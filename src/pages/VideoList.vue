@@ -5,6 +5,7 @@ import DifficultySlider from "@/components/DifficultySlider.vue";
 import CategorySelector from "@/components/CategorySelector.vue";
 import SearchBar from "@/components/SearchBar.vue";
 import OrderBySelector from "@/components/OrderBySelector.vue";
+import Toolbar from "@/components/Toolbar.vue";
 
 const videoStore = useVideoStore();
 const selDifficultyStore = useSelDifficultyStore();
@@ -13,20 +14,7 @@ const curSelSortingOrder = useSelSortingOrder();
 </script>
 
 <script>
-export default {
-  methods: {
-    reset () {
-      const selCategoryStore = useSelCategoryStore();
-      const selDifficultyStore = useSelDifficultyStore();
-      const curSearchStore = useCurSearchStore();
-      const selSortingOrder = useSelSortingOrder()
-      selCategoryStore.reset();
-      selDifficultyStore.reset();
-      curSearchStore.reset();
-      selSortingOrder.reset();
-    },
-  },
-}
+
 
 function isMobile() {
   return window.screen.orientation.type === 'portrait-primary'
@@ -36,23 +24,7 @@ function isMobile() {
 <template>
   <v-container>
     <v-row class="mt-3" justify="start">
-      <v-col>
-        <SearchBar/>
-      </v-col>
-      <v-col>
-        <CategorySelector/>
-      </v-col>
-      <v-col>
-        <OrderBySelector/>
-      </v-col>
-      <v-col>
-        <DifficultySlider/>
-      </v-col>
-      <v-col>
-        <v-btn elevation="2" @click="reset">
-          Reset Filters
-        </v-btn>
-      </v-col>
+      <Toolbar/>
     </v-row>
     <v-row :justify="(isMobile) ? 'center' : 'start'">
       <template
