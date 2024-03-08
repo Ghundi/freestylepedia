@@ -1,5 +1,12 @@
 import { defineStore } from 'pinia'
 
+export const useMembers = defineStore('members', {
+    state: () => {
+        return {
+            val: ['Matti', 'Niklas', 'Alex', 'Basti', 'Danny' , 'Eduard', 'Lena' , 'Markus', 'Vio'],
+        }
+    },
+})
 export const useCurPage = defineStore('curPage', {
     state: () => {
         return {
