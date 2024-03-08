@@ -1,5 +1,5 @@
 <template>
-  <v-card outlined elevation="5" width="15em"  align="center" class="border">
+  <v-card outlined elevation="5" width="15em"  align="center" class="border" @click="props">
     <v-img
         :src="thumbnailUrl"
         id="thumbnail">
@@ -12,23 +12,15 @@
     <v-card-actions>
       <v-dialog fullscreen>
         <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" text="Open" width="100%">
-
+          <v-btn v-bind="props" width="100%">
+            Open
           </v-btn>
         </template>
 
         <template v-slot:default="{ isActive }">
-          <v-card>
-            <iframe width="100%" height="90%" :src="getEmbedURL(id)" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-            <v-card-actions>
-              <v-btn
-                  width="100%"
-                  text="Close Dialog"
-                  @click="isActive.value = false"
-              ></v-btn>
-            </v-card-actions>
-          </v-card>
+          <VideoPlayer
+            :id="id"
+          />
         </template>
       </v-dialog>
     </v-card-actions>
@@ -36,6 +28,8 @@
 </template>
 
 <script setup>
+import VideoPlayer from "@/components/VideoPlayer.vue";
+
 const props = defineProps({
   id: String,
   title: String,
@@ -45,9 +39,6 @@ const props = defineProps({
   thumbnailUrl: String,
 });
 
-function getEmbedURL(id) {
-  return 'https://www.youtube.com/embed/' + id + '?si=9jysKI0zbGHvpMCD'
-}
 function getLang() {
   if (navigator.languages !== undefined)
     return navigator.languages[0];

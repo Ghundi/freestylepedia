@@ -54,7 +54,7 @@ function openPage(page) {
       </v-list-item>
       <v-list-item @click="openInstagram()">
         <v-btn @click="drawer = !drawer" id="no-background-hover" class="bg-black font-weight-bold">
-          Impressum
+          Instagram
         </v-btn>
       </v-list-item>
       <v-list-item @click="openPage('Impressum')">
@@ -70,8 +70,5 @@ function openPage(page) {
 .v-app-bar-title {
   line-height: 2em;
   font-size: 2em;
-}
-#no-background-hover::before {
-  background-color: transparent !important;
 }
 </style>

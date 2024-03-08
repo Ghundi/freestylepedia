@@ -37,10 +37,8 @@ export const useSelSortingOrder = defineStore('SelSortingOrder', {
         },
         reset() {
             const sortingOrders = useSortingOrderStore().sortingOrders;
-            return {
-                by: sortingOrders[0],
-            };
-        }
+            this.by = sortingOrders[0];
+        },
     }
 })
 export const useCategoryStore = defineStore('categoryStore', {
@@ -111,7 +109,7 @@ export const useVideoStore = defineStore('videoStore', {
             { id: 'lrwQ1GLtL6o', title: 'Split Jump', difficulty: '5', category: 'Jumps', releaseDate: new Date('2019-03-07') },
             { id: 'Ymh5bwfYAcs', title: 'Spiderman', difficulty: '4', category: 'Hydroblading', releaseDate: new Date('2019-03-08') },
             { id: 'qVQYXi9jMSU', title: 'Cannon', difficulty: '2', category: 'Hydroblading', releaseDate: new Date('2019-03-14') },  // Difficulty F: 2, B: 3
-            { id: 'QZBqAVg9GoM', title: 'V-Stop', difficulty: '4', category: 'Stops', releaseDate: new Date('2019-04-19') },
+            { id: 'QZBqAVg9GoM', title: 'V-Stop', difficulty: '3', category: 'Stops', releaseDate: new Date('2019-04-19') },
             { id: 'AmZFtgm9Is4', title: 'Butterfly', difficulty: '4', category: 'Acrobatics', releaseDate: new Date('2020-01-23') },
         ],
     }),
@@ -131,7 +129,7 @@ export const useVideoStore = defineStore('videoStore', {
                     case 'Title (Z-A)':
                         return [...state.videos].sort((a, b) => b.title.localeCompare(a.title));
                     case 'Released (New - Old)':
-                        return [...state.videos].sort((a, b) => b.releaseDate.year < a.releaseDate.year);
+                        return [...state.videos].sort((a, b) => b.releaseDate < a.releaseDate);
                     default:
                         return [...state.videos];
                 }

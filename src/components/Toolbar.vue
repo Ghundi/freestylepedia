@@ -7,6 +7,8 @@ import SearchBar from "@/components/SearchBar.vue";
 </script>
 
 <script>
+import {useCurSearchStore, useSelCategoryStore, useSelDifficultyStore, useSelSortingOrder} from "@/store.js";
+
 export default {
   methods: {
     reset () {
@@ -26,16 +28,13 @@ export default {
 <template>
   <v-container>
     <v-row>
-      <v-col>
+      <v-col class="minWidth">
         <SearchBar/>
       </v-col>
       <v-col>
         <CategorySelector/>
       </v-col>
-      <v-col>
-        <OrderBySelector/>
-      </v-col>
-      <v-col cols="5" md="3">
+      <v-col class="minWidth">
         <DifficultySlider/>
       </v-col>
       <v-col>
@@ -43,10 +42,15 @@ export default {
           Reset Filters
         </v-btn>
       </v-col>
+      <v-col>
+        <OrderBySelector/>
+      </v-col>
       </v-row>
   </v-container>
 </template>
 
 <style scoped>
-
+.minWidth {
+  min-width: 200px;
+}
 </style>
