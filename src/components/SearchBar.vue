@@ -18,10 +18,6 @@ export default {
     ]
   }),
 }
-
-function reset() {
-
-}
 </script>
 
 <template>

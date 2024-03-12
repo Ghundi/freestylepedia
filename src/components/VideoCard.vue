@@ -6,7 +6,6 @@
     </v-img>
     <v-card-subtitle class="smaller-font">
       {{releaseDate.toLocaleDateString("de-DE")}}
-      {{ releaseDate.getYear() }}
     </v-card-subtitle>
       <v-divider></v-divider>
     <v-card-actions>

@@ -9,12 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "js-yaml": "^4.1.0",
     "pinia": "^2.1.7",
     "vue": "^3.4.15",
     "vuetify": "^3.5.3"
   },
   "devDependencies": {
     "@mdi/font": "^7.4.47",
+    "@modyfi/vite-plugin-yaml": "^1.1.0",
     "@vitejs/plugin-vue": "^5.0.3",
     "vite": "^5.0.11"
   }
