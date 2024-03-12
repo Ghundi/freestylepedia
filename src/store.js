@@ -1,6 +1,19 @@
 import { defineStore } from 'pinia';
-import yamlFile from "./DB/freestylepedia.yaml";
+import tricksYAML from "./DB/freestylepedia.yaml";
 
+export const useFAQ = defineStore('FAQ', {
+    state: () => {
+        return {
+            val: [
+                {title: 'Naming', text:"Naming is done by our team with community input."},
+                {title: 'Scoring', text:'We try to score every trick as fair as possible. It is represented by the number skates'},
+                {title: 'Categories', text:'We divide all tricks into subsections to better organize them for you. This way a trick is easier to find'},
+                {title: 'How do I use Freestylepedia?', text:'PH '},
+                {title: 'How can I use Freestylepedia to improve on the ice?', text:'With Freestylepedia you can easily see which tricks are achievable for you and which tricks are similar to the tricks you already mastered'},
+            ],
+        }
+    },
+})
 export const useMembers = defineStore('members', {
     state: () => {
         return {
@@ -130,9 +143,9 @@ export const useVideoStore = defineStore('videoStore', {
             // trick number - trickID - attribute
 
             const tricks = [];
-            for (let i = 0; i < yamlFile["tricks"].length; i++) {
+            for (let i = 0; i < tricksYAML["tricks"].length; i++) {
                 const j = i + 1;
-                const lst = yamlFile["tricks"][i][("trick" + ("000" + j).slice(-4))];
+                const lst = tricksYAML["tricks"][i][("trick" + ("000" + j).slice(-4))];
                 const trick = { id: lst[1], title: lst[0], difficulty: lst[2], category: lst[3], releaseDate: new Date(lst[4]), requirements: lst[5], connections: lst[6] }
                 tricks.push(trick);
             }
