@@ -4,6 +4,8 @@ import NavBar from "@/components/navBar.vue";
 import 'vuetify/styles';
 import { useCurPage } from "@/store.js";
 import Impressum from "@/pages/Impressum.vue";
+import Help from "@/pages/Help.vue"
+import Footer from "@/components/footer.vue"
 const curPage = useCurPage();
 </script>
 
@@ -13,15 +15,12 @@ const curPage = useCurPage();
     <br>
     <v-main>
       <VideoList v-if="curPage.val==='VideoList'"/>
-      <Impressum v-if="curPage.val==='Impressum'"/>
+      <Impressum v-if="curPage.val==='About Us'"/>
+      <Help v-if="curPage.val==='Help'"/>
     </v-main>
+    <Footer/>
     </v-app>
 </template>
 
 <style scoped>
-.v-mains {
-  background-image: url('assets/blackbirdLogo.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-}
 </style>

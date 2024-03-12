@@ -52,7 +52,7 @@ export const useSelSortingOrder = defineStore('SelSortingOrder', {
 export const useCategoryStore = defineStore('categoryStore', {
     state: () => {
         return {
-            categories: ['Footwork', 'Grounds', 'Jumps', 'Acrobatics', 'Hydroblading', 'Spins', 'Stops'],
+            categories: ['Footwork', 'Ground', 'Jump', 'Acrobatics', 'Hydroblading', 'Spin', 'Stop'],
         }
     },
 })

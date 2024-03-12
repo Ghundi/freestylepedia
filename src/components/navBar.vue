@@ -9,18 +9,6 @@ import logo from '@/assets/blackbirdLogoInverted.jpg'
 <script>
 import { useCurPage} from "@/store.js";
 
-export default {
-  name: "app",
-  methods: {
-    openYoutube() {
-      window.open("https://www.youtube.com/@BlackbirdIceFreestyle");
-    },
-    openInstagram() {
-      window.open("https://www.instagram.com/blackbird_ice_freestyle/");
-    },
-  },
-};
-
 function openPage(page) {
   const curPage = useCurPage();
   curPage.update(page);
@@ -47,19 +35,14 @@ function openPage(page) {
           Freestylepedia
         </v-btn>
       </v-list-item>
-      <v-list-item @click="openYoutube()">
+      <v-list-item @click="openPage('Help')">
         <v-btn @click="drawer = !drawer" id="no-background-hover" class="bg-black font-weight-bold">
-          Youtube
-        </v-btn>
-      </v-list-item>
-      <v-list-item @click="openInstagram()">
-        <v-btn @click="drawer = !drawer" id="no-background-hover" class="bg-black font-weight-bold">
-          Instagram
+          PH Trick Families
         </v-btn>
       </v-list-item>
       <v-list-item @click="openPage('Impressum')">
         <v-btn @click="drawer = !drawer" id="no-background-hover" class="bg-black font-weight-bold">
-          Impressum
+          PH Trick Tree
         </v-btn>
       </v-list-item>
     </v-list>

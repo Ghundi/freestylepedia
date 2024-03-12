@@ -5,9 +5,9 @@
         id="thumbnail">
     </v-img>
     <v-card-subtitle class="smaller-font">
-      {{releaseDate.toLocaleDateString("de-DE")}}
+      {{releaseDate.toLocaleDateString("de-DE")}} <!-- TODO change to getLang() -->
     </v-card-subtitle>
-      <v-divider></v-divider>
+    <v-divider></v-divider>
     <v-card-actions>
       <v-dialog fullscreen>
         <template v-slot:activator="{ props }">
@@ -18,7 +18,7 @@
 
         <template v-slot:default="{ isActive }">
           <VideoPlayer
-            :id="id"
+              :id="id"
           />
         </template>
       </v-dialog>
@@ -30,9 +30,9 @@
 import VideoPlayer from "@/components/VideoPlayer.vue";
 
 const props = defineProps({
-  id: String,
+  id: Array[String],
   title: String,
-  difficulty: String,
+  difficulty: Number,
   category: String,
   releaseDate: Date,
   thumbnailUrl: String,

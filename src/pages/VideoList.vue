@@ -43,7 +43,7 @@ function isMobile() {
 </template>
 
 <style scoped>
-  .videoCard{
-    max-width: 300px;
-  }
+.videoCard{
+  max-width: 300px;
+}
 </style>
