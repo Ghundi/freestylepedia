@@ -136,9 +136,7 @@ export const useVideoStore = defineStore('videoStore', {
                 const trick = { id: lst[1], title: lst[0], difficulty: lst[2], category: lst[3], releaseDate: new Date(lst[4]), requirements: lst[5], connections: lst[6] }
                 tricks.push(trick);
             }
-            //console.log(tricks);
             this.videos = tricks;
-            console.log("loaded tricks")
         },
         getThumbnailUrl(videoId) {
             return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
@@ -168,9 +166,13 @@ export const useVideoStore = defineStore('videoStore', {
             for(let i = 0; i < videos.length; i++) {
                 if( selDifficulties[0] <= videos[i].difficulty && videos[i].difficulty <= selDifficulties[1]) {
                     if((selCategories.length > 0) ? selCategories.includes(videos[i].category) : true) {
-                        if((curSearch) ? videos[i].title[0].toLowerCase().includes(curSearch.toLowerCase()) : true) {
-                            filtered.push(videos[i]);
+                        for (let j = 0; j < videos[i].title.length; j++) {
+                            if((curSearch) ? videos[i].title[j].toLowerCase().includes(curSearch.toLowerCase()) : true) {
+                                filtered.push(videos[i]);
+                                break;
+                            }
                         }
+
                     }
                 }
             }
