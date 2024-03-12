@@ -146,13 +146,13 @@ export const useVideoStore = defineStore('videoStore', {
         sortedVideos: (state, sortOption) => {
                 switch (sortOption) {
                     case 'Difficulty (Hard to Easy)':
-                        return [...state.videos].sort((a, b) => b.difficulty - a.difficulty) //|| a[0].title.localeCompare(b[0].title));
+                        return [...state.videos].sort((a, b) => b.difficulty - a.difficulty || a.title[0].localeCompare(b.title[0]));
                     case 'Difficulty (Easy to Hard)':
-                        return [...state.videos].sort((a, b) => a.difficulty - b.difficulty)// || a[0].title.localeCompare(b[0].title));
+                        return [...state.videos].sort((a, b) => a.difficulty - b.difficulty || a.title[0].localeCompare(b.title[0]));
                     case 'Title (A-Z)':
-                        return [...state.videos].sort((a, b) => a[0].title.localeCompare(b[0].title));
+                        return [...state.videos].sort((a, b) => a.title[0].localeCompare(b.title[0]));
                     case 'Title (Z-A)':
-                        return [...state.videos].sort((a, b) => b[0].title.localeCompare(a[0].title));
+                        return [...state.videos].sort((a, b) => b.title[0].localeCompare(a.title[0]));
                     case 'Released (New - Old)':
                         return [...state.videos].sort((a, b) => b.releaseDate < a.releaseDate);
                     default:
@@ -169,7 +169,7 @@ export const useVideoStore = defineStore('videoStore', {
                 if( selDifficulties[0] <= videos[i].difficulty && videos[i].difficulty <= selDifficulties[1]) {
                     if((selCategories.length > 0) ? selCategories.includes(videos[i].category) : true) {
                         if((curSearch) ? videos[i].title[0].toLowerCase().includes(curSearch.toLowerCase()) : true) {
-                            filtered.push(videos[i])
+                            filtered.push(videos[i]);
                         }
                     }
                 }
