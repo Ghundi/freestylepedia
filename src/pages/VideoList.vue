@@ -28,12 +28,14 @@ function isMobile() {
         <v-col class="videoCard">
           <v-container>
             <VideoCard
-                :id="video.id[0]"
-                :title="video.title[0]"
+                :id="video.id"
+                :title="video.title"
                 :difficulty="video.difficulty"
                 :category="video.category"
                 :releaseDate="video.releaseDate"
                 :thumbnailUrl="videoStore.getThumbnailUrl(video.id[0])"
+                :connections="video.connections"
+                :requirements="video.requirements"
             />
           </v-container>
         </v-col>

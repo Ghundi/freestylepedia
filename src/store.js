@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import tricksYAML from "./DB/freestylepedia.yaml";
 
+// TODO read FAQ from YAML?
 export const useFAQ = defineStore('FAQ', {
     state: () => {
         return {
@@ -65,7 +66,7 @@ export const useSelSortingOrder = defineStore('SelSortingOrder', {
 export const useCategoryStore = defineStore('categoryStore', {
     state: () => {
         return {
-            categories: ['Footwork', 'Ground', 'Jump', 'Acrobatics', 'Hydroblading', 'Spin', 'Stop'],
+            categories: ['Footwork', 'Ground', 'Jump', 'Acrobatic', 'Hydroblading', 'Spin', 'Stop'],
         }
     },
 })
@@ -121,21 +122,6 @@ export const useCurSearchStore = defineStore('curSearchStore', {
 export const useVideoStore = defineStore('videoStore', {
     state: () => ({
         videos: [],
-        /*[
-            { id: ['ot8MGzXZln0'], title: ['Zulu Spin'], difficulty: '2', category: 'Ground', releaseDate: new Date('2024-02-02') },
-            { id: ['yKWyPTtDCX8'], title: ['Inward Triangle'], difficulty: '2', category: 'Footwork', releaseDate: new Date('2023-08-11') },
-            { id: ['Xo2frGP3Q8A'], title: ['Brush'], difficulty: '3', category: 'Footwork', releaseDate: new Date('2019-02-15') },
-            { id: ['JbvdGJe0XSs'], title: ['Jumped X'], difficulty: '3', category: 'Footwork', releaseDate: new Date('2019-02-21') },
-            { id: ['GBdYeRkjkos'], title: ['Toe Donut'], difficulty: '2', category: 'Footwork', releaseDate: new Date('2019-02-28') },
-            { id: ['uQNzU8hD0u4'], title: ['Cantilever'], difficulty: '5', category: 'Hydroblading', releaseDate: new Date('2019-03-01') },
-            { id: ['lrwQ1GLtL6o'], title: ['Split Jump'], difficulty: '5', category: 'Jumps', releaseDate: new Date('2019-03-07') },
-            { id: ['Ymh5bwfYAcs'], title: ['Spiderman'], difficulty: '4', category: 'Hydroblading', releaseDate: new Date('2019-03-08') },
-            { id: ['qVQYXi9jMSU'], title: ['Cannon'], difficulty: '2', category: 'Hydroblading', releaseDate: new Date('2019-03-14') },  // Difficulty F: 2, B: 3
-            { id: ['QZBqAVg9GoM'], title: ['V-Stop'], difficulty: '3', category: 'Stops', releaseDate: new Date('2019-04-19') },
-            { id: ['AmZFtgm9Is4'], title: ['Butterfly'], difficulty: '4', category: 'Acrobatics', releaseDate: new Date('2020-01-23') },
-        ],
-
-         */
     }),
     // Adding a method to get a thumbnail URL by video ID
     actions: {
@@ -146,13 +132,22 @@ export const useVideoStore = defineStore('videoStore', {
             for (let i = 0; i < tricksYAML["tricks"].length; i++) {
                 const j = i + 1;
                 const lst = tricksYAML["tricks"][i][("trick" + ("000" + j).slice(-4))];
-                const trick = { id: lst[1], title: lst[0], difficulty: lst[2], category: lst[3], releaseDate: new Date(lst[4]), requirements: lst[5], connections: lst[6] }
+                const trick = { trickID: ("trick" + ("000" + j).slice(-4)), id: lst[1], title: lst[0], difficulty: lst[2], category: lst[3], releaseDate: new Date(lst[4]), requirements: lst[5], connections: lst[6] }
                 tricks.push(trick);
             }
             this.videos = tricks;
         },
         getThumbnailUrl(videoId) {
             return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+        },
+        getTrickByID(trickID, state) {
+            for (let i = 0; i < state.videos.length; i++) {
+                if(state.videos[i].trickID === trickID) {
+                    return state.videos[i];
+                }
+            }
+            console.log(`${ trickID } could not be found`)
+            return state.videos[0];
         },
         sortedVideos: (state, sortOption) => {
                 switch (sortOption) {

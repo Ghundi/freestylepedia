@@ -18,7 +18,14 @@
 
         <template v-slot:default="{ isActive }">
           <VideoPlayer
+              :isActive="isActive"
               :id="id"
+              :title="title"
+              :difficulty="difficulty"
+              :category="category"
+              :releaseDate="releaseDate"
+              :connections="connections"
+              :requirements="requirements"
           />
         </template>
       </v-dialog>
@@ -31,11 +38,13 @@ import VideoPlayer from "@/components/VideoPlayer.vue";
 
 const props = defineProps({
   id: Array[String],
-  title: String,
+  title: Array[String],
   difficulty: Number,
   category: String,
   releaseDate: Date,
   thumbnailUrl: String,
+  requirements: Array[String],
+  connections: Array[String],
 });
 
 function getLang() {
