@@ -1,11 +1,12 @@
 <template>
+  <!-- TODO make card clickable -->
   <v-card outlined elevation="5" width="15em"  align="center" class="border" @click="props">
     <v-img
         :src="thumbnailUrl"
         id="thumbnail">
     </v-img>
     <v-card-subtitle class="smaller-font">
-      {{releaseDate.toLocaleDateString("de-DE")}} <!-- TODO change to getLang() -->
+      {{releaseDate.toLocaleDateString(getLang())}} <!-- TODO change to getLang() -->
     </v-card-subtitle>
     <v-divider></v-divider>
     <v-card-actions>

@@ -25,7 +25,7 @@ export const useMembers = defineStore('members', {
 export const useCurPage = defineStore('curPage', {
     state: () => {
         return {
-            val: "VideoList",
+            val: "TrickTree",
         }
     },
     actions: {
@@ -123,7 +123,6 @@ export const useVideoStore = defineStore('videoStore', {
     state: () => ({
         videos: [],
     }),
-    // Adding a method to get a thumbnail URL by video ID
     actions: {
         loadYAML() {
             // trick number - trickID - attribute
@@ -148,6 +147,38 @@ export const useVideoStore = defineStore('videoStore', {
             }
             console.log(`${ trickID } could not be found`)
             return state.videos[0];
+        },
+        getConnectionsGraph(state) {
+            function trickToNode(trick) {
+                return {name: trick.title[0], children: []}
+            }
+            let graph= [{name: "Categories", children: []}];
+            const categories = useCategoryStore().categories;
+            for (let i = 0; i < categories.length; i++) {
+                graph[0].children.push({name: categories[i], children: [], left: (i / categories.length < 0.5)});
+            }
+            for (let i = 0; i < state.videos.length; i++) {
+                const categoryIdx = categories.indexOf(state.videos[i].category)
+                graph[0].children[categoryIdx].children.push(trickToNode(state.videos[i]));
+                if(state.videos[i].connections.length > 0) {
+                    for (let j = 0; j < state.videos[i].connections.length; j++) {
+                        graph[0].children[categoryIdx].children[j].children.push(trickToNode(state.getTrickByID(state.videos[i].connections[j], state)));
+                    }
+                }
+            }
+            return graph;
+        },
+        getTrickTreeGraph(state) {
+            let graph = [];
+            for (let i = 0; i < state.videos.length; i++) {
+                graph.push({name: state.videos[i].title[0], children: []});
+                if(state.videos[i].requirements.length > 0) {
+                    for (let j = 0; j < state.videos[i].requirements.length; j++) {
+                        graph[i].children.push({name: state.getTrickByID(state.videos[i].requirements[j], state).title[0], children: []});
+                    }
+                }
+            }
+            return graph;
         },
         sortedVideos: (state, sortOption) => {
                 switch (sortOption) {
@@ -180,7 +211,6 @@ export const useVideoStore = defineStore('videoStore', {
                                 break;
                             }
                         }
-
                     }
                 }
             }

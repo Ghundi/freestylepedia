@@ -8,11 +8,8 @@ import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loade
 
 import {createPinia} from "pinia";
 
-const app = createApp(App)
 
 const pinia = createPinia()
-app.use(pinia)
-
 const vuetify = createVuetify({
     components,
     directives,
@@ -20,6 +17,9 @@ const vuetify = createVuetify({
         defaultTheme: 'light'
     }
 })
-app.use(vuetify)
 
-app.mount('#app')
+createApp(App)
+    .use(pinia) // Use Pinia plugin
+    .use(vuetify)
+    .mount('#app');
+

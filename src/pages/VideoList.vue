@@ -4,7 +4,6 @@ import { useSelDifficultyStore, useVideoStore, useCurSearchStore, useSelSortingO
 import Toolbar from "@/components/Toolbar.vue";
 
 const videoStore = useVideoStore();
-videoStore.loadYAML();
 const selDifficultyStore = useSelDifficultyStore();
 const curSearchStore = useCurSearchStore();
 const curSelSortingOrder = useSelSortingOrder();
@@ -26,7 +25,6 @@ function isMobile() {
           v-for="video in videoStore.filteredVideos(videoStore.sortedVideos(videoStore, curSelSortingOrder.by))"
           :key="video.title[0]">
         <v-col class="videoCard">
-          <v-container>
             <VideoCard
                 :id="video.id"
                 :title="video.title"
@@ -37,7 +35,6 @@ function isMobile() {
                 :connections="video.connections"
                 :requirements="video.requirements"
             />
-          </v-container>
         </v-col>
       </template>
     </v-row>
