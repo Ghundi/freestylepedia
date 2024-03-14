@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import tricksYAML from "./DB/freestylepedia.yaml";
+import tricksYAML from "@/data/freestylepedia.yaml";
 
 // TODO read FAQ from YAML?
 export const useFAQ = defineStore('FAQ', {
