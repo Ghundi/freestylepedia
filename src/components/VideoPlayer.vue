@@ -40,34 +40,31 @@ function getDescription() {
 </script>
 
 <template>
-  <v-card>
-    <iframe width="100%" height="90%" :src="getEmbedURL(id[0])" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    <v-card align="center">
-        <v-container>
-          <v-row >
-            <v-col v-for="title in title">
-              <v-card-subtitle>
-                {{title}}
-              </v-card-subtitle>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-card-text>
-              {{ getDescription() }}
-            </v-card-text>
-          </v-row>
-        </v-container>
-    </v-card>
-    <v-card-actions>
-      <v-btn
-          width="100%"
-          text="Close Dialog"
-          @click="isActive.value = false"
-      ></v-btn>
-    </v-card-actions>
-  </v-card>
+    <iframe width="100%" height="80%" :src="getEmbedURL(id[0])" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <v-container>
+       <v-row >
+        <v-col v-for="title in title">
+          {{title}}
+        </v-col>
+      </v-row>
+      <v-row>
+        {{ getDescription() }}
+      </v-row>
+    </v-container>
+  <!--
+  <iframe width="100%" height="80vh" :src="getEmbedURL(id[0])" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <v-container>
+      <v-row >
+        <v-col v-for="title in title">
+          {{title}}
+        </v-col>
+      </v-row>
+      <v-row>
+        {{ getDescription() }}
+      </v-row>
+    </v-container>
+    -->
 </template>
 
 <style scoped>
-
 </style>

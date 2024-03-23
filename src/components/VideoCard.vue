@@ -1,37 +1,53 @@
-<template>
-  <!-- TODO make card clickable -->
-  <v-card outlined elevation="5" width="15em"  align="center" class="border" @click="props">
-    <v-img
-        :src="thumbnailUrl"
-        id="thumbnail">
-    </v-img>
-    <v-card-subtitle class="smaller-font">
-      {{releaseDate.toLocaleDateString(getLang())}} <!-- TODO change to getLang() -->
-    </v-card-subtitle>
-    <v-divider></v-divider>
-    <v-card-actions>
-      <v-dialog fullscreen>
-        <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" width="100%">
-            {{ $t("videoCard.open") }}
-          </v-btn>
-        </template>
+<script>
+export default {
+  data () {
+    return {
+      dialog: false,
+    }
+  },
+}
+</script>
 
-        <template v-slot:default="{ isActive }">
-          <VideoPlayer
-              :isActive="isActive"
-              :id="id"
-              :title="title"
-              :difficulty="difficulty"
-              :category="category"
-              :releaseDate="releaseDate"
-              :connections="connections"
-              :requirements="requirements"
-          />
-        </template>
-      </v-dialog>
-    </v-card-actions>
-  </v-card>
+<template>
+  <div class="text-center pa-4">
+    <v-dialog
+        v-model="dialog"
+        transition="dialog-bottom-transition"
+        fullscreen
+    >
+      <template v-slot:activator="{ props: activatorProps }">
+          <v-card width="15em" height="12em"  class="border" v-bind="activatorProps">
+            <v-img
+                :src="thumbnailUrl"
+                id="thumbnail">
+            </v-img>
+            <v-spacer></v-spacer>
+            <v-card-subtitle class="smaller-font">
+              {{releaseDate.toLocaleDateString(getLang())}}
+            </v-card-subtitle>
+          </v-card>
+      </template>
+      <v-card>
+        <VideoPlayer
+            :id="id"
+            :title="title"
+            :difficulty="difficulty"
+            :category="category"
+            :releaseDate="releaseDate"
+            :connections="connections"
+            :requirements="requirements"
+        />
+        <v-card-actions>
+        <v-btn
+            @click="dialog = false"
+            block
+        >
+          Close
+        </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
 </template>
 
 <script setup>
