@@ -25,7 +25,7 @@ export const useMembers = defineStore('members', {
 export const useCurPage = defineStore('curPage', {
     state: () => {
         return {
-            val: "TrickTree",
+            val: "VideoList",
         }
     },
     actions: {
@@ -41,7 +41,7 @@ export const useCurPage = defineStore('curPage', {
 export const useSortingOrderStore = defineStore('sortingOrderStore', {
     state: () => {
         return {
-            sortingOrders: ['Difficulty (Easy to Hard)' , 'Difficulty (Hard to Easy)', 'Title (A-Z)', 'Title (Z-A)', 'Released (New - Old)', 'Released (Old - New)']
+            sortingOrders: ['difficultyUp' , 'difficultyDown', 'nameUp', 'nameDown', 'releasedDown', 'releasedUp']
         }
     },
 })
@@ -66,7 +66,7 @@ export const useSelSortingOrder = defineStore('SelSortingOrder', {
 export const useCategoryStore = defineStore('categoryStore', {
     state: () => {
         return {
-            categories: ['Footwork', 'Ground', 'Jump', 'Acrobatic', 'Hydroblading', 'Spin', 'Stop'],
+            categories: ['footwork', 'ground', 'jump', 'acrobatic', 'hydroblading', 'spin', 'stop'],
         }
     },
 })
@@ -131,7 +131,7 @@ export const useVideoStore = defineStore('videoStore', {
             for (let i = 0; i < tricksYAML["tricks"].length; i++) {
                 const j = i + 1;
                 const lst = tricksYAML["tricks"][i][("trick" + ("000" + j).slice(-4))];
-                const trick = { trickID: ("trick" + ("000" + j).slice(-4)), id: lst[1], title: lst[0], difficulty: lst[2], category: lst[3], releaseDate: new Date(lst[4]), requirements: lst[5], connections: lst[6] }
+                const trick = { trickID: ("trick" + ("000" + j).slice(-4)), id: lst[1], title: lst[0], difficulty: lst[2], category: lst[3].toLowerCase(), releaseDate: new Date(lst[4]), requirements: lst[5], connections: lst[6] }
                 tricks.push(trick);
             }
             this.videos = tricks;
@@ -154,7 +154,9 @@ export const useVideoStore = defineStore('videoStore', {
             }
             let graph= [{name: "Categories", children: []}];
             const categories = useCategoryStore().categories;
+            //category nodes
             for (let i = 0; i < categories.length; i++) {
+                //TODO translate categories, atm translate not aailable
                 graph[0].children.push({name: categories[i], children: [], left: (i / categories.length < 0.5)});
             }
             for (let i = 0; i < state.videos.length; i++) {
@@ -182,16 +184,18 @@ export const useVideoStore = defineStore('videoStore', {
         },
         sortedVideos: (state, sortOption) => {
                 switch (sortOption) {
-                    case 'Difficulty (Hard to Easy)':
+                    case 'difficultyDown':
                         return [...state.videos].sort((a, b) => b.difficulty - a.difficulty || a.title[0].localeCompare(b.title[0]));
-                    case 'Difficulty (Easy to Hard)':
+                    case 'difficultyUp':
                         return [...state.videos].sort((a, b) => a.difficulty - b.difficulty || a.title[0].localeCompare(b.title[0]));
-                    case 'Title (A-Z)':
+                    case 'nameUp':
                         return [...state.videos].sort((a, b) => a.title[0].localeCompare(b.title[0]));
-                    case 'Title (Z-A)':
+                    case 'nameDown':
                         return [...state.videos].sort((a, b) => b.title[0].localeCompare(a.title[0]));
-                    case 'Released (New - Old)':
+                    case 'releasedDown':
                         return [...state.videos].sort((a, b) => b.releaseDate < a.releaseDate);
+                    case 'releasedUp':
+                        return [...state.videos].sort((a, b) => b.releaseDate > a.releaseDate);
                     default:
                         return [...state.videos];
                 }

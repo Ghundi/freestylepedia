@@ -1,0 +1,39 @@
+{
+  "navBar": {
+    "freestylepedia": "Freestylepedia",
+    "mindMap": "Mind Map",
+    "trickTree": "Trick Tree"
+  },
+  "toolbar": {
+    "resetFilters": "Reset Filters",
+    "search": "Search",
+    "sortBy": "sort by",
+    "categories": "categories"
+  },
+  "videoCard": {
+    "open": "Open"
+  },
+  "footer": {
+    "aboutUs": "About Us",
+    "help": "Help",
+    "language": "Language",
+    "byBlackbirdAndMISG": "by Blackbird and MISG"
+  },
+  "sortOptions": {
+    "difficultyDown": "Difficulty (Hard - Easy)",
+    "difficultyUp": "Difficulty (Easy - Hard)",
+    "nameDown": "Name (A - Z)",
+    "nameUp": "Name (Z - A)",
+    "releasedDown": "Released (Old - New)",
+    "releasedUp": "Released (New - Old)"
+  },
+  "categories": {
+    "footwork": "Footwork",
+    "ground": "Ground",
+    "jump":  "Jump",
+    "acrobatic":  "Acrobatic",
+    "hydroblading": "Hydroblading",
+    "spin": "Spin",
+    "stop": "Stop"
+  }
+}

@@ -39,7 +39,7 @@ export default {
       </v-col>
       <v-col>
         <v-btn elevation="2" @click="reset">
-          Reset Filters
+          {{ $t('toolbar.resetFilters') }}
         </v-btn>
       </v-col>
       <v-col>

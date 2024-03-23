@@ -29,17 +29,17 @@ function openPage(page) {
     <v-list>
       <v-list-item class="bg-transparent" @click="openPage('VideoList')">
         <v-btn @click="drawer = !drawer" id="no-background-hover" class="bg-black font-weight-bold">
-          Freestylepedia
+          {{ $t("navBar.freestylepedia") }}
         </v-btn>
       </v-list-item>
       <v-list-item @click="openPage('MindMap')">
         <v-btn @click="drawer = !drawer" id="no-background-hover" class="bg-black font-weight-bold">
-          Mind Map
+          {{ $t("navBar.mindMap") }}
         </v-btn>
       </v-list-item>
       <v-list-item @click="openPage('TrickTree')">
         <v-btn @click="drawer = !drawer" id="no-background-hover" class="bg-black font-weight-bold">
-          Trick Tree
+          {{ $t("navBar.trickTree") }}
         </v-btn>
       </v-list-item>
     </v-list>

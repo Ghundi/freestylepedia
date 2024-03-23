@@ -13,7 +13,7 @@
       <v-dialog fullscreen>
         <template v-slot:activator="{ props }">
           <v-btn v-bind="props" width="100%">
-            Open
+            {{ $t("videoCard.open") }}
           </v-btn>
         </template>
 

@@ -17,7 +17,7 @@ function createSortingOrderObject() {
 }
 export default {
   data: () => ({
-    valid: false,
+    valid: true,
     items: createSortingOrderObject(),
   }),
   methods: {
@@ -33,9 +33,9 @@ export default {
     <v-btn
         id="menu-activator"
     >
-      Sort By
+      {{ $t("toolbar.sortBy") }}
       <v-card-subtitle class="smaller-font">
-        {{ selSortingOrder.by }}
+        {{ $t("sortOptions." + selSortingOrder.by)  }}
       </v-card-subtitle>
     </v-btn>
     <v-card-subtitle class="smaller-font">
@@ -49,7 +49,9 @@ export default {
             :key="index"
             :value="index"
         >
-          <v-btn block @click="updateStore(item.title)" class="smaller-font">{{ item.title }}</v-btn>
+          <v-btn block @click="updateStore(item.title)" class="smaller-font">
+            {{ $t("sortOptions." + item.title) }}
+          </v-btn>
         </v-list-item>
       </v-list>
     </v-menu>

@@ -25,7 +25,7 @@ export default {
   <v-menu>
     <template v-slot:activator="{ props }">
       <v-btn v-bind="props">
-        Categories
+        {{ $t("toolbar.categories") }}
       </v-btn>
     </template>
     <v-card>
@@ -34,7 +34,7 @@ export default {
             v-model="selCategoryStore.categories"
             :rules="updateStore"
             v-for="item in categoryStore.categories"
-            :label="item"
+            v-bind:label="$t('categories.' + item)"
             :value="item"
             hide-details
         ></v-checkbox>

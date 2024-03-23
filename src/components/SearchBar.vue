@@ -26,11 +26,12 @@ export default {
       :rules="updateStore"
       density="compact"
       variant="solo"
-      label="Search"
+      v-bind:label="$t('toolbar.search')"
       append-inner-icon="mdi-magnify"
       single-line
       hide-details
-  ></v-text-field>
+  >
+  </v-text-field>
 </template>
 
 <style scoped>

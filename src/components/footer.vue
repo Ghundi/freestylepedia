@@ -1,5 +1,6 @@
 <script setup>
 import {useCurPage} from "@/store.js";
+import LanguageSelector from "@/components/languageSelector.vue";
 const curPage = useCurPage();
 function openPage(page) {
   const curPage = useCurPage();
@@ -52,19 +53,20 @@ export default {
           variant="plain"
           @click="openPage('About Us')"
       >
-        About Us
+        {{ $t("footer.aboutUs") }}
       </v-btn>
       <v-btn
           variant="plain"
           @click="openPage('Help')"
       >
-        Help
+        {{ $t("footer.help") }}
       </v-btn>
+      <language-selector/>
     </div>
     <div class="px-4 py-2 bg-black text-center w-100">
       {{ new Date().getFullYear() }} — <strong>Freestylepedia</strong>
       <br>
-      <small>by Blackbird Ice Freestyle and MISG</small>
+      <small>{{ $t("footer.byBlackbirdAndMISG") }}</small>
     </div>
   </v-footer>
 </template>

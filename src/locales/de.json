@@ -1,0 +1,43 @@
+{
+  "navBar": {
+    "freestylepedia": "Freistilpedia",
+    "mindMap": "Mindmap",
+    "trickTree": "Trickbaum"
+  },
+  "toolbar": {
+    "resetFilters": "Filter zurücksetzen",
+    "search": "Suchen",
+    "sortBy": "Sortieren",
+    "categories": "Kategorien"
+  },
+  "videoCard": {
+    "open": "Öffnen"
+  },
+  "footer": {
+    "aboutUs": "Über uns",
+    "help": "Hilfe",
+    "language": "Sprache",
+    "byBlackbirdAndMISG": "von Blackbird und MISG"
+  },
+  "sortOptions": {
+    "difficultyDown": "Schwierigkeit (Schwer - Leicht)",
+    "difficultyUp": "Schwierigkeit (Leicht - Schwer)",
+    "nameDown": "Name (A - Z)",
+    "nameUp": "Name (Z - A)",
+    "releasedDown": "Veröffentlicht (Alt - Neu)",
+    "releasedUp": "Veröffentlicht (Neu - Alt)"
+  },
+  "categories": {
+    "footwork": "Fußarbeit",
+    "ground": "Breakdance",
+    "jump":  "Sprung",
+    "acrobatic":  "Akrobatik",
+    "hydroblading": "Wasserkufen",
+    "spin": "Drehung",
+    "stop": "Bremse"
+  },
+  "languages": {
+    "en": "English",
+    "de": "Deutsch"
+  }
+}
