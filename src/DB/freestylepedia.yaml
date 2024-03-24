@@ -32,7 +32,7 @@ tricks:
     - [trick0001]
 - trick0004:
     - ["Sweep"]
-    - ["C3XfjSFDA80"]
+    - ["C3XfjSFDA80", "DeCh2nZgtbY", "P_f0_DF3Qbo"]
     - 3
     - "Footwork"
     - 15.02.2019,
@@ -48,7 +48,7 @@ tricks:
     - []
 - trick0006:
     - ["Donut"]
-    - ["-BclH8x0eXQ"]
+    - ["-BclH8x0eXQ", "JD4Zzz3Fn_Y"]
     - 1
     - "Ground"
     - 10.11.2019,
@@ -98,13 +98,13 @@ tricks:
     - ["Backflip"]
     - ["853hRI0UoMM"]
     - 5
-    - "Acrobatic"
+    - "Acrobatics"
     - 12.01.2024,
     - []
     - []
 - trick0013:
     - ["Compass"]
-    - ["A7Q907vPMuQ"]
+    - ["A7Q907vPMuQ", "N5q2P-syZIc", "vW-KqolxQqo"]
     - 2
     - "Spin"
     - Feb 22, 2019,
@@ -112,7 +112,7 @@ tricks:
     - []
 - trick0014:
     - ["Spiderman", "Hydro"]
-    - ["Ymh5bwfYAcs"]
+    - ["Ymh5bwfYAcs", "l5tVRffTzkY", "1Rt7HC1Pstg"]
     - 4
     - "Hydroblading"
     - Mar 8, 2019
@@ -144,7 +144,7 @@ tricks:
     - []
 - trick0018:
     - ["Inward Triangle"]
-    - ["yKWyPTtDCX8"]
+    - ["yKWyPTtDCX8", "DeCh2nZgtbY", "GprO5Fvc-d4"]
     - 2
     - "Footwork"
     - Mar 8, 2019
@@ -152,17 +152,17 @@ tricks:
     - []
 - trick0019:
     - ["Head down"]
-    - ["5_4m1NnS7D0"]
+    - ["5_4m1NnS7D0", "czKbXDxQgX8"]
     - 4
     - "Hydroblading"
     - Mar 8, 2019
     - []
     - []
 - trick0020:
-    - ["Head down"]
-    - ["5_4m1NnS7D0"]
-    - 4
-    - "Hydroblading"
+    - ["Grapevine"]
+    - ["xrxxASySDs0", "FwtzestNMwQ", "nDhvTDuobDE"]
+    - 2
+    - "Footwork"
     - Mar 8, 2019
     - []
     - []
@@ -232,7 +232,7 @@ tricks:
     - []
 - trick0029:
     - ["Russian Twist"]
-    - ["xVT7LnWchhc"]
+    - ["xVT7LnWchhc", "s4Nk4_gXOfs"]
     - 2
     - "Footwork"
     - Mar 8, 2019
@@ -272,7 +272,7 @@ tricks:
     - []
 - trick0034:
     - ["Pirouette"]
-    - ["iVzdUXbFT88 "]
+    - ["iVzdUXbFT88"]
     - 3
     - "Spin"
     - Mar 8, 2019
@@ -280,8 +280,168 @@ tricks:
     - []
 - trick0035:
     - ["Inverted Grapevine"]
-    - ["ro8KtnS_aFY "]
+    - ["ro8KtnS_aFY"]
     - 4
+    - "Footwork"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0036:
+    - ["Double Grapvine"]
+    - ["qixbnkAfe2A", "U4cfIdFkM48"]
+    - 3
+    - "Footwork"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0037:
+    - ["Insanity"]
+    - ["sO_cSB6Buy8", "N5q2P-syZIc"]
+    - 2
+    - "Footwork"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0038:
+    - ["Butterfly"]
+    - ["AmZFtgm9Is4", "sDPCN0nnqp0"]
+    - 4
+    - "Acrobatics"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0039:
+    - ["Inverse Compass", "Leg Breaker"]
+    - ["38DbuwUi9Go", "N5q2P-syZIc", "Mrd8nc2d8HE"]
+    - 3
+    - "Footwork"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0040:
+    - ["Sweep Spin"]
+    - ["V-Qj-V3Ov3k"]
+    - 3
+    - "Footwork"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0041:
+    - ["Shuffle"]
+    - ["1PIfbu_4HMk"]
+    - 2
+    - "Footwork"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0042:
+    - ["Hockey Stop"]
+    - ["Gox8MmXs0Bo"]
+    - 1
+    - "Stop"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0043:
+    - ["Scissors"]
+    - ["C2-Ioubk5SY"]
+    - 3
+    - "Footwork"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0044:
+    - ["180", "180 Jump"]
+    - ["rkOAFBFmprI", "bRgD9-KI87Q"]
+    - 3
+    - "Jump"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0045:
+    - ["Couch Potato"]
+    - ["vfc2GukBBsk"]
+    - 4
+    - "Hydroblading"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0046:
+    - ["Knee Spin"]
+    - ["QNoOStwZ5q0"]
+    - 1
+    - "Spin"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0047:
+    - ["Outside Edge"]
+    - ["T80WCrKnaFg"]
+    - 3
+    - "Stop"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0048:
+    - ["720", "720 Jump"]
+    - ["L8_dHLCbjxQ", "bRgD9-KI87Q"]
+    - 5
+    - "Jump"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0049:
+    - ["Handflip"]
+    - ["DBGDZlK1Q-E"]
+    - 3
+    - "Ground"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0050:
+    - ["8", "Eight"]
+    - ["mg7hCXAQBPY", "EAe764_8uBo"]
+    - 3
+    - "Footwork"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0051:
+    - ["Canon"]
+    - ["qVQYXi9jMSU", "Esut7pZO924"]
+    - 2
+    - "Hydroblading"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0052:
+    - ["Split jump"]
+    - ["lrwQ1GLtL6o"]
+    - 5
+    - "Jump"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0053:
+    - ["Cantilever"]
+    - ["uQNzU8hD0u4", "CLetSI4LIn8"]
+    - 5
+    - "Hydroblading"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0054:
+    - ["Toe Donut"]
+    - ["GBdYeRkjkos"]
+    - 2
+    - "Spin"
+    - Mar 8, 2019
+    - []
+    - []
+- trick0055:
+    - ["Jumped X"]
+    - ["JbvdGJe0XSs"]
+    - 3
     - "Footwork"
     - Mar 8, 2019
     - []
