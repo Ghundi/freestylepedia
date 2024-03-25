@@ -16,7 +16,6 @@ export default {
   }),
   methods: {
     updateLang(lang) {
-      console.log(lang)
       this.$i18n.locale = lang;
     }
   }

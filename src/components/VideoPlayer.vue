@@ -6,6 +6,15 @@ const videoStore = useVideoStore()
 function getEmbedURL(id) {
   return 'https://www.youtube.com/embed/' + id + '?si=9jysKI0zbGHvpMCD&mute=1'
 }
+
+function getThumbnailUrl(videoId) {
+  return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+}
+
+function openVideo(id) {
+  window.open("https://www.youtube.com/watch?v=" + id);
+}
+
 const props = defineProps({
   isActive: Object,
   id: Array[String],
@@ -15,6 +24,7 @@ const props = defineProps({
   releaseDate: Date,
   requirements: Array[String],
   connections: Array[String],
+  thumbnailUrl: String
 });
 
 function getTrickNames(id_list) {
@@ -46,6 +56,17 @@ function getTrickNames(id_list) {
         </v-col>
         <v-col v-if="requirements.length > 0">
           {{ $t('requirements') }}: {{ getTrickNames(requirements) }}
+        </v-col>
+        <v-col v-if="id.length > 1">
+          {{ $t('Other Tutorials') }}:
+        </v-col>
+        <v-col v-for="video in id.slice(1)">
+          <v-card elevation="3" width="150px" class="ma-2" rounded>
+            <v-img
+                :src="getThumbnailUrl(video)"
+                v-on:click="openVideo(video)"
+            />
+          </v-card>
         </v-col>
       </v-row>
     </v-container>

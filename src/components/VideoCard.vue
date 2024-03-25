@@ -36,6 +36,7 @@ export default {
             :releaseDate="releaseDate"
             :connections="connections"
             :requirements="requirements"
+            :thumbnail-url="thumbnailUrl"
         />
         <v-card-actions>
         <v-btn
