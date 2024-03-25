@@ -4,21 +4,20 @@ const selSortingOrder = useSelSortingOrder()
 </script>
 
 <script>
-
 function createSortingOrderObject() {
-  const items = {};
+  const translated = {};
   const sortingOrders = useSortingOrderStore().sortingOrders;
   for (let x = 0; x < sortingOrders.length; x++) {
-    items[x] = {
+    translated[x] = {
       title: sortingOrders[x]
     };
   }
-  return items;
+  return translated;
 }
 export default {
   data: () => ({
-    valid: true,
-    items: createSortingOrderObject(),
+    extended: true,
+    translated: createSortingOrderObject(),
   }),
   methods: {
     updateStore(title) {
@@ -31,7 +30,7 @@ export default {
 
 <template>
     <v-btn
-        id="menu-activator"
+        id="list-activator"
     >
       {{ $t("toolbar.sortBy") }}
       <v-card-subtitle class="smaller-font">
@@ -41,13 +40,13 @@ export default {
     <v-card-subtitle class="smaller-font">
 
     </v-card-subtitle>
-  <v-form v-model="valid">
-    <v-menu activator="#menu-activator">
+  <v-form v-model="extended">
+    <v-menu activator="#list-activator">
       <v-list>
         <v-list-item
-            v-for="(item, index) in items"
+            v-for="(item, index) in translated"
             :key="index"
-            :value="index"
+            :value="item"
         >
           <v-btn block @click="updateStore(item.title)" class="smaller-font">
             {{ $t("sortOptions." + item.title) }}

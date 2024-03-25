@@ -4,7 +4,7 @@ import {useVideoStore} from "@/store.js";
 const videoStore = useVideoStore()
 
 function getEmbedURL(id) {
-  return 'https://www.youtube.com/embed/' + id + '?si=9jysKI0zbGHvpMCD'
+  return 'https://www.youtube.com/embed/' + id + '?si=9jysKI0zbGHvpMCD&mute=1'
 }
 const props = defineProps({
   isActive: Object,
@@ -17,25 +17,12 @@ const props = defineProps({
   connections: Array[String],
 });
 
-function getDescription() {
-  let descr = `The ${props.title[0]} from the category ${ props.category } has a difficulty of ${ props.difficulty }. `
-  if(props.connections && props.connections.length > 0) {
-    let connections = [];
-    for (let i = 0; i < props.connections.length; i++) {
-      connections += videoStore.getTrickByID(props.connections[i], videoStore).title[0] + ", ";
-    }
-    connections = connections.slice(0, -2);
-    descr += `The Trick is similar to ${ connections }. `
+function getTrickNames(id_list) {
+  let res = videoStore.getTrickByID(id_list[0], videoStore).title[0];
+  for (let i = 1; i < id_list.length; i++) {
+    res += ", " + videoStore.getTrickByID(id_list[i], videoStore).title[0];
   }
-  if(props.requirements && props.requirements.length > 0) {
-    let requirements = [];
-    for (let i = 0; i < props.requirements.length; i++) {
-      requirements += videoStore.getTrickByID(props.requirements[i], videoStore).title[0] + ", ";
-    }
-    requirements = requirements.slice(0, -2);
-    descr += `The Trick builds upon ${ requirements }.`
-  }
-  return descr
+  return res;
 }
 </script>
 
@@ -48,22 +35,20 @@ function getDescription() {
         </v-col>
       </v-row>
       <v-row>
-        {{ getDescription() }}
-      </v-row>
-    </v-container>
-  <!--
-  <iframe width="100%" height="80vh" :src="getEmbedURL(id[0])" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-  <v-container>
-      <v-row >
-        <v-col v-for="title in title">
-          {{title}}
+        <v-col>
+          {{ $t('difficulty') }}: {{ difficulty }}
+        </v-col>
+        <v-col>
+          {{ $t('category') }}: {{ $t('categories.' + category) }}
+        </v-col>
+        <v-col v-if="connections.length > 0">
+          {{ $t('similarTricks') }}: {{ getTrickNames(connections) }}
+        </v-col>
+        <v-col v-if="requirements.length > 0">
+          {{ $t('requirements') }}: {{ getTrickNames(requirements) }}
         </v-col>
       </v-row>
-      <v-row>
-        {{ getDescription() }}
-      </v-row>
     </v-container>
-    -->
 </template>
 
 <style scoped>

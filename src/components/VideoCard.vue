@@ -27,7 +27,7 @@ export default {
             </v-card-subtitle>
           </v-card>
       </template>
-      <v-card>
+      <v-card align="center">
         <VideoPlayer
             :id="id"
             :title="title"
@@ -42,7 +42,7 @@ export default {
             @click="dialog = false"
             block
         >
-          Close
+          {{ $t("close") }}
         </v-btn>
         </v-card-actions>
       </v-card>

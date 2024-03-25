@@ -35,5 +35,14 @@
     "hydroblading": "Hydroblading",
     "spin": "Spin",
     "stop": "Stop"
-  }
+  },
+  "languages": {
+    "en": "English",
+    "de": "German"
+  },
+  "close": "Close",
+  "difficulty": "Difficulty",
+  "category": "Category",
+  "similarTricks": "Similar Tricks",
+  "requirements": "Requirements"
 }

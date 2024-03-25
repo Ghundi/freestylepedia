@@ -1,22 +1,22 @@
 <script>
+function createLangObj() {
+  const dict = {};
+  const locales = ['de', 'en'];
+  for (let x = 0; x < locales.length; x++) {
+    dict[x] = {
+      title: locales[x]
+    };
+  }
+  return dict
+}
 export default {
   data: () => ({
     valid: true,
-    items: [],
+    items: createLangObj(),
   }),
   methods: {
-    createLangObj(i18) {
-      const items = {};
-      const locales = this.$i18n.availableLocales;
-      for (let x = 0; x < locales.length; x++) {
-        items[x] = {
-          title: locales[x]
-        };
-      }
-      this.items = items;
-    },
     updateLang(lang) {
-      console.log('lang')
+      console.log(lang)
       this.$i18n.locale = lang;
     }
   }
@@ -24,7 +24,6 @@ export default {
 </script>
 
 <template>
-  {{ this.createLangObj($i18n) }}
   <v-btn
       id="menu-activator"
       variant="plain"
@@ -41,12 +40,12 @@ export default {
     <v-menu activator="#menu-activator">
       <v-list>
         <v-list-item
-            v-for="(item, index) in this.items"
+            v-for="(item, index) in items"
             :key="index"
-            :value="index"
+            :value="item"
         >
-          <v-btn block @click="this.updateLang('de')" class="smaller-font">
-            {{ $t("languages." + item) }}
+          <v-btn block @click="updateLang(item.title)" class="smaller-font">
+            {{ $t("languages." + item.title) }}
           </v-btn>
         </v-list-item>
       </v-list>

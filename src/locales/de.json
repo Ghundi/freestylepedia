@@ -10,9 +10,6 @@
     "sortBy": "Sortieren",
     "categories": "Kategorien"
   },
-  "videoCard": {
-    "open": "Öffnen"
-  },
   "footer": {
     "aboutUs": "Über uns",
     "help": "Hilfe",
@@ -28,7 +25,7 @@
     "releasedUp": "Veröffentlicht (Neu - Alt)"
   },
   "categories": {
-    "footwork": "Fußarbeit",
+    "footwork": "Schritt",
     "ground": "Breakdance",
     "jump":  "Sprung",
     "acrobatic":  "Akrobatik",
@@ -37,7 +34,12 @@
     "stop": "Bremse"
   },
   "languages": {
-    "en": "English",
+    "en": "Englisch",
     "de": "Deutsch"
-  }
+  },
+  "close": "Schließen",
+  "difficulty": "Schwierigkeit",
+  "category": "Kategorie",
+  "similarTricks": "Ähnliche Tricks",
+  "requirements": "Erfordert"
 }
