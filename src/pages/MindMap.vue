@@ -1,5 +1,5 @@
 <script setup>
-import {useVideoStore} from "@/store.js";
+
 </script>
 
 <script>
@@ -12,7 +12,6 @@ export default {
   data() {
     const videoStore = useVideoStore();
     const graph = videoStore.getConnectionsGraph(videoStore);
-    //console.log(graph);
     return {
       data: graph,
       locale: "en",
@@ -22,7 +21,7 @@ export default {
 </script>
 
 <template>
-  <v-card class="ma-10 mr-15 ml-15" align="center">
+  <v-card class="ma-10 mr-15 ml-15 text-center">
     <mindmap
         style="height: 100vh"
         v-model="data"
@@ -34,7 +33,7 @@ export default {
         :fit-btn="true"
         :center-btn="true"
         :download-btn="true"
-        :drag="false"
+        :drag="true"
         :edit="false"
         :add-node-btn="false"
         :sharp-corner="false"

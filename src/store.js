@@ -25,7 +25,7 @@ export const useMembers = defineStore('members', {
 export const useCurPage = defineStore('curPage', {
     state: () => {
         return {
-            val: "VideoList",
+            val: "MindMap",
         }
     },
     actions: {
@@ -156,15 +156,25 @@ export const useVideoStore = defineStore('videoStore', {
             const categories = useCategoryStore().categories;
             //category nodes
             for (let i = 0; i < categories.length; i++) {
-                //TODO translate categories, atm translate not aailable
-                graph[0].children.push({name: categories[i], children: [], left: (i / categories.length < 0.5)});
+                //TODO translate categories, atm translate not available
+                const categorySentenceCase = categories[i].charAt(0).toUpperCase() + categories[i].slice(1);
+                graph[0].children.push({name: categorySentenceCase, children: [], left: (i / categories.length < 0.5)});
             }
+            let visitedIDs = [];
             for (let i = 0; i < state.videos.length; i++) {
-                const categoryIdx = categories.indexOf(state.videos[i].category)
-                graph[0].children[categoryIdx].children.push(trickToNode(state.videos[i]));
-                if(state.videos[i].connections.length > 0) {
-                    for (let j = 0; j < state.videos[i].connections.length; j++) {
-                        graph[0].children[categoryIdx].children[j].children.push(trickToNode(state.getTrickByID(state.videos[i].connections[j], state)));
+                if(!visitedIDs.includes(state.videos[i].trickID)) {
+                    const categoryIdx = categories.indexOf(state.videos[i].category)
+                    graph[0].children[categoryIdx].children.push(trickToNode(state.videos[i]));
+                    // add connections if not base trick and mark them as visited
+                    if(state.videos[i].connections.length > 0) {
+                        let connectionsAdded = 0;
+                        for (let j = 0; j < state.videos[i].connections.length; j++) {
+                            if(parseInt(state.videos[i].trickID.slice(5)) < parseInt(state.videos[i].connections[j].slice(5))) {
+                                graph[0].children[categoryIdx].children.at(-1).children.push(trickToNode(state.getTrickByID(state.videos[i].connections[j], state)));
+                                visitedIDs.push(state.videos[i].connections[j]);
+                                connectionsAdded += 1;
+                            }
+                        }
                     }
                 }
             }

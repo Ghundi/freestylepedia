@@ -7,13 +7,13 @@ tricks:
 #   requirements
 #   connections
 - trick0001:
-    - ["Forward Brush"]
-    - ["bS6_Cx_OES8"]
-    - 3
-    - "Footwork"
-    - Feb 23 2024,
-    - []
-    - [trick0003]
+      - ["Brush"]
+      - ["Xo2frGP3Q8A"]
+      - 3
+      - "Footwork"
+      - 15.02.2019,
+      - []
+      - [trick0003]
 - trick0002:
     - ["Crazy Legs"]
     - ["JRwQ3GLsysQ"]
@@ -23,13 +23,13 @@ tricks:
     - []
     - []
 - trick0003:
-    - ["Brush"]
-    - ["Xo2frGP3Q8A"]
-    - 3
-    - "Footwork"
-    - 15.02.2019,
-    - []
-    - [trick0001]
+      - ["Forward Brush"]
+      - ["bS6_Cx_OES8"]
+      - 3
+      - "Footwork"
+      - Feb 23 2024,
+      - []
+      - [trick0001]
 - trick0004:
     - ["Sweep"]
     - ["C3XfjSFDA80", "DeCh2nZgtbY", "P_f0_DF3Qbo"]
@@ -79,21 +79,21 @@ tricks:
     - ["trick0006"]
     - []
 - trick0010:
-    - ["Forward Spiderman", "Forward Hydro"]
-    - ["K7mM-kyIfLw"]
-    - 4
-    - "Hydroblading"
-    - 22.10.2021,
-    - []
-    - []
+      - ["Spiderman", "Hydro"]
+      - ["Ymh5bwfYAcs", "l5tVRffTzkY", "1Rt7HC1Pstg"]
+      - 4
+      - "Hydroblading"
+      - Mar 8, 2019
+      - []
+      - [trick0014, trick0011]
 - trick0011:
-    - ["Spiderman 180", "Hydro 180"]
-    - ["3B9rCmLAfpg"]
-    - 5
-    - "Hydroblading"
-    - 06.11.2021,
-    - [trick0010, trick0014]
-    - [trick0010, trick0014]
+      - ["Forward Spiderman", "Forward Hydro"]
+      - ["K7mM-kyIfLw"]
+      - 4
+      - "Hydroblading"
+      - 22.10.2021,
+      - []
+      - []
 - trick0012:
     - ["Backflip"]
     - ["853hRI0UoMM"]
@@ -111,13 +111,13 @@ tricks:
     - []
     - []
 - trick0014:
-    - ["Spiderman", "Hydro"]
-    - ["Ymh5bwfYAcs", "l5tVRffTzkY", "1Rt7HC1Pstg"]
-    - 4
-    - "Hydroblading"
-    - Mar 8, 2019
-    - []
-    - [trick0010, trick0011]
+      - ["Spiderman 180", "Hydro 180"]
+      - ["3B9rCmLAfpg"]
+      - 5
+      - "Hydroblading"
+      - 06.11.2021,
+      - [trick0010, trick0011]
+      - [trick0010, trick0011]
 - trick0015:
     - ["Zulu Spin"]
     - ["ot8MGzXZln0"]
@@ -210,7 +210,7 @@ tricks:
     - ["Split-Stop (Heel Heel)"]
     - ["43fW4vzTpqU"]
     - 4
-    - ""
+    - "Stop"
     - Mar 8, 2019
     - []
     - []
