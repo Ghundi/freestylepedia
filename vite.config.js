@@ -6,7 +6,7 @@ import ViteYaml from '@modyfi/vite-plugin-yaml';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',
+  base: '/freestylepedia',
   plugins: [
     vue(),
     ViteYaml(),

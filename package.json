@@ -5,21 +5,23 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/freestylepedia/",
+    "build": "vite build",
+    "deploy": "gh-pages -d dist",
     "preview": "vite preview"
   },
   "dependencies": {
+    "d3-color": ">=3.1.0",
     "js-yaml": "^4.1.0",
     "pinia": "^2.1.7",
     "vue": "^3.4.15",
     "vue3-mindmap": "^0.5.12",
-    "vuetify": "^3.5.3",
-    "d3-color": ">=3.1.0"
+    "vuetify": "^3.5.3"
   },
   "devDependencies": {
     "@mdi/font": "^7.4.47",
     "@modyfi/vite-plugin-yaml": "^1.1.0",
     "@vitejs/plugin-vue": "^5.0.3",
+    "gh-pages": "^6.1.1",
     "vite": "^5.0.11"
   }
 }
