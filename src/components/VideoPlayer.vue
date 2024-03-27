@@ -12,7 +12,7 @@ function getThumbnailUrl(videoId) {
 }
 
 function openVideo(id) {
-  window.open("https://www.youtube.com/watch?v=" + id);
+  window.open("https://www.youtube.com/watch?v=" + id + "?mute=1");
 }
 
 const props = defineProps({
@@ -46,28 +46,41 @@ function getTrickNames(id_list) {
       </v-row>
       <v-row>
         <v-col>
-          {{ $t('difficulty') }}: {{ difficulty }}
-        </v-col>
-        <v-col>
-          {{ $t('category') }}: {{ $t('categories.' + category) }}
-        </v-col>
-        <v-col v-if="connections.length > 0">
-          {{ $t('similarTricks') }}: {{ getTrickNames(connections) }}
-        </v-col>
-        <v-col v-if="requirements.length > 0">
-          {{ $t('requirements') }}: {{ getTrickNames(requirements) }}
-        </v-col>
-        <v-col v-if="id.length > 1">
-          {{ $t('Other Tutorials') }}:
-        </v-col>
-        <v-col v-for="video in id.slice(1)">
-          <v-card elevation="3" width="150px" class="ma-2" rounded>
-            <v-img
-                :src="getThumbnailUrl(video)"
-                v-on:click="openVideo(video)"
-            />
+          <v-card class="pa-3" elevation="5">
+            <p class="font-weight-bold">{{ $t('difficulty') }}:</p>
+             {{ difficulty }}
+            <br>
+            <p class="font-weight-bold">{{ $t('category') }}:</p>
+            {{ $t('categories.' + category) }}
           </v-card>
         </v-col>
+        <v-col v-if="connections.length > 0">
+          <v-card class="pa-3" elevation="5">
+            <p class="font-weight-bold">{{ $t('similarTricks') }}:</p>
+            <br>
+            {{ getTrickNames(connections) }}
+          </v-card>
+        </v-col>
+        <v-col v-if="requirements.length > 0">
+          <v-card class="pa-3" elevation="5">
+            <p class="font-weight-bold">{{ $t('requirements') }}:</p>
+            <br>
+            {{ getTrickNames(requirements) }}
+          </v-card>
+        </v-col>
+        <template v-if="id.length > 1">
+          <v-col>
+            <p class="font-weight-bold">{{ $t('otherTutorials') }}:</p>
+          </v-col>
+          <v-col v-for="video in id.slice(1)">
+            <v-card elevation="3" width="150px" class="ma-2" rounded>
+              <v-img
+                  :src="getThumbnailUrl(video)"
+                  v-on:click="openVideo(video)"
+              />
+            </v-card>
+          </v-col>
+        </template>
       </v-row>
     </v-container>
 </template>

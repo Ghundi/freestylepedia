@@ -22,8 +22,8 @@
   "sortOptions": {
     "difficultyDown": "Schwierigkeit (Schwer - Leicht)",
     "difficultyUp": "Schwierigkeit (Leicht - Schwer)",
-    "nameDown": "Name (A - Z)",
-    "nameUp": "Name (Z - A)",
+    "nameUp": "Name (A - Z)",
+    "nameDown": "Name (Z - A)",
     "releasedDown": "Veröffentlicht (Alt - Neu)",
     "releasedUp": "Veröffentlicht (Neu - Alt)"
   },
@@ -44,5 +44,6 @@
   "difficulty": "Schwierigkeit",
   "category": "Kategorie",
   "similarTricks": "Ähnliche Tricks",
-  "requirements": "Erfordert"
+  "requirements": "Erfordert",
+  "otherTutorials": "Andere Tutorials"
 }

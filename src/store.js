@@ -41,7 +41,7 @@ export const useCurPage = defineStore('curPage', {
 export const useSortingOrderStore = defineStore('sortingOrderStore', {
     state: () => {
         return {
-            sortingOrders: ['difficultyUp' , 'difficultyDown', 'nameDown', 'nameUp', 'releasedDown', 'releasedUp']
+            sortingOrders: ['difficultyUp' , 'difficultyDown', 'nameUp', 'nameDown', 'releasedDown', 'releasedUp']
         }
     },
 })

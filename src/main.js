@@ -10,10 +10,16 @@ import messages from "@intlify/unplugin-vue-i18n/messages";
 
 import {createPinia} from "pinia";
 
+function getLang() {
+    if (navigator.languages !== undefined)
+        return navigator.languages[0].slice(0, 2);
+    return navigator.language;
+}
+
 const i18n = createI18n({
     legacy: false,
     globalInjection: true,
-    locale: "de",
+    locale: getLang(),
     fallbackLocale: "en",
     availableLocales: ["en", "de"],
     messages: messages,

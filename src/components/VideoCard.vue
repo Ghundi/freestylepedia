@@ -42,7 +42,6 @@ function getCategoryColor(category) {
               class="videoCard"
               :style =  "{'box-shadow': `0px 0px 8px 2px ${getCategoryColor(category)}`}"
               v-bind="activatorProps">
-            {{ category }}
             <v-img
                 :src="thumbnailUrl"
                 id="thumbnail">
@@ -53,7 +52,7 @@ function getCategoryColor(category) {
             </v-card-subtitle>
           </v-card>
       </template>
-      <v-card align="center">
+      <v-card class="text-center">
         <VideoPlayer
             :id="id"
             :title="title"
