@@ -6,6 +6,26 @@ export default {
     }
   },
 }
+function getCategoryColor(category) {
+  switch(category) {
+    case 'ground':
+      return 'rgba(152,221,69,0.75)';
+    case 'spin':
+      return 'rgba(23,35,255,0.53)';
+    case 'acrobatic':
+      return '#e03030';
+    case 'stop':
+      return 'rgba(252,247,0,0.76)';
+    case 'jump':
+      return 'rgba(255,136,0,0.68)';
+    case 'hydroblading':
+      return 'rgba(6,187,211,0.78)';
+    case 'footwork':
+      return 'rgba(151,0,197,0.48)';
+    default:
+      return '#000000';
+  }
+}
 </script>
 
 <template>
@@ -16,7 +36,13 @@ export default {
         fullscreen
     >
       <template v-slot:activator="{ props: activatorProps }">
-          <v-card width="15em" height="12em"  class="border" v-bind="activatorProps">
+          <v-card
+              width="15em"
+              height="12em"
+              class="videoCard"
+              :style =  "{'box-shadow': `0px 0px 8px 2px ${getCategoryColor(category)}`}"
+              v-bind="activatorProps">
+            {{ category }}
             <v-img
                 :src="thumbnailUrl"
                 id="thumbnail">
@@ -77,5 +103,8 @@ function getLang() {
 .smaller-font {
   font-size: 0.6em;
   text-transform: none;
+}
+.videoCard {
+  border-radius: 5%;
 }
 </style>

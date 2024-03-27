@@ -21,7 +21,8 @@ export default {
 </script>
 
 <template>
-  <v-card class="ma-10 mr-15 ml-15 text-center">
+  <v-card class="ma-3
+  text-center">
     <mindmap
         style="height: 100vh"
         v-model="data"
@@ -29,7 +30,7 @@ export default {
         :branch="2"
         :x-gap="80"
         :y-gap="10"
-        :zoom="true"
+        :zoom="false"
         :fit-btn="true"
         :center-btn="true"
         :download-btn="true"

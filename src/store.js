@@ -25,7 +25,7 @@ export const useMembers = defineStore('members', {
 export const useCurPage = defineStore('curPage', {
     state: () => {
         return {
-            val: "MindMap",
+            val: "VideoList",
         }
     },
     actions: {
@@ -41,7 +41,7 @@ export const useCurPage = defineStore('curPage', {
 export const useSortingOrderStore = defineStore('sortingOrderStore', {
     state: () => {
         return {
-            sortingOrders: ['difficultyUp' , 'difficultyDown', 'nameUp', 'nameDown', 'releasedDown', 'releasedUp']
+            sortingOrders: ['difficultyUp' , 'difficultyDown', 'nameDown', 'nameUp', 'releasedDown', 'releasedUp']
         }
     },
 })

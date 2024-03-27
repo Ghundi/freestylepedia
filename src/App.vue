@@ -18,7 +18,7 @@ videoStore.loadYAML();
   <v-app>
     <nav-bar/>
     <br>
-    <v-main>
+    <v-main class="bg-grey-lighten-3">
       <VideoList v-if="curPage.val==='VideoList'"/>
       <MindMap v-if="curPage.val==='MindMap'"/>
       <Impressum v-if="curPage.val==='About Us'"/>
