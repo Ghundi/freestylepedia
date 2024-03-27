@@ -15,6 +15,10 @@ videoStore.loadYAML();
 
 
 <template>
+  <head>
+    <title>My Page Title</title>
+    <link rel="icon" type="image/jpg" href="./assets/blackbirdLogo.jpg">
+  </head>
   <v-app>
     <nav-bar/>
     <br>

@@ -37,8 +37,8 @@ function getCategoryColor(category) {
     >
       <template v-slot:activator="{ props: activatorProps }">
           <v-card
-              width="15em"
-              height="12em"
+              width="14em"
+              height="10em"
               class="videoCard"
               :style =  "{'box-shadow': `0px 0px 8px 2px ${getCategoryColor(category)}`}"
               v-bind="activatorProps">

@@ -32,7 +32,8 @@ export default {
         :step="1"
         show-ticks="always"
         thumb-label="always"
-        track-size="5">
+        track-size="5"
+        class="mt-3">
     </v-range-slider>
   </v-form>
 </template>

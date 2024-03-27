@@ -24,7 +24,7 @@ function openPage(page) {
       v-model="drawer"
       temporary
       :elevation="5"
-      class="bg-black mt-3"
+      class="bg-black mt-3 ma-3"
   >
     <v-list>
       <v-list-item class="bg-transparent" @click="openPage('VideoList')">
