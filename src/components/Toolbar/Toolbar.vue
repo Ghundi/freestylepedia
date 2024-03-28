@@ -1,9 +1,9 @@
 <script setup>
 
-import OrderBySelector from "@/components/OrderBySelector.vue";
-import CategorySelector from "@/components/CategorySelector.vue";
-import DifficultySlider from "@/components/DifficultySlider.vue";
-import SearchBar from "@/components/SearchBar.vue";
+import OrderBySelector from "@/components/Toolbar/OrderBySelector.vue";
+import CategorySelector from "@/components/Toolbar/CategorySelector.vue";
+import DifficultySlider from "@/components/Toolbar/DifficultySlider.vue";
+import SearchBar from "@/components/Toolbar/SearchBar.vue";
 </script>
 
 <script>
