@@ -1,6 +1,6 @@
 <script setup>
 import {useMembers} from "@/store.js";
-import logo from "@/assets/blackbirdLogo.jpg"
+import logo from "@/assets/blackbirdIconInverted.png"
 
 const members = useMembers().val
 </script>

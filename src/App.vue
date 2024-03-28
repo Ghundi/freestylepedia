@@ -15,19 +15,11 @@ videoStore.loadYAML();
 
 
 <template>
-  <head>
-    <title>My Page Title</title>
-    <link rel="icon" type="image/jpg" href="./assets/blackbirdLogo.jpg">
-  </head>
   <v-app>
     <nav-bar/>
     <br>
     <v-main class="bg-grey-lighten-3">
-      <VideoList v-if="curPage.val==='VideoList'"/>
-      <MindMap v-if="curPage.val==='MindMap'"/>
-      <Impressum v-if="curPage.val==='About Us'"/>
-      <TrickTree v-if="curPage.val==='TrickTree'"/>
-      <Help v-if="curPage.val==='Help'"/>
+      <router-view/>
     </v-main>
     <Footer/>
     </v-app>

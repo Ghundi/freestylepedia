@@ -1,14 +1,39 @@
 import { createApp } from 'vue'
 import App from "@/App.vue";
 
+// vuetify styling
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
+
+// multi language
 import { createI18n } from "vue-i18n";
 import messages from "@intlify/unplugin-vue-i18n/messages";
 
+// global store
 import {createPinia} from "pinia";
+
+// routing
+import {createMemoryHistory, createRouter, createWebHistory} from 'vue-router'
+import VideoList from './pages/VideoList.vue'
+import MindMap from './pages/MindMap.vue'
+import TrickTree from './pages/TrickTree.vue'
+import AboutUs from './pages/AboutUs.vue'
+import Help from './pages/Help.vue'
+
+const routes = [
+    { path: '/', component: VideoList },
+    { path: '/MindMap', component: MindMap },
+    { path: '/TrickTree', component: TrickTree },
+    { path: '/AboutUs', component: AboutUs },
+    { path: '/Help', component: Help },
+]
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+})
 
 function getLang() {
     if (navigator.languages !== undefined)
@@ -37,5 +62,6 @@ createApp(App)
     .use(pinia) // Use Pinia plugin
     .use(vuetify)
     .use(i18n)
+    .use(router)
     .mount('#app');
 

@@ -51,13 +51,13 @@ export default {
     <div>
       <v-btn
           variant="plain"
-          @click="openPage('About Us')"
+          to="/AboutUs"
       >
         {{ $t("footer.aboutUs") }}
       </v-btn>
       <v-btn
           variant="plain"
-          @click="openPage('Help')"
+          to="/Help"
       >
         {{ $t("footer.help") }}
       </v-btn>
