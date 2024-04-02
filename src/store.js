@@ -172,6 +172,13 @@ export const useVideoStore = defineStore('videoStore', {
             console.log(`${ trickID } could not be found`)
             return state.videos[0];
         },
+        getTitles(state) {
+            let res = [];
+            for (let i = 0; i < state.videos.length; i++) {
+                res.push(state.videos[i].title);
+            }
+            return res.flat();
+        },
         getConnectionsGraph(state) {
             let graph= [{name: "Categories", children: []}];
             const categories = useCategoryStore().categories;

@@ -4,7 +4,7 @@ const curSearchStore = useCurSearchStore();
 </script>
 
 <script>
-import { useCurSearchStore } from "@/store.js";
+import { useVideoStore ,useCurSearchStore } from "@/store.js";
 
 export default {
   data: () => ({
@@ -21,17 +21,19 @@ export default {
 </script>
 
 <template>
-  <v-text-field
-      v-model="curSearchStore.val"
+  <v-autocomplete
+      v-bind:label="$t('toolbar.search')"
       :rules="updateStore"
+      @update:search="updateStore"
+      hide-no-data
+      hide-details
       density="compact"
       variant="solo"
-      v-bind:label="$t('toolbar.search')"
-      append-inner-icon="mdi-magnify"
       single-line
-      hide-details
-  >
-  </v-text-field>
+      append-inner-icon="mdi-magnify"
+      menu-icon=""
+      :items="useVideoStore().getTitles(useVideoStore())"
+  ></v-autocomplete>
 </template>
 
 <style scoped>
