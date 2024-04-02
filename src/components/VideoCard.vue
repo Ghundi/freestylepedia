@@ -51,8 +51,8 @@ function getCategoryColor(category) {
               {{ releaseDate.toLocaleDateString(getLang()) }}
             </v-card-subtitle>
           </v-card>
-        <template v-if="title[0] === videoStore.newestTrick">
-          <v-icon class="newTag" color="green" icon="mdi-new-box"></v-icon>
+        <template v-if="title[0] === videoStore.newestTrick" class="newTag">
+          <v-card-title class="newTag">New!</v-card-title>
         </template>
       </template>
       <v-card class="text-center">
@@ -115,8 +115,13 @@ function getLang() {
 }
 .newTag {
   position: relative;
-  bottom: 7em;
-  left: 4em;
+  bottom: 8em;
+  left: 8.4em;
   rotate: 30deg;
+  line-height: 0;
+  width: 4em;
+  border-radius: 1em;
+  padding: 0.7em;
+  background: rgba(255, 0, 0, 50%);
 }
 </style>

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/android": "^5.7.4",
     "@intlify/unplugin-vue-i18n": "^3.0.1",
     "js-yaml": "^4.1.0",
     "pinia": "^2.1.7",
