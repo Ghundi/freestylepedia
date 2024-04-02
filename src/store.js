@@ -1,6 +1,34 @@
 import { defineStore } from 'pinia';
 import tricksYAML from "./DB/freestylepedia.yaml";
 
+//helpers
+function trickToNode(trick) {
+    return {name: trick.title[0], children: []}
+}
+
+function graphSearch(trickTitle, graph) {
+    let visited = [];
+    for (let i = 0; i < graph.length; i++) {
+        if(!visited.includes(graph[i])) {
+            visited.push(graph[i].name)
+            if(graph[i].name === trickTitle) {
+                return graph[i];
+            }
+            else {
+                let res = null;
+                for (let j = 0; j < graph[i].children.length; j++) {
+                    res = graphSearch(trickTitle, graph[i])
+                    console.log(res, graph[i].children, graph[i].name)
+                    if(res != null) {
+                        console.log(`found ${trickTitle}`)
+                        return res
+                    }
+                }
+            }
+        }
+    }
+}
+
 // TODO read FAQ from YAML?
 export const useFAQ = defineStore('FAQ', {
     state: () => {
@@ -21,21 +49,6 @@ export const useMembers = defineStore('members', {
             val: ['Matti', 'Niklas', 'Alex', 'Basti', 'Danny' , 'Eduard', 'Lena' , 'Markus', 'Vio'],
         }
     },
-})
-export const useCurPage = defineStore('curPage', {
-    state: () => {
-        return {
-            val: "VideoList",
-        }
-    },
-    actions: {
-        update(value){
-            this.val = value;
-        },
-        reset() {
-            this.val = "VideoList";
-        }
-    }
 })
 
 export const useSortingOrderStore = defineStore('sortingOrderStore', {
@@ -122,6 +135,7 @@ export const useCurSearchStore = defineStore('curSearchStore', {
 export const useVideoStore = defineStore('videoStore', {
     state: () => ({
         videos: [],
+        newestTrick: null,
     }),
     actions: {
         loadYAML() {
@@ -133,6 +147,16 @@ export const useVideoStore = defineStore('videoStore', {
                 const lst = tricksYAML["tricks"][i][("trick" + ("000" + j).slice(-4))];
                 const trick = { trickID: ("trick" + ("000" + j).slice(-4)), id: lst[1], title: lst[0], difficulty: lst[2], category: lst[3].toLowerCase(), releaseDate: new Date(lst[4]), requirements: lst[5], connections: lst[6] }
                 tricks.push(trick);
+            }
+            // find the newest trick
+            const newestTrick = tricks.sort((a, b) => a.title[0].localeCompare(b.title[0]))[0];
+            //helper for datetime one month ago
+            const d = new Date();
+            d.setMonth(d.getMonth()-1);
+            // set newestTrick Tag if max 1 month-old
+            //TODO change to >=
+            if(newestTrick.releaseDate != d) {
+                this.newestTrick = newestTrick.title[0];
             }
             this.videos = tricks;
         },
@@ -149,9 +173,6 @@ export const useVideoStore = defineStore('videoStore', {
             return state.videos[0];
         },
         getConnectionsGraph(state) {
-            function trickToNode(trick) {
-                return {name: trick.title[0], children: []}
-            }
             let graph= [{name: "Categories", children: []}];
             const categories = useCategoryStore().categories;
             //category nodes
@@ -167,12 +188,10 @@ export const useVideoStore = defineStore('videoStore', {
                     graph[0].children[categoryIdx].children.push(trickToNode(state.videos[i]));
                     // add connections if not base trick and mark them as visited
                     if(state.videos[i].connections.length > 0) {
-                        let connectionsAdded = 0;
                         for (let j = 0; j < state.videos[i].connections.length; j++) {
                             if(parseInt(state.videos[i].trickID.slice(5)) < parseInt(state.videos[i].connections[j].slice(5))) {
                                 graph[0].children[categoryIdx].children.at(-1).children.push(trickToNode(state.getTrickByID(state.videos[i].connections[j], state)));
                                 visitedIDs.push(state.videos[i].connections[j]);
-                                connectionsAdded += 1;
                             }
                         }
                     }
@@ -181,12 +200,27 @@ export const useVideoStore = defineStore('videoStore', {
             return graph;
         },
         getTrickTreeGraph(state) {
-            let graph = [];
+            let graph= [];
+            let visitedIDs = [];
             for (let i = 0; i < state.videos.length; i++) {
-                graph.push({name: state.videos[i].title[0], children: []});
-                if(state.videos[i].requirements.length > 0) {
-                    for (let j = 0; j < state.videos[i].requirements.length; j++) {
-                        graph[i].children.push({name: state.getTrickByID(state.videos[i].requirements[j], state).title[0], children: []});
+                if(!visitedIDs.includes(state.videos[i].trickID)) {
+                    // check if requirements
+                    if(state.videos[i].requirements.length > 0) {
+                        for (let j = 0; j < state.videos[i].requirements.length; j++) {
+                            const parent = graphSearch(state.getTrickByID(state.videos[i].requirements[j], state).title[0], graph);
+                            if(parent != null) {
+                                parent.children.push(trickToNode(state.videos[i]));
+                                visitedIDs.push(state.videos[i].trickID);
+                            }
+                            else {
+                                console.log(`error ${state.videos[i].requirements[j]} not found`)
+                            }
+                        }
+                    }
+                    // start new subtree
+                    else {
+                        graph.push(trickToNode(state.videos[i]))
+                        visitedIDs.push(state.videos[i].trickID);
                     }
                 }
             }
@@ -203,9 +237,9 @@ export const useVideoStore = defineStore('videoStore', {
                     case 'nameDown':
                         return [...state.videos].sort((a, b) => b.title[0].localeCompare(a.title[0]));
                     case 'releasedDown':
-                        return [...state.videos].sort((a, b) => b.releaseDate < a.releaseDate);
+                        return [...state.videos].sort((a, b) => b.releaseDate.localeCompare(a.releaseDate));
                     case 'releasedUp':
-                        return [...state.videos].sort((a, b) => b.releaseDate > a.releaseDate);
+                        return [...state.videos].sort((a, b) => a.releaseDate.localeCompare(b.releaseDate));
                     default:
                         return [...state.videos];
                 }

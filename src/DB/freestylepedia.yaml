@@ -3,6 +3,7 @@ tricks:
 #   names
 #   YouTube IDs
 #   difficulty
+#   category
 #   release Date
 #   requirements
 #   connections
@@ -11,7 +12,7 @@ tricks:
       - ["Xo2frGP3Q8A"]
       - 3
       - "Footwork"
-      - 15.02.2019,
+      - "2019-02-15"
       - []
       - [trick0003]
 - trick0002:
@@ -19,7 +20,7 @@ tricks:
     - ["JRwQ3GLsysQ"]
     - 2
     - "Footwork"
-    - Feb 16, 2024,
+    - "2024-02-16"
     - []
     - []
 - trick0003:
@@ -27,7 +28,7 @@ tricks:
       - ["bS6_Cx_OES8"]
       - 3
       - "Footwork"
-      - Feb 23 2024,
+      - "2024-02-23"
       - []
       - [trick0001]
 - trick0004:
@@ -92,7 +93,7 @@ tricks:
       - 4
       - "Hydroblading"
       - 22.10.2021,
-      - []
+      - [trick0010]
       - []
 - trick0012:
     - ["Backflip"]
@@ -116,7 +117,7 @@ tricks:
       - 5
       - "Hydroblading"
       - 06.11.2021,
-      - [trick0010, trick0011]
+      - [trick0011]
       - [trick0010, trick0011]
 - trick0015:
     - ["Zulu Spin"]

@@ -17,10 +17,10 @@ function isMobile() {
 
 <template>
   <v-container>
-    <v-row class="mt-3" justify="start">
+    <v-row class="mt-3" justify="center">
       <Toolbar/>
     </v-row>
-    <v-row :justify="(isMobile) ? 'start' : 'center'">
+    <v-row :justify="(isMobile()) ? 'center' : 'start'" :align-content="(isMobile()) ? 'center' : 'start'">
       <template
           v-for="video in videoStore.filteredVideos(videoStore.sortedVideos(videoStore, curSelSortingOrder.by))"
           :key="video.title[0]">

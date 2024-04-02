@@ -1,23 +1,30 @@
-<script setup>
+<script>
 import {useVideoStore} from "@/store.js";
-
-const videoStore = useVideoStore();
+export default {
+  data() {
+    const videoStore = useVideoStore();
+    const graph = videoStore.getTrickTreeGraph(videoStore);
+    return {
+      data: graph
+    };
+  },
+};
 </script>
 
 <template>
 <v-container>
   <v-row>
-    <template v-for="(trick, tmp) in videoStore.getTrickTreeGraph(videoStore)">
+    <template v-for="(trick, tmp) in data">
       <v-col>
         <v-card class="ma-5" align="center">
           <v-card-title>
             {{ trick.name }}
           </v-card-title>
         <template v-if="trick.children.length > 0">
-            Requirements:
+            |
           <v-list >
             <v-list-item v-for="(trick, idx) in trick.children">
-              {{idx + 1}}. {{ trick.name }}
+              {{ trick.name }}
             </v-list-item>
           </v-list>
         </template>

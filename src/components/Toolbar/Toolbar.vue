@@ -27,7 +27,7 @@ export default {
 
 <template>
   <v-container>
-    <v-row>
+    <v-row justify="center">
       <v-col class="minWidth">
         <SearchBar/>
       </v-col>

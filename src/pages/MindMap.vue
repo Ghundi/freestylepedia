@@ -1,5 +1,4 @@
 <script setup>
-
 </script>
 
 <script>
@@ -14,7 +13,7 @@ export default {
     const graph = videoStore.getConnectionsGraph(videoStore);
     return {
       data: graph,
-      locale: "en",
+      treeConfig: { nodeWidth: 120, nodeHeight: 80, levelHeight: 200 }
     };
   },
 };
@@ -26,22 +25,19 @@ export default {
     <mindmap
         style="height: 100vh"
         v-model="data"
-        :locale="locale"
-        :branch="2"
-        :x-gap="80"
-        :y-gap="10"
+        :branch="4"
+        :x-gap="84"
+        :y-gap="18"
         :zoom="false"
         :fit-btn="true"
         :center-btn="true"
         :download-btn="true"
-        :drag="true"
-        :edit="false"
-        :add-node-btn="false"
+        :drag="false"
+        :add-node-btn="true"
         :sharp-corner="false"
         :ctm="true"
         :timetravel="false"
-        :vertical="true"
-    />
+        :vertical="true"/>
   </v-card>
 </template>
 

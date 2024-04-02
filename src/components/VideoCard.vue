@@ -41,16 +41,19 @@ function getCategoryColor(category) {
               height="10em"
               class="videoCard"
               :style =  "{'box-shadow': `0px 0px 8px 2px ${getCategoryColor(category)}`}"
-              v-bind="activatorProps">
+              v-bind="activatorProps"
+          >
             <v-img
                 :src="thumbnailUrl"
                 id="thumbnail">
             </v-img>
-            <v-spacer></v-spacer>
             <v-card-subtitle class="smaller-font">
-              {{releaseDate.toLocaleDateString(getLang())}}
+              {{ releaseDate.toLocaleDateString(getLang()) }}
             </v-card-subtitle>
           </v-card>
+        <template v-if="title[0] === videoStore.newestTrick">
+          <v-icon class="newTag" color="green" icon="mdi-new-box"></v-icon>
+        </template>
       </template>
       <v-card class="text-center">
         <VideoPlayer
@@ -78,6 +81,9 @@ function getCategoryColor(category) {
 
 <script setup>
 import VideoPlayer from "@/components/VideoPlayer.vue";
+import { useVideoStore } from "@/store.js";
+
+const videoStore = useVideoStore();
 
 const props = defineProps({
   id: Array[String],
@@ -89,6 +95,7 @@ const props = defineProps({
   requirements: Array[String],
   connections: Array[String],
 });
+
 
 function getLang() {
   if (navigator.languages !== undefined)
@@ -105,5 +112,11 @@ function getLang() {
 }
 .videoCard {
   border-radius: 5%;
+}
+.newTag {
+  position: relative;
+  bottom: 7em;
+  left: 4em;
+  rotate: 30deg;
 }
 </style>

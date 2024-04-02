@@ -12,12 +12,11 @@
     "@intlify/unplugin-vue-i18n": "^3.0.1",
     "js-yaml": "^4.1.0",
     "pinia": "^2.1.7",
-    "vue": "^3.4.15",
+    "vue": "^3.4.21",
     "vue-i18n": "^9.10.1",
     "vue-router": "^4.3.0",
     "vue3-mindmap": "^0.5.12",
-    "vuetify": "^3.5.3",
-    "d3-color": ">= 3.1.0"
+    "vuetify": "^3.5.3"
   },
   "devDependencies": {
     "@mdi/font": "^7.4.47",

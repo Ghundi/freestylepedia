@@ -1,11 +1,5 @@
 <script setup>
-import {useCurPage} from "@/store.js";
 import LanguageSelector from "@/components/languageSelector.vue";
-const curPage = useCurPage();
-function openPage(page) {
-  const curPage = useCurPage();
-  curPage.update(page);
-}
 </script>
 
 <script>
@@ -31,7 +25,7 @@ export default {
 </script>
 
 <template>
-  <v-footer class="d-flex flex-column bg-black">
+  <v-footer class="d-flex align-center flex-column bg-black">
     <div class="d-flex align-center px-4">
       <v-btn
           icon='mdi-youtube'
