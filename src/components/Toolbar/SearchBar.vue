@@ -5,23 +5,30 @@ const curSearchStore = useCurSearchStore();
 
 <script>
 import { useVideoStore ,useCurSearchStore } from "@/store.js";
+let searchEmpty = true;
 
 export default {
   data: () => ({
-    value: useCurSearchStore().val,
     updateStore: [
       value => {
-        const selCurSearchStore = useCurSearchStore();
-        selCurSearchStore.update(value);
-        return true
+        searchEmpty = value == null;
       }
-    ]
+    ],
+  getItems() {
+    if (searchEmpty) {
+      return []
+    }
+    else {
+      return useVideoStore().getTitles(useVideoStore());
+    }
+  }
   }),
 }
 </script>
 
 <template>
   <v-combobox
+      @update:modelValue="updateStore"
       v-bind:label="$t('toolbar.search')"
       v-model="useCurSearchStore().val"
       hide-no-data
@@ -32,7 +39,7 @@ export default {
       append-inner-icon="mdi-magnify"
       menu-icon=""
       clearable
-      :items="useVideoStore().getTitles(useVideoStore())"
+      :items="getItems()"
   ></v-combobox>
 </template>
 
