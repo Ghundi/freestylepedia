@@ -119,7 +119,7 @@ export const useSelDifficultyStore = defineStore('selDifficultyStore', {
 export const useCurSearchStore = defineStore('curSearchStore', {
     state: () => {
         return {
-            val: ""
+            val: null
         };
     },
     actions: {
@@ -127,7 +127,7 @@ export const useCurSearchStore = defineStore('curSearchStore', {
             this.val = value;
         },
         reset() {
-            this.val = "";
+            this.val = null;
         }
     }
 })

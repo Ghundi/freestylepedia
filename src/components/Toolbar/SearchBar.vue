@@ -1,5 +1,5 @@
 <script setup>
-import { useCurSearchStore} from "@/store.js";
+import {useCurSearchStore, useSelCategoryStore} from "@/store.js";
 const curSearchStore = useCurSearchStore();
 </script>
 
@@ -21,10 +21,9 @@ export default {
 </script>
 
 <template>
-  <v-autocomplete
+  <v-combobox
       v-bind:label="$t('toolbar.search')"
-      :rules="updateStore"
-      @update:search="updateStore"
+      v-model="useCurSearchStore().val"
       hide-no-data
       hide-details
       density="compact"
@@ -32,8 +31,9 @@ export default {
       single-line
       append-inner-icon="mdi-magnify"
       menu-icon=""
+      clearable
       :items="useVideoStore().getTitles(useVideoStore())"
-  ></v-autocomplete>
+  ></v-combobox>
 </template>
 
 <style scoped>
