@@ -4,10 +4,13 @@ import OrderBySelector from "@/components/Toolbar/OrderBySelector.vue";
 import CategorySelector from "@/components/Toolbar/CategorySelector.vue";
 import DifficultySlider from "@/components/Toolbar/DifficultySlider.vue";
 import SearchBar from "@/components/Toolbar/SearchBar.vue";
+import { useCurSearchStore, useSelCategoryStore, useSelDifficultyStore, useSelSortingOrder, useCategoryStore} from "@/store.js";
+const selCategoriesStore = useSelCategoryStore()
+const categoryStore = useCategoryStore();
 </script>
 
 <script>
-import {useCurSearchStore, useSelCategoryStore, useSelDifficultyStore, useSelSortingOrder} from "@/store.js";
+
 
 export default {
   methods: {
@@ -21,6 +24,10 @@ export default {
       curSearchStore.reset();
       selSortingOrder.reset();
     },
+    removeCategory(category) {
+      const selCategoryStore = useSelCategoryStore();
+      selCategoryStore.remove(category);
+    }
   },
 }
 </script>
@@ -45,7 +52,20 @@ export default {
       <v-col>
         <OrderBySelector/>
       </v-col>
-      </v-row>
+    </v-row>
+    <v-row>
+      <v-chip
+          v-for="category in selCategoriesStore.categories"
+          class="ma-1 text-black"
+          @click="removeCategory(category)"
+          variant="elevated"
+          :color="categoryStore.getColor(category)"
+      >
+        {{ $t("categories." + category) }}
+        <span style="display:inline-block; width: 5px;"></span>
+        <v-icon>mdi-close-circle</v-icon>
+      </v-chip>
+    </v-row>
   </v-container>
 </template>
 

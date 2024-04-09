@@ -6,26 +6,6 @@ export default {
     }
   },
 }
-function getCategoryColor(category) {
-  switch(category) {
-    case 'ground':
-      return 'rgba(152,221,69,0.75)';
-    case 'spin':
-      return 'rgba(23,35,255,0.53)';
-    case 'acrobatic':
-      return '#e03030';
-    case 'stop':
-      return 'rgba(252,247,0,0.76)';
-    case 'jump':
-      return 'rgba(255,136,0,0.68)';
-    case 'hydroblading':
-      return 'rgba(6,187,211,0.78)';
-    case 'footwork':
-      return 'rgba(151,0,197,0.48)';
-    default:
-      return '#000000';
-  }
-}
 </script>
 
 <template>
@@ -40,7 +20,7 @@ function getCategoryColor(category) {
               width="14em"
               height="10em"
               class="videoCard"
-              :style =  "{'box-shadow': `0px 0px 8px 2px ${getCategoryColor(category)}`}"
+              :style =  "{'box-shadow': `0px 0px 8px 2px ${categoryStore.getColor(category)}`}"
               v-bind="activatorProps"
           >
             <v-img
@@ -81,9 +61,10 @@ function getCategoryColor(category) {
 
 <script setup>
 import VideoPlayer from "@/components/VideoPlayer.vue";
-import { useVideoStore } from "@/store.js";
+import { useVideoStore, useCategoryStore } from "@/store.js";
 
 const videoStore = useVideoStore();
+const categoryStore = useCategoryStore();
 
 const props = defineProps({
   id: Array[String],

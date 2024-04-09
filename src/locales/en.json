@@ -1,6 +1,7 @@
 {
   "aboutUs": {
-    "members": "Members"
+    "members": "Members",
+    "aboutUs": "About Us"
   },
   "navBar": {
     "freestylepedia": "Freestylepedia",
@@ -17,7 +18,6 @@
     "open": "Open"
   },
   "footer": {
-    "aboutUs": "About Us",
     "help": "Help",
     "language": "Language",
     "byBlackbirdAndMISG": "by Blackbird and MISG"

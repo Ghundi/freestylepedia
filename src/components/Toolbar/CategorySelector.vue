@@ -1,14 +1,16 @@
 <script setup>
-import { useCategoryStore, useSelCategoryStore } from '../../store.js';
+import { useCategoryStore, useSelCategoryStore } from '@/store.js';
 const categoryStore = useCategoryStore();
 const selCategoryStore = useSelCategoryStore();
 </script>
 
 <script>
 
+import {useSelCategoryStore} from "@/store.js";
+
 export default {
   data: () => ({
-    valid: false,
+    valid: true,
     selected: useSelCategoryStore().categories,
     updateStore: [
       value => {
@@ -24,12 +26,12 @@ export default {
 <template>
   <v-menu>
     <template v-slot:activator="{ props }">
+      {{ props["aria-expanded"] }}
       <v-btn v-bind="props">
         {{ $t("toolbar.categories") }}
       </v-btn>
     </template>
     <v-card>
-      <v-form v-model="valid">
         <v-checkbox
             v-model="selCategoryStore.categories"
             :rules="updateStore"
@@ -38,7 +40,6 @@ export default {
             :value="item"
             hide-details
         ></v-checkbox>
-      </v-form>
     </v-card>
   </v-menu>
 </template>

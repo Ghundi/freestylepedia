@@ -47,7 +47,7 @@ export default {
           variant="plain"
           to="/AboutUs"
       >
-        {{ $t("footer.aboutUs") }}
+        {{ $t("aboutUs.aboutUs") }}
       </v-btn>
       <v-btn
           variant="plain"

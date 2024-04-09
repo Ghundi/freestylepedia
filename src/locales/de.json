@@ -1,6 +1,7 @@
 {
   "aboutUs": {
-    "members": "Mitglieder"
+    "members": "Mitglieder",
+    "aboutUs": "Über uns"
   },
   "navBar": {
     "freestylepedia": "Freistilpedia",
@@ -14,7 +15,6 @@
     "categories": "Kategorien"
   },
   "footer": {
-    "aboutUs": "Über uns",
     "help": "Hilfe",
     "language": "Sprache",
     "byBlackbirdAndMISG": "von Blackbird und MISG"

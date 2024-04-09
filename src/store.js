@@ -80,8 +80,15 @@ export const useCategoryStore = defineStore('categoryStore', {
     state: () => {
         return {
             categories: ['footwork', 'ground', 'jump', 'acrobatic', 'hydroblading', 'spin', 'stop'],
+            colors: ['rgba(151,0,197,0.48)', 'rgba(152,221,69,0.75)', 'rgba(255,136,0,0.68)', '#e03030', 'rgba(6,187,211,0.78)', 'rgba(23,35,255,0.53)', 'rgba(252,247,0,0.76)']
         }
     },
+    actions: {
+        getColor(category) {
+            const index = this.categories.indexOf(category);
+            return this.colors[index];
+        }
+    }
 })
 
 export const useSelCategoryStore = defineStore('SelCategoryStore', {
@@ -93,6 +100,12 @@ export const useSelCategoryStore = defineStore('SelCategoryStore', {
     actions: {
         update(value){
             this.categories = value;
+        },
+        remove(value) {
+            const index = this.categories.indexOf(value);
+            if (index > -1) { // only splice array when item is found
+                this.categories.splice(index, 1); // 2nd parameter means remove one item only
+            }
         },
         reset() {
             this.categories = []
@@ -140,7 +153,7 @@ export const useVideoStore = defineStore('videoStore', {
     actions: {
         loadYAML() {
             // trick number - trickID - attribute
-
+            
             const tricks = [];
             for (let i = 0; i < tricksYAML["tricks"].length; i++) {
                 const j = i + 1;
