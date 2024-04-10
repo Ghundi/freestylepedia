@@ -10,7 +10,7 @@ import {useSelCategoryStore} from "@/store.js";
 
 export default {
   data: () => ({
-    valid: true,
+    extended: false,
     selected: useSelCategoryStore().categories,
     updateStore: [
       value => {
@@ -24,9 +24,8 @@ export default {
 </script>
 
 <template>
-  <v-menu>
+  <v-menu v-model="extended" :close-on-content-click="false">
     <template v-slot:activator="{ props }">
-      {{ props["aria-expanded"] }}
       <v-btn v-bind="props">
         {{ $t("toolbar.categories") }}
       </v-btn>

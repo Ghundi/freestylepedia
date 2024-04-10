@@ -1,15 +1,14 @@
 <script setup>
 import VideoCard from '../components/VideoCard.vue';
-import { useSelDifficultyStore, useVideoStore, useCurSearchStore, useSelSortingOrder } from '../store.js';
 import Toolbar from "@/components/Toolbar/Toolbar.vue";
+import {useSelSortingOrderStore, useVideoStore} from "@/store.js";
 
 const videoStore = useVideoStore();
-const selDifficultyStore = useSelDifficultyStore();
-const curSearchStore = useCurSearchStore();
-const curSelSortingOrder = useSelSortingOrder();
+const selSortingOrderStore = useSelSortingOrderStore();
 </script>
 
 <script>
+
 function isMobile() {
   return window.screen.orientation.type === 'portrait-primary'
 }
@@ -22,7 +21,7 @@ function isMobile() {
     </v-row>
     <v-row :justify="(isMobile()) ? 'center' : 'start'" :align-content="(isMobile()) ? 'center' : 'start'">
       <template
-          v-for="video in videoStore.filteredVideos(videoStore.sortedVideos(videoStore, curSelSortingOrder.by))"
+          v-for="video in videoStore.filteredVideos(videoStore.sortedVideos(videoStore, selSortingOrderStore.by))"
           :key="video.title[0]">
         <v-col class="videoCard">
             <VideoCard
@@ -31,11 +30,14 @@ function isMobile() {
                 :difficulty="video.difficulty"
                 :category="video.category"
                 :releaseDate="video.releaseDate"
-                :thumbnailUrl="videoStore.getThumbnailUrl(video.id[0])"
+                :thumbnailUrl="useVideoStore().getThumbnailUrl(video.id[0])"
                 :connections="video.connections"
                 :requirements="video.requirements"
             />
         </v-col>
+      </template >
+      <template v-if="videoStore.filteredVideos(videoStore.sortedVideos(videoStore, selSortingOrderStore.by)).length === 0">
+        {{ $t("noResults") }}
       </template>
     </v-row>
   </v-container>

@@ -1,6 +1,5 @@
 <script setup>
-import {useCurSearchStore, useSelCategoryStore} from "@/store.js";
-const curSearchStore = useCurSearchStore();
+import {useCurSearchStore} from "@/store.js";
 </script>
 
 <script>

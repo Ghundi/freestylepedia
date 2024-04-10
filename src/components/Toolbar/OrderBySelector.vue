@@ -1,6 +1,6 @@
 <script setup>
-import { useSortingOrderStore, useSelSortingOrder} from '../../store.js';
-const selSortingOrder = useSelSortingOrder()
+import { useSortingOrderStore, useSelSortingOrderStore} from '@/store.js';
+const selSortingOrder = useSelSortingOrderStore()
 </script>
 
 <script>
@@ -21,7 +21,7 @@ export default {
   }),
   methods: {
     updateStore(title) {
-      const selSortingOrder = useSelSortingOrder();
+      const selSortingOrder = useSelSortingOrderStore();
       selSortingOrder.update(title);
     }
   }

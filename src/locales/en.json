@@ -48,5 +48,6 @@
   "category": "Category",
   "similarTricks": "Similar Tricks",
   "requirements": "Requirements",
-  "otherTutorials": "Other Tutorials"
+  "otherTutorials": "Other Tutorials",
+  "noResults": "We couldn't find any tricks"
 }

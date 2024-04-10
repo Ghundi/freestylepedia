@@ -59,7 +59,7 @@ export const useSortingOrderStore = defineStore('sortingOrderStore', {
     },
 })
 
-export const useSelSortingOrder = defineStore('SelSortingOrder', {
+export const useSelSortingOrderStore = defineStore('SelSortingOrder', {
     state: () => {
         const sortingOrders = useSortingOrderStore().sortingOrders;
         return {
