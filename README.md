@@ -1,29 +1,17 @@
-# freestylepedia
+# Freestylepedia
 
-This template should help get you started developing with Vue 3 in Vite.
+You can visit the website **[here](https://freestylepedia.onrender.com)**.
+If you have any suggestions please feel free to contact us.
 
-## Recommended IDE Setup
+This project aims to provide an encyclopedia of all ice freestyle tricks. 
+All entries are based upon the Blackbird Ice Freestyle Freestylepedia YouTube Playlist and thus doesn't include every trick yet.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+<img src="https://img.youtube.com/vi/xrxxASySDs0/maxresdefault.jpg  " alt="alt_text" width="200">
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+## Contact Us
+**Blackbird**
+- [YouTube](https://www.youtube.com/@BlackbirdIceFreestyle)
+- [Instagram](https://www.instagram.com/blackbird_ice_freestyle)
+    
+**MISG**
+- [Instagram](https://www.instagram.com/mainziceskategroup/)
