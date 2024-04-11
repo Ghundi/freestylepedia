@@ -38,7 +38,7 @@ tricks:
     - "Footwork"
     - 15.02.2019,
     - []
-    - []
+    - [trick0040]
 - trick0005:
     - ["V-Stop", "Penguin Stop"]
     - ["QZBqAVg9GoM"]
@@ -166,7 +166,7 @@ tricks:
     - "Footwork"
     - Mar 8, 2019
     - []
-    - []
+    - [trick0035, trick0036]
 - trick0021:
     - ["Kip-up"]
     - ["7FoqJiusIk0"]
@@ -176,13 +176,13 @@ tricks:
     - []
     - []
 - trick0022:
-    - ["Splitjump 180"]
-    - ["SkneLgZt2d4"]
-    - 3
-    - "Jump"
-    - Mar 8, 2019
-    - []
-    - []
+      - ["180", "180 Jump"]
+      - ["rkOAFBFmprI", "bRgD9-KI87Q"]
+      - 2
+      - "Jump"
+      - Mar 8, 2019
+      - []
+      - [trick0044, trick0024]
 - trick0023:
     - ["2 Feet Spin"]
     - ["VBMsmVZ8Mbs"]
@@ -198,7 +198,7 @@ tricks:
     - "Jump"
     - Mar 8, 2019
     - []
-    - []
+    - [trick0022]
 - trick0025:
     - ["Knee Stop"]
     - ["QXcGMJhpMpM"]
@@ -224,13 +224,13 @@ tricks:
     - []
     - []
 - trick0028:
-    - ["Scissors Moonwalk"]
-    - ["JCq0Fz3guL0"]
-    - 4
-    - "Footwork"
-    - Mar 8, 2019
-    - []
-    - []
+      - ["Scissors"]
+      - ["C2-Ioubk5SY"]
+      - 3
+      - "Footwork"
+      - Mar 8, 2019
+      - []
+      - [trick0043]
 - trick0029:
     - ["Russian Twist"]
     - ["xVT7LnWchhc", "s4Nk4_gXOfs", "wm6CCK5x9vU"]
@@ -286,7 +286,7 @@ tricks:
     - "Footwork"
     - Mar 8, 2019
     - []
-    - []
+    - [trick0020]
 - trick0036:
     - ["Double Grapevine"]
     - ["qixbnkAfe2A", "U4cfIdFkM48", "hlDx5X_Ej-E"]
@@ -294,7 +294,7 @@ tricks:
     - "Footwork"
     - Mar 8, 2019
     - []
-    - []
+    - [trick0020]
 - trick0037:
     - ["Insanity"]
     - ["sO_cSB6Buy8", "N5q2P-syZIc"]
@@ -326,7 +326,7 @@ tricks:
     - "Footwork"
     - Mar 8, 2019
     - []
-    - []
+    - [trick0004]
 - trick0041:
     - ["Shuffle"]
     - ["1PIfbu_4HMk"]
@@ -344,29 +344,29 @@ tricks:
     - []
     - []
 - trick0043:
-    - ["Scissors"]
-    - ["C2-Ioubk5SY"]
-    - 3
-    - "Footwork"
-    - Mar 8, 2019
-    - []
-    - []
+      - ["Scissors Moonwalk"]
+      - ["JCq0Fz3guL0"]
+      - 4
+      - "Footwork"
+      - Mar 8, 2019
+      - []
+      - [trick0028]
 - trick0044:
-    - ["180", "180 Jump"]
-    - ["rkOAFBFmprI", "bRgD9-KI87Q"]
-    - 2
-    - "Jump"
-    - Mar 8, 2019
-    - []
-    - []
+      - ["Splitjump 180"]
+      - ["SkneLgZt2d4"]
+      - 3
+      - "Jump"
+      - Mar 8, 2019
+      - []
+      - [trick0022]
 - trick0045:
-    - ["Couch Potato"]
-    - ["vfc2GukBBsk"]
-    - 4
-    - "Hydroblading"
-    - Mar 8, 2019
-    - []
-    - []
+      - ["Cannon"]
+      - ["qVQYXi9jMSU", "Esut7pZO924"]
+      - 2
+      - "Hydroblading"
+      - Mar 8, 2019
+      - []
+      - [trick0051]
 - trick0046:
     - ["Knee Spin"]
     - ["QNoOStwZ5q0"]
@@ -408,13 +408,13 @@ tricks:
     - []
     - []
 - trick0051:
-    - ["Cannon"]
-    - ["qVQYXi9jMSU", "Esut7pZO924"]
-    - 2
-    - "Hydroblading"
-    - Mar 8, 2019
-    - []
-    - []
+      - ["Couch Potato"]
+      - ["vfc2GukBBsk"]
+      - 4
+      - "Hydroblading"
+      - Mar 8, 2019
+      - []
+      - [trick0045]
 - trick0052:
     - ["Split jump"]
     - ["lrwQ1GLtL6o"]

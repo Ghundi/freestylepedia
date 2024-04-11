@@ -20,8 +20,7 @@ export default {
 </script>
 
 <template>
-  <v-card class="ma-3
-  text-center">
+  <v-card class="ma-3">
     <mindmap
         style="height: 100vh"
         v-model="data"

@@ -152,8 +152,6 @@ export const useVideoStore = defineStore('videoStore', {
     }),
     actions: {
         loadYAML() {
-            // trick number - trickID - attribute
-            
             const tricks = [];
             for (let i = 0; i < tricksYAML["tricks"].length; i++) {
                 const j = i + 1;
@@ -162,7 +160,7 @@ export const useVideoStore = defineStore('videoStore', {
                 tricks.push(trick);
             }
             // find the newest trick
-            const newestTrick = tricks.sort((a, b) => a.title[0].localeCompare(b.title[0]))[0];
+            const newestTrick = tricks.toSorted((a, b) => a.title[0].localeCompare(b.title[0]))[0];
             //helper for datetime one month ago
             const d = new Date();
             d.setMonth(d.getMonth()-1);
@@ -171,7 +169,7 @@ export const useVideoStore = defineStore('videoStore', {
             if(newestTrick.releaseDate != d) {
                 this.newestTrick = newestTrick.title[0];
             }
-            this.videos = tricks;
+            return tricks;
         },
         getThumbnailUrl(videoId) {
             return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
@@ -201,17 +199,19 @@ export const useVideoStore = defineStore('videoStore', {
                 const categorySentenceCase = categories[i].charAt(0).toUpperCase() + categories[i].slice(1);
                 graph[0].children.push({name: categorySentenceCase, children: [], left: (i / categories.length < 0.5)});
             }
+            let videos = state.loadYAML()
             let visitedIDs = [];
-            for (let i = 0; i < state.videos.length; i++) {
-                if(!visitedIDs.includes(state.videos[i].trickID)) {
-                    const categoryIdx = categories.indexOf(state.videos[i].category)
-                    graph[0].children[categoryIdx].children.push(trickToNode(state.videos[i]));
+            for (let i = 0; i < videos.length; i++) {
+                if(!visitedIDs.includes(videos[i].trickID)) {
+                    const categoryIdx = categories.indexOf(videos[i].category)
+                    graph[0].children[categoryIdx].children.push(trickToNode(videos[i]));
                     // add connections if not base trick and mark them as visited
-                    if(state.videos[i].connections.length > 0) {
-                        for (let j = 0; j < state.videos[i].connections.length; j++) {
-                            if(parseInt(state.videos[i].trickID.slice(5)) < parseInt(state.videos[i].connections[j].slice(5))) {
-                                graph[0].children[categoryIdx].children.at(-1).children.push(trickToNode(state.getTrickByID(state.videos[i].connections[j], state)));
-                                visitedIDs.push(state.videos[i].connections[j]);
+                    if(videos[i].connections.length > 0) {
+                        for (let j = 0; j < videos[i].connections.length; j++) {
+                            console.log(i, videos[i].trickID, videos[i].connections[j])
+                            if(parseInt(videos[i].trickID.slice(5)) < parseInt(videos[i].connections[j].slice(5))) {
+                                graph[0].children[categoryIdx].children.at(-1).children.push(trickToNode(state.getTrickByID(videos[i].connections[j], state)));
+                                visitedIDs.push(videos[i].connections[j]);
                             }
                         }
                     }
@@ -220,27 +220,28 @@ export const useVideoStore = defineStore('videoStore', {
             return graph;
         },
         getTrickTreeGraph(state) {
+            let videos = state.loadYAML()
             let graph= [];
             let visitedIDs = [];
-            for (let i = 0; i < state.videos.length; i++) {
-                if(!visitedIDs.includes(state.videos[i].trickID)) {
+            for (let i = 0; i < videos.length; i++) {
+                if(!visitedIDs.includes(videos[i].trickID)) {
                     // check if requirements
-                    if(state.videos[i].requirements.length > 0) {
-                        for (let j = 0; j < state.videos[i].requirements.length; j++) {
-                            const parent = graphSearch(state.getTrickByID(state.videos[i].requirements[j], state).title[0], graph);
+                    if(videos[i].requirements.length > 0) {
+                        for (let j = 0; j < videos[i].requirements.length; j++) {
+                            const parent = graphSearch(state.getTrickByID(videos[i].requirements[j], state).title[0], graph);
                             if(parent != null) {
-                                parent.children.push(trickToNode(state.videos[i]));
-                                visitedIDs.push(state.videos[i].trickID);
+                                parent.children.push(trickToNode(videos[i]));
+                                visitedIDs.push(videos[i].trickID);
                             }
                             else {
-                                console.log(`error ${state.videos[i].requirements[j]} not found`)
+                                console.log(`error ${videos[i].requirements[j]} not found`)
                             }
                         }
                     }
                     // start new subtree
                     else {
-                        graph.push(trickToNode(state.videos[i]))
-                        visitedIDs.push(state.videos[i].trickID);
+                        graph.push(trickToNode(videos[i]))
+                        visitedIDs.push(videos[i].trickID);
                     }
                 }
             }

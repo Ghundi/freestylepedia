@@ -4,7 +4,7 @@ import 'vuetify/styles';
 import {useVideoStore} from "@/store.js";
 import Footer from "@/components/footer.vue"
 const videoStore = useVideoStore();
-videoStore.loadYAML();
+videoStore.videos = videoStore.loadYAML();
 </script>
 
 
