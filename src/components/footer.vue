@@ -25,7 +25,7 @@ export default {
 </script>
 
 <template>
-  <v-footer class="d-flex align-center flex-column bg-black">
+  <v-footer class="d-flex align-center flex-column bg-black pb-16">
     <div class="d-flex align-center px-4">
       <v-btn
           icon='mdi-youtube'
