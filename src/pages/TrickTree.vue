@@ -36,5 +36,8 @@ export default {
 </template>
 
 <style scoped>
-
+html::-webkit-scrollbar{
+  width: 50px;
+  background:red;
+}
 </style>

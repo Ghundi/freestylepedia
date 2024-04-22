@@ -19,5 +19,9 @@ videoStore.videos = videoStore.loadYAML();
     </v-app>
 </template>
 
-<style scoped>
+<style>
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
+}
 </style>
