@@ -17,14 +17,14 @@ import {createPinia} from "pinia";
 // routing
 import {createMemoryHistory, createRouter, createWebHistory} from 'vue-router'
 import VideoList from './pages/VideoList.vue'
-import MindMap from './pages/MindMap.vue'
+import CategoryTree from './pages/CategoryTree.vue'
 import TrickTree from './pages/TrickTree.vue'
 import AboutUs from './pages/AboutUs.vue'
 import Help from './pages/Help.vue'
 
 const routes = [
     { path: '/', component: VideoList },
-    { path: '/MindMap', component: MindMap },
+    { path: '/CategoryTree', component: CategoryTree },
     { path: '/TrickTree', component: TrickTree },
     { path: '/AboutUs', component: AboutUs },
     { path: '/Help', component: Help },

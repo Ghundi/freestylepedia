@@ -16,12 +16,14 @@
   "aboutUs": {
     "members": "Members",
     "aboutUs": "About Us",
+    "findUs": "Find us on",
+    "story": "Two members of our groups had the idea of creating a place to look up tricks. We both quite often have different names for the same trick. So we hope this collection allows everybody to find the tricks under the name they know while also learning other aliases. We worked hard on this project for a long time and it took multiple attempts. Now we are proud to present it and hope you will enjoy this new resource in our sport.",
     "MisgDescription": "The Mainz Ice Skate Group is a small Ice Breaking group from Mainz in Germany. We love to skate at all ice rinks in the area.",
     "BlackbirdDescription": "The Blackbirds are a munich Ice Freestyle Group with eight members. They are mostly in the East Stadium Munich or the new Olympic Ice Stadium."
   },
   "navBar": {
     "freestylepedia": "Freestylepedia",
-    "mindMap": "Mind Map",
+    "categoryTree": "Category Tree",
     "trickTree": "Trick Tree"
   },
   "toolbar": {

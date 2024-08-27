@@ -29,8 +29,8 @@ const drawer = ref(null)
       <v-list-item to="/">
         {{ $t("navBar.freestylepedia") }}
       </v-list-item>
-      <v-list-item to="/MindMap">
-        {{ $t("navBar.mindMap") }}
+      <v-list-item to="/CategoryTree">
+        {{ $t("navBar.categoryTree") }}
       </v-list-item>
       <v-list-item to="/TrickTree">
         {{ $t("navBar.trickTree") }}
