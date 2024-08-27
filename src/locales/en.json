@@ -1,7 +1,23 @@
 {
+  "faq": {
+    "naming_question": "Where do the trick names comes from?",
+    "naming_answer": "Naming is done by us with community input.",
+    "scoring_question": "How are the difficulty scores assigned?",
+    "scoring_answer": "We try to score every trick as fair as possible. It is represented by the number skates.",
+    "categories_question": "What do the categories mean?",
+    "categories_answer": "The categories group tricks together by their similarities.",
+    "usage_question": "How do I use Freestylepedia?",
+    "usage_answer": "You can get detailed information about all tricks on the freestylepedia page, learn about the the different categories in the Mind Map or see which tricks build upon others in the Trick Tree.",
+    "existence_question": "Why did you make Freestylepedia?",
+    "existence_answer": "You can quickly look up tricks to show your friends or watch them on the ice to learn them.",
+    "improve_question": "How can I use Freestylepedia to improve on the ice?",
+    "improve_answer": "With Freestylepedia you can easily see which tricks are achievable for you and which tricks are similar to the tricks you already mastered"
+  },
   "aboutUs": {
     "members": "Members",
-    "aboutUs": "About Us"
+    "aboutUs": "About Us",
+    "MisgDescription": "The Mainz Ice Skate Group is a small Ice Breaking group from Mainz in Germany. We love to skate at all ice rinks in the area.",
+    "BlackbirdDescription": "The Blackbirds are a munich Ice Freestyle Group with eight members. They are mostly in the East Stadium Munich or the new Olympic Ice Stadium."
   },
   "navBar": {
     "freestylepedia": "Freestylepedia",

@@ -35,6 +35,9 @@ const drawer = ref(null)
       <v-list-item to="/TrickTree">
         {{ $t("navBar.trickTree") }}
       </v-list-item>
+      <v-list-item to="/Help">
+        {{ $t("footer.help") }}
+      </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>

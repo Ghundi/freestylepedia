@@ -1,26 +1,24 @@
 import { defineStore } from 'pinia';
 import tricksYAML from "./DB/freestylepedia.yaml";
+import {vi} from "vuetify/locale";
 
 //helpers
-function trickToNode(trick) {
-    return {name: trick.title[0], children: []}
+function trickToNode(trick, left = false) {
+    return {name: trick.title[0], children: [],  left: left}
 }
 
 function graphSearch(trickTitle, graph) {
     let visited = [];
-    for (let i = 0; i < graph.length; i++) {
-        if(!visited.includes(graph[i])) {
-            visited.push(graph[i].name)
-            if(graph[i].name === trickTitle) {
-                return graph[i];
+    for (let i = 0; i < graph.children.length; i++) {
+        if(!visited.includes(graph.children[i])) {
+            visited.push(graph.children[i].name)
+            if(graph.children[i].name === trickTitle) {
+                return graph.children[i];
             }
             else {
-                let res = null;
-                for (let j = 0; j < graph[i].children.length; j++) {
-                    res = graphSearch(trickTitle, graph[i])
-                    console.log(res, graph[i].children, graph[i].name)
-                    if(res != null) {
-                        console.log(`found ${trickTitle}`)
+                if(graph.children[i].children.length > 0) {
+                    let res = graphSearch(trickTitle, graph.children[i]);
+                    if (res != null) {
                         return res
                     }
                 }
@@ -29,17 +27,10 @@ function graphSearch(trickTitle, graph) {
     }
 }
 
-// TODO read FAQ from YAML?
 export const useFAQ = defineStore('FAQ', {
     state: () => {
         return {
-            val: [
-                {title: 'Naming', text:"Naming is done by our team with community input."},
-                {title: 'Scoring', text:'We try to score every trick as fair as possible. It is represented by the number skates'},
-                {title: 'Categories', text:'We divide all tricks into subsections to better organize them for you. This way a trick is easier to find'},
-                {title: 'How do I use Freestylepedia?', text:'PH '},
-                {title: 'How can I use Freestylepedia to improve on the ice?', text:'With Freestylepedia you can easily see which tricks are achievable for you and which tricks are similar to the tricks you already mastered'},
-            ],
+            val: ['usage', 'naming', 'scoring', 'categories', 'existence', 'improve']
         }
     },
 })
@@ -76,6 +67,7 @@ export const useSelSortingOrderStore = defineStore('SelSortingOrder', {
         },
     }
 })
+
 export const useCategoryStore = defineStore('categoryStore', {
     state: () => {
         return {
@@ -221,29 +213,28 @@ export const useVideoStore = defineStore('videoStore', {
         },
         getTrickTreeGraph(state) {
             let videos = state.loadYAML()
-            let graph= [];
+            let graph= [{name: "Starting Points", children: []}];
             let visitedIDs = [];
-            for (let i = 0; i < videos.length; i++) {
+            let i = 0;
+            while (visitedIDs.length <= videos.length) {
                 if(!visitedIDs.includes(videos[i].trickID)) {
-                    // check if requirements
+                    // check if requirements exist
                     if(videos[i].requirements.length > 0) {
                         for (let j = 0; j < videos[i].requirements.length; j++) {
-                            const parent = graphSearch(state.getTrickByID(videos[i].requirements[j], state).title[0], graph);
+                            const parent = graphSearch(state.getTrickByID(videos[i].requirements[j], state).title[0], graph[0]);
                             if(parent != null) {
                                 parent.children.push(trickToNode(videos[i]));
                                 visitedIDs.push(videos[i].trickID);
-                            }
-                            else {
-                                console.log(`error ${videos[i].requirements[j]} not found`)
                             }
                         }
                     }
                     // start new subtree
                     else {
-                        graph.push(trickToNode(videos[i]))
+                        graph[0].children.push(trickToNode(videos[i], i < 20));
                         visitedIDs.push(videos[i].trickID);
                     }
                 }
+                i = (i + 1) % videos.length;
             }
             return graph;
         },

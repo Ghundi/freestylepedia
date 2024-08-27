@@ -11,11 +11,20 @@ const members = useMembers().val
         <v-col>
           <v-card class="text-center justify-center pa-5" elevation="5">
             <v-card-title>MISG</v-card-title>
-            <v-img
-                :src="logo"
-                aspect-ratio="1/1"
-            ></v-img>
-            Mainz Ice Skate Group
+            <v-container>
+              <v-row>
+                <v-col>
+                  <v-img
+                      :src="logo"
+                      aspect-ratio="1/1"
+                      width="100px"
+                  ></v-img>
+                </v-col>
+                <v-col>
+                  {{ $t('aboutUs.MisgDescription') }}
+                </v-col>
+              </v-row>
+            </v-container>
           </v-card>
         </v-col>
         <v-col>
@@ -25,10 +34,7 @@ const members = useMembers().val
                 :src="logo"
                 aspect-ratio="1/1"
             ></v-img>
-            Die Blackbirds sind eine Münchner Ice Freestyle-Gruppe mit acht Mitgliedern.
-            <br>
-            Wir sind im Olympia Eisstadion München, sowie im Weststadion anzutreffen.
-            <br>
+            {{ $t('aboutUs.BlackbirdDescription') }}
             <v-card-title>{{ $t('aboutUs.members') }}</v-card-title>
             <v-list-item v-for="name in members">
               <v-list-item-title>- {{ name }}</v-list-item-title>

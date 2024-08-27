@@ -3,6 +3,7 @@ import NavBar from "@/components/navBar.vue";
 import 'vuetify/styles';
 import {useVideoStore} from "@/store.js";
 import Footer from "@/components/footer.vue"
+
 const videoStore = useVideoStore();
 videoStore.videos = videoStore.loadYAML();
 </script>
@@ -22,6 +23,6 @@ videoStore.videos = videoStore.loadYAML();
 <style>
 /* width */
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 0;
 }
 </style>

@@ -1,7 +1,23 @@
 {
+  "faq": {
+    "naming_question": "Woher kommen die Namen der Tricks?",
+    "naming_answer": "Wir benennen alle Tricks zusammen mit der Community.",
+    "scoring_question": "Wie werden die Schwierigkeitslevel bestimmt?",
+    "scoring_answer": "Wir versuchen jeden Trick möglichst fair zu bewerten. Diw Schwierigkeit wird durch die Anzahl der Schlittschuhe repräsentiert.",
+    "categories_question": "Was bedeuten die Kategorien?",
+    "categories_answer": "Die Kategorien gruppieren die Tricks nach ihrer Ähnlichkeit.",
+    "usage_question": "Wie nutze ich Freestylepedia?",
+    "usage_answer": "Du kannst detaillierte Infos auf der freestylepedia Seite nachschauen, über die Kategorien lernen in der Mind Map oder nachschauen, welche Tricks aufeinander aufbauen.",
+    "existence_question":"",
+    "existence_answer": "Du kannst auf Freestylepedia schnell Tricks nachzusehen und sie auf dem Eis lernen.",
+    "improve_question": "Wie kann ich Freestylepedia nutzen um auf dem Eis besser zu werden?",
+    "improve_answer": "Mit Freestylepedia kannst du sehen, welche Tricks für dich erreichbar sind und welche ähnlich."
+  },
   "aboutUs": {
     "members": "Mitglieder",
-    "aboutUs": "Über uns"
+    "aboutUs": "Über uns",
+    "MisgDescription": "Die Mainz Ice Skate Group ist eine kleine Ice Breaking Gruppe aus Mainz in in der Nähe von Frankfurt. Wir sind gerne in vielen Eishallen bei uns in der Nähe.",
+    "BlackbirdDescription": "Die Blackbirds sind eine Münchner Ice Freestyle-Gruppe mit acht Mitgliedern. Wir sind im Olympia Eisstadion München, sowie im Weststadion anzutreffen. "
   },
   "navBar": {
     "freestylepedia": "Freistilpedia",

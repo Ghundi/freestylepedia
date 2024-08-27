@@ -1,7 +1,7 @@
 <script setup>
 import {useFAQ} from "@/store.js";
 
-const FAQ = useFAQ().val
+const FAQ_store = useFAQ();
 </script>
 
 <template>
@@ -11,9 +11,9 @@ const FAQ = useFAQ().val
     </v-card-title>
     <v-expansion-panels variant="accordion">
       <v-expansion-panel
-          v-for="question in FAQ"
-          :text="question.text"
-          :title="question.title"
+          v-for="entry in FAQ_store.val"
+          :text="$t('faq.' + entry + '_answer')"
+          :title="$t('faq.' + entry + '_question')"
       >
       </v-expansion-panel>
     </v-expansion-panels>
