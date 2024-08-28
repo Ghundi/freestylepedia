@@ -1,4 +1,10 @@
 {
+  "categoryTree": {
+  "description": "This mind map groups together tricks in the same category and the connection to a base trick."
+  },
+  "trickTree": {
+    "description": "Each trick family tree splits up into increasing difficulty."
+  },
   "faq": {
     "naming_question": "Where do the trick names comes from?",
     "naming_answer": "Naming is done by us with community input.",

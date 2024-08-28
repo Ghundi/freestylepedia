@@ -157,8 +157,7 @@ export const useVideoStore = defineStore('videoStore', {
             const d = new Date();
             d.setMonth(d.getMonth()-1);
             // set newestTrick Tag if max 1 month-old
-            //TODO change to >=
-            if(newestTrick.releaseDate != d) {
+            if(newestTrick.releaseDate >= d) {
                 this.newestTrick = newestTrick.title[0];
             }
             return tricks;

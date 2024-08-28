@@ -21,6 +21,9 @@ export default {
 
 <template>
   <v-card class="ma-3">
+    <v-card-subtitle class="text-center bg-grey-lighten-2 pa-2">
+      {{ $t('categoryTree.description') }}
+    </v-card-subtitle>
     <mindmap
         style="height: 100vh"
         v-model="data"

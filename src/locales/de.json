@@ -1,4 +1,10 @@
 {
+  "categoryTree": {
+    "description": "Diese Mind Map stellt Tricks aus der gleichen Familie zusammen da und Verbindungen zu den jeweiligen Basistricks."
+  },
+  "trickTree": {
+    "description": "Jeder Skill Tree nimmt in Schwierigkeit zu."
+  },
   "faq": {
     "naming_question": "Woher kommen die Namen der Tricks?",
     "naming_answer": "Wir benennen alle Tricks zusammen mit der Community.",
@@ -7,7 +13,7 @@
     "categories_question": "Was bedeuten die Kategorien?",
     "categories_answer": "Die Kategorien gruppieren die Tricks nach ihrer Ähnlichkeit.",
     "usage_question": "Wie nutze ich Freestylepedia?",
-    "usage_answer": "Du kannst detaillierte Infos auf der freestylepedia Seite nachschauen, über die Kategorien lernen in der Mind Map oder nachschauen, welche Tricks aufeinander aufbauen.",
+    "usage_answer": "Du kannst detaillierte Infos auf der freestylepedia Seite nachschauen, über die Kategorien lernen im Kategorienbaum oder nachschauen, welche Tricks aufeinander aufbauen im Skill Tree.",
     "existence_question":"",
     "existence_answer": "Du kannst auf Freestylepedia schnell Tricks nachzusehen und sie auf dem Eis lernen.",
     "improve_question": "Wie kann ich Freestylepedia nutzen um auf dem Eis besser zu werden?",
@@ -24,7 +30,7 @@
   "navBar": {
     "freestylepedia": "Freistilpedia",
     "categoryTree": "Kategorienbaum",
-    "trickTree": "Trickbaum"
+    "trickTree": "Skill Tree"
   },
   "toolbar": {
     "resetFilters": "Filter zurücksetzen",
