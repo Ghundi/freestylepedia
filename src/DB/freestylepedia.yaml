@@ -44,7 +44,7 @@ tricks:
     - ["QZBqAVg9GoM"]
     - 3
     - "Stop"
-    - 19.04.2019,
+    - "2019-04-19"
     - [trick0033]
     - []
 - trick0006:
@@ -52,7 +52,7 @@ tricks:
     - ["-BclH8x0eXQ", "JD4Zzz3Fn_Y", "uvMoWEuBdCQ"]
     - 1
     - "Ground"
-    - 10.11.2019,
+    - "2019-11-10"
     - []
     - []
 - trick0007:
@@ -60,7 +60,7 @@ tricks:
     - ["1kd6_E4gKnA"]
     - 3
     - "Stop"
-    - 22.11.2019,
+    - "2019-11-22"
     - [trick0042]
     - []
 - trick0008:
@@ -68,7 +68,7 @@ tricks:
     - ["5mIml0jGIzE"]
     - 5
     - "Jump"
-    - 11.01.2020,
+    - "2020-01-11"
     - [trick0027]
     - []
 - trick0009:
@@ -76,7 +76,7 @@ tricks:
     - ["OAMtcIoTDCE", "3n8HVSwcfzU"]
     - 3
     - "Ground"
-    - 31.01.2020,
+    - "2020-01-31"
     - [trick0006]
     - []
 - trick0010:
@@ -84,7 +84,7 @@ tricks:
       - ["Ymh5bwfYAcs", "l5tVRffTzkY", "1Rt7HC1Pstg", "8MC0AMw3euQ"]
       - 4
       - "Hydroblading"
-      - Mar 8, 2019
+      - "2019-03-08"
       - []
       - [trick0014, trick0011]
 - trick0011:
@@ -92,7 +92,7 @@ tricks:
       - ["K7mM-kyIfLw"]
       - 4
       - "Hydroblading"
-      - 22.10.2021,
+      - "2021-10-22"
       - [trick0010]
       - []
 - trick0012:
@@ -100,7 +100,7 @@ tricks:
     - ["853hRI0UoMM"]
     - 5
     - "Acrobatic"
-    - 12.01.2024,
+    - "2024-01-12"
     - [trick0038]
     - []
 - trick0013:
@@ -108,17 +108,17 @@ tricks:
     - ["A7Q907vPMuQ", "N5q2P-syZIc", "vW-KqolxQqo", "Ps1RDZqsdXU"]
     - 2
     - "Spin"
-    - Feb 22, 2019,
+    - "2019-02-22"
     - [trick0020]
     - []
 - trick0014:
-      - ["Spiderman 180", "Hydro 180"]
-      - ["3B9rCmLAfpg"]
-      - 5
-      - "Hydroblading"
-      - 06.11.2021,
-      - [trick0011]
-      - [trick0010, trick0011]
+    - ["Spiderman 180", "Hydro 180"]
+    - ["3B9rCmLAfpg"]
+    - 5
+    - "Hydroblading"
+    - "2021-11-06"
+    - [trick0011]
+    - [trick0010, trick0011]
 - trick0015:
     - ["Zulu Spin"]
     - ["ot8MGzXZln0", "oDuJ3uL7bVo"]

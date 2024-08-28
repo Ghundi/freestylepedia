@@ -28,7 +28,7 @@ export default {
                 id="thumbnail">
             </v-img>
             <v-card-subtitle class="smaller-font">
-              {{ releaseDate.toLocaleDateString(getLang()) }}
+              {{ releaseDate.toLocaleDateString('de') }}
             </v-card-subtitle>
           </v-card>
         <template v-if="title[0] === videoStore.newestTrick" class="newTag">

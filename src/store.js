@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import tricksYAML from "./DB/freestylepedia.yaml";
-import {vi} from "vuetify/locale";
 
 //helpers
 function trickToNode(trick, left = false) {
@@ -148,11 +147,17 @@ export const useVideoStore = defineStore('videoStore', {
             for (let i = 0; i < tricksYAML["tricks"].length; i++) {
                 const j = i + 1;
                 const lst = tricksYAML["tricks"][i][("trick" + ("000" + j).slice(-4))];
+                console.log(lst[4]);
                 const trick = { trickID: ("trick" + ("000" + j).slice(-4)), id: lst[1], title: lst[0], difficulty: lst[2], category: lst[3].toLowerCase(), releaseDate: new Date(lst[4]), requirements: lst[5], connections: lst[6] }
                 tricks.push(trick);
             }
             // find the newest trick
-            const newestTrick = tricks.toSorted((a, b) => a.title[0].localeCompare(b.title[0]))[0];
+            const newestTrick = tricks.sort(function(a,b){
+                // Turn your strings into dates, and then subtract them
+                // to get a value that is either negative, positive, or zero.
+                return new Date(b.releaseDate) - new Date(a.releaseDate);
+            })[0];
+
             //helper for datetime one month ago
             const d = new Date();
             d.setMonth(d.getMonth()-1);
@@ -248,9 +253,9 @@ export const useVideoStore = defineStore('videoStore', {
                     case 'nameDown':
                         return [...state.videos].sort((a, b) => b.title[0].localeCompare(a.title[0]));
                     case 'releasedDown':
-                        return [...state.videos].sort((a, b) => b.releaseDate.localeCompare(a.releaseDate));
+                        return [...state.videos].sort((a, b) => a.releaseDate - b.releaseDate);
                     case 'releasedUp':
-                        return [...state.videos].sort((a, b) => a.releaseDate.localeCompare(b.releaseDate));
+                        return [...state.videos].sort((a, b) => b.releaseDate - a.releaseDate);
                     default:
                         return [...state.videos];
                 }
