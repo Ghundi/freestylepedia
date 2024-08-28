@@ -203,7 +203,6 @@ export const useVideoStore = defineStore('videoStore', {
                     // add connections if not base trick and mark them as visited
                     if(videos[i].connections.length > 0) {
                         for (let j = 0; j < videos[i].connections.length; j++) {
-                            console.log(i, videos[i].trickID, videos[i].connections[j])
                             if(parseInt(videos[i].trickID.slice(5)) < parseInt(videos[i].connections[j].slice(5))) {
                                 graph[0].children[categoryIdx].children.at(-1).children.push(trickToNode(state.getTrickByID(videos[i].connections[j], state)));
                                 visitedIDs.push(videos[i].connections[j]);
