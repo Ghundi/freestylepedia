@@ -147,7 +147,6 @@ export const useVideoStore = defineStore('videoStore', {
             for (let i = 0; i < tricksYAML["tricks"].length; i++) {
                 const j = i + 1;
                 const lst = tricksYAML["tricks"][i][("trick" + ("000" + j).slice(-4))];
-                console.log(lst[4]);
                 const trick = { trickID: ("trick" + ("000" + j).slice(-4)), id: lst[1], title: lst[0], difficulty: lst[2], category: lst[3].toLowerCase(), releaseDate: new Date(lst[4]), requirements: lst[5], connections: lst[6] }
                 tricks.push(trick);
             }

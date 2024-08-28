@@ -17,9 +17,9 @@ export default {
 
 <template>
   <v-card class="ma-3">
-    <v-card-subtitle class="text-center bg-grey-lighten-2 pa-2">
+    <v-card-text class="text-center bg-grey-lighten-3 pa-2">
       {{ $t('trickTree.description') }}
-    </v-card-subtitle>
+    </v-card-text>
     <mindmap
         style="height: 100vh"
         v-model="data"
