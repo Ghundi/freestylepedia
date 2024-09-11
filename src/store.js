@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import {defineStore} from 'pinia';
 import tricksYAML from "./DB/freestylepedia.yaml";
 
 //helpers
@@ -164,6 +164,7 @@ export const useVideoStore = defineStore('videoStore', {
             if(newestTrick.releaseDate >= d) {
                 this.newestTrick = newestTrick.title[0];
             }
+
             return tricks;
         },
         getThumbnailUrl(videoId) {
@@ -176,6 +177,15 @@ export const useVideoStore = defineStore('videoStore', {
                 }
             }
             console.log(`${ trickID } could not be found`)
+            return state.videos[0];
+        },
+        getTrickByTitle(trickTitle, state) {
+            for (let i = 0; i < state.videos.length; i++) {
+                if(state.videos[i].title[0] === trickTitle) {
+                    return state.videos[i];
+                }
+            }
+            console.log(`${ trickTitle } could not be found`)
             return state.videos[0];
         },
         getTitles(state) {
@@ -213,6 +223,16 @@ export const useVideoStore = defineStore('videoStore', {
             }
             return graph;
         },
+        getConnectionFlowChart(state) {
+            let nodes = [];
+            let edges = [];
+
+            for (let i = 0; i < videos.length; i++) {
+                nodes.push({id: i, type: 'special', position: { x: 0, y: 0 }, label: state.videos[i].title[0]});
+            }
+
+            return [nodes, edges];
+        },
         getTrickTreeGraph(state) {
             let videos = state.loadYAML()
             let graph= [{name: "Starting Points", children: []}];
@@ -232,7 +252,8 @@ export const useVideoStore = defineStore('videoStore', {
                     }
                     // start new subtree
                     else {
-                        graph[0].children.push(trickToNode(videos[i], i < 20));
+                        // decide if left or right
+                        graph[0].children.push(trickToNode(videos[i], i < 35));
                         visitedIDs.push(videos[i].trickID);
                     }
                 }

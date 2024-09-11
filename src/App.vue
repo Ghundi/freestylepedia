@@ -13,8 +13,8 @@ videoStore.videos = videoStore.loadYAML();
   <v-app>
     <nav-bar/>
     <br>
-    <v-main class="bg-grey-lighten-3">
-      <router-view/>
+    <v-main class="bg-grey-lighten-3 pb-5">
+      <router-view :key="$route.fullPath"/>
     </v-main>
     <Footer/>
     </v-app>

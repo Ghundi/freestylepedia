@@ -15,7 +15,7 @@ import messages from "@intlify/unplugin-vue-i18n/messages";
 import {createPinia} from "pinia";
 
 // routing
-import {createMemoryHistory, createRouter, createWebHistory} from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router'
 
 // pages
 import VideoList from './pages/VideoList.vue'
@@ -23,6 +23,7 @@ import CategoryTree from './pages/CategoryTree.vue'
 import TrickTree from './pages/TrickTree.vue'
 import AboutUs from './pages/AboutUs.vue'
 import Help from './pages/Help.vue'
+import VideoPlayer from "@/pages/VideoPlayer.vue";
 
 const routes = [
     { path: '/', component: VideoList },
@@ -30,6 +31,7 @@ const routes = [
     { path: '/TrickTree', component: TrickTree },
     { path: '/AboutUs', component: AboutUs },
     { path: '/Help', component: Help },
+    { path: '/:trickname', component: VideoPlayer },
 ]
 
 const router = createRouter({
