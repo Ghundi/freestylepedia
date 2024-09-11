@@ -13,7 +13,7 @@ tricks:
       - 3
       - "Footwork"
       - "2019-02-15"
-      - [trick0020]
+      - []
       - [trick0003]
 - trick0002:
     - ["Crazy Legs"]
@@ -37,15 +37,15 @@ tricks:
     - 3
     - "Footwork"
     - "2019-02-15"
-    - [trick0020, trick0013]
+    - []
     - [trick0040]
 - trick0005:
-    - ["V-Stop", "Penguin Stop"]
+    - ["V-Stop"]
     - ["QZBqAVg9GoM"]
     - 3
     - "Stop"
     - "2019-04-19"
-    - [trick0033]
+    - [trick0042]
     - []
 - trick0006:
     - ["Donut"]
@@ -109,7 +109,7 @@ tricks:
     - 2
     - "Spin"
     - "2019-02-22"
-    - [trick0020]
+    - []
     - []
 - trick0014:
     - ["Spiderman 180", "Hydro 180"]
@@ -157,7 +157,7 @@ tricks:
     - 4
     - "Hydroblading"
     - "2022-03-04"
-    - []
+    - [trick0013]
     - []
 - trick0020:
     - ["Grapevine"]
@@ -205,7 +205,7 @@ tricks:
     - 2
     - "Stop"
     - "2021-02-05"
-    - [trick0042]
+    - [trick0042, trick0046]
     - []
 - trick0026:
     - ["Split-Stop (Heel Heel)"]
@@ -213,7 +213,7 @@ tricks:
     - 4
     - "Stop"
     - "2021-01-22"
-    - [trick0033]
+    - [trick0033, trick0005]
     - []
 - trick0027:
     - ["Tornadokick"]
@@ -229,7 +229,7 @@ tricks:
       - 3
       - "Footwork"
       - "2019-11-16"
-      - [trick0020]
+      - [trick0055]
       - [trick0043]
 - trick0029:
     - ["Russian Twist"]
@@ -301,7 +301,7 @@ tricks:
     - 2
     - "Footwork"
     - "2020-02-07"
-    - [trick0020]
+    - []
     - []
 - trick0038:
     - ["Butterfly"]
@@ -445,7 +445,7 @@ tricks:
     - 3
     - "Footwork"
     - "2019-02-21"
-    - [trick0020]
+    - []
     - []
 - trick0056:
     - ["Plank"]
