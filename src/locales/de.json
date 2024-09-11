@@ -28,8 +28,8 @@
     "BlackbirdDescription": "Die Blackbirds sind eine Münchner Ice Freestyle-Gruppe mit acht Mitgliedern. Wir sind im Olympia Eisstadion München, sowie im Weststadion anzutreffen. "
   },
   "navBar": {
-    "freestylepedia": "Freistilpedia",
-    "categoryTree": "Kategorienbaum",
+    "freestylepedia": "Freestylepedia",
+    "categoryTree": "Category Tree",
     "trickTree": "Skill Tree"
   },
   "toolbar": {
@@ -56,7 +56,7 @@
     "ground": "Breakdance",
     "jump":  "Sprung",
     "acrobatic":  "Akrobatik",
-    "hydroblading": "Wasserkufen",
+    "hydroblading": "Hydroblading",
     "spin": "Drehung",
     "stop": "Bremse"
   },

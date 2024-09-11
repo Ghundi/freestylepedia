@@ -16,6 +16,8 @@ import {createPinia} from "pinia";
 
 // routing
 import {createMemoryHistory, createRouter, createWebHistory} from 'vue-router'
+
+// pages
 import VideoList from './pages/VideoList.vue'
 import CategoryTree from './pages/CategoryTree.vue'
 import TrickTree from './pages/TrickTree.vue'

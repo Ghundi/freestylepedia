@@ -1,4 +1,6 @@
 <script>
+
+
 export default {
   data () {
     return {
@@ -28,7 +30,7 @@ export default {
                 id="thumbnail">
             </v-img>
             <v-card-subtitle class="smaller-font">
-              {{ releaseDate.toLocaleDateString(getLang()) }}
+              {{ releaseDate.toLocaleDateString($i18n.locale) }}
             </v-card-subtitle>
           </v-card>
         <template v-if="title[0] === videoStore.newestTrick" class="newTag">
@@ -76,13 +78,6 @@ const props = defineProps({
   requirements: Array[String],
   connections: Array[String],
 });
-
-
-function getLang() {
-  if (navigator.languages !== undefined)
-    return navigator.languages[0];
-  return navigator.language;
-}
 
 </script>
 

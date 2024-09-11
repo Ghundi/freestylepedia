@@ -20,7 +20,10 @@ export default {
 </script>
 
 <template>
-  <v-card class="ma-3">
+  <v-card class="ma-3 text-center bg-grey-lighten-3">
+    <v-card-title class="font-weight-bold">
+      {{ $t("navBar.categoryTree") }}
+    </v-card-title>
     <v-card-text class="text-center bg-grey-lighten-3 pa-2">
       {{ $t('categoryTree.description') }}
     </v-card-text>
