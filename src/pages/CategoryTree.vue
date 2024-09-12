@@ -1,51 +1,59 @@
 <script setup>
-</script>
-
-<script>
-import mindmap from "vue3-mindmap";
-import "vue3-mindmap/dist/style.css";
+import { VueFlow } from '@vue-flow/core'
 import {useVideoStore} from "@/store.js";
-export default {
-  name: "App",
-  components: { mindmap },
-  data() {
-    const videoStore = useVideoStore();
-    const graph = videoStore.getConnectionsGraph(videoStore);
-    return {
-      data: graph,
-      treeConfig: { nodeWidth: 120, nodeHeight: 80, levelHeight: 200 }
-    };
-  },
-};
+
+// these components are only shown as examples of how to use a custom node or edge
+// you can find many examples of how to create these custom components in the examples page of the docs
+import ClickableNode from '../components/mindMap/ClickableNode.vue'
+import CategoryNode from '../components/mindMap/CategoryNode.vue'
+
+const videoStore = useVideoStore();
+
+const graph = videoStore.getConnectionFlowChart(videoStore)
 </script>
 
 <template>
-  <v-card class="ma-3 text-center bg-grey-lighten-3">
+  <v-card class="ma-auto mt-5 text-center bg-grey-lighten-3" width="90%" height="90vh">
     <v-card-title class="font-weight-bold">
       {{ $t("navBar.categoryTree") }}
     </v-card-title>
     <v-card-text class="text-center bg-grey-lighten-3 pa-2">
       {{ $t('categoryTree.description') }}
     </v-card-text>
-    <mindmap
-        style="height: 100vh"
-        v-model="data"
-        :branch="4"
-        :x-gap="84"
-        :y-gap="18"
-        :zoom="false"
-        :fit-btn="true"
-        :center-btn="true"
-        :download-btn="true"
-        :drag="false"
-        :add-node-btn="true"
-        :sharp-corner="false"
-        :ctm="true"
-        :timetravel="false"
-        :vertical="true"/>
+
+    <VueFlow
+        :nodes="graph[0]"
+        :edges="graph[1]"
+        :nodes-draggable="true"
+        :nodes-connectable="false"
+
+        :pan-on-drag="true"
+        :zoom-on-pinch="false"
+
+        :zoom-on-scroll="true"
+        :zoom-on-double-click="false"
+        :edges-focusable="false"
+        class="basic-flow"
+        :default-viewport="{ zoom: 1.5 }"
+        :min-zoom="0.2"
+        :max-zoom="4"
+        fit-view-on-init
+    >
+      <template #node-special="props">
+        <ClickableNode v-bind="props.data"/>
+      </template>
+      <template #node-category="props">
+        <CategoryNode v-bind="props.data" />
+      </template>
+    </VueFlow>
+
   </v-card>
 </template>
 
-<style scoped>
+<style>
+/* import the necessary styles for Vue Flow to work */
+@import '@vue-flow/core/dist/style.css';
 
+/* import the default theme, this is optional but generally recommended */
+@import '@vue-flow/core/dist/theme-default.css';
 </style>

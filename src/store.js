@@ -26,6 +26,16 @@ function graphSearch(trickTitle, graph) {
     }
 }
 
+function getNodeIdxById(id, nodes) {
+    for (let i = 0; i < nodes.length; i++) {
+        if(nodes[i].id === id) {
+            return i;
+        }
+    }
+    console.log(id, ' nde not found');
+    return -1;
+}
+
 export const useFAQ = defineStore('FAQ', {
     state: () => {
         return {
@@ -76,7 +86,7 @@ export const useCategoryStore = defineStore('categoryStore', {
     },
     actions: {
         getColor(category) {
-            const index = this.categories.indexOf(category);
+            const index = this.categories.indexOf(category.toLowerCase());
             return this.colors[index];
         }
     }
@@ -224,40 +234,123 @@ export const useVideoStore = defineStore('videoStore', {
             return graph;
         },
         getConnectionFlowChart(state) {
+            //calc number of category children for positioning
+            const categoryStore = useCategoryStore()
+            const categories = categoryStore.categories;
+            const num_children = new Array(categories.length).fill(0);
+            for (let i = 0; i < state.videos.length; i++) {
+                num_children[categories.indexOf(state.videos[i].category)]++;
+            }
+
+            const sum_children = num_children.reduce((a, b) => a + b, 0);
+            let splitIdx = 0;
+            let curSum = 0;
+            for (let i = 0; i < categories.length; i++) {
+                curSum += num_children[i];
+                if (curSum > sum_children / 2) {
+                    splitIdx = i;
+                    break;
+                }
+            }
+
             let nodes = [];
             let edges = [];
 
-            for (let i = 0; i < videos.length; i++) {
-                nodes.push({id: i, type: 'special', position: { x: 0, y: 0 }, label: state.videos[i].title[0]});
+            //category nodes
+            for (let i = 0; i < categories.length; i++) {
+                nodes.push({
+                    id: i,
+                    type: 'category',
+                    position: { x: (i < splitIdx) ? -200 : 200,
+                                y: ((i > 0 && i !== Math.round(splitIdx)) ? nodes[i-1].position.y : 0) + (((i > 0 && i !== Math.round(splitIdx)) ? num_children[i-1] / 2 : 0) + (num_children[i] / 2)) * 100 },
+                    data: {
+                        label: categories[i],
+                        n_children: 0,
+                        left: (i < splitIdx),
+                        color: categoryStore.getColor(categories[i])
+                    }});
+            }
+
+            // trick nodes
+            let visitedIDs = [];
+            let childIdx = 1000;
+            for (let i = categories.length; i < (state.videos.length + categories.length); i++) {
+                const trick = state.videos[i - categories.length];
+                if(!visitedIDs.includes(trick.trickID)) {
+                    const categoryIdx = categories.indexOf(trick.category)
+                    const xOffset = (categoryIdx < splitIdx) ? -300 : 300;
+                    nodes.push({
+                        id: i,
+                        type: 'special',
+                        position: { x: nodes[categoryIdx].position.x + xOffset,
+                                    y: (nodes[categoryIdx].position.y - (num_children[categoryIdx] / 2 - 1) * 100) + (nodes[categoryIdx].data.n_children * 100) },
+                        data: {
+                            label: trick.title[0],
+                            n_children: 0,
+                            left: nodes[categoryIdx].data.left,
+                            color: nodes[categoryIdx].data.color
+                        }});
+                    nodes[categoryIdx].data.n_children++;
+                    edges.push({
+                        id: (i-1) + '->' + i,
+                        source: categoryIdx.toString(),
+                        target: i.toString()});
+                    // add connections if not base trick and mark them as visited
+                    if(trick.connections.length > 0) {
+                        for (let j = 0; j < trick.connections.length; j++) {
+                            if(parseInt(trick.trickID.slice(5)) < parseInt(trick.connections[j].slice(5))) {
+                                const parentIdx = getNodeIdxById(i, nodes);
+                                nodes.push({
+                                    id: childIdx,
+                                    type: 'special',
+                                    position: {
+                                        x: nodes[parentIdx].position.x + xOffset,
+                                        y: nodes[parentIdx].position.y + (nodes[parentIdx].data.n_children * 100) },
+                                    data: {
+                                        label: state.getTrickByID(trick.connections[j], state).title[0],
+                                        n_children: 0,
+                                        left: nodes[parentIdx].data.left,
+                                        color: nodes[parentIdx].data.color
+                                    }});
+                                nodes[parentIdx].data.n_children++;
+                                edges.push({id: i + '->' + childIdx, source: i.toString(), target: childIdx.toString()});
+                                visitedIDs.push(trick.connections[j]);
+                                childIdx--;
+                            }
+                        }
+                    }
+                }
+                else{
+                    console.log('skipped', trick)
+                }
             }
 
             return [nodes, edges];
         },
         getTrickTreeGraph(state) {
-            let videos = state.loadYAML()
             let graph= [{name: "Starting Points", children: []}];
             let visitedIDs = [];
             let i = 0;
-            while (visitedIDs.length <= videos.length) {
-                if(!visitedIDs.includes(videos[i].trickID)) {
+            while (visitedIDs.length <= state.videos.length) {
+                if(!visitedIDs.includes(state.videos[i].trickID)) {
                     // check if requirements exist
-                    if(videos[i].requirements.length > 0) {
-                        for (let j = 0; j < videos[i].requirements.length; j++) {
-                            const parent = graphSearch(state.getTrickByID(videos[i].requirements[j], state).title[0], graph[0]);
+                    if(state.videos[i].requirements.length > 0) {
+                        for (let j = 0; j < state.videos[i].requirements.length; j++) {
+                            const parent = graphSearch(state.getTrickByID(state.videos[i].requirements[j], state).title[0], graph[0]);
                             if(parent != null) {
-                                parent.children.push(trickToNode(videos[i]));
-                                visitedIDs.push(videos[i].trickID);
+                                parent.children.push(trickToNode(state.videos[i]));
+                                visitedIDs.push(state.videos[i].trickID);
                             }
                         }
                     }
                     // start new subtree
                     else {
                         // decide if left or right
-                        graph[0].children.push(trickToNode(videos[i], i < 35));
-                        visitedIDs.push(videos[i].trickID);
+                        graph[0].children.push(trickToNode(state.videos[i], i < 35));
+                        visitedIDs.push(state.videos[i].trickID);
                     }
                 }
-                i = (i + 1) % videos.length;
+                i = (i + 1) % state.videos.length;
             }
             return graph;
         },
