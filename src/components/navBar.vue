@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import LanguageSelector from "@/components/languageSelector.vue";
 
 const drawer = ref(null)
 
@@ -7,16 +8,16 @@ const drawer = ref(null)
 
 <template>
   <v-app-bar :elevation="8" class="bg-black pa-3" prominent>
-    <v-app-bar-nav-icon align="start" variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-    <v-hover v-slot="{ hover }" disabled>
-      <v-card
-          to="/"
-          class="font-weight-black title bg-black"
-          :ripple="false"
-          >
-        Freestylepedia
-      </v-card>
-    </v-hover>
+    <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-card
+        to="/"
+        class="font-weight-black title bg-black"
+        :ripple="false"
+        >
+      Freestylepedia
+    </v-card>
+    <v-spacer></v-spacer>
+    <language-selector/>
   </v-app-bar>
 
   <v-navigation-drawer
