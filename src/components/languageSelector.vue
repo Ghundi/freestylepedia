@@ -38,7 +38,7 @@ export default {
       </v-card-subtitle>
     </v-btn>
   </template>
-  <template v-if="getOrientation() === 'Portrait'">
+  <template v-else>
     <v-btn
         id="menu-activator"
         variant="plain"

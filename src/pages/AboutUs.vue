@@ -1,6 +1,7 @@
 <script setup>
 import {useMembers} from "@/store.js";
-import logo from "@/assets/blackbirdIconInverted.png"
+import BlackbirdLogo from "@/assets/blackbirdIconInverted.png"
+import MISGLogo from "@/assets/MISG-Icon.png"
 import WebpageIcon from "@/components/WebpageIcon.vue";
 
 const members = useMembers().val
@@ -28,7 +29,7 @@ const members = useMembers().val
             <v-row>
               <v-col>
                 <v-img
-                    :src="logo"
+                    :src="MISGLogo"
                     aspect-ratio="1/1"
                     width="10vw"
                 ></v-img>
@@ -52,7 +53,7 @@ const members = useMembers().val
             <v-row>
               <v-col>
                 <v-img
-                    :src="logo"
+                    :src="BlackbirdLogo"
                     aspect-ratio="1/1"
                     width="10vw"
                 ></v-img>

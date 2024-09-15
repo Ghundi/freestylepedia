@@ -24,7 +24,7 @@ function getTrickNames(id_list) {
   return res;
 }
 
-const trick = videoStore.getTrickByTitle(useRoute().params.trickname.replaceAll("-", " "), videoStore)
+const trick = videoStore.getTrickByTitle(useRoute().params.trickname, videoStore)
 
 </script>
 
@@ -34,8 +34,18 @@ function hasHistory () { return window.history.length > 2 }
 
 <template>
   <div class="text-center">
-    <iframe class="responsive-iframe" :src="getEmbedURL(trick.id[0])" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    <v-container>
+    <v-btn
+        class="Right"
+        icon="mdi-close"
+        variant="elevated"
+        @click="hasHistory()
+            ? $router.back()
+            : $router.push('/')">
+    </v-btn>
+    <v-container class="ma-5">
+      <v-row>
+        <iframe class="responsive-iframe" :src="getEmbedURL(trick.id[0])" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </v-row>
      <v-row >
       <v-col v-for="title in trick.title">
         {{title}}
@@ -55,7 +65,7 @@ function hasHistory () { return window.history.length > 2 }
         <v-card class="pa-3" elevation="5">
           <p class="font-weight-bold">{{ $t('similarTricks') }}:</p>
           <template v-for="name in getTrickNames(trick.connections, videoStore)">
-            <v-btn :to="'/' + name.replaceAll(' ', '-')" variant="flat" class="ma-2">
+            <v-btn :to="'/' + name" variant="flat" class="ma-2">
               {{ name }}
             </v-btn>
           </template>
@@ -66,7 +76,7 @@ function hasHistory () { return window.history.length > 2 }
           <p class="font-weight-bold">{{ $t('requirements') }}:</p>
           <template v-for="r_name in getTrickNames(trick.requirements, videoStore)">
             <v-btn
-              @click="$router.push('/' + r_name.replaceAll(' ', '-'))" variant="flat" class="ma-2">
+              @click="$router.push('/' + r_name)" variant="flat" class="ma-2">
               {{ r_name }}
             </v-btn>
           </template>
@@ -92,19 +102,6 @@ function hasHistory () { return window.history.length > 2 }
         </v-container>
       </template>
     </v-row>
-    <v-row>
-      <v-col>
-        <v-btn
-            variant="elevated"
-            width="80vw"
-            height="50px"
-            @click="hasHistory()
-                ? $router.back()
-                : $router.push('/')">
-          {{ $t('close') }}
-        </v-btn>
-      </v-col>
-    </v-row>
   </v-container>
   </div>
 </template>
@@ -112,7 +109,13 @@ function hasHistory () { return window.history.length > 2 }
 <style scoped>
 /* Then style the iframe to fit in the container div with full height and width */
 .responsive-iframe {
-  width: 80vw;
+  width: 100%;
   aspect-ratio: 16 / 9;
+}
+
+.Right{
+  position: absolute;
+  float: right;
+  right: 10px;
 }
 </style>
