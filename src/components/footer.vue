@@ -32,7 +32,6 @@ import WebpageIcon from "@/components/WebpageIcon.vue";
       >
         {{ $t("footer.help") }}
       </v-btn>
-      <language-selector/>
     </div>
     <div class="px-4 py-2 bg-black text-center w-100">
       {{ new Date().getFullYear() }} — <strong>Freestylepedia</strong>

@@ -9,6 +9,7 @@ function createLangObj() {
   }
   return dict
 }
+
 export default {
   data: () => ({
     valid: true,
@@ -17,24 +18,34 @@ export default {
   methods: {
     updateLang(lang) {
       this.$i18n.locale = lang;
+    },
+    getOrientation(){
+      return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
     }
   }
 }
 </script>
 
 <template>
-  <v-btn
-      id="menu-activator"
-      variant="plain"
-  >
-    {{ $t("footer.language") }}
-    <v-card-subtitle class="smaller-font">
-      {{ $t("languages." + this.$i18n.locale)  }}
-    </v-card-subtitle>
-  </v-btn>
-  <v-card-subtitle class="smaller-font">
-
-  </v-card-subtitle>
+  <template v-if="getOrientation() === 'Landscape'">
+    <v-btn
+        id="menu-activator"
+        variant="plain"
+    >
+      {{ $t("footer.language") }}
+      <v-card-subtitle class="smaller-font">
+        {{ $t("languages." + this.$i18n.locale)  }}
+      </v-card-subtitle>
+    </v-btn>
+  </template>
+  <template v-if="getOrientation() === 'Portrait'">
+    <v-btn
+        id="menu-activator"
+        variant="plain"
+    >
+      <v-icon icon="mdi-translate"></v-icon>
+    </v-btn>
+  </template>
   <v-form v-model="valid">
     <v-menu activator="#menu-activator">
       <v-list>
