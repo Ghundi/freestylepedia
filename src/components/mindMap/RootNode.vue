@@ -10,11 +10,11 @@ function getOrientation(){
 </script>
 
 <template>
-  <Handle type="target" :position="(left) ? Position.Right : Position.Left" style="opacity: 0" />
-  <Handle type="source" :position="(left) ? Position.Left : Position.Right" style="opacity: 0" />
-  <div class="rounded" :style="{backgroundColor: color, 'font-size': (getOrientation() === 'Portrait') ? '20px' : '40px'}">
+  <Handle id="rootR" type="source" :position="Position.Right" style="opacity: 0" />
+  <Handle id="rootL" type="source" :position="Position.Left" style="opacity: 0" />
+  <div class="rounded" :style="{backgroundColor: color, 'color': 'white', 'font-size': (getOrientation() === 'Portrait') ? '20px' : '40px'}">
     <h2>
-      {{ $t('categories.' + label) }}
+      {{ label }}
     </h2>
   </div>
 </template>

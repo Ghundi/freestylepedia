@@ -1,15 +1,21 @@
 <script setup>
-import { VueFlow } from '@vue-flow/core'
+import {VueFlow} from '@vue-flow/core'
 import {useVideoStore} from "@/store.js";
 
 // these components are only shown as examples of how to use a custom node or edge
 // you can find many examples of how to create these custom components in the examples page of the docs
 import ClickableNode from '../components/mindMap/ClickableNode.vue'
 import CategoryNode from '../components/mindMap/CategoryNode.vue'
+import RootNode from '../components/mindMap/RootNode.vue'
 
 const videoStore = useVideoStore();
 
-const graph = videoStore.getConnectionFlowChart(videoStore)
+function getOrientation(){
+  return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
+}
+
+
+const graph = videoStore.getConnectionsGraph(videoStore, getOrientation())
 </script>
 
 <template>
@@ -26,24 +32,30 @@ const graph = videoStore.getConnectionFlowChart(videoStore)
         :edges="graph[1]"
         :nodes-draggable="true"
         :nodes-connectable="false"
-
         :pan-on-drag="true"
-        :zoom-on-pinch="false"
-
+        :zoom-on-pinch="true"
         :zoom-on-scroll="true"
         :zoom-on-double-click="false"
         :edges-focusable="false"
+        :prevent-scrolling="true"
         class="basic-flow"
-        :default-viewport="{ zoom: 1.5 }"
+        :default-viewport="{ zoom: 1 }"
+        :translate-extent="[
+          [(getOrientation() === 'Landscape') ? -4000 : -2000, -2000],
+          [(getOrientation() === 'Landscape') ? 5000 : 2000, 3000],
+        ]"
         :min-zoom="0.2"
-        :max-zoom="4"
+        :max-zoom="2"
         fit-view-on-init
     >
-      <template #node-special="props">
+      <template #node-clickable="props">
         <ClickableNode v-bind="props.data"/>
       </template>
       <template #node-category="props">
         <CategoryNode v-bind="props.data" />
+      </template>
+      <template #node-root="props">
+        <RootNode v-bind="props.data" />
       </template>
     </VueFlow>
 

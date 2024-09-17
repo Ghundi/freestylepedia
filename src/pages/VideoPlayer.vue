@@ -33,8 +33,11 @@ function hasHistory () { return window.history.length > 2 }
 </script>
 
 <template>
-  <div class="text-center">
+  <div class="text-center mt-2">
     <v-btn
+        size="x-large"
+        density="compact"
+        :ripple="true"
         class="Right"
         icon="mdi-close"
         variant="elevated"
@@ -42,7 +45,7 @@ function hasHistory () { return window.history.length > 2 }
             ? $router.back()
             : $router.push('/')">
     </v-btn>
-    <v-container class="ma-5">
+    <v-container>
       <v-row>
         <iframe class="responsive-iframe" :src="getEmbedURL(trick.id[0])" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </v-row>
@@ -107,7 +110,6 @@ function hasHistory () { return window.history.length > 2 }
 </template>
 
 <style scoped>
-/* Then style the iframe to fit in the container div with full height and width */
 .responsive-iframe {
   width: 100%;
   aspect-ratio: 16 / 9;

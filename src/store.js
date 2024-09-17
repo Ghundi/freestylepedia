@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia';
 import tricksYAML from "./DB/freestylepedia.yaml";
+import {Position, VueFlow} from '@vue-flow/core'
 
 //helpers
 function trickToNode(trick, left = false) {
@@ -32,9 +33,10 @@ function getNodeIdxById(id, nodes) {
             return i;
         }
     }
-    console.log(id, ' nde not found');
+    console.log(id, ' node not found');
     return -1;
 }
+
 
 export const useFAQ = defineStore('FAQ', {
     state: () => {
@@ -161,7 +163,8 @@ export const useVideoStore = defineStore('videoStore', {
                 tricks.push(trick);
             }
             // find the newest trick
-            const newestTrick = tricks.sort(function(a,b){
+            const tmp = tricks.slice()
+            const newestTrick = tmp.sort(function(a,b){
                 // Turn your strings into dates, and then subtract them
                 // to get a value that is either negative, positive, or zero.
                 return new Date(b.releaseDate) - new Date(a.releaseDate);
@@ -205,14 +208,14 @@ export const useVideoStore = defineStore('videoStore', {
             }
             return res.flat();
         },
-        getConnectionsGraph(state) {
+        getConnectionsGraph(state, orientation) {
+            // compute full graph for positioning
             let graph= [{name: "Categories", children: []}];
-            const categories = useCategoryStore().categories;
+            const categoryStore = useCategoryStore();
+            const categories = categoryStore.categories;
             //category nodes
             for (let i = 0; i < categories.length; i++) {
-                //TODO translate categories, atm translate not available
-                const categorySentenceCase = categories[i].charAt(0).toUpperCase() + categories[i].slice(1);
-                graph[0].children.push({name: categorySentenceCase, children: [], left: (i / categories.length < 0.5)});
+                graph[0].children.push({name: categories[i], children: [], left: (i / categories.length < 0.5)});
             }
             let videos = state.loadYAML()
             let visitedIDs = [];
@@ -220,26 +223,100 @@ export const useVideoStore = defineStore('videoStore', {
                 if(!visitedIDs.includes(videos[i].trickID)) {
                     const categoryIdx = categories.indexOf(videos[i].category)
                     graph[0].children[categoryIdx].children.push(trickToNode(videos[i]));
-                    // add connections if not base trick and mark them as visited
+                    // add connections if base trick and mark variants as visited
                     if(videos[i].connections.length > 0) {
                         for (let j = 0; j < videos[i].connections.length; j++) {
-                            if(parseInt(videos[i].trickID.slice(5)) < parseInt(videos[i].connections[j].slice(5))) {
-                                graph[0].children[categoryIdx].children.at(-1).children.push(trickToNode(state.getTrickByID(videos[i].connections[j], state)));
-                                visitedIDs.push(videos[i].connections[j]);
+                            graph[0].children[categoryIdx].children.at(-1).children.push(trickToNode(state.getTrickByID(videos[i].connections[j], state)));
+                            visitedIDs.push(videos[i].connections[j]);
                             }
-                        }
                     }
                 }
             }
-            return graph;
+            // convert graph to flow chart
+            function convGraph(nodes, edges, parent, g_node, g_parent) {
+                // category node
+                if(categories.includes(g_node.name)) {
+                    const categoryIdx = categories.indexOf(g_node.name);
+                    const splitIdx = 2;
+                    const prev_idx = g_parent.children.indexOf(g_node) - 1;
+                    nodes.push({
+                        id: g_node.name,
+                        type: 'category',
+                                    // root node + x_offset scaled
+                        position: { x: ((categoryIdx < splitIdx) ? -100 : 100) * xScaleFactor,
+                                    // if first in column -1500, else 100 under previous node
+                                    y: ((prev_idx >= 0 && categoryIdx !== splitIdx) ? nodes[getNodeIdxById(g_parent.children[prev_idx].name, nodes)].position.y + 100 : -1500)
+                                        // children.length + prev.children.length if exists / 2 * 100
+                                        + ((g_node.children.length +
+                                            ((prev_idx >= 0) ? g_parent.children[prev_idx].children.length : 0)) / 2) * 100},
+                        data: {
+                            label: g_node.name,
+                            n_children: 0,
+                            // split left right
+                            left: categoryIdx < splitIdx,
+                            color: categoryStore.getColor(g_node.name)
+                        }});
+                }
+                // trick node
+                else if(parent && g_parent) {
+                    const prev_idx = g_parent.children.indexOf(g_node) - 1;
+                    nodes.push({
+                        id: g_node.name,
+                        type: 'clickable',
+                                    // parent.x +- 700 scaled +- text_offset offset according to side
+                        position: { x: parent.position.x + ((parent.data.left) ? -300 * xScaleFactor -
+                                        // text_offset offset according to side and orientation
+                                        (g_node.name.length * ((orientation === 'Portrait') ? 8 : 25)) :
+                                        300 * xScaleFactor),
+                                        // offset to prev node of parent
+                                    y: (prev_idx >= 0) ? nodes[getNodeIdxById(g_parent.children[prev_idx].name, nodes)].position.y + 100 +
+                                        // + offset to previous node if present and space for own children
+                                        ((g_node.children.length > 0) ? (Math.max(0, g_parent.children[prev_idx].children.length - 1)) * 100 : 0)
+                                            // parent.y - space for children
+                                            : parent.position.y - ((g_parent.children.length - 1) / 2) * 100
+                                         },
+                        data: {
+                            label: g_node.name,
+                            n_children: 0,
+                            left: parent.data.left,
+                            color: parent.data.color
+                        }});
+                    edges.push({
+                        id: g_parent.name + '->' + g_node.name,
+                        source: g_parent.name,
+                        target: g_node.name,
+                        style: { stroke: 'black', strokeWidth: 3}});
+                }
+                for (let i = 0; i < g_node.children.length; i++) {
+                    const [t_nodes, t_edges] = convGraph(nodes, edges, nodes[getNodeIdxById(g_node.name, nodes)], g_node.children[i], g_node)
+                    nodes.concat(t_nodes);
+                    edges.concat(t_edges);
+                }
+                return [nodes, edges];
+            }
+
+            let nodes = [];
+            let edges = [];
+            const xScaleFactor = (orientation === 'Portrait') ? 1 : 3;
+            // compute num children for categories
+            const num_children = new Array(categories.length).fill(0);
+            for (let i = 0; i < videos.length; i++) {
+                num_children[categories.indexOf(videos[i].category)]++;
+            }
+
+            [nodes, edges] = convGraph(nodes, edges, null, graph[0], null)
+
+
+            return [nodes, edges];
         },
-        getConnectionFlowChart(state) {
+        getConnectionFlowChart(state, orientation) {
+            let videos = state.loadYAML()
             //calc number of category children for positioning
             const categoryStore = useCategoryStore()
             const categories = categoryStore.categories;
             const num_children = new Array(categories.length).fill(0);
-            for (let i = 0; i < state.videos.length; i++) {
-                num_children[categories.indexOf(state.videos[i].category)]++;
+            for (let i = 0; i < videos.length; i++) {
+                num_children[categories.indexOf(videos[i].category)]++;
             }
 
             const sum_children = num_children.reduce((a, b) => a + b, 0);
@@ -255,13 +332,16 @@ export const useVideoStore = defineStore('videoStore', {
 
             let nodes = [];
             let edges = [];
+            const xScaleFactor = (orientation === 'Portrait') ? 1 : 3;
+            // graph needed for positioning
+            const graph = state.getConnectionsGraph(state)
 
             //category nodes
             for (let i = 0; i < categories.length; i++) {
                 nodes.push({
                     id: i,
                     type: 'category',
-                    position: { x: (i < splitIdx) ? -200 : 200,
+                    position: { x: ((i < splitIdx) ? -100 : 100) * xScaleFactor,
                                 y: ((i > 0 && i !== Math.round(splitIdx)) ? nodes[i-1].position.y : 0) + (((i > 0 && i !== Math.round(splitIdx)) ? num_children[i-1] / 2 : 0) + (num_children[i] / 2)) * 100 },
                     data: {
                         label: categories[i],
@@ -274,11 +354,11 @@ export const useVideoStore = defineStore('videoStore', {
             // trick nodes
             let visitedIDs = [];
             let childIdx = 1000;
-            for (let i = categories.length; i < (state.videos.length + categories.length); i++) {
-                const trick = state.videos[i - categories.length];
+            for (let i = categories.length; i < (videos.length + categories.length); i++) {
+                const trick = videos[i - categories.length];
                 if(!visitedIDs.includes(trick.trickID)) {
                     const categoryIdx = categories.indexOf(trick.category)
-                    const xOffset = (categoryIdx < splitIdx) ? -300 : 300;
+                    const xOffset = ((categoryIdx < splitIdx) ? -400 : 400) * xScaleFactor;
                     nodes.push({
                         id: i,
                         type: 'special',
@@ -298,30 +378,28 @@ export const useVideoStore = defineStore('videoStore', {
                     // add connections if not base trick and mark them as visited
                     if(trick.connections.length > 0) {
                         for (let j = 0; j < trick.connections.length; j++) {
-                            if(parseInt(trick.trickID.slice(5)) < parseInt(trick.connections[j].slice(5))) {
-                                const parentIdx = getNodeIdxById(i, nodes);
-                                nodes.push({
-                                    id: childIdx,
-                                    type: 'special',
-                                    position: {
-                                        x: nodes[parentIdx].position.x + xOffset,
-                                        y: nodes[parentIdx].position.y + (nodes[parentIdx].data.n_children * 100) },
-                                    data: {
-                                        label: state.getTrickByID(trick.connections[j], state).title[0],
-                                        n_children: 0,
-                                        left: nodes[parentIdx].data.left,
-                                        color: nodes[parentIdx].data.color
-                                    }});
-                                nodes[parentIdx].data.n_children++;
-                                edges.push({id: i + '->' + childIdx, source: i.toString(), target: childIdx.toString()});
-                                visitedIDs.push(trick.connections[j]);
-                                childIdx--;
-                            }
+                            const parentIdx = getNodeIdxById(i, nodes);
+                            nodes.push({
+                                id: childIdx,
+                                type: 'special',
+                                position: {
+                                    x: nodes[parentIdx].position.x + xOffset,
+                                    y: nodes[parentIdx].position.y - (nodes[parentIdx].data.n_children / 2) * 100 + (nodes[parentIdx].data.n_children * 100) },
+                                data: {
+                                    label: state.getTrickByID(trick.connections[j], state).title[0],
+                                    n_children: 0,
+                                    left: nodes[parentIdx].data.left,
+                                    color: nodes[parentIdx].data.color
+                                }});
+                            nodes[parentIdx].data.n_children++;
+                            edges.push({
+                                id: i + '->' + childIdx,
+                                source: i.toString(),
+                                target: childIdx.toString()});
+                            visitedIDs.push(trick.connections[j]);
+                            childIdx++;
                         }
                     }
-                }
-                else{
-                    console.log('skipped', trick)
                 }
             }
 

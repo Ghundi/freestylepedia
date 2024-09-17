@@ -1,12 +1,12 @@
 tricks:
 # trickID
-#   names
-#   YouTube IDs
-#   difficulty
-#   category
-#   release Date
-#   requirements
-#   connections
+#   names (Array of names)
+#   YouTube IDs (just ID)
+#   difficulty (0-5)
+#   category (lowercase)
+#   release Date (YYYY-MM-DD)
+#   requirements (hard -> easy)
+#   connections (bidirectional, base before variant)
 - trick0001:
       - ["Brush"]
       - ["Xo2frGP3Q8A"]
