@@ -1,10 +1,9 @@
 import {defineStore} from 'pinia';
 import tricksYAML from "./DB/freestylepedia.yaml";
-import {Position, VueFlow} from '@vue-flow/core'
 
 //helpers
-function trickToNode(trick, left = false) {
-    return {name: trick.title[0], children: [],  left: left}
+function trickToNode(trick, orientation = 3) {
+    return {name: trick.title[0], children: [],  orientation: orientation, difficulty: trick.difficulty, width: 1, height: 1};
 }
 
 function graphSearch(trickTitle, graph) {
@@ -33,8 +32,31 @@ function getNodeIdxById(id, nodes) {
             return i;
         }
     }
-    console.log(id, ' node not found');
+    console.log(id, 'node not found');
     return -1;
+}
+
+function getSpaceIdx(name, spaces) {
+    for (let y = 0; y < 5; y++) {
+        for (let x = 0; x < spaces[0].length; x++) {
+            if(spaces[y][x] === name) {
+                return x
+            }
+        }
+    }
+    console.log(name, 'not found in spaces')
+    return 0;
+}
+
+function checkSpace(y, x, width, height, spaces) {
+    for (let i = y; i < y + height; i++) {
+        for (let j = x; j < x + width; j++) {
+            if(spaces[i][j] !== false) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 
@@ -215,7 +237,7 @@ export const useVideoStore = defineStore('videoStore', {
             const categories = categoryStore.categories;
             //category nodes
             for (let i = 0; i < categories.length; i++) {
-                graph[0].children.push({name: categories[i], children: [], left: (i / categories.length < 0.5)});
+                graph[0].children.push({name: categories[i], children: []});
             }
             let videos = state.loadYAML()
             let visitedIDs = [];
@@ -253,7 +275,7 @@ export const useVideoStore = defineStore('videoStore', {
                             label: g_node.name,
                             n_children: 0,
                             // split left right
-                            left: categoryIdx < splitIdx,
+                            orientation: (categoryIdx < splitIdx) ? 3 : 1,
                             color: categoryStore.getColor(g_node.name)
                         }});
                 }
@@ -264,7 +286,7 @@ export const useVideoStore = defineStore('videoStore', {
                         id: g_node.name,
                         type: 'clickable',
                                     // parent.x +- 700 scaled +- text_offset offset according to side
-                        position: { x: parent.position.x + ((parent.data.left) ? -300 * xScaleFactor -
+                        position: { x: parent.position.x + ((parent.data.orientation === 3) ? -300 * xScaleFactor -
                                         // text_offset offset according to side and orientation
                                         (g_node.name.length * ((orientation === 'Portrait') ? 8 : 25)) :
                                         300 * xScaleFactor),
@@ -278,7 +300,7 @@ export const useVideoStore = defineStore('videoStore', {
                         data: {
                             label: g_node.name,
                             n_children: 0,
-                            left: parent.data.left,
+                            orientation: parent.data.orientation,
                             color: parent.data.color
                         }});
                     edges.push({
@@ -309,104 +331,9 @@ export const useVideoStore = defineStore('videoStore', {
 
             return [nodes, edges];
         },
-        getConnectionFlowChart(state, orientation) {
-            let videos = state.loadYAML()
-            //calc number of category children for positioning
-            const categoryStore = useCategoryStore()
-            const categories = categoryStore.categories;
-            const num_children = new Array(categories.length).fill(0);
-            for (let i = 0; i < videos.length; i++) {
-                num_children[categories.indexOf(videos[i].category)]++;
-            }
-
-            const sum_children = num_children.reduce((a, b) => a + b, 0);
-            let splitIdx = 0;
-            let curSum = 0;
-            for (let i = 0; i < categories.length; i++) {
-                curSum += num_children[i];
-                if (curSum > sum_children / 2) {
-                    splitIdx = i;
-                    break;
-                }
-            }
-
-            let nodes = [];
-            let edges = [];
-            const xScaleFactor = (orientation === 'Portrait') ? 1 : 3;
-            // graph needed for positioning
-            const graph = state.getConnectionsGraph(state)
-
-            //category nodes
-            for (let i = 0; i < categories.length; i++) {
-                nodes.push({
-                    id: i,
-                    type: 'category',
-                    position: { x: ((i < splitIdx) ? -100 : 100) * xScaleFactor,
-                                y: ((i > 0 && i !== Math.round(splitIdx)) ? nodes[i-1].position.y : 0) + (((i > 0 && i !== Math.round(splitIdx)) ? num_children[i-1] / 2 : 0) + (num_children[i] / 2)) * 100 },
-                    data: {
-                        label: categories[i],
-                        n_children: 0,
-                        left: (i < splitIdx),
-                        color: categoryStore.getColor(categories[i])
-                    }});
-            }
-
-            // trick nodes
-            let visitedIDs = [];
-            let childIdx = 1000;
-            for (let i = categories.length; i < (videos.length + categories.length); i++) {
-                const trick = videos[i - categories.length];
-                if(!visitedIDs.includes(trick.trickID)) {
-                    const categoryIdx = categories.indexOf(trick.category)
-                    const xOffset = ((categoryIdx < splitIdx) ? -400 : 400) * xScaleFactor;
-                    nodes.push({
-                        id: i,
-                        type: 'special',
-                        position: { x: nodes[categoryIdx].position.x + xOffset,
-                                    y: (nodes[categoryIdx].position.y - (num_children[categoryIdx] / 2 - 1) * 100) + (nodes[categoryIdx].data.n_children * 100) },
-                        data: {
-                            label: trick.title[0],
-                            n_children: 0,
-                            left: nodes[categoryIdx].data.left,
-                            color: nodes[categoryIdx].data.color
-                        }});
-                    nodes[categoryIdx].data.n_children++;
-                    edges.push({
-                        id: (i-1) + '->' + i,
-                        source: categoryIdx.toString(),
-                        target: i.toString()});
-                    // add connections if not base trick and mark them as visited
-                    if(trick.connections.length > 0) {
-                        for (let j = 0; j < trick.connections.length; j++) {
-                            const parentIdx = getNodeIdxById(i, nodes);
-                            nodes.push({
-                                id: childIdx,
-                                type: 'special',
-                                position: {
-                                    x: nodes[parentIdx].position.x + xOffset,
-                                    y: nodes[parentIdx].position.y - (nodes[parentIdx].data.n_children / 2) * 100 + (nodes[parentIdx].data.n_children * 100) },
-                                data: {
-                                    label: state.getTrickByID(trick.connections[j], state).title[0],
-                                    n_children: 0,
-                                    left: nodes[parentIdx].data.left,
-                                    color: nodes[parentIdx].data.color
-                                }});
-                            nodes[parentIdx].data.n_children++;
-                            edges.push({
-                                id: i + '->' + childIdx,
-                                source: i.toString(),
-                                target: childIdx.toString()});
-                            visitedIDs.push(trick.connections[j]);
-                            childIdx++;
-                        }
-                    }
-                }
-            }
-
-            return [nodes, edges];
-        },
-        getTrickTreeGraph(state) {
-            let graph= [{name: "Starting Points", children: []}];
+        getTrickTreeGraph(state, orientation) {
+            // generate base graph
+            let graph= [{name: "root", children: []}];
             let visitedIDs = [];
             let i = 0;
             while (visitedIDs.length <= state.videos.length) {
@@ -424,13 +351,138 @@ export const useVideoStore = defineStore('videoStore', {
                     // start new subtree
                     else {
                         // decide if left or right
-                        graph[0].children.push(trickToNode(state.videos[i], i < 35));
+                        graph[0].children.push(trickToNode(state.videos[i], 2));
                         visitedIDs.push(state.videos[i].trickID);
                     }
                 }
                 i = (i + 1) % state.videos.length;
             }
-            return graph;
+
+            // calculate tree widths and height
+            function calcTreeSpace(node) {
+                if(node.children.length > 0) {
+                    let max_children = node.children.length;
+                    let max_difficulty = node.difficulty;
+                    for (let j = 0; j < node.children.length; j++) {
+                        const [tmp_children, tmp_difficulty] = calcTreeSpace(node.children[j])
+                        max_children = Math.max(max_children, tmp_children);
+                        max_difficulty = Math.max(max_difficulty, tmp_difficulty);
+                    }
+                    return [max_children, max_difficulty];
+                }
+                else {
+                    return [1, node.difficulty];
+                }
+            }
+            // calc root tree height and max width
+            let total_width = 0;
+            for (let j = 0; j < graph[0].children.length; j++) {
+                let max_difficulty = graph[0].children[j].difficulty;
+                [graph[0].children[j].width, max_difficulty] = calcTreeSpace(graph[0].children[j]);
+                graph[0].children[j].height = max_difficulty - graph[0].children[j].difficulty + 1;
+                total_width += graph[0].children[j].width;
+            }
+
+            // 2d array for allocating spaces
+            const cols = total_width + 1;
+            let spaces = Array(5).fill(false).map(() => Array(cols).fill(false));
+            // place root nodes in allocation array
+            for (let i = 0; i < graph[0].children.length; i++) {
+                const node = graph[0].children[i];
+                for (let col = 0; col < cols; col++) {
+                    // if space free and wide enough
+                    if(checkSpace(node.difficulty - 1, col, node.width, node.height, JSON.parse(JSON.stringify(spaces)))) {
+                        // mark space as used
+                        for (let x = col; x < col + node.width; x++) {
+                            for (let y = node.difficulty - 1; y < node.difficulty + node.height - 1; y++) {
+                                spaces[y][x] = true;
+                            }
+                        }
+                        spaces[node.difficulty - 1][col] = node.name;
+                        break;
+                    }
+                    else if(col === cols - 1) {
+                        console.log(node.name, ' did not fit')
+                    }
+                }
+            }
+
+            // convert to Flow Chart
+            function convGraph(nodes, edges, parent, g_node, g_parent) {
+                // child node
+                if(parent && g_parent && g_parent.name !== 'root') {
+                    const prev_idx = g_parent.children.indexOf(g_node) - 1;
+                    const prev_node = (prev_idx >= 0) ? nodes[getNodeIdxById(g_parent.children[prev_idx].name, nodes)] : null;
+                    nodes.push({
+                        id: g_node.name,
+                        type: 'clickable',
+                        // parent.x +- 300 scaled +- text_offset offset according to side
+                        position: {// offset to prev node of parent
+                            x: (prev_idx >= 0) ? prev_node.position.x + g_node.name.length * 30 +
+                                // + offset to previous node if present and space for own children
+                                ((g_node.children.length > 0) ? (Math.max(0, g_parent.children[prev_idx].children.length - 1)) * 100 : 0)
+                                // parent.x - space for children
+                                : parent.position.x - ((g_parent.children.length - 1) / 2) * 100,
+                            y: (g_node.difficulty <= g_parent.difficulty) ? parent.position.y + ((parent.data.orientation === 0) ? -100 * xScaleFactor -
+                                // text_offset offset according to side and orientation
+                                (g_node.name.length * ((orientation === 'Portrait') ? 8 : 25)) :
+                                100 * xScaleFactor) : g_node.difficulty * difficultySpacing,
+                        },
+                        data: {
+                            label: g_node.name,
+                            n_children: 0,
+                            orientation: parent.data.orientation,
+                            color: parent.data.color
+                        }});
+                    edges.push({
+                        id: g_parent.name + '->' + g_node.name,
+                        source: g_parent.name,
+                        target: g_node.name,
+                        style: { stroke: 'black', strokeWidth: 3}});
+                }
+                else {
+                    // root nodes
+                    const trick = state.getTrickByTitle(g_node.name, state)
+                    // find node in space allocation array
+                    const x = getSpaceIdx(trick.title[0], spaces)
+                    nodes.push({
+                        id: g_node.name,
+                        type: 'clickable',
+                        position: {
+                            x: x * 500,
+                            y: trick.difficulty * difficultySpacing},
+                        data: {
+                            label: g_node.name,
+                            n_children: 0,
+                            orientation: 2,
+                            color: categoryStore.getColor(trick.category)
+                        }});
+                }
+                // difficulty markers
+                for (let j = 1; j <= 5; j++) {
+                    nodes.push({id: 'Difficulty ' + j.toString(), type: 'output', position: {x: -2000, y: j * difficultySpacing}, data: {
+                        label: 'Difficulty' + j.toString(),
+                        }})
+                }
+                // calculate conversion recursively
+                for (let i = 0; i < g_node.children.length; i++) {
+                    const [t_nodes, t_edges] = convGraph(nodes, edges, nodes[getNodeIdxById(g_node.name, nodes)], g_node.children[i], g_node)
+                    nodes.concat(t_nodes);
+                    edges.concat(t_edges);
+                }
+                return [nodes, edges];
+            }
+
+            let nodes = [];
+            let edges = [];
+            const xScaleFactor = (orientation === 'Portrait') ? 1 : 3;
+            const difficultySpacing = 700;
+            const categoryStore = useCategoryStore();
+
+            [nodes, edges] = convGraph(nodes, edges, null, graph[0], null)
+
+
+            return [nodes, edges];
         },
         sortedVideos: (state, sortOption) => {
                 switch (sortOption) {

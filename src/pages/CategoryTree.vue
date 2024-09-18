@@ -2,8 +2,6 @@
 import {VueFlow} from '@vue-flow/core'
 import {useVideoStore} from "@/store.js";
 
-// these components are only shown as examples of how to use a custom node or edge
-// you can find many examples of how to create these custom components in the examples page of the docs
 import ClickableNode from '../components/mindMap/ClickableNode.vue'
 import CategoryNode from '../components/mindMap/CategoryNode.vue'
 import RootNode from '../components/mindMap/RootNode.vue'
@@ -30,7 +28,7 @@ const graph = videoStore.getConnectionsGraph(videoStore, getOrientation())
     <VueFlow
         :nodes="graph[0]"
         :edges="graph[1]"
-        :nodes-draggable="true"
+        :nodes-draggable="false"
         :nodes-connectable="false"
         :pan-on-drag="true"
         :zoom-on-pinch="true"

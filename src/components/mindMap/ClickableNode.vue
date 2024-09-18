@@ -5,17 +5,30 @@ const connections = useHandleConnections({
   type: 'source',
 })
 
-const props = defineProps(['label', 'left', 'n_children', 'color'])
+const props = defineProps(['label', 'orientation', 'n_children', 'color'])
 
 function getOrientation(){
   return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
 }
 
+function getPosition(orientation) {
+  switch (orientation) {
+    case 0:
+      return Position.Top;
+    case 1:
+      return Position.Right;
+    case 2:
+      return Position.Bottom;
+    case 3:
+      return Position.Left;
+  }
+}
+
 </script>
 
 <template>
-  <Handle type="source" :position="(props.left) ? Position.Left : Position.Right" style="opacity: 0" />
-  <Handle type="target" :position="(!props.left) ? Position.Left : Position.Right" style="opacity: 0" />
+  <Handle type="source" :position="getPosition(props.orientation)" style="opacity: 0" />
+  <Handle type="target" :position="getPosition((props.orientation + 2) % 4)" style="opacity: 0" />
   <v-btn
       @click="$router.push('/' + props.label)"
       variant="elevated"

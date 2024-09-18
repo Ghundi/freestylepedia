@@ -11,7 +11,7 @@ const members = useMembers().val
   <v-container>
     <v-row class="d-flex justify-center align-center">
       <v-col cols="9">
-        <v-card class="text-center justify-center pa-10" width="60vw" elevation="5">
+        <v-card class="text-center justify-center pa-5" elevation="5">
           <v-card-title>
             Our Story
           </v-card-title>
