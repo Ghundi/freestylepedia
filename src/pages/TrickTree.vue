@@ -38,10 +38,10 @@ const graph = videoStore.getTrickTreeGraph(videoStore, getOrientation())
         :default-viewport="{ zoom: 1 }"
         :translate-extent="[
           [0, -200],
-          [10000, 5000],
+          [(getOrientation() === 'Landscape') ? 9000 : 7000, 5000],
         ]"
-        :min-zoom="0.2"
-        :max-zoom="2"
+        :min-zoom="(getOrientation() === 'Landscape') ? 0.2 : 0.1"
+        :max-zoom="1"
         fit-view-on-init
     >
       <template #node-clickable="props">

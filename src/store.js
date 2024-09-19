@@ -428,7 +428,7 @@ export const useVideoStore = defineStore('videoStore', {
                         type: 'clickable',
                         position: {
                             // offset to prev node of parent
-                            x: (g_parent.difficulty < g_node.difficulty) ? g_node.difficulty * difficultySpacing : parent.position.x + 600,
+                            x: (g_parent.difficulty < g_node.difficulty) ? g_node.difficulty * difficultySpacing * xScaleFactor : parent.position.x + 600,
                             y: (prev_idx >= 0) ? nodes[getNodeIdxById(g_parent.children[prev_idx].name, nodes)].position.y + 100 +
                                 // + offset to previous node if present and space for own children
                                 ((g_node.children.length > 0) ? (Math.max(0, g_parent.children[prev_idx].children.length - 1)) * 100 : 0)
@@ -456,7 +456,7 @@ export const useVideoStore = defineStore('videoStore', {
                         id: g_node.name,
                         type: 'clickable',
                         position: {
-                            x: trick.difficulty * difficultySpacing,
+                            x: trick.difficulty * difficultySpacing * xScaleFactor,
                             y: y * 120},
                         data: {
                             label: g_node.name,
@@ -467,7 +467,7 @@ export const useVideoStore = defineStore('videoStore', {
                 }
                 // difficulty markers
                 for (let j = 1; j <= 5; j++) {
-                    nodes.push({id: 'Difficulty ' + j.toString(), type: 'difficulty', position: {x: j * difficultySpacing, y: -200}, data: {
+                    nodes.push({id: 'Difficulty ' + j.toString(), type: 'difficulty', position: {x: j * difficultySpacing * xScaleFactor, y: -200}, data: {
                         label: j.toString(),
                         }})
                 }
@@ -483,6 +483,7 @@ export const useVideoStore = defineStore('videoStore', {
             let nodes = [];
             let edges = [];
             const difficultySpacing = 1500;
+            const xScaleFactor = (orientation === 'Portrait') ? 0.7 : 1;
             const categoryStore = useCategoryStore();
 
             [nodes, edges] = convGraph(nodes, edges, null, graph[0], null)
