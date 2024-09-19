@@ -29,14 +29,17 @@ function getPosition(orientation) {
 <template>
   <Handle type="source" :position="getPosition(props.orientation)" style="opacity: 0" />
   <Handle type="target" :position="getPosition((props.orientation + 2) % 4)" style="opacity: 0" />
-  <v-btn
-      @click="$router.push('/' + props.label)"
-      variant="elevated"
-      rounded="xl"
-      min-width="200px"
-      :style="{'border-style': 'solid', 'border-width': (getOrientation() === 'Portrait') ? '3px' : '7px', 'border-color': color,
+    <v-btn
+        @click="$router.push('/' + props.label)"
+        variant="elevated"
+        rounded="xl"
+        min-width="200px"
+        :style="{'border-style': 'solid', 'border-width': (getOrientation() === 'Portrait') ? '3px' : '7px', 'border-color': color,
       'font-weight': 'bolder', 'font-size': (getOrientation() === 'Portrait') ? '20px' : '40px'}"
-      size="x-large">
+        size="x-large">
       {{ props.label }}
-  </v-btn>
+    </v-btn>
 </template>
+
+<style scoped>
+</style>

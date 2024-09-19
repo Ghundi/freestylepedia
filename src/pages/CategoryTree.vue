@@ -4,7 +4,6 @@ import {useVideoStore} from "@/store.js";
 
 import ClickableNode from '../components/mindMap/ClickableNode.vue'
 import CategoryNode from '../components/mindMap/CategoryNode.vue'
-import RootNode from '../components/mindMap/RootNode.vue'
 
 const videoStore = useVideoStore();
 
@@ -51,9 +50,6 @@ const graph = videoStore.getConnectionsGraph(videoStore, getOrientation())
       </template>
       <template #node-category="props">
         <CategoryNode v-bind="props.data" />
-      </template>
-      <template #node-root="props">
-        <RootNode v-bind="props.data" />
       </template>
     </VueFlow>
 

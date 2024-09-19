@@ -336,26 +336,36 @@ export const useVideoStore = defineStore('videoStore', {
             let graph= [{name: "root", children: []}];
             let visitedIDs = [];
             let i = 0;
-            while (visitedIDs.length <= state.videos.length) {
-                if(!visitedIDs.includes(state.videos[i].trickID)) {
+            let videos = state.loadYAML();
+            videos.sort((a, b) => {
+                if (a.category < b.category) {
+                    return -1;  // a comes before b
+                }
+                if (a.category > b.category) {
+                    return 1;   // a comes after b
+                }
+                return 0;       // a and b are equal
+            });
+            while (visitedIDs.length <= videos.length) {
+                if(!visitedIDs.includes(videos[i].trickID)) {
                     // check if requirements exist
-                    if(state.videos[i].requirements.length > 0) {
-                        for (let j = 0; j < state.videos[i].requirements.length; j++) {
-                            const parent = graphSearch(state.getTrickByID(state.videos[i].requirements[j], state).title[0], graph[0]);
+                    if(videos[i].requirements.length > 0) {
+                        for (let j = 0; j < videos[i].requirements.length; j++) {
+                            const parent = graphSearch(state.getTrickByID(videos[i].requirements[j], state).title[0], graph[0]);
                             if(parent != null) {
-                                parent.children.push(trickToNode(state.videos[i]));
-                                visitedIDs.push(state.videos[i].trickID);
+                                parent.children.push(trickToNode(videos[i]));
+                                visitedIDs.push(videos[i].trickID);
                             }
                         }
                     }
                     // start new subtree
                     else {
                         // decide if left or right
-                        graph[0].children.push(trickToNode(state.videos[i], 2));
-                        visitedIDs.push(state.videos[i].trickID);
+                        graph[0].children.push(trickToNode(videos[i], 2));
+                        visitedIDs.push(videos[i].trickID);
                     }
                 }
-                i = (i + 1) % state.videos.length;
+                i = (i + 1) % videos.length;
             }
 
             // calculate tree widths and height
@@ -384,12 +394,12 @@ export const useVideoStore = defineStore('videoStore', {
             }
 
             // 2d array for allocating spaces
-            const cols = total_width + 1;
-            let spaces = Array(5).fill(false).map(() => Array(cols).fill(false));
+            const rows = total_width + 1;
+            let spaces = Array(5).fill(false).map(() => Array(rows).fill(false));
             // place root nodes in allocation array
             for (let i = 0; i < graph[0].children.length; i++) {
                 const node = graph[0].children[i];
-                for (let col = 0; col < cols; col++) {
+                for (let col = 0; col < rows; col++) {
                     // if space free and wide enough
                     if(checkSpace(node.difficulty - 1, col, node.width, node.height, JSON.parse(JSON.stringify(spaces)))) {
                         // mark space as used
@@ -398,10 +408,10 @@ export const useVideoStore = defineStore('videoStore', {
                                 spaces[y][x] = true;
                             }
                         }
-                        spaces[node.difficulty - 1][col] = node.name;
+                        spaces[node.difficulty - 1][Math.floor(col + (node.width / 2))] = node.name;
                         break;
                     }
-                    else if(col === cols - 1) {
+                    else if(col === rows - 1) {
                         console.log(node.name, ' did not fit')
                     }
                 }
@@ -416,17 +426,14 @@ export const useVideoStore = defineStore('videoStore', {
                     nodes.push({
                         id: g_node.name,
                         type: 'clickable',
-                        // parent.x +- 300 scaled +- text_offset offset according to side
-                        position: {// offset to prev node of parent
-                            x: (prev_idx >= 0) ? prev_node.position.x + g_node.name.length * 30 +
+                        position: {
+                            // offset to prev node of parent
+                            x: (g_parent.difficulty < g_node.difficulty) ? g_node.difficulty * difficultySpacing : parent.position.x + 600,
+                            y: (prev_idx >= 0) ? nodes[getNodeIdxById(g_parent.children[prev_idx].name, nodes)].position.y + 100 +
                                 // + offset to previous node if present and space for own children
                                 ((g_node.children.length > 0) ? (Math.max(0, g_parent.children[prev_idx].children.length - 1)) * 100 : 0)
-                                // parent.x - space for children
-                                : parent.position.x - ((g_parent.children.length - 1) / 2) * 100,
-                            y: (g_node.difficulty <= g_parent.difficulty) ? parent.position.y + ((parent.data.orientation === 0) ? -100 * xScaleFactor -
-                                // text_offset offset according to side and orientation
-                                (g_node.name.length * ((orientation === 'Portrait') ? 8 : 25)) :
-                                100 * xScaleFactor) : g_node.difficulty * difficultySpacing,
+                                // parent.y - space for children
+                                : parent.position.y - ((g_parent.children.length - 1) / 2) * 100,
                         },
                         data: {
                             label: g_node.name,
@@ -444,24 +451,24 @@ export const useVideoStore = defineStore('videoStore', {
                     // root nodes
                     const trick = state.getTrickByTitle(g_node.name, state)
                     // find node in space allocation array
-                    const x = getSpaceIdx(trick.title[0], spaces)
+                    const y = getSpaceIdx(trick.title[0], spaces)
                     nodes.push({
                         id: g_node.name,
                         type: 'clickable',
                         position: {
-                            x: x * 500,
-                            y: trick.difficulty * difficultySpacing},
+                            x: trick.difficulty * difficultySpacing,
+                            y: y * 120},
                         data: {
                             label: g_node.name,
                             n_children: 0,
-                            orientation: 2,
+                            orientation: 1,
                             color: categoryStore.getColor(trick.category)
                         }});
                 }
                 // difficulty markers
                 for (let j = 1; j <= 5; j++) {
-                    nodes.push({id: 'Difficulty ' + j.toString(), type: 'output', position: {x: -2000, y: j * difficultySpacing}, data: {
-                        label: 'Difficulty' + j.toString(),
+                    nodes.push({id: 'Difficulty ' + j.toString(), type: 'difficulty', position: {x: j * difficultySpacing, y: -200}, data: {
+                        label: j.toString(),
                         }})
                 }
                 // calculate conversion recursively
@@ -475,8 +482,7 @@ export const useVideoStore = defineStore('videoStore', {
 
             let nodes = [];
             let edges = [];
-            const xScaleFactor = (orientation === 'Portrait') ? 1 : 3;
-            const difficultySpacing = 700;
+            const difficultySpacing = 1500;
             const categoryStore = useCategoryStore();
 
             [nodes, edges] = convGraph(nodes, edges, null, graph[0], null)

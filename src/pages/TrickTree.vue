@@ -2,11 +2,11 @@
 import {VueFlow} from '@vue-flow/core'
 import {useVideoStore} from "@/store.js";
 
-const videoStore = useVideoStore();
-
 import ClickableNode from '../components/mindMap/ClickableNode.vue'
 import CategoryNode from '../components/mindMap/CategoryNode.vue'
-import RootNode from '../components/mindMap/RootNode.vue'
+import DifficultyNode from '../components/mindMap/DifficultyNode.vue'
+
+const videoStore = useVideoStore();
 
 function getOrientation(){
   return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
@@ -26,7 +26,7 @@ const graph = videoStore.getTrickTreeGraph(videoStore, getOrientation())
     <VueFlow
         :nodes="graph[0]"
         :edges="graph[1]"
-        :nodes-draggable="true"
+        :nodes-draggable="false"
         :nodes-connectable="false"
         :pan-on-drag="true"
         :zoom-on-pinch="true"
@@ -37,8 +37,8 @@ const graph = videoStore.getTrickTreeGraph(videoStore, getOrientation())
         class="basic-flow"
         :default-viewport="{ zoom: 1 }"
         :translate-extent="[
-          [(getOrientation() === 'Landscape') ? -4000 : -2000, -4000],
-          [(getOrientation() === 'Landscape') ? 15000 : 12000, 5000],
+          [0, -200],
+          [10000, 5000],
         ]"
         :min-zoom="0.2"
         :max-zoom="2"
@@ -50,8 +50,8 @@ const graph = videoStore.getTrickTreeGraph(videoStore, getOrientation())
       <template #node-category="props">
         <CategoryNode v-bind="props.data" />
       </template>
-      <template #node-root="props">
-        <RootNode v-bind="props.data" />
+      <template #node-difficulty="props">
+        <DifficultyNode v-bind="props.data" />
       </template>
     </VueFlow>
 
