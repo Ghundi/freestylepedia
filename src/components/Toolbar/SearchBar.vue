@@ -1,14 +1,13 @@
 <script setup>
 import {useCurSearchStore} from "@/store.js";
+
 const searchStore = useCurSearchStore();
+const videoStore = useVideoStore();
 </script>
 
 <script>
 import { useVideoStore ,useCurSearchStore } from "@/store.js";
 let searchEmpty = true;
-
-import { ref } from 'vue'
-import debounce from 'lodash/debounce'
 
 export default {
   data: () => ({
@@ -31,20 +30,21 @@ export default {
 </script>
 
 <template>
-  <v-combobox
-      @update:modelValue="updateStore"
+  <v-autocomplete
       v-bind:label="$t('toolbar.search')"
       v-model="searchStore.val"
-      hide-no-data
-      hide-details
+      :items="videoStore.getTitles(videoStore)"
       density="compact"
+      class="mx-auto"
+      hide-details
+      hide-no-data
       variant="solo"
       single-line
       append-inner-icon="mdi-magnify"
       menu-icon=""
       clearable
-      :items="getItems()"
-  ></v-combobox>
+      auto-select-first>
+  </v-autocomplete>
 </template>
 
 <style scoped>
