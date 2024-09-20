@@ -26,12 +26,12 @@ import Help from './pages/Help.vue'
 import VideoPlayer from "@/pages/VideoPlayer.vue";
 
 const routes = [
-    { path: '/', component: VideoList },
-    { path: '/CategoryTree', component: CategoryTree },
-    { path: '/TrickTree', component: TrickTree },
-    { path: '/AboutUs', component: AboutUs },
-    { path: '/Help', component: Help },
-    { path: '/:trickname', component: VideoPlayer },
+    { path: '/', component: () => import('./pages/VideoList.vue') },
+    { path: '/CategoryTree', component: () => import('./pages/CategoryTree.vue') },
+    { path: '/TrickTree', component: () => import('./pages/TrickTree.vue') },
+    { path: '/AboutUs', component: () => import('./pages/AboutUs.vue') },
+    { path: '/Help', component: () => import('./pages/Help.vue') },
+    { path: '/:trickname', component: () => import('./pages/VideoPlayer.vue') },
 ]
 
 const router = createRouter({

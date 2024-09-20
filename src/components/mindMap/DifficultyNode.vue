@@ -30,7 +30,7 @@ function getPosition(orientation) {
       {{ $t('difficulty') + ' ' + label }}
     </div>
   </div>
-  <div class="line" v-if="label !== '1'"></div>
+  <div class="line" v-show="label !== '1'"></div>
 </template>
 
 <style scoped>
