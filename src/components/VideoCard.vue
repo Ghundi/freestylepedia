@@ -31,7 +31,8 @@ function getLocalDate(date, locale) {
         >
           <v-img
               :src="thumbnailUrl"
-              id="thumbnail">
+              id="thumbnail"
+              rel="preload">
           </v-img>
           <v-card-subtitle class="smaller-font">
             {{ getLocalDate(releaseDate, $i18n.locale) }}

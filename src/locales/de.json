@@ -3,7 +3,7 @@
     "description": "Diese Mind Map stellt Tricks aus der gleichen Familie zusammen da und Verbindungen zu den jeweiligen Basistricks."
   },
   "trickTree": {
-    "description": "Jeder Skill Tree nimmt in Schwierigkeit zu."
+    "description": "Der Graph wird nach rechts zunehmend schwieriger. Jeder Skill Tree spaltet sich in schwierigere Tricks auf und ist mit den Linien verbunden. Wir empfehlen einen einzelnen Skill Tree von links nach rechts zu lernen."
   },
   "faq": {
     "naming_question": "Woher kommen die Namen der Tricks?",
