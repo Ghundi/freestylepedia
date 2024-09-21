@@ -1,5 +1,6 @@
 <script setup>
 import {VueFlow} from '@vue-flow/core'
+import '@vue-flow/core/dist/style.css'
 import {useVideoStore} from "@/store.js";
 
 import ClickableNode from '../components/mindMap/ClickableNode.vue'

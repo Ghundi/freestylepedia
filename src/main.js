@@ -3,8 +3,6 @@ import App from "@/App.vue";
 
 // vuetify styling
 import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 
 // multi language
@@ -16,14 +14,6 @@ import {createPinia} from "pinia";
 
 // routing
 import {createRouter, createWebHistory} from 'vue-router'
-
-// pages
-import VideoList from './pages/VideoList.vue'
-import CategoryTree from './pages/CategoryTree.vue'
-import TrickTree from './pages/TrickTree.vue'
-import AboutUs from './pages/AboutUs.vue'
-import Help from './pages/Help.vue'
-import VideoPlayer from "@/pages/VideoPlayer.vue";
 
 const routes = [
     { path: '/', component: () => import('./pages/VideoList.vue') },
@@ -55,8 +45,6 @@ const i18n = createI18n({
 });
 const pinia = createPinia()
 const vuetify = createVuetify({
-    components,
-    directives,
     theme: {
         defaultTheme: 'light'
     }

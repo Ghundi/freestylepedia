@@ -401,7 +401,7 @@ export const useVideoStore = defineStore('videoStore', {
                 const node = graph[0].children[i];
                 for (let col = 0; col < rows; col++) {
                     // if space free and wide enough
-                    if(checkSpace(node.difficulty - 1, col, node.width, node.height, JSON.parse(JSON.stringify(spaces)))) {
+                    if(checkSpace(node.difficulty - 1, col, node.width, node.height, spaces)) {
                         // mark space as used
                         for (let x = col; x < col + node.width; x++) {
                             for (let y = node.difficulty - 1; y < node.difficulty + node.height - 1; y++) {
