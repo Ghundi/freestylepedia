@@ -73,5 +73,6 @@
   "similarTricks": "Similar Tricks",
   "requirements": "Requirements",
   "otherTutorials": "Other Tutorials",
-  "noResults": "We couldn't find any tricks"
+  "noResults": "We couldn't find any tricks",
+  "noResultsSuggestions": "Try adjusting your search term or filters. Sometimes less specific terms or broader queries can help you find what you're looking for."
 }

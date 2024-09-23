@@ -7,31 +7,25 @@ const videoStore = useVideoStore();
 
 <script>
 import { useVideoStore ,useCurSearchStore } from "@/store.js";
-let searchEmpty = true;
 
 export default {
   data: () => ({
+    value: useCurSearchStore().val,
     updateStore: [
       value => {
-        searchEmpty = value == null;
+        const selCurSearchStore = useCurSearchStore();
+        selCurSearchStore.update(value);
+        return true
       }
-    ],
-  getItems() {
-    const videoStore = useVideoStore();
-    if (searchEmpty) {
-      return []
-    }
-    else {
-      return videoStore.getTitles(videoStore);
-    }
-  }
+    ]
   }),
 }
 </script>
 
 <template>
-  <v-autocomplete
+  <v-combobox
       v-bind:label="$t('toolbar.search')"
+      :rules="updateStore"
       v-model="searchStore.val"
       :items="videoStore.getTitles(videoStore)"
       density="compact"
@@ -44,7 +38,7 @@ export default {
       menu-icon=""
       clearable
       auto-select-first>
-  </v-autocomplete>
+  </v-combobox>
 </template>
 
 <style scoped>

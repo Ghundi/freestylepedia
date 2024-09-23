@@ -5,6 +5,10 @@ import ThemeSwitcher from "@/components/themeSwitcher.vue";
 
 const drawer = ref(null)
 
+function getOrientation(){
+  return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
+}
+
 </script>
 
 <template>
@@ -12,10 +16,14 @@ const drawer = ref(null)
     <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     <v-card
         to="/"
-        class="font-weight-black title bg-black"
+        class="bg-black"
         :ripple="false"
         >
-      Freestylepedia
+      <v-card-title
+          class="font-weight-black"
+          :style="{'font-size': getOrientation() === 'Landscape' ? '30px': '20px'}">
+        Freestylepedia
+      </v-card-title>
     </v-card>
     <v-spacer></v-spacer>
     <language-selector/>

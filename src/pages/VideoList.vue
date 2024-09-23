@@ -37,7 +37,13 @@ function isMobile() {
         </v-col>
       </template >
       <template v-if="videoStore.filteredVideos(videoStore.sortedVideos(videoStore, selSortingOrderStore.by)).length === 0">
-        {{ $t("noResults") }}
+        <v-col>
+          <v-empty-state
+              icon="mdi-magnify"
+              :text="$t('noResultsSuggestions')"
+              :title="$t('noResults')"
+          ></v-empty-state>
+        </v-col>
       </template>
     </v-row>
   </v-container>
