@@ -3,6 +3,10 @@ import NavBar from "@/components/navBar.vue";
 import 'vuetify/styles';
 import {useVideoStore} from "@/store.js";
 import Footer from "@/components/footer.vue"
+import { useTheme } from 'vuetify'
+import { getBgColor } from "@/helpers.js";
+
+const theme = useTheme()
 
 const videoStore = useVideoStore();
 videoStore.videos = videoStore.loadYAML();
@@ -13,7 +17,7 @@ videoStore.videos = videoStore.loadYAML();
   <v-app>
     <nav-bar/>
     <br>
-    <v-main class="bg-grey-lighten-3 pb-5">
+    <v-main class="pb-5" :style="{backgroundColor: getBgColor(theme.global.current.value.dark)}">
       <router-view :key="$route.fullPath"/>
     </v-main>
     <Footer/>

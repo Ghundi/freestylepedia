@@ -5,6 +5,12 @@ import App from "@/App.vue";
 import { createVuetify } from 'vuetify'
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 
+// VueFlow
+/* import the necessary styles for Vue Flow to work */
+import '@vue-flow/core/dist/style.css';
+/* import the default theme, this is optional but generally recommended */
+import '@vue-flow/core/dist/theme-default.css';
+
 // multi language
 import { createI18n } from "vue-i18n";
 import messages from "@intlify/unplugin-vue-i18n/messages";

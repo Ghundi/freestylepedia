@@ -1,6 +1,6 @@
 <script setup>
 
-import { Handle, Position, useHandleConnections, useNodesData } from '@vue-flow/core'
+import { Handle, Position} from '@vue-flow/core'
 
 const props = defineProps(['label', 'orientation', 'n_children', 'color'])
 

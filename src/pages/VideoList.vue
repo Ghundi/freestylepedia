@@ -36,7 +36,7 @@ function isMobile() {
             />
         </v-col>
       </template >
-      <template v-show="videoStore.filteredVideos(videoStore.sortedVideos(videoStore, selSortingOrderStore.by)).length === 0">
+      <template v-if="videoStore.filteredVideos(videoStore.sortedVideos(videoStore, selSortingOrderStore.by)).length === 0">
         {{ $t("noResults") }}
       </template>
     </v-row>

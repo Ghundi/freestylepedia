@@ -79,7 +79,7 @@ function hasHistory () {
           {{ $t('categories.' + trick.category) }}
         </v-card>
       </v-col>
-      <v-col v-show="trick.connections.length > 0">
+      <v-col v-if="trick.connections.length > 0">
         <v-card class="pa-3" elevation="5">
           <p class="font-weight-bold">{{ $t('similarTricks') }}:</p>
           <template v-for="name in getTrickNames(trick.connections, videoStore)">
@@ -89,7 +89,7 @@ function hasHistory () {
           </template>
         </v-card>
       </v-col>
-      <v-col v-show="trick.requirements.length > 0">
+      <v-col v-if="trick.requirements.length > 0">
         <v-card class="pa-3" elevation="5">
           <p class="font-weight-bold">{{ $t('requirements') }}:</p>
           <template v-for="r_name in getTrickNames(trick.requirements, videoStore)">
@@ -100,7 +100,7 @@ function hasHistory () {
           </template>
         </v-card>
       </v-col>
-      <template v-show="trick.id.length > 1">
+      <template v-if="trick.id.length > 1">
         <v-container>
           <v-row>
             <v-col>

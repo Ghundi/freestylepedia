@@ -1,7 +1,10 @@
 <script setup>
 import {VueFlow} from '@vue-flow/core'
-import '@vue-flow/core/dist/style.css'
+
 import {useVideoStore} from "@/store.js";
+
+import { useTheme } from 'vuetify'
+import { getBgColor } from "@/helpers.js";
 
 import ClickableNode from '../components/mindMap/ClickableNode.vue'
 import CategoryNode from '../components/mindMap/CategoryNode.vue'
@@ -13,14 +16,22 @@ function getOrientation(){
   return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
 }
 const graph = videoStore.getTrickTreeGraph(videoStore, getOrientation())
+
+const theme = useTheme()
 </script>
 
 <template>
-  <v-card class="ma-3 text-center bg-grey-lighten-3" width="90%" height="90vh">
-    <v-card-title class="font-weight-bold">
+  <v-card
+      class="ma-3 text-center"
+      width="90%"
+      height="90vh"
+      :style="{backgroundColor: getBgColor(theme.global.current.value.dark)}">
+    <v-card-title
+        class="font-weight-bold">
       {{ $t("navBar.trickTree") }}
     </v-card-title>
-    <v-card-text class="text-center bg-grey-lighten-3 pa-2">
+    <v-card-text
+        class="text-center pa-2">
       {{ $t('trickTree.description') }}
     </v-card-text>
 
@@ -41,9 +52,10 @@ const graph = videoStore.getTrickTreeGraph(videoStore, getOrientation())
           [0, -200],
           [(getOrientation() === 'Landscape') ? 9000 : 7000, 5000],
         ]"
-        :min-zoom="(getOrientation() === 'Landscape') ? 0.2 : 0.1"
+        :min-zoom="(getOrientation() === 'Landscape') ? 0.2 : 0.05"
         :max-zoom="1"
         fit-view-on-init
+        :style="{backgroundColor: getBgColor(theme.global.current.value.dark)}"
     >
       <template #node-clickable="props">
         <ClickableNode v-bind="props.data"/>
@@ -59,7 +71,7 @@ const graph = videoStore.getTrickTreeGraph(videoStore, getOrientation())
   </v-card>
 </template>
 
-<style scoped>
+<style>
 html::-webkit-scrollbar{
   width: 50px;
   background:red;

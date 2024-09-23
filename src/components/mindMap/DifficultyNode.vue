@@ -1,6 +1,7 @@
 <script setup>
-
-import { Handle, Position, useHandleConnections, useNodesData } from '@vue-flow/core'
+import {useTheme} from "vuetify";
+import { getBgColor } from "@/helpers.js";
+import { Handle, Position} from '@vue-flow/core'
 
 const props = defineProps(['label', 'orientation', 'n_children', 'color'])
 
@@ -20,31 +21,48 @@ function getPosition(orientation) {
       return Position.Left;
   }
 }
+const theme = useTheme()
 </script>
 
 <template>
   <Handle type="source" :position="getPosition(props.orientation)" style="opacity: 0" />
   <Handle type="target" :position="getPosition(props.orientation)" style="opacity: 0" />
-  <div class="rounded" :style="{'font-size': (getOrientation() === 'Portrait') ? '20px' : '40px'}">
-    <div class="text-h1">
+
+  <!-- Make the container non-interactive -->
+  <div class="rounded" :style="{
+    'font-size': (getOrientation() === 'Portrait') ? '20px' : '40px',
+    'pointer-events': 'none'
+  }">
+    <div class="text-h1" :style="{
+      'color': theme.global.current.value.dark ? '#ffffff' : '#000000',
+      'pointer-events': 'none'
+    }">
       {{ $t('difficulty') + ' ' + label }}
     </div>
   </div>
-  <div class="line" v-show="label !== '1'"></div>
+
+  <!-- The line div -->
+  <div class="line"
+       v-if="label !== '1'"
+       :style="{
+        'border-color': getBgColor(!theme.global.current.value.dark),
+  }"></div>
 </template>
 
 <style scoped>
-.rounded{
-  padding: 10px 20px 10px 20px;
+.rounded {
+  padding: 10px 20px;
   z-index: 100;
   margin-left: 500px;
+  pointer-events: none; /* Disable pointer events for the entire container */
 }
+
 .line {
-  position: relative;
-  right: 20px;
+  position: absolute;
+  right: 1000px;
   border-left: 1px solid black;
   height: 4000px;
   opacity: 0.1;
-  z-index: -100;
+  pointer-events: none; /* Ensure clicks pass through this element */
 }
 </style>

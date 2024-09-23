@@ -38,7 +38,7 @@ function getLocalDate(date, locale) {
             {{ getLocalDate(releaseDate, $i18n.locale) }}
           </v-card-subtitle>
         </v-card>
-      <template v-show="title[0] === videoStore.newestTrick" class="newTag">
+      <template v-if="title[0] === videoStore.newestTrick" class="newTag">
         <v-card-title class="newTag">New!</v-card-title>
       </template>
     </div>

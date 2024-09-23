@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import LanguageSelector from "@/components/languageSelector.vue";
+import ThemeSwitcher from "@/components/themeSwitcher.vue";
 
 const drawer = ref(null)
 
@@ -18,6 +19,7 @@ const drawer = ref(null)
     </v-card>
     <v-spacer></v-spacer>
     <language-selector/>
+    <theme-switcher/>
   </v-app-bar>
 
   <v-navigation-drawer
