@@ -7,7 +7,7 @@ import {graphSearch, getNodeIdxById, getSpaceIdx, checkSpace, trickToNode} from 
 export const useFAQ = defineStore('FAQ', {
     state: () => {
         return {
-            val: ['usage', 'naming', 'scoring', 'categories', 'existence', 'improve']
+            val: ['usage', 'naming', 'scoring', 'categories', 'existence', 'improve', 'help']
         }
     },
 })

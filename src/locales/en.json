@@ -17,7 +17,9 @@
     "existence_question": "Why did you make Freestylepedia?",
     "existence_answer": "You can quickly look up tricks to show your friends or watch them on the ice to learn them.",
     "improve_question": "How can I use Freestylepedia to improve on the ice?",
-    "improve_answer": "With Freestylepedia you can easily see which tricks are achievable for you and which tricks are similar to the tricks you already mastered"
+    "improve_answer": "With Freestylepedia you can easily see which tricks are achievable for you and which tricks are similar to the tricks you already mastered",
+    "help_question": "How can I help to improve Freestylepedia?",
+    "help_answer": "You can contact us on Social Media or open an issue on our github page if you are familiar with github. Everything is linked at the bottom of this website."
   },
   "aboutUs": {
     "members": "Members",
