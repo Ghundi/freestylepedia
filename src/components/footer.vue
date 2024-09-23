@@ -1,5 +1,4 @@
 <script setup>
-import LanguageSelector from "@/components/languageSelector.vue";
 import WebpageIcon from "@/components/WebpageIcon.vue";
 </script>
 
@@ -17,6 +16,10 @@ import WebpageIcon from "@/components/WebpageIcon.vue";
       <WebpageIcon
           page="https://www.instagram.com/blackbird_ice_freestyle"
           icon="mdi-instagram"
+      ></WebpageIcon>
+      <WebpageIcon
+          page="https://github.com/Ghundi/freestylepedia"
+          icon="mdi-github"
       ></WebpageIcon>
     </div>
     <div>
@@ -42,7 +45,4 @@ import WebpageIcon from "@/components/WebpageIcon.vue";
 </template>
 
 <style scoped>
-.v-footer {
-  width: 100%;
-}
 </style>

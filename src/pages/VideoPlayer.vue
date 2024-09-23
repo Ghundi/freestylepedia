@@ -107,14 +107,18 @@ function hasHistory () {
               <p class="font-weight-bold">{{ $t('otherTutorials') }}:</p>
             </v-col>
           </v-row>
-          <v-row>
-            <v-col v-for="video in trick.id.slice(1)">
-              <v-card elevation="3" width="150px">
-                <v-img
-                    :src="getThumbnailUrl(video)"
-                    v-on:click="openVideo(video)"
-                />
-              </v-card>
+          <v-row justify="center" align="center">
+            <v-col
+                v-for="video in trick.id.slice(1)"
+                :key="video"
+                cols="auto"
+            >
+            <v-card elevation="3" width="150px">
+              <v-img
+                  :src="getThumbnailUrl(video)"
+                  v-on:click="openVideo(video)"
+              />
+            </v-card>
             </v-col>
           </v-row>
         </v-container>
