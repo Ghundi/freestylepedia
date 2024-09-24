@@ -29,7 +29,6 @@ export function getNodeIdxById(id, nodes) {
             return i;
         }
     }
-    console.log(id, 'node not found');
     return -1;
 }
 
