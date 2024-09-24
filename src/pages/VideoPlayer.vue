@@ -1,5 +1,5 @@
 <script setup>
-import {useVideoStore} from "@/store.js";
+import {useVideoStore} from "@/scripts/store.js";
 import { useRoute } from "vue-router";
 
 const videoStore = useVideoStore()

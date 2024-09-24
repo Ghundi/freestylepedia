@@ -1,9 +1,9 @@
 <script setup>
 import {VueFlow} from '@vue-flow/core'
-import {useVideoStore} from "@/store.js";
+import {useVideoStore} from "@/scripts/store.js";
 
 import {useTheme} from "vuetify";
-import { getBgColor } from "@/helpers.js";
+import { getBgColor } from "@/scripts/helpers.js";
 
 import ClickableNode from '../components/mindMap/ClickableNode.vue'
 import CategoryNode from '../components/mindMap/CategoryNode.vue'
@@ -50,7 +50,7 @@ const theme = useTheme()
           [(getOrientation() === 'Landscape') ? -4000 : -2000, -2000],
           [(getOrientation() === 'Landscape') ? 5000 : 2000, 3000],
         ]"
-        :min-zoom="(getOrientation() === 'Landscape') ? 0.2 : 0.4"
+        :min-zoom="(getOrientation() === 'Landscape') ? 0.2 : 0.2"
         :max-zoom="(getOrientation() === 'Landscape') ? 1.5 : 2"
         fit-view-on-init
         :style="{backgroundColor: getBgColor(theme.global.current.value.dark)}"

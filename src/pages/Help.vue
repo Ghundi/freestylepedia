@@ -1,5 +1,5 @@
 <script setup>
-import {useFAQ} from "@/store.js";
+import {useFAQ} from "@/scripts/store.js";
 
 const FAQ_store = useFAQ();
 </script>

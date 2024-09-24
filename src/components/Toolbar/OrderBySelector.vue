@@ -1,5 +1,5 @@
 <script setup>
-import { useSortingOrderStore, useSelSortingOrderStore} from '@/store.js';
+import { useSortingOrderStore, useSelSortingOrderStore} from '@/scripts/store.js';
 const selSortingOrder = useSelSortingOrderStore()
 </script>
 

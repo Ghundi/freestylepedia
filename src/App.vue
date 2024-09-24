@@ -1,10 +1,10 @@
 <script setup>
 import NavBar from "@/components/navBar.vue";
 import 'vuetify/styles';
-import {useVideoStore} from "@/store.js";
+import {useVideoStore} from "@/scripts/store.js";
 import Footer from "@/components/footer.vue"
 import { useTheme } from 'vuetify'
-import { getBgColor } from "@/helpers.js";
+import { getBgColor } from "@/scripts/helpers.js";
 
 const theme = useTheme()
 

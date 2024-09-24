@@ -1,5 +1,5 @@
 <script setup>
-import {useMembers} from "@/store.js";
+import {useMembers} from "@/scripts/store.js";
 import BlackbirdLogo from "@/assets/blackbirdIconInverted.png"
 import MISGLogo from "@/assets/MISG-Icon.png"
 import WebpageIcon from "@/components/WebpageIcon.vue";

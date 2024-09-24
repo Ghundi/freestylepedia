@@ -45,7 +45,7 @@ function getLocalDate(date, locale) {
 </template>
 
 <script setup>
-import { useVideoStore, useCategoryStore } from "@/store.js";
+import { useVideoStore, useCategoryStore } from "@/scripts/store.js";
 
 const videoStore = useVideoStore();
 const categoryStore = useCategoryStore();

@@ -1,10 +1,10 @@
 <script setup>
-import { useSelDifficultyStore } from "@/store.js";
+import { useSelDifficultyStore } from "@/scripts/store.js";
 const selDifficultyStore = useSelDifficultyStore();
 </script>
 
 <script>
-import { useSelDifficultyStore } from "@/store.js";
+import { useSelDifficultyStore } from "@/scripts/store.js";
 
 export default {
   data: () => ({

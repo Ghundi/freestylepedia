@@ -1,12 +1,12 @@
 <script setup>
-import {useCurSearchStore} from "@/store.js";
+import {useCurSearchStore} from "@/scripts/store.js";
 
 const searchStore = useCurSearchStore();
 const videoStore = useVideoStore();
 </script>
 
 <script>
-import { useVideoStore ,useCurSearchStore } from "@/store.js";
+import { useVideoStore ,useCurSearchStore } from "@/scripts/store.js";
 
 export default {
   data: () => ({

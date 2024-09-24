@@ -1,10 +1,10 @@
 <script setup>
 import {VueFlow} from '@vue-flow/core'
 
-import {useVideoStore} from "@/store.js";
+import {useVideoStore} from "@/scripts/store.js";
 
 import { useTheme } from 'vuetify'
-import { getBgColor } from "@/helpers.js";
+import { getBgColor } from "@/scripts/helpers.js";
 
 import ClickableNode from '../components/mindMap/ClickableNode.vue'
 import CategoryNode from '../components/mindMap/CategoryNode.vue'

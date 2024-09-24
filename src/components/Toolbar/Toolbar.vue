@@ -4,7 +4,7 @@ import OrderBySelector from "@/components/Toolbar/OrderBySelector.vue";
 import CategorySelector from "@/components/Toolbar/CategorySelector.vue";
 import DifficultySlider from "@/components/Toolbar/DifficultySlider.vue";
 import SearchBar from "@/components/Toolbar/SearchBar.vue";
-import { useCurSearchStore, useSelCategoryStore, useSelDifficultyStore, useCategoryStore} from "@/store.js";
+import { useCurSearchStore, useSelCategoryStore, useSelDifficultyStore, useCategoryStore} from "@/scripts/store.js";
 const selCategoriesStore = useSelCategoryStore()
 const categoryStore = useCategoryStore();
 </script>

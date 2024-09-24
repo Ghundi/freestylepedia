@@ -1,12 +1,12 @@
 <script setup>
-import { useCategoryStore, useSelCategoryStore } from '@/store.js';
+import { useCategoryStore, useSelCategoryStore } from '@/scripts/store.js';
 const categoryStore = useCategoryStore();
 const selCategoryStore = useSelCategoryStore();
 </script>
 
 <script>
 
-import {useSelCategoryStore} from "@/store.js";
+import {useSelCategoryStore} from "@/scripts/store.js";
 
 export default {
   data: () => ({
