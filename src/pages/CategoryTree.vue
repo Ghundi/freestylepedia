@@ -1,23 +1,37 @@
 <script setup>
-import {VueFlow} from '@vue-flow/core'
-import {useVideoStore} from "@/scripts/store.js";
-
-import {useTheme} from "vuetify";
+import { ref, watch } from 'vue';
+import { VueFlow } from '@vue-flow/core';
+import { useVideoStore } from "@/scripts/store.js";
+import { useTheme } from "vuetify";
 import { getBgColor } from "@/scripts/helpers.js";
 
-import ClickableNode from '../components/mindMap/ClickableNode.vue'
-import CategoryNode from '../components/mindMap/CategoryNode.vue'
+import ClickableNode from '../components/mindMap/ClickableNode.vue';
+import CategoryNode from '../components/mindMap/CategoryNode.vue';
 
 const videoStore = useVideoStore();
 
-function getOrientation(){
+function getOrientation() {
   return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
 }
 
-const graph = videoStore.getConnectionsGraph(videoStore, getOrientation())
+const graph = ref(videoStore.getConnectionsGraph(videoStore, getOrientation()));
+const theme = useTheme();
 
-const theme = useTheme()
+// Function to set edge color dynamically based on theme
+function updateEdgeColorsBasedOnTheme() {
+  const edgeColor = theme.global.current.value.dark ? 'white' : 'black';
+  graph.value[1] = graph.value[1].map(edge => ({
+    ...edge,
+    style: {
+      ...edge.style,
+      stroke: edgeColor,  // Update stroke color based on theme
+    }
+  }));
+}
 
+watch(() => theme.global.current.value.dark, () => {
+  updateEdgeColorsBasedOnTheme();
+}, {immediate: true});
 </script>
 
 <template>
@@ -25,7 +39,8 @@ const theme = useTheme()
       class="ma-auto mt-5 text-center"
       width="90%"
       height="90vh"
-      :style="{backgroundColor: getBgColor(theme.global.current.value.dark)}">
+      :style="{ backgroundColor: getBgColor(theme.global.current.value.dark) }"
+  >
     <v-card-title class="font-weight-bold">
       {{ $t("navBar.categoryTree") }}
     </v-card-title>
@@ -47,25 +62,23 @@ const theme = useTheme()
         class="basic-flow"
         :default-viewport="{ zoom: 1 }"
         :translate-extent="[
-          [(getOrientation() === 'Landscape') ? -4000 : -2000, -2000],
-          [(getOrientation() === 'Landscape') ? 5000 : 2000, 3000],
-        ]"
+        [(getOrientation() === 'Landscape') ? -4000 : -2000, -2000],
+        [(getOrientation() === 'Landscape') ? 5000 : 2000, 3000]
+      ]"
         :min-zoom="(getOrientation() === 'Landscape') ? 0.2 : 0.2"
         :max-zoom="(getOrientation() === 'Landscape') ? 1.5 : 2"
         fit-view-on-init
-        :style="{backgroundColor: getBgColor(theme.global.current.value.dark)}"
+        :style="{ backgroundColor: getBgColor(theme.global.current.value.dark) }"
     >
       <template #node-clickable="props">
         <ClickableNode v-bind="props.data"/>
       </template>
       <template #node-category="props">
-        <CategoryNode v-bind="props.data" />
+        <CategoryNode v-bind="props.data"/>
       </template>
     </VueFlow>
-
   </v-card>
 </template>
 
 <style>
-
 </style>

@@ -50,13 +50,13 @@ export default {
     <v-menu activator="#menu-activator">
       <v-list>
         <v-list-item
-            v-for="(item, index) in items"
-            :key="index"
-            :value="item"
+          v-for="(item, index) in items"
+          :key="index"
+          :value="item"
+          @click="updateLang(item.title)"
+          class="text-center"
         >
-          <v-btn block @click="updateLang(item.title)" class="smaller-font">
-            {{ $t("languages." + item.title) }}
-          </v-btn>
+          {{ $t("languages." + item.title) }}
         </v-list-item>
       </v-list>
     </v-menu>
