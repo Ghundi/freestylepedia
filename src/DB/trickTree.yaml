@@ -1,0 +1,767 @@
+- - id: root
+    type: clickable
+    position:
+      x: 4500
+      y: 120
+    data:
+      label: root
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Sliding Headstand
+    type: clickable
+    position:
+      x: 7500
+      y: 0
+    data:
+      label: Sliding Headstand
+      orientation: 1
+      color: "#e03030"
+  - id: Kip-up
+    type: clickable
+    position:
+      x: 4500
+      y: 0
+    data:
+      label: Kip-up
+      orientation: 1
+      color: "#e03030"
+  - id: Butterfly
+    type: clickable
+    position:
+      x: 6000
+      y: 240
+    data:
+      label: Butterfly
+      orientation: 1
+      color: "#e03030"
+  - id: Tornadokick
+    type: clickable
+    position:
+      x: 6600
+      y: 190
+    data:
+      label: Tornadokick
+      orientation: 1
+      color: "#e03030"
+  - id: Axle-Kick
+    type: clickable
+    position:
+      x: 7500
+      y: 190
+    data:
+      label: Axle-Kick
+      orientation: 1
+      color: "#e03030"
+  - id: Backflip
+    type: clickable
+    position:
+      x: 7500
+      y: 290
+    data:
+      label: Backflip
+      orientation: 1
+      color: "#e03030"
+  - id: Brush
+    type: clickable
+    position:
+      x: 4500
+      y: 120
+    data:
+      label: Brush
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Forward Brush
+    type: clickable
+    position:
+      x: 5100
+      y: 120
+    data:
+      label: Forward Brush
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Sweep
+    type: clickable
+    position:
+      x: 4500
+      y: 240
+    data:
+      label: Sweep
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Sweep Spin
+    type: clickable
+    position:
+      x: 5100
+      y: 240
+    data:
+      label: Sweep Spin
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Inward Triangle
+    type: clickable
+    position:
+      x: 3000
+      y: 360
+    data:
+      label: Inward Triangle
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Inverted Drunken Sailor
+    type: clickable
+    position:
+      x: 4500
+      y: 360
+    data:
+      label: Inverted Drunken Sailor
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Grapevine
+    type: clickable
+    position:
+      x: 3000
+      y: 840
+    data:
+      label: Grapevine
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Drunken Sailor
+    type: clickable
+    position:
+      x: 4500
+      y: 590
+    data:
+      label: Drunken Sailor
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Inverted Grapevine
+    type: clickable
+    position:
+      x: 6000
+      y: 690
+    data:
+      label: Inverted Grapevine
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Double Grapevine
+    type: clickable
+    position:
+      x: 4500
+      y: 790
+    data:
+      label: Double Grapevine
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: "8"
+    type: clickable
+    position:
+      x: 4500
+      y: 890
+    data:
+      label: "8"
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Crazy Legs
+    type: clickable
+    position:
+      x: 3600
+      y: 990
+    data:
+      label: Crazy Legs
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Inverted Drunken Sailor
+    type: clickable
+    position:
+      x: 4500
+      y: 1090
+    data:
+      label: Inverted Drunken Sailor
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Insanity
+    type: clickable
+    position:
+      x: 3000
+      y: 0
+    data:
+      label: Insanity
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Inverse Compass
+    type: clickable
+    position:
+      x: 4500
+      y: 1200
+    data:
+      label: Inverse Compass
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Toe Donut
+    type: clickable
+    position:
+      x: 5100
+      y: 1200
+    data:
+      label: Toe Donut
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Shuffle
+    type: clickable
+    position:
+      x: 3000
+      y: 1320
+    data:
+      label: Shuffle
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Shuffle Side Step
+    type: clickable
+    position:
+      x: 4500
+      y: 1320
+    data:
+      label: Shuffle Side Step
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Jumped X
+    type: clickable
+    position:
+      x: 4500
+      y: 1440
+    data:
+      label: Jumped X
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Scissors
+    type: clickable
+    position:
+      x: 5100
+      y: 1440
+    data:
+      label: Scissors
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Scissors Moonwalk
+    type: clickable
+    position:
+      x: 6000
+      y: 1440
+    data:
+      label: Scissors Moonwalk
+      orientation: 1
+      color: rgba(151,0,197,0.48)
+  - id: Donut
+    type: clickable
+    position:
+      x: 1500
+      y: 1680
+    data:
+      label: Donut
+      orientation: 1
+      color: rgba(152,221,69,0.75)
+  - id: Point Freeze
+    type: clickable
+    position:
+      x: 4500
+      y: 1630
+    data:
+      label: Point Freeze
+      orientation: 1
+      color: rgba(152,221,69,0.75)
+  - id: Zulu Spin
+    type: clickable
+    position:
+      x: 3000
+      y: 1730
+    data:
+      label: Zulu Spin
+      orientation: 1
+      color: rgba(152,221,69,0.75)
+  - id: Handflip
+    type: clickable
+    position:
+      x: 4500
+      y: 1800
+    data:
+      label: Handflip
+      orientation: 1
+      color: rgba(152,221,69,0.75)
+  - id: Spiderman
+    type: clickable
+    position:
+      x: 6000
+      y: 360
+    data:
+      label: Spiderman
+      orientation: 1
+      color: rgba(6,187,211,0.78)
+  - id: Forward Spiderman
+    type: clickable
+    position:
+      x: 6600
+      y: 360
+    data:
+      label: Forward Spiderman
+      orientation: 1
+      color: rgba(6,187,211,0.78)
+  - id: Spiderman 180
+    type: clickable
+    position:
+      x: 7500
+      y: 360
+    data:
+      label: Spiderman 180
+      orientation: 1
+      color: rgba(6,187,211,0.78)
+  - id: Cannon
+    type: clickable
+    position:
+      x: 3000
+      y: 1920
+    data:
+      label: Cannon
+      orientation: 1
+      color: rgba(6,187,211,0.78)
+  - id: Couch Potato
+    type: clickable
+    position:
+      x: 6000
+      y: 1920
+    data:
+      label: Couch Potato
+      orientation: 1
+      color: rgba(6,187,211,0.78)
+  - id: Cantilever
+    type: clickable
+    position:
+      x: 7500
+      y: 480
+    data:
+      label: Cantilever
+      orientation: 1
+      color: rgba(6,187,211,0.78)
+  - id: "180"
+    type: clickable
+    position:
+      x: 3000
+      y: 2280
+    data:
+      label: "180"
+      orientation: 1
+      color: rgba(255,136,0,0.68)
+  - id: Groundtouch 180
+    type: clickable
+    position:
+      x: 4500
+      y: 2130
+    data:
+      label: Groundtouch 180
+      orientation: 1
+      color: rgba(255,136,0,0.68)
+  - id: Splitjump 180
+    type: clickable
+    position:
+      x: 4500
+      y: 2230
+    data:
+      label: Splitjump 180
+      orientation: 1
+      color: rgba(255,136,0,0.68)
+  - id: "720"
+    type: clickable
+    position:
+      x: 7500
+      y: 2330
+    data:
+      label: "720"
+      orientation: 1
+      color: rgba(255,136,0,0.68)
+  - id: Split jump
+    type: clickable
+    position:
+      x: 7500
+      y: 2430
+    data:
+      label: Split jump
+      orientation: 1
+      color: rgba(255,136,0,0.68)
+  - id: Compass
+    type: clickable
+    position:
+      x: 3000
+      y: 2640
+    data:
+      label: Compass
+      orientation: 1
+      color: rgba(23,35,255,0.53)
+  - id: Russian Twist
+    type: clickable
+    position:
+      x: 3600
+      y: 2590
+    data:
+      label: Russian Twist
+      orientation: 1
+      color: rgba(23,35,255,0.53)
+  - id: Head down
+    type: clickable
+    position:
+      x: 6000
+      y: 2690
+    data:
+      label: Head down
+      orientation: 1
+      color: rgba(23,35,255,0.53)
+  - id: 2 Feet Spin
+    type: clickable
+    position:
+      x: 1500
+      y: 2760
+    data:
+      label: 2 Feet Spin
+      orientation: 1
+      color: rgba(23,35,255,0.53)
+  - id: Pirouette
+    type: clickable
+    position:
+      x: 4500
+      y: 2760
+    data:
+      label: Pirouette
+      orientation: 1
+      color: rgba(23,35,255,0.53)
+  - id: Knee Spin
+    type: clickable
+    position:
+      x: 1500
+      y: 120
+    data:
+      label: Knee Spin
+      orientation: 1
+      color: rgba(23,35,255,0.53)
+  - id: Knee Stop
+    type: clickable
+    position:
+      x: 3000
+      y: 120
+    data:
+      label: Knee Stop
+      orientation: 1
+      color: rgba(23,35,255,0.53)
+  - id: Hockey Stop
+    type: clickable
+    position:
+      x: 1500
+      y: 3120
+    data:
+      label: Hockey Stop
+      orientation: 1
+      color: rgba(252,247,0,0.76)
+  - id: Outside Edge
+    type: clickable
+    position:
+      x: 4500
+      y: 2970
+    data:
+      label: Outside Edge
+      orientation: 1
+      color: rgba(252,247,0,0.76)
+  - id: Eagle Stop
+    type: clickable
+    position:
+      x: 5100
+      y: 2970
+    data:
+      label: Eagle Stop
+      orientation: 1
+      color: rgba(252,247,0,0.76)
+  - id: V-Stop
+    type: clickable
+    position:
+      x: 4500
+      y: 3070
+    data:
+      label: V-Stop
+      orientation: 1
+      color: rgba(252,247,0,0.76)
+  - id: Split-Stop (Heel Heel)
+    type: clickable
+    position:
+      x: 6000
+      y: 3070
+    data:
+      label: Split-Stop (Heel Heel)
+      orientation: 1
+      color: rgba(252,247,0,0.76)
+  - id: Hawk Stop
+    type: clickable
+    position:
+      x: 4500
+      y: 3170
+    data:
+      label: Hawk Stop
+      orientation: 1
+      color: rgba(252,247,0,0.76)
+  - id: Split-Stop (Heel-Toe)
+    type: clickable
+    position:
+      x: 6000
+      y: 3270
+    data:
+      label: Split-Stop (Heel-Toe)
+      orientation: 1
+      color: rgba(252,247,0,0.76)
+  - id: Plank
+    type: clickable
+    position:
+      x: 3000
+      y: 240
+    data:
+      label: Plank
+      orientation: 1
+      color: rgba(252,247,0,0.76)
+  - id: Difficulty 1
+    type: difficulty
+    position:
+      x: 1500
+      y: -200
+    data:
+      label: "1"
+  - id: Difficulty 2
+    type: difficulty
+    position:
+      x: 3000
+      y: -200
+    data:
+      label: "2"
+  - id: Difficulty 3
+    type: difficulty
+    position:
+      x: 4500
+      y: -200
+    data:
+      label: "3"
+  - id: Difficulty 4
+    type: difficulty
+    position:
+      x: 6000
+      y: -200
+    data:
+      label: "4"
+  - id: Difficulty 5
+    type: difficulty
+    position:
+      x: 7500
+      y: -200
+    data:
+      label: "5"
+- - id: Butterfly->Tornadokick
+    source: Butterfly
+    target: Tornadokick
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Tornadokick->Axle-Kick
+    source: Tornadokick
+    target: Axle-Kick
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Butterfly->Backflip
+    source: Butterfly
+    target: Backflip
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Brush->Forward Brush
+    source: Brush
+    target: Forward Brush
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Sweep->Sweep Spin
+    source: Sweep
+    target: Sweep Spin
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Inward Triangle->Inverted Drunken Sailor
+    source: Inward Triangle
+    target: Inverted Drunken Sailor
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Grapevine->Drunken Sailor
+    source: Grapevine
+    target: Drunken Sailor
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Grapevine->Inverted Grapevine
+    source: Grapevine
+    target: Inverted Grapevine
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Grapevine->Double Grapevine
+    source: Grapevine
+    target: Double Grapevine
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Grapevine->8
+    source: Grapevine
+    target: "8"
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Grapevine->Crazy Legs
+    source: Grapevine
+    target: Crazy Legs
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Grapevine->Inverted Drunken Sailor
+    source: Grapevine
+    target: Inverted Drunken Sailor
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Inverse Compass->Toe Donut
+    source: Inverse Compass
+    target: Toe Donut
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Shuffle->Shuffle Side Step
+    source: Shuffle
+    target: Shuffle Side Step
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Jumped X->Scissors
+    source: Jumped X
+    target: Scissors
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Scissors->Scissors Moonwalk
+    source: Scissors
+    target: Scissors Moonwalk
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Donut->Point Freeze
+    source: Donut
+    target: Point Freeze
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Donut->Zulu Spin
+    source: Donut
+    target: Zulu Spin
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Spiderman->Forward Spiderman
+    source: Spiderman
+    target: Forward Spiderman
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Forward Spiderman->Spiderman 180
+    source: Forward Spiderman
+    target: Spiderman 180
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Cannon->Couch Potato
+    source: Cannon
+    target: Couch Potato
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: 180->Groundtouch 180
+    source: "180"
+    target: Groundtouch 180
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: 180->Splitjump 180
+    source: "180"
+    target: Splitjump 180
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: 180->720
+    source: "180"
+    target: "720"
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: 180->Split jump
+    source: "180"
+    target: Split jump
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Compass->Russian Twist
+    source: Compass
+    target: Russian Twist
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Compass->Head down
+    source: Compass
+    target: Head down
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: 2 Feet Spin->Pirouette
+    source: 2 Feet Spin
+    target: Pirouette
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Knee Spin->Knee Stop
+    source: Knee Spin
+    target: Knee Stop
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Hockey Stop->Outside Edge
+    source: Hockey Stop
+    target: Outside Edge
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Outside Edge->Eagle Stop
+    source: Outside Edge
+    target: Eagle Stop
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Hockey Stop->V-Stop
+    source: Hockey Stop
+    target: V-Stop
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: V-Stop->Split-Stop (Heel Heel)
+    source: V-Stop
+    target: Split-Stop (Heel Heel)
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Hockey Stop->Hawk Stop
+    source: Hockey Stop
+    target: Hawk Stop
+    style:
+      stroke: black
+      strokeWidth: 3
+  - id: Hockey Stop->Split-Stop (Heel-Toe)
+    source: Hockey Stop
+    target: Split-Stop (Heel-Toe)
+    style:
+      stroke: black
+      strokeWidth: 3

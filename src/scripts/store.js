@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia';
-import tricksYAML from "../DB/freestylepedia.yaml";
+import fs from 'fs';
+import yaml from 'js-yaml';
 
 import {graphSearch, getNodeIdxById, getSpaceIdx, checkSpace, trickToNode} from "./helpers.js"
 
@@ -120,7 +121,7 @@ export const useVideoStore = defineStore('videoStore', {
         newestTrick: null,
     }),
     actions: {
-        loadYAML() {
+        loadYAML(tricksYAML) {
             const tricks = [];
             for (let i = 0; i < tricksYAML["tricks"].length; i++) {
                 const j = i + 1;
@@ -173,7 +174,7 @@ export const useVideoStore = defineStore('videoStore', {
             }
             return res.flat();
         },
-        getConnectionsGraph(state, orientation) {
+        getConnectionsGraph(state, trickYAML, orientation) {
             // compute full graph for positioning
             let graph= [{name: "Categories", children: []}];
             const categoryStore = useCategoryStore();
@@ -182,7 +183,7 @@ export const useVideoStore = defineStore('videoStore', {
             for (let i = 0; i < categories.length; i++) {
                 graph[0].children.push({name: categories[i], children: []});
             }
-            let videos = state.loadYAML()
+            let videos = state.loadYAML(trickYAML)
             let visitedIDs = [];
             for (let i = 0; i < videos.length; i++) {
                 if(!visitedIDs.includes(videos[i].trickID)) {
@@ -274,12 +275,12 @@ export const useVideoStore = defineStore('videoStore', {
 
             return [nodes, edges];
         },
-        getTrickTreeGraph(state, orientation) {
+        getTrickTreeGraph(state, trickYAML, orientation) {
             // generate base graph
             let graph= [{name: "root", children: []}];
             let visitedIDs = [];
             let i = 0;
-            let videos = state.loadYAML();
+            let videos = state.loadYAML(trickYAML);
             videos.sort((a, b) => {
                 if (a.category < b.category) {
                     return -1;  // a comes before b
@@ -407,12 +408,6 @@ export const useVideoStore = defineStore('videoStore', {
                             color: categoryStore.getColor(trick.category)
                         }});
                 }
-                // difficulty markers
-                for (let j = 1; j <= 5; j++) {
-                    nodes.push({id: 'Difficulty ' + j.toString(), type: 'difficulty', position: {x: j * difficultySpacing * xScaleFactor, y: -200}, data: {
-                        label: j.toString(),
-                        }})
-                }
                 // calculate conversion recursively
                 for (let i = 0; i < g_node.children.length; i++) {
                     const [t_nodes, t_edges] = convGraph(nodes, edges, nodes[getNodeIdxById(g_node.name, nodes)], g_node.children[i], g_node)
@@ -428,8 +423,14 @@ export const useVideoStore = defineStore('videoStore', {
             const difficultySpacing = 1500;
             const xScaleFactor = (orientation === 'Portrait') ? 0.7 : 1;
             const categoryStore = useCategoryStore();
+            [nodes, edges] = convGraph(nodes, edges, null, graph[0], null);
 
-            [nodes, edges] = convGraph(nodes, edges, null, graph[0], null)
+            // difficulty markers
+            for (let j = 1; j <= 5; j++) {
+                nodes.push({id: 'Difficulty ' + j.toString(), type: 'difficulty', position: {x: j * difficultySpacing * xScaleFactor, y: -200}, data: {
+                        label: j.toString(),
+                    }})
+            }
 
 
             return [nodes, edges];

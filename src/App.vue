@@ -2,6 +2,7 @@
 import NavBar from "@/components/navBar.vue";
 import 'vuetify/styles';
 import {useVideoStore} from "@/scripts/store.js";
+import tricksYAML from './DB/freestylepedia.yaml';
 import Footer from "@/components/footer.vue"
 import { useTheme } from 'vuetify'
 import { getBgColor } from "@/scripts/helpers.js";
@@ -9,7 +10,7 @@ import { getBgColor } from "@/scripts/helpers.js";
 const theme = useTheme()
 
 const videoStore = useVideoStore();
-videoStore.videos = videoStore.loadYAML();
+videoStore.videos = videoStore.loadYAML(tricksYAML);
 </script>
 
 

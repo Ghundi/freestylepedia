@@ -25,9 +25,6 @@ const theme = useTheme()
 </script>
 
 <template>
-  <Handle type="source" :position="getPosition(props.orientation)" style="opacity: 0" />
-  <Handle type="target" :position="getPosition(props.orientation)" style="opacity: 0" />
-
   <!-- Make the container non-interactive -->
   <div class="rounded" :style="{
     'font-size': (getOrientation() === 'Portrait') ? '20px' : '40px',
@@ -62,7 +59,6 @@ const theme = useTheme()
   right: 1000px;
   border-left: 1px solid black;
   height: 4000px;
-  opacity: 0.1;
   pointer-events: none; /* Ensure clicks pass through this element */
 }
 </style>

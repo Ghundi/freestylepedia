@@ -9,14 +9,15 @@ import ClickableNode from '../components/mindMap/ClickableNode.vue'
 import CategoryNode from '../components/mindMap/CategoryNode.vue'
 
 const videoStore = useVideoStore();
+import tricksYAML from '../DB/freestylepedia.yaml';
 
 function getOrientation(){
   return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
 }
 
-const graph = videoStore.getConnectionsGraph(videoStore, getOrientation())
+const graph = videoStore.getConnectionsGraph(videoStore, tricksYAML, getOrientation());
 
-const theme = useTheme()
+const theme = useTheme();
 
 </script>
 

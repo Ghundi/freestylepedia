@@ -19,7 +19,7 @@ import messages from "@intlify/unplugin-vue-i18n/messages";
 import {createPinia} from "pinia";
 
 // routing
-import {createRouter, createWebHistory} from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router';
 
 const routes = [
     { path: '/', component: () => import('./pages/VideoList.vue') },

@@ -1,7 +1,7 @@
 <script setup>
 import {VueFlow} from '@vue-flow/core'
 
-import {useVideoStore} from "@/scripts/store.js";
+import trickTreeYaml from '../DB/trickTree.yaml';
 
 import { useTheme } from 'vuetify'
 import { getBgColor } from "@/scripts/helpers.js";
@@ -10,12 +10,9 @@ import ClickableNode from '../components/mindMap/ClickableNode.vue'
 import CategoryNode from '../components/mindMap/CategoryNode.vue'
 import DifficultyNode from '../components/mindMap/DifficultyNode.vue'
 
-const videoStore = useVideoStore();
-
 function getOrientation(){
   return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
 }
-const graph = videoStore.getTrickTreeGraph(videoStore, getOrientation())
 
 const theme = useTheme()
 </script>
@@ -36,8 +33,8 @@ const theme = useTheme()
     </v-card-text>
 
     <VueFlow
-        :nodes="graph[0]"
-        :edges="graph[1]"
+        :nodes="trickTreeYaml[0]"
+        :edges="trickTreeYaml[1]"
         :nodes-draggable="false"
         :nodes-connectable="false"
         :pan-on-drag="true"
@@ -50,7 +47,7 @@ const theme = useTheme()
         :default-viewport="{ zoom: 1 }"
         :translate-extent="[
           [0, -200],
-          [(getOrientation() === 'Landscape') ? 9000 : 7000, 5000],
+          [9000, 5000],
         ]"
         :min-zoom="(getOrientation() === 'Landscape') ? 0.2 : 0.05"
         :max-zoom="1"
