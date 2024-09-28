@@ -1,7 +1,8 @@
 <script setup>
 import VideoCard from '../components/VideoCard.vue';
 import Toolbar from "@/components/Toolbar/Toolbar.vue";
-import {useSelSortingOrderStore, useVideoStore} from "@/scripts/store.js";
+import {useSelSortingOrderStore} from "@/scripts/store.js";
+import {useVideoStore} from "@/scripts/videoStore.js";
 
 const videoStore = useVideoStore();
 const selSortingOrderStore = useSelSortingOrderStore();

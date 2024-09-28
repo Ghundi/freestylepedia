@@ -6,7 +6,8 @@ const videoStore = useVideoStore();
 </script>
 
 <script>
-import { useVideoStore ,useCurSearchStore } from "@/scripts/store.js";
+import { useCurSearchStore } from "@/scripts/store.js";
+import { useVideoStore} from "@/scripts/videoStore.js";
 
 export default {
   data: () => ({

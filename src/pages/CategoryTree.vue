@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { VueFlow } from '@vue-flow/core';
-import { useVideoStore } from "@/scripts/store.js";
+import { useVideoStore } from "@/scripts/videoStore.js";
 import { useTheme } from "vuetify";
 import { getBgColor } from "@/scripts/helpers.js";
 
@@ -14,7 +14,7 @@ function getOrientation() {
   return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
 }
 
-const graph = ref(videoStore.getConnectionsGraph(videoStore, getOrientation()));
+const graph = ref(videoStore.categoryTree);
 const theme = useTheme();
 
 // Function to set edge color dynamically based on theme
@@ -40,6 +40,7 @@ watch(() => theme.global.current.value.dark, () => {
       width="90%"
       height="90vh"
       :style="{ backgroundColor: getBgColor(theme.global.current.value.dark) }"
+      v-once
   >
     <v-card-title class="font-weight-bold">
       {{ $t("navBar.categoryTree") }}
