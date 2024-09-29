@@ -76,5 +76,9 @@
   "requirements": "Requirements",
   "otherTutorials": "Other Tutorials",
   "noResults": "We couldn't find any tricks",
-  "noResultsSuggestions": "Try adjusting your search term or filters. Sometimes less specific terms or broader queries can help you find what you're looking for."
+  "noResultsSuggestions": "Try adjusting your search term or filters. Sometimes less specific terms or broader queries can help you find what you're looking for.",
+  "pageNotFound": "Page not found",
+  "pageNotFoundSuggestion": "Maybe you spelled something wrong",
+  "trickNotFound": "Trick not found",
+  "trickNotFoundSuggestion": "Maybe the trick in the URL is spelled wrong. Only the name of the YouTube Thumbnail is valid."
 }

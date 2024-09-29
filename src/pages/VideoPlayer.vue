@@ -24,17 +24,11 @@ function getTrickNames(id_list) {
   return res;
 }
 
-const trick = videoStore.getTrickByTitle(useRoute().params.trickname, videoStore)
+const trick = videoStore.getTrickByTitle(useRoute().params.trickname, videoStore);
 </script>
 
 <script>
 export default {
-  methods: {
-    onEscapePressed() {
-      // Function to be executed when escape is pressed
-      console.log('Escape key pressed');
-    }
-  },
   mounted() {
     // Ensure the div is focusable to capture key events
     this.$el.focus();
@@ -46,7 +40,22 @@ function hasHistory () {
 </script>
 
 <template>
-  <div class="text-center mt-2" @keyup.esc="hasHistory()
+  <div
+      v-if="trick === -1"
+      v-once>
+    <div class="text-center pa-5 ma-15">
+      <v-empty-state
+          icon="mdi-alert-circle-outline"
+          :text="$t('trickNotFoundSuggestion')"
+          :title="$t('trickNotFound')"
+      ></v-empty-state>
+    </div>
+  </div>
+  <div
+      v-else
+      v-once
+      class="text-center mt-2"
+      @keyup.esc="hasHistory()
             ? $router.back()
             : $router.push('/')" tabindex="0">
     <v-btn

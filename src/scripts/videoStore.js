@@ -46,8 +46,7 @@ export const useVideoStore = defineStore('videoStore', {
                     return state.videos[i];
                 }
             }
-            console.log(`${ trickID } could not be found`)
-            return state.videos[0];
+            return -1;
         },
         getTrickByTitle(trickTitle, state) {
             for (let i = 0; i < state.videos.length; i++) {
@@ -55,7 +54,7 @@ export const useVideoStore = defineStore('videoStore', {
                     return state.videos[i];
                 }
             }
-            return state.videos[0];
+            return -1;
         },
         getTitles(state) {
             let res = [];
@@ -286,10 +285,10 @@ export const useVideoStore = defineStore('videoStore', {
                         target: g_node.name,
                         style: { stroke: 'black', strokeWidth: 3}});
                 }
-                else {
+                else if(g_node.name !== 'root') {
                     // root nodes
                     const trick = state.getTrickByTitle(g_node.name, state)
-                    // find node in space allocation array
+                        // find node in space allocation array
                     const y = getSpaceIdx(trick.title[0], spaces)
                     nodes.push({
                         id: g_node.name,

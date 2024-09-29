@@ -27,7 +27,7 @@ function getPosition(orientation) {
   <Handle type="source" :position="getPosition(props.orientation)" style="opacity: 0" />
   <Handle type="target" :position="getPosition((props.orientation + 2) % 4)" style="opacity: 0" />
   <v-btn
-      @click="$router.push('/' + props.label)"
+      @click="$router.push('/trick/' + props.label)"
       variant="elevated"
       rounded="xl"
       min-width="200px"

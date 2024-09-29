@@ -27,7 +27,7 @@ function getLocalDate(date, locale) {
             height="10em"
             class="videoCard"
             :style =  "{'box-shadow': `0px 0px 8px 2px ${categoryStore.getColor(category)}`}"
-            :to="'/' + title[0]"
+            :to="'/trick/' + title[0]"
         >
           <v-img
               :src="thumbnailUrl"
