@@ -42,10 +42,14 @@ watch(() => theme.global.current.value.dark, () => {
       :style="{ backgroundColor: getBgColor(theme.global.current.value.dark) }"
       v-once
   >
-    <v-card-title class="font-weight-bold">
+    <v-card-title
+        class="font-weight-bold"
+        :style="{ backgroundColor: getBgColor(theme.global.current.value.dark) }">
       {{ $t("navBar.categoryTree") }}
     </v-card-title>
-    <v-card-text class="text-center pa-2">
+    <v-card-text
+        class="text-center pa-2"
+        :style="{ backgroundColor: getBgColor(theme.global.current.value.dark) }">
       {{ $t('categoryTree.description') }}
     </v-card-text>
 
@@ -81,5 +85,8 @@ watch(() => theme.global.current.value.dark, () => {
   </v-card>
 </template>
 
-<style>
+<style scoped>
+.bg-color {
+  background-color: v-bind(getBgColor(theme.global.current.value.dark));
+}
 </style>

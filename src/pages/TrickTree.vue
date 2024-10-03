@@ -43,10 +43,14 @@ watch(() => theme.global.current.value.dark, () => {
       :style="{backgroundColor: getBgColor(theme.global.current.value.dark)}"
       v-once
   >
-    <v-card-title class="font-weight-bold">
+    <v-card-title
+        class="font-weight-bold"
+        :style="{ backgroundColor: getBgColor(theme.global.current.value.dark) }">
       {{ $t("navBar.trickTree") }}
     </v-card-title>
-    <v-card-text class="text-center pa-2">
+    <v-card-text
+        class="text-center pa-2"
+        :style="{ backgroundColor: getBgColor(theme.global.current.value.dark) }">
       {{ $t('trickTree.description') }}
     </v-card-text>
 

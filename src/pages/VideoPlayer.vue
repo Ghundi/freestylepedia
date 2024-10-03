@@ -92,7 +92,7 @@ function hasHistory () {
         <v-card class="pa-3" elevation="5">
           <p class="font-weight-bold">{{ $t('similarTricks') }}:</p>
           <template v-for="name in getTrickNames(trick.connections, videoStore)">
-            <v-btn :to="'/' + name" variant="flat" class="ma-2">
+            <v-btn :to="'/trick/' + name" variant="flat" class="ma-2">
               {{ name }}
             </v-btn>
           </template>
@@ -103,7 +103,7 @@ function hasHistory () {
           <p class="font-weight-bold">{{ $t('requirements') }}:</p>
           <template v-for="r_name in getTrickNames(trick.requirements, videoStore)">
             <v-btn
-              @click="$router.push('/' + r_name)" variant="flat" class="ma-2">
+              @click="$router.push('/trick/' + r_name)" variant="flat" class="ma-2">
               {{ r_name }}
             </v-btn>
           </template>
