@@ -3,7 +3,7 @@ tricks:
 #   names (Array of names)
 #   YouTube IDs (just ID)
 #   difficulty (0-5)
-#   category (lowercase)
+#   category ("Footwork", "Stop", "Ground", "Acrobatic", "Spin")
 #   release Date (YYYY-MM-DD)
 #   requirements (hard -> easy)
 #   connections (bidirectional, base before variant)
@@ -455,5 +455,13 @@ tricks:
     - "2022-03-25"
     - []
     - []
+- trick0057:
+    - ["Inward Toe Stop"]
+    - ["A_OCR2JXLhc"]
+    - 5
+    - "Stop"
+    - "2024-10-11"
+    - [trick0005]
+    - [trick0030, trick0005, trick0026]
 
   
