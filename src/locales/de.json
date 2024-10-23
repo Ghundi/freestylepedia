@@ -43,7 +43,8 @@
   "footer": {
     "help": "Hilfe",
     "language": "Sprache",
-    "byBlackbirdAndMISG": "von Blackbird und MISG"
+    "byBlackbirdAndMISG": "von Blackbird und MISG",
+    "supportedBy": "supported by"
   },
   "sortOptions": {
     "difficultyDown": "Schwierigkeit (Schwer - Leicht)",

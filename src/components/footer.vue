@@ -1,32 +1,38 @@
 <script setup>
 import WebpageIcon from "@/components/WebpageIcon.vue";
+import Blackbird from "../assets/blackbirdIcon.png"
+import MISG from "../assets/MISG-white-Icon.png"
+</script>
+
+<script>
 import AIF from "../assets/supporters/aif w.png";
 import GlobalIce from '../assets/supporters/GlobalIce.png';
 import IFO from "../assets/supporters/Logo_IFO_schwarz.webp";
 import MunichEast from "../assets/supporters/RZ_freestyler_Logo_1-2.jpg";
-</script>
-
-<script>
-
+import Turtle from "../assets/supporters/Turtle_upscaled.jpg"
 export default {
   data() {
     return {
       images: [
         {
+          src: AIF,
+          link: 'https://www.youtube.com/@AlpineIceFreestyle'
+        },
+        {
           src: IFO,
-          link: ''
+          link: 'https://www.instagram.com/icefreestyleroffenburg'
         },
         {
           src: GlobalIce,
-          link: ''
-        },
-        {
-          src: AIF,
-          link: ''
+          link: 'https://www.instagram.com/globaliceskate'
         },
         {
           src: MunichEast,
-          link: ''
+          link: 'https://www.youtube.com/@ice.freestyler.muenchen-ost'
+        },
+        {
+          src: Turtle,
+          link: 'https://www.instagram.com/turtlestyleofficial'
         },
       ]
     };
@@ -71,13 +77,36 @@ export default {
         <small>
           {{ $t("footer.byBlackbirdAndMISG") }}
         </small>
-      <br>
-      <br>
+        <v-container>
+          <v-row justify="center">
+            <v-col cols="auto">
+              <v-avatar size="50">
+                <v-img
+                    contain
+                    :src="MISG"
+                    aspect-ratio="1"
+                    alt="MISG Logo"
+                ></v-img>
+              </v-avatar>
+            </v-col>
+            <v-col cols="auto">
+              <v-avatar size="50">
+                <v-img
+                    contain
+                    :src="Blackbird"
+                    aspect-ratio="1"
+                    alt="Blackbird Logo"
+                ></v-img>
+              </v-avatar>
+            </v-col>
+          </v-row>
+        </v-container>
         <p class="supporters">
-          supported by
+          {{ $t('footer.supportedBy') }}
           <v-container>
             <v-row justify="center">
               <v-col cols="auto" v-for="(image, index) in images" :key="index">
+                <a :href="image.link" target="_blank">
                 <v-avatar size="50">
                   <v-img
                       contain
@@ -86,6 +115,7 @@ export default {
                       alt="Supporter Logo"
                   ></v-img>
                 </v-avatar>
+                </a>
               </v-col>
             </v-row>
           </v-container>
