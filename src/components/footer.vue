@@ -1,8 +1,37 @@
 <script setup>
 import WebpageIcon from "@/components/WebpageIcon.vue";
+import AIF from "../assets/supporters/aif w.png";
+import GlobalIce from '../assets/supporters/GlobalIce.png';
+import IFO from "../assets/supporters/Logo_IFO_schwarz.webp";
+import MunichEast from "../assets/supporters/RZ_freestyler_Logo_1-2.jpg";
 </script>
 
 <script>
+
+export default {
+  data() {
+    return {
+      images: [
+        {
+          src: IFO,
+          link: ''
+        },
+        {
+          src: GlobalIce,
+          link: ''
+        },
+        {
+          src: AIF,
+          link: ''
+        },
+        {
+          src: MunichEast,
+          link: ''
+        },
+      ]
+    };
+  }
+};
 
 </script>
 
@@ -36,13 +65,37 @@ import WebpageIcon from "@/components/WebpageIcon.vue";
         {{ $t("footer.help") }}
       </v-btn>
     </div>
-    <div class="px-4 py-2 bg-black text-center w-100">
+    <div class="px-4 py-2 text-center w-100">
       {{ new Date().getFullYear() }} — <strong>Freestylepedia</strong>
       <br>
-      <small>{{ $t("footer.byBlackbirdAndMISG") }}</small>
+        <small>
+          {{ $t("footer.byBlackbirdAndMISG") }}
+        </small>
+      <br>
+      <br>
+        <p class="supporters">
+          supported by
+          <v-container>
+            <v-row justify="center">
+              <v-col cols="auto" v-for="(image, index) in images" :key="index">
+                <v-avatar size="50">
+                  <v-img
+                      contain
+                      :src="image.src"
+                      aspect-ratio="1"
+                      alt="Supporter Logo"
+                  ></v-img>
+                </v-avatar>
+              </v-col>
+            </v-row>
+          </v-container>
+        </p>
     </div>
   </v-footer>
 </template>
 
 <style scoped>
+.supporters {
+  font-size: 0.8em;
+}
 </style>

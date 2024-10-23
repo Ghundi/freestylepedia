@@ -63,21 +63,6 @@ const members = useMembers().val
               </v-col>
             </v-row>
           </v-container>
-          <v-card-title>{{ $t('aboutUs.members') }}</v-card-title>
-          <v-container>
-            <v-row>
-              <v-col>
-                <v-list-item v-for="name in members.slice(0, members.length / 2)">
-                  <v-list-item-title>- {{ name }}</v-list-item-title>
-                </v-list-item>
-              </v-col>
-              <v-col>
-                <v-list-item v-for="name in members.slice(members.length / 2)">
-                  <v-list-item-title>- {{ name }}</v-list-item-title>
-                </v-list-item>
-              </v-col>
-            </v-row>
-          </v-container>
           {{ $t('aboutUs.findUs') }}
           <WebpageIcon
               page="https://www.instagram.com/blackbird_ice_freestyle"
