@@ -6,6 +6,7 @@ import GlobalIce from '../assets/supporters/GlobalIce.png';
 import IFO from "../assets/supporters/Logo_IFO_schwarz.webp";
 import MunichEast from "../assets/supporters/RZ_freestyler_Logo_1-2.jpg";
 import Turtle from "../assets/supporters/Turtle_upscaled.jpg"
+import NK from "../assets/supporters/nagyerdei korisok.jpg"
 
 export const useFAQ = defineStore('FAQ', {
     state: () => {
@@ -33,6 +34,10 @@ export const useSupporters = defineStore('supporters', {
                 {
                     imgSrc: MunichEast,
                     link: 'https://www.youtube.com/@ice.freestyler.muenchen-ost'
+                },
+                {
+                    imgSrc: NK,
+                    link: 'https://www.youtube.com/@NagyerdeiKorisok'
                 },
                 {
                     imgSrc: Turtle,
