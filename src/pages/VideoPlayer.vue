@@ -71,7 +71,18 @@ function hasHistory () {
     </v-btn>
     <v-container>
       <v-row>
-        <iframe class="responsive-iframe" :src="getEmbedURL(trick.id[0])" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe
+            class="responsive-iframe"
+            :src="getEmbedURL(trick.id[0])"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            name="Freestylepedia Video"
+        ></iframe>
+
+        <noframes>
+          Here should be the Freestylepedia Video for {{ trick.title[0] }}
+        </noframes>
       </v-row>
      <v-row >
       <v-col v-for="title in trick.title">

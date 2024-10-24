@@ -2,42 +2,11 @@
 import WebpageIcon from "@/components/WebpageIcon.vue";
 import Blackbird from "../assets/blackbirdIcon.png"
 import MISG from "../assets/MISG-white-Icon.png"
+import { useSupporters} from "@/scripts/store.js";
+const supporters = useSupporters().images
 </script>
 
 <script>
-import AIF from "../assets/supporters/aif w.png";
-import GlobalIce from '../assets/supporters/GlobalIce.png';
-import IFO from "../assets/supporters/Logo_IFO_schwarz.webp";
-import MunichEast from "../assets/supporters/RZ_freestyler_Logo_1-2.jpg";
-import Turtle from "../assets/supporters/Turtle_upscaled.jpg"
-export default {
-  data() {
-    return {
-      images: [
-        {
-          src: AIF,
-          link: 'https://www.youtube.com/@AlpineIceFreestyle'
-        },
-        {
-          src: IFO,
-          link: 'https://www.instagram.com/icefreestyleroffenburg'
-        },
-        {
-          src: GlobalIce,
-          link: 'https://www.instagram.com/globaliceskate'
-        },
-        {
-          src: MunichEast,
-          link: 'https://www.youtube.com/@ice.freestyler.muenchen-ost'
-        },
-        {
-          src: Turtle,
-          link: 'https://www.instagram.com/turtlestyleofficial'
-        },
-      ]
-    };
-  }
-};
 
 </script>
 
@@ -105,16 +74,16 @@ export default {
           {{ $t('footer.supportedBy') }}
           <v-container>
             <v-row justify="center">
-              <v-col cols="auto" v-for="(image, index) in images" :key="index">
-                <a :href="image.link" target="_blank">
-                <v-avatar size="50">
-                  <v-img
-                      contain
-                      :src="image.src"
-                      aspect-ratio="1"
-                      alt="Supporter Logo"
-                  ></v-img>
-                </v-avatar>
+              <v-col cols="auto" v-for="(team, index) in supporters" :key="index">
+                <a :href="team.link" target="_blank">
+                  <v-avatar size="50">
+                    <v-img
+                        contain
+                        :src="team.imgSrc"
+                        aspect-ratio="1"
+                        alt="Supporter Logo"
+                    ></v-img>
+                  </v-avatar>
                 </a>
               </v-col>
             </v-row>

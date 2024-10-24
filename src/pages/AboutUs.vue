@@ -1,10 +1,8 @@
 <script setup>
-import {useMembers} from "@/scripts/store.js";
 import BlackbirdLogo from "@/assets/blackbirdIconInverted.png"
 import MISGLogo from "@/assets/MISG-Icon.png"
 import WebpageIcon from "@/components/WebpageIcon.vue";
 
-const members = useMembers().val
 </script>
 
 <template>

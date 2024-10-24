@@ -1,5 +1,11 @@
 import {defineStore} from 'pinia';
 
+// suporter logos
+import AIF from "../assets/supporters/aif w.png";
+import GlobalIce from '../assets/supporters/GlobalIce.png';
+import IFO from "../assets/supporters/Logo_IFO_schwarz.webp";
+import MunichEast from "../assets/supporters/RZ_freestyler_Logo_1-2.jpg";
+import Turtle from "../assets/supporters/Turtle_upscaled.jpg"
 
 export const useFAQ = defineStore('FAQ', {
     state: () => {
@@ -8,10 +14,31 @@ export const useFAQ = defineStore('FAQ', {
         }
     },
 })
-export const useMembers = defineStore('members', {
+export const useSupporters = defineStore('supporters', {
     state: () => {
         return {
-            val: ['Matti', 'Niklas', 'Alex', 'Basti', 'Danny' , 'Eduard', 'Lena' , 'Markus', 'Vio'],
+            images: [
+                {
+                    imgSrc: AIF,
+                    link: 'https://www.youtube.com/@AlpineIceFreestyle'
+                },
+                {
+                    imgSrc: IFO,
+                    link: 'https://www.instagram.com/icefreestyleroffenburg'
+                },
+                {
+                    imgSrc: GlobalIce,
+                    link: 'https://www.instagram.com/globaliceskate'
+                },
+                {
+                    imgSrc: MunichEast,
+                    link: 'https://www.youtube.com/@ice.freestyler.muenchen-ost'
+                },
+                {
+                    imgSrc: Turtle,
+                    link: 'https://www.instagram.com/turtlestyleofficial'
+                },
+            ]
         }
     },
 })
