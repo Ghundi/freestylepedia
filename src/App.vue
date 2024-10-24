@@ -20,6 +20,11 @@ videoStore.trickTree = videoStore.getTrickTreeGraph(videoStore, getOrientation()
 
 
 <template>
+  <head>
+    This is a website where you can learn ice freestyle tricks and moves.
+    You can learn about all of them here and see the connections between them.
+    It is the page for the freestylepedia youtube series from Blackbirds Ice Freestyle.
+  </head>
   <v-app>
     <nav-bar/>
     <br>
