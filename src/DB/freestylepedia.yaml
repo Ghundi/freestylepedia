@@ -472,7 +472,7 @@ tricks:
     - [trick0013]
     - []
 - trick0059:
-    - ["B-Twist", "Butterflytwist"]
+    - ["B-Twist", "Butterflytwist", "BTwist", "B Twist"]
     - ["PlfMsc67YCM"]
     - 5
     - "Acrobatic"
@@ -488,7 +488,7 @@ tricks:
     - [trick0004]
     - []
 - trick0061:
-    - ["Kneekick"]
+    - ["Knee Kick"]
     - ["2MfvW-CmLI0"]
     - 2
     - "Footwork"
