@@ -147,11 +147,13 @@ function hasHistory () {
           </v-container>
         </template>
       </v-row>
+      <!--
       <v-row>
         <v-col>
           <ShareDial/>
         </v-col>
       </v-row>
+      -->
     </v-container>
   </div>
 </template>
