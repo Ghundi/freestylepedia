@@ -1,6 +1,7 @@
 <script setup>
 import {useVideoStore} from "@/scripts/videoStore.js";
 import { useRoute } from "vue-router";
+import ShareDial from "@/components/shareDial.vue";
 
 const videoStore = useVideoStore()
 
@@ -84,67 +85,74 @@ function hasHistory () {
           Here should be the Freestylepedia Video for {{ trick.title[0] }}
         </noframes>
       </v-row>
-     <v-row >
-      <v-col v-for="title in trick.title">
-        {{title}}
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <v-card class="pa-3" elevation="5">
-          <p class="font-weight-bold">{{ $t('difficulty') }}:</p>
-           {{ trick.difficulty }}
-          <br>
-          <p class="font-weight-bold">{{ $t('category') }}:</p>
-          {{ $t('categories.' + trick.category) }}
-        </v-card>
-      </v-col>
-      <v-col v-if="trick.connections.length > 0">
-        <v-card class="pa-3" elevation="5">
-          <p class="font-weight-bold">{{ $t('similarTricks') }}:</p>
-          <template v-for="name in getTrickNames(trick.connections, videoStore)">
-            <v-btn :to="'/trick/' + name" variant="flat" class="ma-2">
-              {{ name }}
-            </v-btn>
-          </template>
-        </v-card>
-      </v-col>
-      <v-col v-if="trick.requirements.length > 0">
-        <v-card class="pa-3" elevation="5">
-          <p class="font-weight-bold">{{ $t('requirements') }}:</p>
-          <template v-for="r_name in getTrickNames(trick.requirements, videoStore)">
-            <v-btn
-              @click="$router.push('/trick/' + r_name)" variant="flat" class="ma-2">
-              {{ r_name }}
-            </v-btn>
-          </template>
-        </v-card>
-      </v-col>
-      <template v-if="trick.id.length > 1">
-        <v-container>
-          <v-row>
-            <v-col>
-              <p class="font-weight-bold">{{ $t('otherTutorials') }}:</p>
-            </v-col>
-          </v-row>
-          <v-row justify="center" align="center">
-            <v-col
-                v-for="video in trick.id.slice(1)"
-                :key="video"
-                cols="auto"
-            >
-            <v-card elevation="3" width="150px">
-              <v-img
-                  :src="getThumbnailUrl(video)"
-                  v-on:click="openVideo(video)"
-              />
-            </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
-      </template>
-    </v-row>
-  </v-container>
+      <v-row >
+        <v-col v-for="title in trick.title">
+          <strong>
+            {{title}}
+          </strong>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-card class="pa-3 ma-auto" elevation="5" max-width="30vw" justify-center align-center>
+            <p class="font-weight-bold">{{ $t('difficulty') }}:</p>
+             {{ trick.difficulty }}
+            <br>
+            <p class="font-weight-bold">{{ $t('category') }}:</p>
+            {{ $t('categories.' + trick.category) }}
+          </v-card>
+        </v-col>
+        <v-col v-if="trick.connections.length > 0">
+          <v-card class="pa-3" elevation="5">
+            <p class="font-weight-bold">{{ $t('similarTricks') }}:</p>
+            <template v-for="name in getTrickNames(trick.connections, videoStore)">
+              <v-btn :to="'/trick/' + name" variant="flat" class="ma-2">
+                {{ name }}
+              </v-btn>
+            </template>
+          </v-card>
+        </v-col>
+        <v-col v-if="trick.requirements.length > 0">
+          <v-card class="pa-3" elevation="5">
+            <p class="font-weight-bold">{{ $t('requirements') }}:</p>
+            <template v-for="r_name in getTrickNames(trick.requirements, videoStore)">
+              <v-btn
+                @click="$router.push('/trick/' + r_name)" variant="flat" class="ma-2">
+                {{ r_name }}
+              </v-btn>
+            </template>
+          </v-card>
+        </v-col>
+        <template v-if="trick.id.length > 1">
+          <v-container>
+            <v-row>
+              <v-col>
+                <p class="font-weight-bold">{{ $t('otherTutorials') }}:</p>
+              </v-col>
+            </v-row>
+            <v-row justify="center" align="center">
+              <v-col
+                  v-for="video in trick.id.slice(1)"
+                  :key="video"
+                  cols="auto"
+              >
+              <v-card elevation="3" width="150px">
+                <v-img
+                    :src="getThumbnailUrl(video)"
+                    v-on:click="openVideo(video)"
+                />
+              </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+        </template>
+      </v-row>
+      <v-row>
+        <v-col>
+          <ShareDial/>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
