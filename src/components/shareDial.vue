@@ -20,7 +20,6 @@ export default {
 </script>
 
 <template>
-  {{ pageUrl }}
   <v-speed-dial
       location="right center"
       transition="slide-y-transition"
