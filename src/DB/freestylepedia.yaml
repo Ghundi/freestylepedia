@@ -49,7 +49,7 @@ tricks:
     - []
 - trick0006:
     - ["Donut"]
-    - ["-BclH8x0eXQ", "JD4Zzz3Fn_Y", "uvMoWEuBdCQ"]
+    - ["-BclH8x0eXQ", "JD4Zzz3Fn_Y", "uvMoWEuBdCQ", "yZJmSqoVM_k"]
     - 1
     - "Ground"
     - "2019-11-10"
@@ -57,7 +57,7 @@ tricks:
     - []
 - trick0007:
     - ["Hawk Stop", "Reverse T-Stop", "Angel Stop"]
-    - ["1kd6_E4gKnA"]
+    - ["1kd6_E4gKnA", "CfHDSzF7dPE"]
     - 3
     - "Stop"
     - "2019-11-22"
@@ -305,7 +305,7 @@ tricks:
     - []
 - trick0038:
     - ["Butterfly"]
-    - ["AmZFtgm9Is4", "sDPCN0nnqp0"]
+    - ["AmZFtgm9Is4", "sDPCN0nnqp0","xibQVI-6WVY"]
     - 4
     - "Acrobatic"
     - "2020-01-23"
@@ -313,7 +313,7 @@ tricks:
     - []
 - trick0039:
     - ["Inverse Compass", "Leg Breaker"]
-    - ["38DbuwUi9Go", "N5q2P-syZIc", "Mrd8nc2d8HE"]
+    - ["38DbuwUi9Go", "N5q2P-syZIc", "Mrd8nc2d8HE","onSdugiCYAk"]
     - 3
     - "Footwork"
     - "2020-01-17"
@@ -337,7 +337,7 @@ tricks:
     - []
 - trick0042:
     - ["Hockey Stop"]
-    - ["Gox8MmXs0Bo", "nIfU38nAYYk"]
+    - ["Gox8MmXs0Bo", "EcEuu6zvnpM"]
     - 1
     - "Stop"
     - "2019-12-15"
@@ -433,7 +433,7 @@ tricks:
     - []
 - trick0054:
     - ["Toe Donut"]
-    - ["GBdYeRkjkos"]
+    - ["GBdYeRkjkos", "T4Dehm969_Y"]
     - 2
     - "Spin"
     - "2019-02-28"
