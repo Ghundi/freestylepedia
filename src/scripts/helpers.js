@@ -64,3 +64,7 @@ export function checkSpace(y, x, width, height, spaces) {
 export function getBgColor(dark) {
     return dark ? '#222222' : '#eeeeee'
 }
+
+export function getTrickURL(trick) {
+    return trick.replace(' ', '%20');
+}

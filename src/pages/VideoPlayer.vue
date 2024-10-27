@@ -94,7 +94,7 @@ function hasHistory () {
       </v-row>
       <v-row>
         <v-col>
-          <v-card class="pa-3 ma-auto" elevation="5" max-width="30vw" justify-center align-center>
+          <v-card class="pa-3 ma-auto" elevation="5" max-width="300px" justify-center align-center>
             <p class="font-weight-bold">{{ $t('difficulty') }}:</p>
              {{ trick.difficulty }}
             <br>

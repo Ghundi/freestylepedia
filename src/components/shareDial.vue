@@ -4,7 +4,7 @@ export default {
   data() {
     return {
       dialShare: false,
-      pageUrl: 'https://freestylepedia.org/trick/' + this.$route.fullPath.replace(' ', '%20'),
+      pageUrl: 'https://freestylepedia.org' + this.$route.fullPath.replace(' ', '---'),
     };
   },
   methods: {
@@ -20,8 +20,9 @@ export default {
 </script>
 
 <template>
+  {{ pageUrl }}
   <v-speed-dial
-      location="top center"
+      location="right center"
       transition="slide-y-transition"
   >
     <template v-slot:activator="{ props: activatorProps }">
@@ -37,12 +38,12 @@ export default {
     <v-btn
         key="2"
         icon="mdi-content-copy"
-        @click="copyURL(pageUrl + '/')"></v-btn>
+        @click="copyURL(pageUrl)"></v-btn>
     <v-btn
         key="3"
         icon="mdi-whatsapp"
         color="#25d366"
-        :href="`https://wa.me/?text=Checkout%20this%20page.%20${pageUrl}/`"></v-btn>
+        :href="`https://wa.me/?text=Checkout%20this%20trick%20${pageUrl}/`"></v-btn>
     <v-btn
         key="5"
         icon="mdi-facebook"
