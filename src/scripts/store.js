@@ -7,6 +7,7 @@ import IFO from "../assets/supporters/Logo_IFO_schwarz.webp";
 import MunichEast from "../assets/supporters/RZ_freestyler_Logo_1-2.jpg";
 import Turtle from "../assets/supporters/Turtle_upscaled.jpg"
 import NK from "../assets/supporters/nagyerdei korisok.jpg"
+import IceRad from "../assets/supporters/ICERAD.png"
 
 export const useFAQ = defineStore('FAQ', {
     state: () => {
@@ -22,6 +23,10 @@ export const useSupporters = defineStore('supporters', {
                 {
                     imgSrc: AIF,
                     link: 'https://www.youtube.com/@AlpineIceFreestyle'
+                },
+                {
+                    imgSrc: IceRad,
+                    link: 'https://www.instagram.com/icerad'
                 },
                 {
                     imgSrc: IFO,
