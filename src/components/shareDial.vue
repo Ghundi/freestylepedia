@@ -1,10 +1,13 @@
 <script>
 
+import {useRoute} from "vue-router";
+import {toPath} from "@/scripts/helpers.js";
+
 export default {
   data() {
     return {
       dialShare: false,
-      pageUrl: 'https://freestylepedia.org' + this.$route.fullPath.replace(' ', '---'),
+      pageUrl: 'https://freestylepedia.org/' + toPath(useRoute().params.trickname.toString()),
     };
   },
   methods: {
@@ -42,17 +45,20 @@ export default {
         key="3"
         icon="mdi-whatsapp"
         color="#25d366"
-        :href="`https://wa.me/?text=Checkout%20this%20trick%20${pageUrl}/`"></v-btn>
+        :href="`https://wa.me/?text=Check%20out%20this%20trick%20${pageUrl}/`"
+        target="_blank"></v-btn>
     <v-btn
         key="5"
         icon="mdi-facebook"
         color="#0866ff"
-        :href="`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}%2F&amp;src=sdkpreparse`"></v-btn>
+        :href="`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}%2F&amp;src=sdkpreparse`"
+        target="_blank"></v-btn>
     <v-btn
         key="6"
         icon="mdi-twitter"
         color="#1DA1F2"
-        :href="`https://www.twitter.com/share?url=http://${pageUrl}/`"></v-btn>
+        :href="`https://www.twitter.com/share?url=http://${pageUrl}/`"
+        target="_blank"></v-btn>
   </v-speed-dial>
 </template>
 

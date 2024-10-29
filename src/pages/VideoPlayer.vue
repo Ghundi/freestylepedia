@@ -2,6 +2,7 @@
 import {useVideoStore} from "@/scripts/videoStore.js";
 import { useRoute } from "vue-router";
 import ShareDial from "@/components/shareDial.vue";
+import { pathToStr } from "@/scripts/helpers.js";
 
 const videoStore = useVideoStore()
 
@@ -25,7 +26,7 @@ function getTrickNames(id_list) {
   return res;
 }
 
-const trick = videoStore.getTrickByTitle(useRoute().params.trickname, videoStore);
+const trick = videoStore.getTrickByTitle(pathToStr(useRoute().params.trickname), videoStore);
 </script>
 
 <script>
@@ -103,7 +104,7 @@ function hasHistory () {
           </v-card>
         </v-col>
         <v-col v-if="trick.connections.length > 0">
-          <v-card class="pa-3" elevation="5">
+          <v-card class="pa-3" elevation="5" max-width="300px" justify-center align-center>
             <p class="font-weight-bold">{{ $t('similarTricks') }}:</p>
             <template v-for="name in getTrickNames(trick.connections, videoStore)">
               <v-btn :to="'/trick/' + name" variant="flat" class="ma-2">
@@ -113,7 +114,7 @@ function hasHistory () {
           </v-card>
         </v-col>
         <v-col v-if="trick.requirements.length > 0">
-          <v-card class="pa-3" elevation="5">
+          <v-card class="pa-3" elevation="5" max-width="300px" justify-center align-center>
             <p class="font-weight-bold">{{ $t('requirements') }}:</p>
             <template v-for="r_name in getTrickNames(trick.requirements, videoStore)">
               <v-btn
@@ -147,13 +148,11 @@ function hasHistory () {
           </v-container>
         </template>
       </v-row>
-      <!--
       <v-row>
         <v-col>
           <ShareDial/>
         </v-col>
       </v-row>
-      -->
     </v-container>
   </div>
 </template>

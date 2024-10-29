@@ -65,6 +65,10 @@ export function getBgColor(dark) {
     return dark ? '#222222' : '#eeeeee'
 }
 
-export function getTrickURL(trick) {
-    return trick.replace(' ', '%20');
+export function toPath(str) {
+    return str.replaceAll(' ', '_');
+}
+
+export function pathToStr(path) {
+    return path.replaceAll('_', ' ');
 }

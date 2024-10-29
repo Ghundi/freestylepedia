@@ -27,7 +27,7 @@ function getLocalDate(date, locale) {
             height="10em"
             class="videoCard"
             :style =  "{'box-shadow': `0px 0px 8px 2px ${categoryStore.getColor(category)}`}"
-            :to="'/trick/' + title[0]"
+            :to="'/trick/' + toPath(title[0])"
         >
           <v-img
               :src="thumbnailUrl"
@@ -47,6 +47,7 @@ function getLocalDate(date, locale) {
 <script setup>
 import { useCategoryStore } from "@/scripts/store.js";
 import { useVideoStore} from "@/scripts/videoStore.js";
+import {toPath} from "@/scripts/helpers.js";
 
 const videoStore = useVideoStore();
 const categoryStore = useCategoryStore();
