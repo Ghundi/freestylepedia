@@ -87,10 +87,17 @@ function hasHistory () {
         </noframes>
       </v-row>
       <v-row >
-        <v-col v-for="title in trick.title">
+        <v-col v-for="title in trick.title.slice(0, -1)">
           <strong>
             {{title}}
           </strong>
+        </v-col>
+        <v-col>
+          <strong>
+            {{ trick.title.slice(-1)[0]}}
+          </strong>
+          &nbsp;
+          <ShareDial/>
         </v-col>
       </v-row>
       <v-row>
@@ -147,11 +154,6 @@ function hasHistory () {
             </v-row>
           </v-container>
         </template>
-      </v-row>
-      <v-row>
-        <v-col>
-          <ShareDial/>
-        </v-col>
       </v-row>
     </v-container>
   </div>
