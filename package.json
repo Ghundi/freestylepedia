@@ -15,8 +15,6 @@
     "googleapis": "^144.0.0",
     "js-yaml": "^4.1.0",
     "pinia": "^2.1.7",
-    "rollup": ">=4.22.4",
-    "vite": ">=5.2.14",
     "vite-plugin-vuetify": "^2.0.4",
     "vue": "^3.4.21",
     "vue-i18n": "^9.10.1",
@@ -29,7 +27,7 @@
     "@mdi/font": "^7.4.47",
     "@modyfi/vite-plugin-yaml": "^1.1.0",
     "@vitejs/plugin-vue": "^5.0.3",
-    "vite": ">=5.2.14",
-    "rollup": ">=4.22.4"
+    "rollup": ">=4.22.4",
+    "vite": ">=5.2.14"
   }
 }

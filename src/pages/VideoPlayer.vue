@@ -2,7 +2,7 @@
 import {useVideoStore} from "@/scripts/videoStore.js";
 import { useRoute } from "vue-router";
 import ShareDial from "@/components/shareDial.vue";
-import { pathToStr } from "@/scripts/helpers.js";
+import {pathToStr} from "@/scripts/helpers.js";
 
 const videoStore = useVideoStore()
 

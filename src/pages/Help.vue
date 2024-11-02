@@ -18,6 +18,7 @@ const FAQ_store = useFAQ();
       </v-expansion-panel>
     </v-expansion-panels>
   </v-card>
+
 </template>
 
 <style scoped>

@@ -1,4 +1,5 @@
 //helpers
+
 export function trickToNode(trick, orientation = 3) {
     return {
         name: trick.title[0],
@@ -71,4 +72,11 @@ export function toPath(str) {
 
 export function pathToStr(path) {
     return path.replaceAll('_', ' ');
+}
+
+export function isReleased(trick) {
+    const releaseTime = new Date();
+    releaseTime.setHours(12)
+    releaseTime.setMinutes(30)
+    return releaseTime > new Date(trick.releaseDate)
 }

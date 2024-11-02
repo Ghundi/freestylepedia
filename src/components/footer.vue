@@ -49,18 +49,6 @@ const supporters = useSupporters().images
         <v-container>
           <v-row justify="center">
             <v-col cols="auto">
-              <a href="https://www.instagram.com/mainziceskategroup/" target="_blank">
-                <v-avatar size="50">
-                  <v-img
-                      contain
-                      :src="MISG"
-                      aspect-ratio="1"
-                      alt="MISG Logo"
-                  ></v-img>
-                </v-avatar>
-              </a>
-            </v-col>
-            <v-col cols="auto">
               <a href="https://www.youtube.com/@BlackbirdIceFreestyle" target="_blank">
                 <v-avatar size="50">
                   <v-img
@@ -68,6 +56,18 @@ const supporters = useSupporters().images
                       :src="Blackbird"
                       aspect-ratio="1"
                       alt="Blackbird Logo"
+                  ></v-img>
+                </v-avatar>
+              </a>
+            </v-col>
+            <v-col cols="auto">
+              <a href="https://www.instagram.com/mainziceskategroup/" target="_blank">
+                <v-avatar size="50">
+                  <v-img
+                      contain
+                      :src="MISG"
+                      aspect-ratio="1"
+                      alt="MISG Logo"
                   ></v-img>
                 </v-avatar>
               </a>
