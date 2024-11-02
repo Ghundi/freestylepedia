@@ -9,7 +9,6 @@ export default {
     return {
       dialShare: false,
       pageUrl: 'https://freestylepedia.org/' + toPath(useRoute().params.trickname.toString()),
-      active: false,
     };
   },
   methods: {
@@ -27,12 +26,12 @@ export default {
 
 <template>
   <v-speed-dial
-      location="top center"
+      location="top left"
       transition="slide-y-transition"
   >
-    <template v-slot:activator="{ active }">
+    <template v-slot:activator="{ props: opened }">
       <v-fab
-          v-bind="active"
+          v-bind="opened"
           icon="mdi-share-variant"
       ></v-fab>
     </template>

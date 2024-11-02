@@ -60,17 +60,16 @@ function hasHistory () {
       @keyup.esc="hasHistory()
             ? $router.back()
             : $router.push('/')" tabindex="0">
-    <v-btn
-        size="x-large"
-        density="compact"
-        :ripple="true"
-        class="Right"
+    <v-fab
         icon="mdi-close"
+        :ripple="true"
+        density="comfortable"
         variant="elevated"
+        size="x-large"
         @click="hasHistory()
             ? $router.back()
-            : $router.push('/')">
-    </v-btn>
+            : $router.push('/')"
+        class="Right"></v-fab>
     <v-container>
       <v-row>
         <iframe
@@ -164,7 +163,8 @@ function hasHistory () {
 .Right{
   position: absolute;
   float: right;
-  right: 10px;
+  right: 60px;
+  top: 120px;
 }
 div {
   outline: none;
