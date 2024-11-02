@@ -1,13 +1,13 @@
 import {defineStore} from 'pinia';
 
 // suporter logos
-import AIF from "../assets/supporters/aif w.png";
-import GlobalIce from '../assets/supporters/GlobalIce.png';
+import AIF from "../assets/supporters/aif w.webp";
+import GlobalIce from '../assets/supporters/GlobalIce.webp';
 import IFO from "../assets/supporters/Logo_IFO_schwarz.webp";
-import MunichEast from "../assets/supporters/RZ_freestyler_Logo_1-2.jpg";
-import Turtle from "../assets/supporters/Turtle_upscaled.jpg"
-import NK from "../assets/supporters/nagyerdei korisok.jpg"
-import IceRad from "../assets/supporters/ICERAD.png"
+import MunichEast from "../assets/supporters/RZ_freestyler_Logo_1-2.webp";
+import Turtle from "../assets/supporters/Turtle_upscaled.webp"
+import NK from "../assets/supporters/nagyerdei korisok.webp"
+import IceRad from "../assets/supporters/ICERAD.webp"
 
 export const useFAQ = defineStore('FAQ', {
     state: () => {
