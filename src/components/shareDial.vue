@@ -2,15 +2,18 @@
 
 import {useRoute} from "vue-router";
 import {toPath} from "@/scripts/helpers.js";
+import {getActivePinia} from "pinia";
 
 export default {
   data() {
     return {
       dialShare: false,
       pageUrl: 'https://freestylepedia.org/' + toPath(useRoute().params.trickname.toString()),
+      active: false,
     };
   },
   methods: {
+    getActivePinia,
     async copyURL(url) {
       try {
         await navigator.clipboard.writeText(url);
@@ -24,16 +27,15 @@ export default {
 
 <template>
   <v-speed-dial
-      location="right center"
+      location="top center"
       transition="slide-y-transition"
   >
-    <template v-slot:activator="{ props: activatorProps }">
+    <template v-slot:activator="{ active }">
       <v-fab
-          v-bind="activatorProps"
+          v-bind="active"
           icon="mdi-share-variant"
       ></v-fab>
     </template>
-
     <v-btn
         key="1"
         icon="mdi-close"></v-btn>

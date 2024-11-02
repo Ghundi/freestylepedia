@@ -7,7 +7,7 @@ import {pathToStr} from "@/scripts/helpers.js";
 const videoStore = useVideoStore()
 
 function getEmbedURL(id) {
-  return 'https://www.youtube.com/embed/' + id + '?si=9jysKI0zbGHvpMCD&mute=1'
+  return 'https://www.youtube-nocookie.com/embed/' + id + '?si=9jysKI0zbGHvpMCD&mute=1'
 }
 
 function getThumbnailUrl(videoId) {
@@ -81,10 +81,6 @@ function hasHistory () {
             allowfullscreen
             name="Freestylepedia Video"
         ></iframe>
-
-        <noframes>
-          Here should be the Freestylepedia Video for {{ trick.title[0] }}
-        </noframes>
       </v-row>
       <v-row >
         <v-col v-for="title in trick.title.slice(0, -1)">
