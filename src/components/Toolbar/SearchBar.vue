@@ -28,7 +28,7 @@ export default {
       v-bind:label="$t('toolbar.search')"
       :rules="updateStore"
       v-model="searchStore.val"
-      :items="videoStore.getTitles(videoStore)"
+      :items="videoStore.getTitlesStr(videoStore, $i18n.locale)"
       density="compact"
       class="mx-auto"
       hide-details

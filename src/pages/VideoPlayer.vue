@@ -12,22 +12,6 @@ function getEmbedURL(id) {
   return 'https://www.youtube-nocookie.com/embed/' + id + '?si=9jysKI0zbGHvpMCD&mute=1'
 }
 
-function getThumbnailUrl(videoId) {
-  return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-}
-
-function openVideo(id) {
-  window.open("https://www.youtube.com/watch?v=" + id + "?mute=1");
-}
-
-function getTrickNames(id_list) {
-  let res = [videoStore.getTrickByID(id_list[0], videoStore).title[0]];
-  for (let i = 1; i < id_list.length; i++) {
-    res.push(videoStore.getTrickByID(id_list[i], videoStore).title[0]);
-  }
-  return res;
-}
-
 const trick = videoStore.getTrickByTitle(pathToStr(useRoute().params.trickname), videoStore);
 </script>
 
@@ -90,14 +74,14 @@ function hasHistory () {
         ></iframe>
       </v-row>
       <v-row >
-        <v-col v-for="title in trick.title.slice(0, -1)">
+        <v-col v-for="title in videoStore.getLocalTrickTitles(trick, $i18n.locale).slice(0, -1)">
           <strong>
             {{title}}
           </strong>
         </v-col>
         <v-col>
           <strong>
-            {{ trick.title.slice(-1)[0]}}
+            {{ videoStore.getLocalTrickTitles(trick, $i18n.locale).slice(-1)[0]}}
           </strong>
           &nbsp;
           <ShareDial/>
