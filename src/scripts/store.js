@@ -3,7 +3,7 @@ import {defineStore} from 'pinia';
 // suporter logos
 import AIF from "../assets/supporters/aif w.webp";
 import GlobalIce from '../assets/supporters/GlobalIce.webp';
-import IFO from "../assets/supporters/Logo_IFO_schwarz.webp";
+import IFO from "../assets/supporters/Logo_IFO_schwarz-1.webp";
 import MunichEast from "../assets/supporters/RZ_freestyler_Logo_1-2.webp";
 import Turtle from "../assets/supporters/Turtle_upscaled.webp"
 import NK from "../assets/supporters/nagyerdei korisok.webp"
