@@ -2,7 +2,7 @@
 import {useVideoStore} from "@/scripts/videoStore.js";
 import { useRoute } from "vue-router";
 import ShareDial from "@/components/shareDial.vue";
-import {pathToStr} from "@/scripts/helpers.js";
+import { pathToStr } from "@/scripts/helpers.js";
 
 const videoStore = useVideoStore()
 
@@ -33,7 +33,7 @@ const trick = videoStore.getTrickByTitle(pathToStr(useRoute().params.trickname),
 export default {
   mounted() {
     // Ensure the div is focusable to capture key events
-    this.$el.focus();
+    document.getElementById('main').focus();
   }
 };
 function hasHistory () {
@@ -42,6 +42,11 @@ function hasHistory () {
 </script>
 
 <template>
+  <head>
+    <title>{{ trick.title.toString() }}</title>
+    <meta name="description" :content="'Here you can learn the ice freestyle trick or move ' + trick.title.toString() +'.' +
+     'Here is more information about the trick: ' + trick.toString()">
+  </head>
   <div
       v-if="trick === -1"
       v-once>
@@ -54,6 +59,7 @@ function hasHistory () {
     </div>
   </div>
   <div
+      id="main"
       v-else
       v-once
       class="text-center mt-2"
