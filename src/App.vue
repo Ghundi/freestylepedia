@@ -1,8 +1,8 @@
 <script setup>
-import NavBar from "@/components/navBar.vue";
+import NavBar from "@/components/Frame/navBar.vue";
 import 'vuetify/styles';
 import {useVideoStore} from "@/scripts/videoStore.js";
-import Footer from "@/components/footer.vue"
+import Footer from "@/components/Frame/footer.vue"
 import { useTheme } from 'vuetify'
 import { getBgColor } from "@/scripts/helpers.js";
 

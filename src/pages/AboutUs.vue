@@ -1,7 +1,7 @@
 <script setup>
 import BlackbirdLogo from "@/assets/blackbirdIconInverted.png"
 import MISGLogo from "@/assets/MISG-Icon.png"
-import WebpageIcon from "@/components/WebpageIcon.vue";
+import WebpageIcon from "@/components/Frame/WebpageIcon.vue";
 
 </script>
 
