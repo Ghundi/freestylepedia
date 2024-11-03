@@ -149,6 +149,7 @@ function hasHistory () {
                 <v-img
                     :src="getThumbnailUrl(video)"
                     v-on:click="openVideo(video)"
+                    alt="Tutorial from different creator"
                 />
               </v-card>
               </v-col>
