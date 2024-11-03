@@ -3,6 +3,8 @@ import {useVideoStore} from "@/scripts/videoStore.js";
 import { useRoute } from "vue-router";
 import ShareDial from "@/components/shareDial.vue";
 import { pathToStr } from "@/scripts/helpers.js";
+import OtherTutorials from "@/components/otherTutorials.vue";
+import TrickLinkList from "@/components/trickLinkList.vue";
 
 const videoStore = useVideoStore()
 
@@ -112,49 +114,13 @@ function hasHistory () {
           </v-card>
         </v-col>
         <v-col v-if="trick.connections.length > 0">
-          <v-card class="pa-3" elevation="5" max-width="300px" justify-center align-center>
-            <p class="font-weight-bold">{{ $t('similarTricks') }}:</p>
-            <template v-for="name in getTrickNames(trick.connections, videoStore)">
-              <v-btn :to="'/trick/' + name" variant="flat" class="ma-2">
-                {{ name }}
-              </v-btn>
-            </template>
-          </v-card>
+          <trick-link-list :list="trick.connections" :title="$t('similarTricks')"/>
         </v-col>
         <v-col v-if="trick.requirements.length > 0">
-          <v-card class="pa-3" elevation="5" max-width="300px" justify-center align-center>
-            <p class="font-weight-bold">{{ $t('requirements') }}:</p>
-            <template v-for="r_name in getTrickNames(trick.requirements, videoStore)">
-              <v-btn
-                @click="$router.push('/trick/' + r_name)" variant="flat" class="ma-2">
-                {{ r_name }}
-              </v-btn>
-            </template>
-          </v-card>
+          <trick-link-list :list="trick.requirements" :title="$t('requirements')"/>
         </v-col>
         <template v-if="trick.id.length > 1">
-          <v-container>
-            <v-row>
-              <v-col>
-                <p class="font-weight-bold">{{ $t('otherTutorials') }}:</p>
-              </v-col>
-            </v-row>
-            <v-row justify="center" align="center">
-              <v-col
-                  v-for="video in trick.id.slice(1)"
-                  :key="video"
-                  cols="auto"
-              >
-              <v-card elevation="3" width="150px">
-                <v-img
-                    :src="getThumbnailUrl(video)"
-                    v-on:click="openVideo(video)"
-                    alt="Tutorial from different creator"
-                />
-              </v-card>
-              </v-col>
-            </v-row>
-          </v-container>
+          <other-tutorials :id="trick.id"/>
         </template>
       </v-row>
     </v-container>
