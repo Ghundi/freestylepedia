@@ -1,7 +1,7 @@
 <script setup>
 import BlackbirdLogo from "@/assets/blackbirdIconInverted.png"
 import MISGLogo from "@/assets/MISG-Icon.png"
-import WebpageIcon from "@/components/WebpageIcon.vue";
+import WebpageIcon from "@/components/Frame/WebpageIcon.vue";
 
 </script>
 
@@ -30,6 +30,7 @@ import WebpageIcon from "@/components/WebpageIcon.vue";
                     :src="MISGLogo"
                     aspect-ratio="1/1"
                     width="10vw"
+                    alt="MISG Logo"
                 ></v-img>
               </v-col>
               <v-col>
@@ -54,6 +55,7 @@ import WebpageIcon from "@/components/WebpageIcon.vue";
                     :src="BlackbirdLogo"
                     aspect-ratio="1/1"
                     width="10vw"
+                    alt="Blackbird Logo"
                 ></v-img>
               </v-col>
               <v-col>

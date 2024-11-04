@@ -2,28 +2,14 @@
 import {useVideoStore} from "@/scripts/videoStore.js";
 import { useRoute } from "vue-router";
 import ShareDial from "@/components/shareDial.vue";
-import {pathToStr} from "@/scripts/helpers.js";
+import { pathToStr } from "@/scripts/helpers.js";
+import OtherTutorials from "@/components/otherTutorials.vue";
+import TrickLinkList from "@/components/trickLinkList.vue";
 
 const videoStore = useVideoStore()
 
 function getEmbedURL(id) {
   return 'https://www.youtube-nocookie.com/embed/' + id + '?si=9jysKI0zbGHvpMCD&mute=1'
-}
-
-function getThumbnailUrl(videoId) {
-  return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-}
-
-function openVideo(id) {
-  window.open("https://www.youtube.com/watch?v=" + id + "?mute=1");
-}
-
-function getTrickNames(id_list) {
-  let res = [videoStore.getTrickByID(id_list[0], videoStore).title[0]];
-  for (let i = 1; i < id_list.length; i++) {
-    res.push(videoStore.getTrickByID(id_list[i], videoStore).title[0]);
-  }
-  return res;
 }
 
 const trick = videoStore.getTrickByTitle(pathToStr(useRoute().params.trickname), videoStore);
@@ -33,7 +19,7 @@ const trick = videoStore.getTrickByTitle(pathToStr(useRoute().params.trickname),
 export default {
   mounted() {
     // Ensure the div is focusable to capture key events
-    this.$el.focus();
+    document.getElementById('main').focus();
   }
 };
 function hasHistory () {
@@ -42,6 +28,11 @@ function hasHistory () {
 </script>
 
 <template>
+  <head>
+    <title>{{ trick.title.toString() }}</title>
+    <meta name="description" :content="'Here you can learn the ice freestyle trick or move ' + trick.title.toString() +'.' +
+     'Here is more information about the trick: ' + trick.toString()">
+  </head>
   <div
       v-if="trick === -1"
       v-once>
@@ -54,6 +45,7 @@ function hasHistory () {
     </div>
   </div>
   <div
+      id="main"
       v-else
       v-once
       class="text-center mt-2"
@@ -82,14 +74,14 @@ function hasHistory () {
         ></iframe>
       </v-row>
       <v-row >
-        <v-col v-for="title in trick.title.slice(0, -1)">
+        <v-col v-for="title in videoStore.getLocalTrickTitles(trick, $i18n.locale).slice(0, -1)">
           <strong>
             {{title}}
           </strong>
         </v-col>
         <v-col>
           <strong>
-            {{ trick.title.slice(-1)[0]}}
+            {{ videoStore.getLocalTrickTitles(trick, $i18n.locale).slice(-1)[0]}}
           </strong>
           &nbsp;
           <ShareDial/>
@@ -106,48 +98,13 @@ function hasHistory () {
           </v-card>
         </v-col>
         <v-col v-if="trick.connections.length > 0">
-          <v-card class="pa-3" elevation="5" max-width="300px" justify-center align-center>
-            <p class="font-weight-bold">{{ $t('similarTricks') }}:</p>
-            <template v-for="name in getTrickNames(trick.connections, videoStore)">
-              <v-btn :to="'/trick/' + name" variant="flat" class="ma-2">
-                {{ name }}
-              </v-btn>
-            </template>
-          </v-card>
+          <trick-link-list :list="trick.connections" :title="$t('similarTricks')"/>
         </v-col>
         <v-col v-if="trick.requirements.length > 0">
-          <v-card class="pa-3" elevation="5" max-width="300px" justify-center align-center>
-            <p class="font-weight-bold">{{ $t('requirements') }}:</p>
-            <template v-for="r_name in getTrickNames(trick.requirements, videoStore)">
-              <v-btn
-                @click="$router.push('/trick/' + r_name)" variant="flat" class="ma-2">
-                {{ r_name }}
-              </v-btn>
-            </template>
-          </v-card>
+          <trick-link-list :list="trick.requirements" :title="$t('requirements')"/>
         </v-col>
         <template v-if="trick.id.length > 1">
-          <v-container>
-            <v-row>
-              <v-col>
-                <p class="font-weight-bold">{{ $t('otherTutorials') }}:</p>
-              </v-col>
-            </v-row>
-            <v-row justify="center" align="center">
-              <v-col
-                  v-for="video in trick.id.slice(1)"
-                  :key="video"
-                  cols="auto"
-              >
-              <v-card elevation="3" width="150px">
-                <v-img
-                    :src="getThumbnailUrl(video)"
-                    v-on:click="openVideo(video)"
-                />
-              </v-card>
-              </v-col>
-            </v-row>
-          </v-container>
+          <other-tutorials :id="trick.id"/>
         </template>
       </v-row>
     </v-container>

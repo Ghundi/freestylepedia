@@ -21,6 +21,13 @@ export default {
     ]
   }),
 }
+
+function getSuggestions(state, search, lang) {
+  if(search) {
+    return state.getTitlesStr(state, lang);
+  }
+  return [];
+}
 </script>
 
 <template>
@@ -28,7 +35,7 @@ export default {
       v-bind:label="$t('toolbar.search')"
       :rules="updateStore"
       v-model="searchStore.val"
-      :items="videoStore.getTitles(videoStore)"
+      :items="getSuggestions(videoStore, searchStore.val, $i18n.locale)"
       density="compact"
       class="mx-auto"
       hide-details

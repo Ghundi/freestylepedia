@@ -35,9 +35,11 @@ export default {
           icon="mdi-share-variant"
       ></v-fab>
     </template>
+    <!--
     <v-btn
         key="1"
         icon="mdi-close"></v-btn>
+        -->
     <v-btn
         key="2"
         icon="mdi-content-copy"

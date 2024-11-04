@@ -1,6 +1,6 @@
 tricks:
 # trickID
-#   names (Array of names)
+#   names (Array of names) (for local titles: language code {name}, e.g. en{name})
 #   YouTube IDs (just ID)
 #   difficulty (0-5)
 #   category ("Footwork", "Stop", "Ground", "Acrobatic", "Spin")
@@ -24,7 +24,7 @@ tricks:
     - [trick0020]
     - []
 - trick0003:
-      - ["Forward Brush"]
+      - ["Forward Brush", "de{Vorwärts Brush}"]
       - ["bS6_Cx_OES8"]
       - 3
       - "Footwork"
@@ -104,7 +104,7 @@ tricks:
     - [trick0038]
     - []
 - trick0013:
-    - ["Compass"]
+    - ["Compass", "de{Kompass}"]
     - ["A7Q907vPMuQ", "N5q2P-syZIc", "vW-KqolxQqo", "Ps1RDZqsdXU"]
     - 2
     - "Spin"
@@ -160,7 +160,7 @@ tricks:
     - [trick0013]
     - []
 - trick0020:
-    - ["Grapevine"]
+    - ["Grapevine", "de{Knoten}"]
     - ["xrxxASySDs0", "FwtzestNMwQ", "nDhvTDuobDE", "c9YokTcE_bY"]
     - 2
     - "Footwork"
@@ -184,7 +184,7 @@ tricks:
       - []
       - [trick0044, trick0024]
 - trick0023:
-    - ["2 Feet Spin"]
+    - ["2 Feet Spin", "de{2 Fuß Pirouette}"]
     - ["VBMsmVZ8Mbs"]
     - 1
     - "Spin"
@@ -360,7 +360,7 @@ tricks:
       - [trick0022]
       - [trick0022]
 - trick0045:
-      - ["Cannon"]
+      - ["Cannon", "Shoot-the-duck", "de{Kannone}"]
       - ["qVQYXi9jMSU", "Esut7pZO924"]
       - 2
       - "Hydroblading"
@@ -400,7 +400,7 @@ tricks:
     - []
     - []
 - trick0050:
-    - ["8", "Eight", "The 8"]
+    - ["8", "Eight", "The 8", "de{Acht}"]
     - ["mg7hCXAQBPY", "EAe764_8uBo", "hlDx5X_Ej-E" ,"-LC17fFWQF0"]
     - 3
     - "Footwork"
@@ -480,7 +480,7 @@ tricks:
     - [trick0038]
     - []
 - trick0060:
-    - ["Forward Sweep"]
+    - ["Forward Sweep", "de{Vorwärts Twist}"]
     - ["hqGZluT0ArQ"]
     - 3
     - "Footwork"

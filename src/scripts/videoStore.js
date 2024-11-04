@@ -60,10 +60,25 @@ export const useVideoStore = defineStore('videoStore', {
             }
             return -1;
         },
-        getTitles(state) {
+        getLocalTrickTitles(trick, lang) {
+            let res = [];
+            for (let i = 0; i < trick.title.length; i++) {
+                if(trick.title[i].includes('{')) {
+                    if(trick.title[i].substring(0, 2) === lang) {
+                        res.push(trick.title[i].substring(3, trick.title[i].length - 1))
+                    }
+                }
+                else {
+                    res.push(trick.title[i]);
+                }
+            }
+            return res;
+        },
+        getTitlesStr(state, lang) {
             let res = [];
             for (let i = 0; i < state.videos.length; i++) {
-                res.push(state.videos[i].title);
+                state.getLocalTrickTitles(state.videos[i], lang)
+                res.push(state.getLocalTrickTitles(state.videos[i], lang));
             }
             return res.flat();
         },
