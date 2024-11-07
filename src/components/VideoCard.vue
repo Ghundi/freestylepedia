@@ -48,7 +48,12 @@ function isMobile() {
           </template>
         </v-card>
       <template v-if="title[0] === videoStore.newestTrick" class="newTag">
-        <v-card-title class="newTag">New!</v-card-title>
+        <v-card-title
+            class="newTag"
+            :style="{'bottom': isMobile() ? '100px' : '170px',
+                     'left': isMobile() ? '120px' : '190px'}">
+            New!
+        </v-card-title>
       </template>
     </div>
 </template>
@@ -84,11 +89,9 @@ const props = defineProps({
 }
 .newTag {
   position: relative;
-  bottom: 8em;
-  left: 8.4em;
   rotate: 30deg;
   line-height: 0;
-  width: 4em;
+  width: 80px;
   border-radius: 1em;
   padding: 0.7em;
   background: rgba(255, 0, 0, 50%);
