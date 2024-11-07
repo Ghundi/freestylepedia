@@ -27,7 +27,7 @@ function isMobile() {
 <template>
     <div class="text-center">
         <v-card
-            :width="isMobile() ? '30vw' : '12vw'"
+            :width="isMobile() ? '40vw' : '12vw'"
             :height="isMobile() ? '10vh' :  '16vh'"
             class="videoCard"
             :style="{'box-shadow': `0px 0px 8px 2px ${categoryStore.getColor(category)}`,
@@ -49,8 +49,10 @@ function isMobile() {
           <template v-if="title[0] === videoStore.newestTrick" class="newTag">
             <v-card-title
                 class="newTag"
-                :style="{'bottom': isMobile() ? '80px' : '160px',
-                     'left': isMobile() ? '80px' : '190px'}">
+                :style="{'width': isMobile() ? '50px' : '80px',
+                      'font-size': isMobile() ? '0.7em' : '1.2em',
+                      'bottom': isMobile() ? '80px' : '160px',
+                     'left': isMobile() ? '105px' : '190px'}">
               New!
             </v-card-title>
           </template>
@@ -92,7 +94,6 @@ const props = defineProps({
   position: relative;
   rotate: 30deg;
   line-height: 0;
-  width: 80px;
   border-radius: 1em;
   padding: 0.7em;
   background: rgba(255, 0, 0, 50%);
