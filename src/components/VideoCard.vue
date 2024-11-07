@@ -46,15 +46,15 @@ function isMobile() {
               {{ getLocalDate(releaseDate, $i18n.locale) }}
             </v-card-subtitle>
           </template>
-        </v-card>
-      <template v-if="title[0] === videoStore.newestTrick" class="newTag">
-        <v-card-title
-            class="newTag"
-            :style="{'bottom': isMobile() ? '100px' : '170px',
+          <template v-if="title[0] === videoStore.newestTrick" class="newTag">
+            <v-card-title
+                class="newTag"
+                :style="{'bottom': isMobile() ? '100px' : '160px',
                      'left': isMobile() ? '120px' : '190px'}">
-            New!
-        </v-card-title>
-      </template>
+              New!
+            </v-card-title>
+          </template>
+        </v-card>
     </div>
 </template>
 
@@ -85,6 +85,7 @@ const props = defineProps({
   text-transform: none;
 }
 .videoCard {
+  overflow: visible;
   border-radius: 5%;
 }
 .newTag {
