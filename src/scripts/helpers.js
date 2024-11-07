@@ -74,9 +74,28 @@ export function pathToStr(path) {
     return path.replaceAll('_', ' ');
 }
 
+function changeTimeZone(date, timeZone) {
+    if (typeof date === 'string') {
+        return new Date(
+            new Date(date).toLocaleString('en-US', {
+                timeZone,
+            }),
+        );
+    }
+
+    return new Date(
+        date.toLocaleString('en-US', {
+            timeZone,
+        }),
+    );
+}
+
 export function isReleased(trick) {
-    const releaseTime = new Date();
-    releaseTime.setHours(12)
-    releaseTime.setMinutes(30)
-    return releaseTime > new Date(trick.releaseDate)
+    let releaseTime = new Date();
+    const date = releaseTime.getDate();
+    releaseTime = changeTimeZone(releaseTime, 'Europe/Berlin');
+    releaseTime.setDate(date);
+    releaseTime.setHours(12);
+    releaseTime.setMinutes(30);
+    return releaseTime > new Date(trick.releaseDate);
 }
