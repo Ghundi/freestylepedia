@@ -27,10 +27,11 @@ function isMobile() {
 <template>
     <div class="text-center">
         <v-card
-            :width="isMobile() ? '11em' : '14em'"
-            :height="isMobile() ? '6em' :  '10em'"
+            :width="isMobile() ? '40vw' : '12vw'"
+            :height="isMobile() ? '10vh' :  '16vh'"
             class="videoCard"
-            :style =  "{'box-shadow': `0px 0px 8px 2px ${categoryStore.getColor(category)}`, 'margin': isMobile() ? '0px 0px 0px' : '20px'}"
+            :style="{'box-shadow': `0px 0px 8px 2px ${categoryStore.getColor(category)}`,
+                    'margin': isMobile() ? '0px 0px 0px' : '10px'}"
             :to="'/trick/' + toPath(title[0])"
         >
           <v-img
