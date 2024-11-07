@@ -18,15 +18,19 @@ function getLocalDate(date, locale) {
   }
 }
 
+function isMobile() {
+  return window.screen.orientation.type === 'portrait-primary'
+}
+
 </script>
 
 <template>
-    <div class="text-center pa-4">
+    <div class="text-center">
         <v-card
-            width="14em"
-            height="10em"
+            :width="isMobile() ? '11em' : '14em'"
+            :height="isMobile() ? '6em' :  '10em'"
             class="videoCard"
-            :style =  "{'box-shadow': `0px 0px 8px 2px ${categoryStore.getColor(category)}`}"
+            :style =  "{'box-shadow': `0px 0px 8px 2px ${categoryStore.getColor(category)}`, 'margin': isMobile() ? '0px 0px 0px' : '20px'}"
             :to="'/trick/' + toPath(title[0])"
         >
           <v-img
@@ -36,9 +40,11 @@ function getLocalDate(date, locale) {
               :alt="title[0]"
           >
           </v-img>
-          <v-card-subtitle class="smaller-font">
-            {{ getLocalDate(releaseDate, $i18n.locale) }}
-          </v-card-subtitle>
+          <template v-if="!isMobile()">
+            <v-card-subtitle class="smaller-font">
+              {{ getLocalDate(releaseDate, $i18n.locale) }}
+            </v-card-subtitle>
+          </template>
         </v-card>
       <template v-if="title[0] === videoStore.newestTrick" class="newTag">
         <v-card-title class="newTag">New!</v-card-title>
