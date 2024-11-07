@@ -27,7 +27,7 @@ function isMobile() {
 <template>
     <div class="text-center">
         <v-card
-            :width="isMobile() ? '40vw' : '12vw'"
+            :width="isMobile() ? '30vw' : '12vw'"
             :height="isMobile() ? '10vh' :  '16vh'"
             class="videoCard"
             :style="{'box-shadow': `0px 0px 8px 2px ${categoryStore.getColor(category)}`,
@@ -49,8 +49,8 @@ function isMobile() {
           <template v-if="title[0] === videoStore.newestTrick" class="newTag">
             <v-card-title
                 class="newTag"
-                :style="{'bottom': isMobile() ? '100px' : '160px',
-                     'left': isMobile() ? '120px' : '190px'}">
+                :style="{'bottom': isMobile() ? '80px' : '160px',
+                     'left': isMobile() ? '80px' : '190px'}">
               New!
             </v-card-title>
           </template>
