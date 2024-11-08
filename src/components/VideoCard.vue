@@ -19,19 +19,19 @@ function getLocalDate(date, locale) {
 }
 
 function isMobile() {
-  return window.screen.orientation.type === 'portrait-primary'
+  return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
 </script>
 
 <template>
-    <div class="text-center">
+    <div
+        class="text-center">
         <v-card
-            :width="isMobile() ? '40vw' : '12vw'"
-            :height="isMobile() ? '10vh' :  '16vh'"
             class="videoCard"
-            :style="{'box-shadow': `0px 0px 8px 2px ${categoryStore.getColor(category)}`,
-                    'margin': isMobile() ? '0px 0px 0px' : '10px'}"
+            :width="isMobile() ? '9em' : '14em'"
+            :height="isMobile() ? '6em' : '10em'"
+            :style="{'box-shadow': `0px 0px 8px 2px ${categoryStore.getColor(category)}`}"
             :to="'/trick/' + toPath(title[0])"
         >
           <v-img
@@ -51,8 +51,8 @@ function isMobile() {
                 class="newTag"
                 :style="{'width': isMobile() ? '50px' : '80px',
                       'font-size': isMobile() ? '0.7em' : '1.2em',
-                      'bottom': isMobile() ? '80px' : '160px',
-                     'left': isMobile() ? '105px' : '190px'}">
+                      'bottom': isMobile() ? '80px' : '140px',
+                     'left': isMobile() ? '105px' : '170px'}">
               New!
             </v-card-title>
           </template>
