@@ -9,9 +9,8 @@ const selSortingOrderStore = useSelSortingOrderStore();
 </script>
 
 <script>
-
 function isMobile() {
-  return window.screen.orientation.type === 'portrait-primary'
+  return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 </script>
 
@@ -20,11 +19,11 @@ function isMobile() {
     <v-row class="mt-3" justify="center">
       <Toolbar/>
     </v-row>
-    <v-row :justify="(isMobile()) ? 'center' : 'start'" :align-content="(isMobile()) ? 'center' : 'start'">
+    <v-row :justify="isMobile() ? 'center' : 'start'" align-content="center">
       <template
           v-for="video in videoStore.filteredVideos(videoStore.sortedVideos(videoStore, selSortingOrderStore.by))"
           :key="video.title[0]">
-        <v-col class="videoCard">
+        <v-col cols="auto">
             <VideoCard
                 :id="video.id"
                 :title="video.title"
@@ -36,7 +35,7 @@ function isMobile() {
                 :requirements="video.requirements"
             />
         </v-col>
-      </template >
+      </template>
       <template v-if="videoStore.filteredVideos(videoStore.sortedVideos(videoStore, selSortingOrderStore.by)).length === 0">
         <v-col>
           <v-empty-state

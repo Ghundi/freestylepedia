@@ -25,8 +25,6 @@ function isMobile() {
 </script>
 
 <template>
-    <div
-        class="text-center">
         <v-card
             class="videoCard"
             :width="isMobile() ? '9em' : '14em'"
@@ -57,7 +55,6 @@ function isMobile() {
             </v-card-title>
           </template>
         </v-card>
-    </div>
 </template>
 
 <script setup>
