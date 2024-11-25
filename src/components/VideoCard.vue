@@ -40,7 +40,7 @@ function isMobile() {
           >
           </v-img>
           <template v-if="!isMobile()">
-            <v-card-subtitle class="smaller-font">
+            <v-card-subtitle class="smaller-font text-center">
               {{ getLocalDate(releaseDate, $i18n.locale) }}
             </v-card-subtitle>
           </template>
