@@ -40,7 +40,7 @@ tricks:
     - []
     - [trick0040]
 - trick0005:
-    - ["V-Stop"]
+    - ["V-Stop", "Heel Stop", "de{Hacken Bremse}"]
     - ["QZBqAVg9GoM"]
     - 3
     - "Stop"
@@ -88,7 +88,7 @@ tricks:
       - []
       - [trick0014, trick0011]
 - trick0011:
-      - ["Forward Spiderman", "Forward Hydro"]
+      - ["Forward Spiderman", "Forward Hydro", "Limbo", "Dragon Squad"]
       - ["K7mM-kyIfLw"]
       - 4
       - "Hydroblading"
@@ -120,7 +120,7 @@ tricks:
     - [trick0011]
     - [trick0010, trick0011]
 - trick0015:
-    - ["Zulu Spin"]
+    - ["Zulu Spin", "Tornado Spin"]
     - ["ot8MGzXZln0", "oDuJ3uL7bVo"]
     - 2
     - "Ground"
@@ -152,7 +152,7 @@ tricks:
     - []
     - []
 - trick0019:
-    - ["Head down"]
+    - ["Head down", "Billard"]
     - ["5_4m1NnS7D0", "czKbXDxQgX8", "KjkKkh5eKiY"]
     - 4
     - "Hydroblading"
@@ -160,7 +160,7 @@ tricks:
     - [trick0013]
     - []
 - trick0020:
-    - ["Grapevine", "de{Knoten}"]
+    - ["Grapevine", "de{Knoten}", "de{Gummifuß}", "de{Achter}"]
     - ["xrxxASySDs0", "FwtzestNMwQ", "nDhvTDuobDE", "c9YokTcE_bY"]
     - 2
     - "Footwork"
@@ -168,7 +168,7 @@ tricks:
     - []
     - [trick0035, trick0036]
 - trick0021:
-    - ["Kip-up"]
+    - ["Kip-up", "Kick-up"]
     - ["7FoqJiusIk0"]
     - 3
     - "Acrobatic"
@@ -320,7 +320,7 @@ tricks:
     - []
     - []
 - trick0040:
-    - ["Sweep Spin"]
+    - ["Sweep Spin", "Sweep Pirouette"]
     - ["V-Qj-V3Ov3k"]
     - 3
     - "Footwork"
@@ -408,7 +408,7 @@ tricks:
     - [trick0020]
     - []
 - trick0051:
-      - ["Couch Potato"]
+      - ["Couch Potato", "Venom"]
       - ["vfc2GukBBsk"]
       - 4
       - "Hydroblading"
@@ -432,7 +432,7 @@ tricks:
     - []
     - []
 - trick0054:
-    - ["Toe Donut"]
+    - ["Toe Donut", "Sitting Toe Spin"]
     - ["GBdYeRkjkos", "T4Dehm969_Y"]
     - 2
     - "Spin"
