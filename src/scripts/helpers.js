@@ -91,11 +91,12 @@ function changeTimeZone(date, timeZone) {
 }
 
 export function isReleased(trick) {
-    let releaseTime = new Date();
-    const date = releaseTime.getDate();
-    releaseTime = changeTimeZone(releaseTime, 'Europe/Berlin');
-    releaseTime.setDate(date);
-    releaseTime.setHours(12);
-    releaseTime.setMinutes(30);
-    return releaseTime > new Date(trick.releaseDate);
+    let trickDate = new Date(trick.releaseDate);
+    let today = new Date();
+    today = changeTimeZone(today, 'Europe/Berlin');
+    if (today.setHours(0, 0, 0, 0) === trickDate.setHours(0, 0, 0, 0)) {
+        const now = new Date();
+        return (now.getHours() >= 12 && now.getMinutes() >= 30)
+    }
+    return true;
 }
