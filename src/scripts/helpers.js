@@ -96,7 +96,7 @@ export function isReleased(trick) {
     today = changeTimeZone(today, 'Europe/Berlin');
     if (today.setHours(0, 0, 0, 0) === trickDate.setHours(0, 0, 0, 0)) {
         const now = new Date();
-        return (now.getHours() >= 12 && now.getMinutes() >= 30)
+        return ((now.getHours() >= 12 && now.getMinutes() >= 30) || now.getHours() >= 13)
     }
     return true;
 }
