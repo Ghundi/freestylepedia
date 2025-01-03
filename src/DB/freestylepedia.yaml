@@ -272,7 +272,7 @@ tricks:
     - [trick0047]
     - []
 - trick0034:
-    - ["Pirouette"]
+    - ["Pirouette", "One Foot Spin"]
     - ["iVzdUXbFT88"]
     - 3
     - "Spin"
@@ -518,5 +518,13 @@ tricks:
     - "Spin"
     - "2024-11-29"
     - [trick0054]
+    - []
+- trick0065:
+    - ["Heel Spin"]
+    - ["X92ffU_ZRfk"]
+    - 4
+    - "Spin"
+    - "2025-01-03"
+    - [trick0034]
     - []
      
