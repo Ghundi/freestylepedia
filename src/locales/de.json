@@ -29,8 +29,13 @@
     "MisgDescription": "Die Mainz Ice Skate Group ist eine kleine Ice Breaking Gruppe aus Mainz in in der Nähe von Frankfurt. Wir sind gerne in vielen Eishallen bei uns in der Nähe.",
     "BlackbirdDescription": "Die Blackbirds sind eine Münchner Ice Freestyle-Gruppe mit acht Mitgliedern. Wir sind im Olympia Eisstadion München, sowie im Weststadion anzutreffen. "
   },
+  "calendar": {
+    "description": "Dieser Kalendar listet alle Ice Freestyle events die wir kennen",
+    "eventList": "Eventliste"
+  },
   "navBar": {
     "freestylepedia": "Freestylepedia",
+    "calendar": "Kalendar",
     "categoryTree": "Category Tree",
     "trickTree": "Skill Tree"
   },

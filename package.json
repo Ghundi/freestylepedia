@@ -11,17 +11,20 @@
   "dependencies": {
     "@capacitor/android": "^5.7.4",
     "@intlify/unplugin-vue-i18n": "^3.0.1",
+    "@schedule-x/calendar": "^2.14.3",
+    "@schedule-x/theme-default": "^2.14.3",
+    "@schedule-x/vue": "^2.12.2",
     "@vue-flow/core": "^1.41.1",
     "googleapis": "^144.0.0",
     "js-yaml": "^4.1.0",
     "pinia": "^2.1.7",
+    "rollup": ">=4.22.4",
+    "vite": ">=5.2.14",
     "vite-plugin-vuetify": "^2.0.4",
     "vue": "^3.4.21",
     "vue-i18n": "^9.10.1",
     "vue-router": "^4.3.0",
-    "vuetify": "^3.7.2",
-    "rollup": ">=4.22.4",
-    "vite": ">=5.2.14"
+    "vuetify": "^3.7.2"
   },
   "devDependencies": {
     "@mdi/font": "^7.4.47",

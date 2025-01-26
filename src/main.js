@@ -3,6 +3,8 @@ import App from "@/App.vue";
 
 // vuetify styling
 import { createVuetify } from 'vuetify'
+// vuetify calendar component
+import { VCalendar } from 'vuetify/labs/VCalendar'
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 
 // VueFlow
@@ -23,6 +25,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 
 const routes = [
     { path: '/', component: () => import('./pages/VideoList.vue') },
+    { path: '/Calendar', component: () => import('./pages/Calendar.vue') },
     { path: '/CategoryTree', component: () => import('./pages/CategoryTree.vue') },
     { path: '/TrickTree', component: () => import('./pages/TrickTree.vue') },
     { path: '/AboutUs', component: () => import('./pages/AboutUs.vue') },
@@ -52,6 +55,9 @@ const i18n = createI18n({
 });
 const pinia = createPinia()
 const vuetify = createVuetify({
+    components: {
+        VCalendar,
+    },
     theme: {
         defaultTheme: 'light'
     }

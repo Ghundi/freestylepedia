@@ -2,7 +2,7 @@
 import WebpageIcon from "@/components/Frame/WebpageIcon.vue";
 import Blackbird from "../../assets/blackbirdIcon.png"
 import MISG from "../../assets/MISG-white-Icon.png"
-import { useSupporters} from "@/scripts/store.js";
+import { useSupporters } from "@/scripts/store.js";
 const supporters = useSupporters().images
 </script>
 
