@@ -8,7 +8,7 @@ export default {
   data() {
     return {
       dialShare: false,
-      pageUrl: 'https://freestylepedia.org/' + toPath(useRoute().params.trickname.toString()),
+      pageUrl: 'https://freestylepedia.org/trick/' + toPath(useRoute().params.trickname.toString()),
     };
   },
   methods: {
