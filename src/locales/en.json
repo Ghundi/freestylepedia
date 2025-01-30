@@ -30,7 +30,7 @@
     "BlackbirdDescription": "The Blackbirds are a munich Ice Freestyle Group with eight members. They are mostly in the East Stadium Munich or the new Olympic Ice Stadium."
   },
   "calendar": {
-    "description": "This calendar lists all ice freestyle events we know of",
+    "disclaimer": "This calendar lists all ice freestyle events that the teams reported to us. All info is subject to change!",
     "eventList": "Event List"
   },
   "navBar": {
@@ -76,6 +76,7 @@
     "de": "German"
   },
   "close": "Close",
+  "moreInfo": "More Info",
   "difficulty": "Difficulty",
   "category": "Category",
   "similarTricks": "Similar Tricks",

@@ -9,6 +9,7 @@ import Turtle from "../assets/supporters/Turtle_upscaled.webp"
 import NK from "../assets/supporters/nagyerdei korisok.webp"
 import IceRad from "../assets/supporters/ICERAD.webp"
 import Guardians from "../assets/supporters/Guardians.webp"
+import calendarYAML from "@/DB/calendar.yaml";
 
 export const useFAQ = defineStore('FAQ', {
     state: () => {
@@ -17,6 +18,52 @@ export const useFAQ = defineStore('FAQ', {
         }
     },
 })
+
+export const useEventsStore = defineStore('Events', {
+    state: () => {
+        return {
+            events: []
+        }
+    },
+    actions: {
+        loadYAML() {
+            const events = [];
+            for (let i = 0; i < calendarYAML["events"].length; i++) {
+                const j = i + 1;
+                const lst = calendarYAML["events"][i][("event" + ("000" + j).slice(-4))];
+                const event = {
+                    eventID: ("event" + ("000" + j).slice(-4)),
+                    title: lst[0],
+                    location: lst[1],
+                    moreInfo: lst[2],
+                    dateStart: new Date(lst[3]), dateEnd: new Date(lst[4]),
+                    description: lst[5],
+                    color: lst[6], team: lst[7],
+                    price: lst[8],
+                    style: lst[9],
+                    type: lst[10]
+                }
+                events.push(event)
+            }
+
+            return events;
+        },
+        getCalendarEvents(events) {
+            const calEvents = [];
+            for (let i = 0; i < events.length; i++) {
+                calEvents.push( {
+                    id: events[i].eventID,
+                    title: events[i].title,
+                    start: events[i].dateStart.toISOString().split('T')[0],
+                    end: events[i].dateEnd.toISOString().split('T')[0],
+                    calendarID: events[i].logo
+                } )
+            }
+            return calEvents;
+        }
+    }
+})
+
 export const useSupporters = defineStore('supporters', {
     state: () => {
         return {

@@ -5,6 +5,7 @@ import {useVideoStore} from "@/scripts/videoStore.js";
 import Footer from "@/components/Frame/footer.vue"
 import { useTheme } from 'vuetify'
 import { getBgColor } from "@/scripts/helpers.js";
+import {useEventsStore} from "@/scripts/store.js";
 
 const theme = useTheme();
 
@@ -16,6 +17,9 @@ const videoStore = useVideoStore();
 videoStore.videos = videoStore.loadYAML();
 videoStore.categoryTree = videoStore.getConnectionsGraph(videoStore, getOrientation());
 videoStore.trickTree = videoStore.getTrickTreeGraph(videoStore, getOrientation());
+
+const eventStore = useEventsStore()
+eventStore.events = eventStore.loadYAML()
 </script>
 
 

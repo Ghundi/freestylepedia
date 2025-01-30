@@ -1,6 +1,8 @@
 <script setup>
 const props = defineProps({
   title: String,
+  moreInfo: String,
+  location: String,
   logo: String,
   date: String,
   description: String,
@@ -9,7 +11,6 @@ const props = defineProps({
 </script>
 
 <script>
-import NK from "../assets/supporters/nagyerdei korisok.webp"
 
 export default {
   data: () => ({
@@ -59,7 +60,7 @@ export default {
               <v-avatar :color="color">
                 <v-img
                     contain
-                    :src="NK"
+                    :src="logo"
                     aspect-ratio="1"
                     alt="Supporter Logo"
                 ></v-img>
@@ -82,13 +83,23 @@ export default {
           width="auto"
       >
         <v-card
-            prepend-icon="mdi-information"
             class="pa-5"
         >
           <v-card-title>
             {{ title }}
           </v-card-title>
-          {{ description }}
+          <v-card-subtitle>
+            {{ location }}
+          </v-card-subtitle>
+          <v-card-text>
+            {{ description }}
+          </v-card-text>
+          <v-btn
+              class="ms-auto"
+              :href="'https://www.' + moreInfo"
+              target="_blank">
+            {{ $t('moreInfo') }}
+          </v-btn>
           <template v-slot:actions>
             <v-btn
                 class="ms-auto"

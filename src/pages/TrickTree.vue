@@ -3,17 +3,13 @@ import {ref, watch} from 'vue';
 import {VueFlow} from '@vue-flow/core';
 import {useVideoStore} from '@/scripts/videoStore.js';
 import {useTheme} from 'vuetify';
-import {getBgColor} from "@/scripts/helpers.js";
+import {getBgColor, getOrientation} from "@/scripts/helpers.js";
 
 import ClickableNode from '../components/mindMap/ClickableNode.vue';
 import CategoryNode from '../components/mindMap/CategoryNode.vue';
 import DifficultyNode from '../components/mindMap/DifficultyNode.vue';
 
 const videoStore = useVideoStore();
-
-function getOrientation() {
-  return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
-}
 
 const graph = ref(videoStore.trickTree);
 const theme = useTheme();

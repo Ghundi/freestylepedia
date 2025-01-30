@@ -1,17 +1,12 @@
 <script setup>
-import { useCategoryStore, useSelCategoryStore } from '@/scripts/store.js';
-const categoryStore = useCategoryStore();
-const selCategoryStore = useSelCategoryStore();
 </script>
 
 <script>
-
-import { useSelCategoryStore } from "@/scripts/store.js";
-
+const values = ['A', 'B', 'C', 'D'];
 export default {
   data: () => ({
     extended: false,
-    selected: useSelCategoryStore().categories,
+    selected: values,
     updateStore: [
       value => {
         const selCategoryStore = useSelCategoryStore();
@@ -27,14 +22,14 @@ export default {
   <v-menu v-model="extended" :close-on-content-click="false">
     <template v-slot:activator="{ props }">
       <v-btn v-bind="props">
-        {{ $t("toolbar.categories") }}
+        {{ $t("calendar.country") }}
       </v-btn>
     </template>
     <v-card>
         <v-checkbox
-            v-model="selCategoryStore.categories"
+            v-model="values"
             :rules="updateStore"
-            v-for="item in categoryStore.categories"
+            v-for="item in values"
             v-bind:label="$t('categories.' + item)"
             :value="item"
             hide-details

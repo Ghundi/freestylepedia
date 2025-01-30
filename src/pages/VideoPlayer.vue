@@ -1,10 +1,10 @@
 <script setup>
 import {useVideoStore} from "@/scripts/videoStore.js";
 import { useRoute } from "vue-router";
-import ShareDial from "@/components/shareDial.vue";
+import ShareDial from "@/components/VideoPlayer/shareDial.vue";
 import { pathToStr } from "@/scripts/helpers.js";
-import OtherTutorials from "@/components/otherTutorials.vue";
-import TrickLinkList from "@/components/trickLinkList.vue";
+import OtherTutorials from "@/components/VideoPlayer/otherTutorials.vue";
+import TrickLinkList from "@/components/VideoPlayer/trickLinkList.vue";
 
 const videoStore = useVideoStore()
 

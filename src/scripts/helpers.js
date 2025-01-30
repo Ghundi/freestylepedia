@@ -100,3 +100,18 @@ export function isReleased(trick) {
     }
     return true;
 }
+
+export function getLocalDate(date, locale) {
+    if(locale === 'en') {
+        const dateOptions = {year: 'numeric', month: 'long', day: 'numeric'}
+        return date.toLocaleDateString(locale, dateOptions)
+    }
+    else {
+        const dateOptions = {year: 'numeric', month: 'numeric', day: 'numeric'}
+        return date.toLocaleDateString(locale, dateOptions)
+    }
+}
+
+export function getOrientation() {
+    return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
+}

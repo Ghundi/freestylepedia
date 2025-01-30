@@ -1,0 +1,38 @@
+events:
+# title
+# location continent, country, city, rink
+# more info link
+# dateStart full days
+# dateEnd
+# description
+# color
+# team
+# price
+# style {NewBlade, Breaking, Classic, Mixed}
+# type {Battle, Contest, Meetup, Gala}
+
+
+- event0001:
+    - 'Budapest Meetup'
+    - 'Europe, Hungary, Budapest, PH'
+    - 'instagram.com/nagyerdeikorisok'
+    - "2025-01-31"
+    - "2025-02-02"
+    - 'Ice Freestyle Meetup in Budapest by a river.'
+    - 'yellow'
+    - 'Nagyerdei Korisok'
+    - '10€/d'
+    - 'Mixed'
+    - 'Contest, Meetup'
+- event0002:
+      - 'Turtlestyle Battle Contest of DOOOM'
+      - 'Europe, Germany, Bottrop, PH'
+      - 'instagram.com/turtlestyle'
+      - "2025-02-08"
+      - "2025-02-08"
+      - 'Ice Freestyle to the max'
+      - '#c03030'
+      - 'Turtle'
+      - '5€'
+      - 'Classic'
+      - 'Contest'

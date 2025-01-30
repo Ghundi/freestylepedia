@@ -1,5 +1,5 @@
 <script setup>
-import VideoCard from '../components/VideoCard.vue';
+import VideoCard from '@/components/VideoPlayer/VideoCard.vue';
 import Toolbar from "@/components/Toolbar/Toolbar.vue";
 import {useSelSortingOrderStore} from "@/scripts/store.js";
 import {useVideoStore} from "@/scripts/videoStore.js";
