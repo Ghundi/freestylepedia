@@ -269,7 +269,7 @@ tricks:
     - 2
     - "Stop"
     - "2020-03-13"
-    - [trick0047]
+    - [trick0068, trick0047]
     - []
 - trick0034:
     - ["Pirouette", "One Foot Spin"]
@@ -429,7 +429,7 @@ tricks:
     - 5
     - "Hydroblading"
     - "2019-03-01"
-    - []
+    - [trick0068]
     - []
 - trick0054:
     - ["Toe Donut", "Sitting Toe Spin"]
@@ -540,8 +540,15 @@ tricks:
     - ["DdDInpsHz2M"]
     - 2
     - "Hydroblading"
-    - "2025-02-02"
+    - "2025-02-19"
     - []
     - []
-
+- trick0068:
+    - ["Eagle"]
+    - ["I7XVtvn3wDg"]
+    - 1
+    - "Hydroblading"
+    - "2025-02-26"
+    - []
+    - []
      
