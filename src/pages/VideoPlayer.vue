@@ -9,7 +9,7 @@ import TrickLinkList from "@/components/trickLinkList.vue";
 const videoStore = useVideoStore()
 
 function getEmbedURL(id) {
-  return 'https://www.youtube-nocookie.com/embed/' + id + '?si=9jysKI0zbGHvpMCD&mute=1'
+  return 'https://www.youtube-nocookie.com/embed/' + id + '?si=9jysKI0zbGHvpMCD&mute=1&start=4'
 }
 
 const trick = videoStore.getTrickByTitle(pathToStr(useRoute().params.trickname), videoStore);
