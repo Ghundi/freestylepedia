@@ -27,6 +27,7 @@ function updateEdgeColorsBasedOnTheme() {
       stroke: edgeColor,  // Update stroke color based on theme
     }
   }));
+
 }
 
 watch(() => theme.global.current.value.dark, () => {
@@ -52,36 +53,36 @@ watch(() => theme.global.current.value.dark, () => {
         :style="{ backgroundColor: getBgColor(theme.global.current.value.dark) }">
       {{ $t('categoryTree.description') }}
     </v-card-text>
-
-    <VueFlow
-        :nodes="graph[0]"
-        :edges="graph[1]"
-        :nodes-draggable="false"
-        :nodes-connectable="false"
-        :pan-on-drag="true"
-        :zoom-on-pinch="true"
-        :zoom-on-scroll="true"
-        :zoom-on-double-click="false"
-        :edges-focusable="false"
-        :prevent-scrolling="true"
-        class="basic-flow"
-        :default-viewport="{ zoom: 1 }"
-        :translate-extent="[
-        [(getOrientation() === 'Landscape') ? -4000 : -2000, -2000],
-        [(getOrientation() === 'Landscape') ? 5000 : 2000, 3000]
-      ]"
-        :min-zoom="(getOrientation() === 'Landscape') ? 0.2 : 0.2"
-        :max-zoom="(getOrientation() === 'Landscape') ? 1.5 : 2"
-        fit-view-on-init
-        :style="{ backgroundColor: getBgColor(theme.global.current.value.dark) }"
-    >
-      <template #node-clickable="props">
-        <ClickableNode v-bind="props.data"/>
-      </template>
-      <template #node-category="props">
-        <CategoryNode v-bind="props.data"/>
-      </template>
-    </VueFlow>
+    <div style="width: 100%; height: 800px">
+      <VueFlow
+          :nodes="graph[0]"
+          :edges="graph[1]"
+          :nodes-draggable="false"
+          :nodes-connectable="false"
+          :pan-on-drag="true"
+          :zoom-on-pinch="true"
+          :zoom-on-scroll="true"
+          :zoom-on-double-click="false"
+          :edges-focusable="false"
+          :prevent-scrolling="true"
+          class="basic-flow"
+          :default-viewport="{ zoom: (getOrientation() === 'Landscape') ? 0.05 : 0.14 }"
+          :translate-extent="[
+          [(getOrientation() === 'Landscape') ? -4000 : -2000, -2000],
+          [(getOrientation() === 'Landscape') ? 5000 : 2000, 3000]
+        ]"
+          :min-zoom="(getOrientation() === 'Landscape') ? 0.2 : 0.12"
+          :max-zoom="(getOrientation() === 'Landscape') ? 0.5 : 1"
+          :style="{ backgroundColor: getBgColor(theme.global.current.value.dark) }"
+      >
+        <template #node-clickable="props">
+          <ClickableNode v-bind="props.data"/>
+        </template>
+        <template #node-category="props">
+          <CategoryNode v-bind="props.data"/>
+        </template>
+      </VueFlow>
+    </div>
   </v-card>
 </template>
 
