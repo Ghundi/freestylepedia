@@ -98,7 +98,7 @@ export const useVideoStore = defineStore('videoStore', {
 
             let videos = null;
             // check if videos already loaded from YAML
-            if (state.videos.length > 0) {
+            if (state.videos !== undefined) {
                 videos = state.videos;
             }
             else {
@@ -112,8 +112,12 @@ export const useVideoStore = defineStore('videoStore', {
                     // add connections if base trick and mark variants as visited
                     if(videos[i].connections.length > 0) {
                         for (let j = 0; j < videos[i].connections.length; j++) {
-                            categoryNode.children.at(-1).children.push(trickToNode(state.getTrickByID(videos[i].connections[j], state)));
-                            visitedIDs.add(videos[i].connections[j]);
+                            try {
+                                categoryNode.children.at(-1).children.push(trickToNode(state.getTrickByID(videos[i].connections[j], state)));
+                                visitedIDs.add(videos[i].connections[j]);
+                            } catch (e) {
+                                console.log(`${videos[i].connections[j]} not available`);
+                            }
                         }
                     }
                 }
@@ -204,7 +208,7 @@ export const useVideoStore = defineStore('videoStore', {
 
             let videos = null;
             // check if videos already loaded from YAML
-            if (state.videos.length > 0) {
+            if (state.videos !== undefined) {
                 videos = state.videos;
             }
             else {
@@ -225,9 +229,15 @@ export const useVideoStore = defineStore('videoStore', {
                     // check if requirements exist
                     if(videos[i].requirements.length > 0) {
                         for (let j = 0; j < videos[i].requirements.length; j++) {
-                            const parent = graphSearch(state.getTrickByID(videos[i].requirements[j], state).title[0], graph[0]);
-                            if(parent != null) {
-                                parent.children.push(trickToNode(videos[i]));
+                            try {
+                                const parent = graphSearch(state.getTrickByID(videos[i].requirements[j], state).title[0], graph[0]);
+                                if(parent != null) {
+                                    parent.children.push(trickToNode(videos[i]));
+                                    visitedIDs.push(videos[i].trickID);
+                                }
+                            }
+                            catch (e) {
+                                console.log(`${videos[i].requirements[j]} not available`)
                                 visitedIDs.push(videos[i].trickID);
                             }
                         }
