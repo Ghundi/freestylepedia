@@ -149,8 +149,8 @@ tricks:
     - 2
     - "Footwork"
     - "2023-11-08"
-    - []
-    - []
+    - [trick0070]
+    - [trick0070]
 - trick0019:
     - ["Head down", "Billard"]
     - ["5_4m1NnS7D0", "czKbXDxQgX8", "KjkKkh5eKiY"]
@@ -166,7 +166,7 @@ tricks:
     - "Footwork"
     - "2020-02-14"
     - []
-    - [trick0035, trick0036]
+    - [trick0035, trick0036, trick0070]
 - trick0021:
     - ["Kip-up", "Kick-up"]
     - ["7FoqJiusIk0"]
