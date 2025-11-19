@@ -9,7 +9,7 @@ import Turtle from "../assets/supporters/Turtle_upscaled.webp"
 import NK from "../assets/supporters/nagyerdei korisok.webp"
 import IceRad from "../assets/supporters/ICERAD.webp"
 import Guardians from "../assets/supporters/Guardians.webp"
-import IFP from "../assets/supporters/IFP Print Brust Link.png"
+import IFP from "../assets/supporters/IFP Print Brust Link.webp"
 import ICD from "../assets/supporters/ICD.webp"
 
 export const useFAQ = defineStore('FAQ', {
