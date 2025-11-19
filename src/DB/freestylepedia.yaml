@@ -85,8 +85,8 @@ tricks:
       - 4
       - "Hydroblading"
       - "2019-03-08"
-      - []
-      - [trick0014, trick0011, trick0045]
+      - [trick0045]
+      - [trick0014, trick0011]
 - trick0011:
       - ["Forward Spiderman", "Forward Hydro", "Limbo", "Dragon Squad"]
       - ["K7mM-kyIfLw"]

@@ -96,7 +96,14 @@ export const useVideoStore = defineStore('videoStore', {
                 categoryMap.set(categories[i], categoryNode);
             }
 
-            let videos = state.loadYAML()
+            let videos = null;
+            // check if videos already loaded from YAML
+            if (state.videos.length > 0) {
+                videos = state.videos;
+            }
+            else {
+                videos = state.loadYAML()
+            }
             const visitedIDs = new Set();
             for (let i = 0; i < videos.length; i++) {
                 if(!visitedIDs.has(videos[i].trickID)) {
@@ -194,7 +201,16 @@ export const useVideoStore = defineStore('videoStore', {
             let graph= [{name: "root", children: []}];
             let visitedIDs = [];
             let i = 0;
-            let videos = state.loadYAML();
+
+            let videos = null;
+            // check if videos already loaded from YAML
+            if (state.videos.length > 0) {
+                videos = state.videos;
+            }
+            else {
+                videos = state.loadYAML()
+            }
+
             videos.sort((a, b) => {
                 if (a.category < b.category) {
                     return -1;  // a comes before b

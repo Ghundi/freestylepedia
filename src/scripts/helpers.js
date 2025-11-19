@@ -94,9 +94,6 @@ export function isReleased(trick) {
     let trickDate = new Date(trick.releaseDate);
     let today = new Date();
     today = changeTimeZone(today, 'Europe/Berlin');
-    if (today.setHours(0, 0, 0, 0) === trickDate.setHours(0, 0, 0, 0)) {
-        const now = new Date();
-        return ((now.getHours() >= 12 && now.getMinutes() >= 30) || now.getHours() >= 13)
-    }
-    return true;
+    // UNIX timestamp of trick in the past
+    return (Math.floor(trickDate.getTime() / 1000) < Math.floor(today.getTime() / 1000));
 }
