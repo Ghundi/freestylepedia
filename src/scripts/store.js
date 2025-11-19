@@ -10,6 +10,7 @@ import NK from "../assets/supporters/nagyerdei korisok.webp"
 import IceRad from "../assets/supporters/ICERAD.webp"
 import Guardians from "../assets/supporters/Guardians.webp"
 import IFP from "../assets/supporters/IFP Print Brust Link.png"
+import ICD from "../assets/supporters/ICD.webp"
 
 export const useFAQ = defineStore('FAQ', {
     state: () => {
@@ -27,8 +28,20 @@ export const useSupporters = defineStore('supporters', {
                     link: 'https://www.youtube.com/@AlpineIceFreestyle'
                 },
                 {
-                    imgSrc: IceRad,
-                    link: 'https://www.instagram.com/icerad'
+                    imgSrc: GlobalIce,
+                    link: 'https://www.instagram.com/globaliceskate'
+                },
+                {
+                    imgSrc: Guardians,
+                    link: 'https://www.youtube.com/@icefreestyleguardians'
+                },
+                {
+                    imgSrc: ICD,
+                    link: 'https://www.instagram.com/ice.cracks_dresden'
+                },
+                {
+                    imgSrc: MunichEast,
+                    link: 'https://www.youtube.com/@ice.freestyler.muenchen-ost'
                 },
                 {
                     imgSrc: IFO,
@@ -39,16 +52,8 @@ export const useSupporters = defineStore('supporters', {
                     link: 'https://www.instagram.com/ice_freestyler_polarion'
                 },
                 {
-                    imgSrc: GlobalIce,
-                    link: 'https://www.instagram.com/globaliceskate'
-                },
-                {
-                    imgSrc: Guardians,
-                    link: 'https://www.youtube.com/@icefreestyleguardians'
-                },
-                {
-                    imgSrc: MunichEast,
-                    link: 'https://www.youtube.com/@ice.freestyler.muenchen-ost'
+                    imgSrc: IceRad,
+                    link: 'https://www.instagram.com/icerad'
                 },
                 {
                     imgSrc: NK,
