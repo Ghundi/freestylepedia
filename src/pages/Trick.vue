@@ -6,20 +6,24 @@ import { pathToStr } from "@/scripts/helpers.js";
 import OtherTutorials from "@/components/otherTutorials.vue";
 import TrickLinkList from "@/components/trickLinkList.vue";
 
-const videoStore = useVideoStore()
-
 function getEmbedURL(id) {
   return 'https://www.youtube-nocookie.com/embed/' + id + '?si=9jysKI0zbGHvpMCD&mute=1&start=4'
 }
 
+const videoStore = useVideoStore()
 const trick = videoStore.getTrickByTitle(pathToStr(useRoute().params.trickname), videoStore);
+
 </script>
 
 <script>
 export default {
   mounted() {
-    // Ensure the div is focusable to capture key events
-    document.getElementById('main').focus();
+    const videoStore = useVideoStore()
+    const trick = videoStore.getTrickByTitle(pathToStr(useRoute().params.trickname), videoStore);
+    if (trick != -1) {
+      // Ensure the div is focusable to capture key events
+      document.getElementById('main').focus();
+    }
   }
 };
 function hasHistory () {
@@ -28,7 +32,7 @@ function hasHistory () {
 </script>
 
 <template>
-  <head>
+  <head v-if="trick != -1">
     <title>{{ trick.title.toString() }}</title>
     <meta name="description" :content="'Here you can learn the ice freestyle trick or move ' + trick.title.toString() +'.' +
      'Here is more information about the trick: ' + trick.toString()">
@@ -40,7 +44,7 @@ function hasHistory () {
       <v-empty-state
           icon="mdi-alert-circle-outline"
           :text="$t('trickNotFoundSuggestion')"
-          :title="$t('trickNotFound')"
+          :title="pathToStr(useRoute().params.trickname) + ' ' + $t('trickNotFound')"
       ></v-empty-state>
     </div>
   </div>
