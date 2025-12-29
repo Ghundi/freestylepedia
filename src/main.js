@@ -27,7 +27,7 @@ const routes = [
     { path: '/TrickTree', component: () => import('./pages/TrickTree.vue') },
     { path: '/AboutUs', component: () => import('./pages/AboutUs.vue') },
     { path: '/Help', component: () => import('./pages/Help.vue') },
-    { path: '/trick/:trickname', component: () => import('./pages/VideoPlayer.vue') },
+    { path: '/trick/:trickname', component: () => import('./pages/Trick.vue') },
     { path: '/:pathMatch(.*)*', component: () => import('./pages/notFound.vue') },
 ]
 

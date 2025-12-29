@@ -1,6 +1,7 @@
 <script setup>
-import NavBar from "@/components/Frame/navBar.vue";
+
 import 'vuetify/styles';
+import NavBar from "@/components/Frame/navBar.vue";
 import {useVideoStore} from "@/scripts/videoStore.js";
 import Footer from "@/components/Frame/footer.vue"
 import { useTheme } from 'vuetify'

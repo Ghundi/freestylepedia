@@ -26,38 +26,33 @@ export default {
 
 <template>
   <v-speed-dial
-      location="top left"
+      location="top center"
       transition="slide-y-transition"
   >
     <template v-slot:activator="{ props: opened }">
-      <v-fab
+      <v-btn
           v-bind="opened"
           icon="mdi-share-variant"
-      ></v-fab>
+      ></v-btn>
     </template>
-    <!--
     <v-btn
         key="1"
-        icon="mdi-close"></v-btn>
-        -->
-    <v-btn
-        key="2"
         icon="mdi-content-copy"
         @click="copyURL(pageUrl)"></v-btn>
     <v-btn
-        key="3"
+        key="2"
         icon="mdi-whatsapp"
         color="#25d366"
         :href="`https://wa.me/?text=Check%20out%20this%20trick%20${pageUrl}/`"
         target="_blank"></v-btn>
     <v-btn
-        key="5"
+        key="3"
         icon="mdi-facebook"
         color="#0866ff"
         :href="`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}%2F&amp;src=sdkpreparse`"
         target="_blank"></v-btn>
     <v-btn
-        key="6"
+        key="4"
         icon="mdi-twitter"
         color="#1DA1F2"
         :href="`https://www.twitter.com/share?url=http://${pageUrl}/`"
