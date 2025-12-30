@@ -15,8 +15,8 @@ function getOrientation() {
 
 const videoStore = useVideoStore();
 videoStore.videos = videoStore.loadYAML();
-videoStore.categoryTree = videoStore.getConnectionsGraph(videoStore, getOrientation());
-videoStore.trickTree = videoStore.getTrickTreeGraph(videoStore, getOrientation());
+// videoStore.categoryTree = videoStore.getConnectionsGraph(videoStore, getOrientation());
+// videoStore.trickTree = videoStore.getTrickTreeGraph(videoStore, getOrientation());
 </script>
 
 

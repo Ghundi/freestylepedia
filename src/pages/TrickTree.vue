@@ -10,6 +10,7 @@ import CategoryNode from '../components/mindMap/CategoryNode.vue';
 import DifficultyNode from '../components/mindMap/DifficultyNode.vue';
 
 const videoStore = useVideoStore();
+videoStore.trickTree = videoStore.getTrickTreeGraph(videoStore, getOrientation());
 
 function getOrientation() {
   return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";

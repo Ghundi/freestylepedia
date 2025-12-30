@@ -9,6 +9,7 @@ import ClickableNode from '../components/mindMap/ClickableNode.vue';
 import CategoryNode from '../components/mindMap/CategoryNode.vue';
 
 const videoStore = useVideoStore();
+videoStore.categoryTree = videoStore.getConnectionsGraph(videoStore, getOrientation());
 
 function getOrientation() {
   return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
