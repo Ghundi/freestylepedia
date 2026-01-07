@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import LanguageSelector from "@/components/Frame/languageSelector.vue";
 import ThemeSwitcher from "@/components/Frame/themeSwitcher.vue";
+import InstallButton from './installButton.vue';
 
 const drawer = ref(null)
 
@@ -26,6 +27,7 @@ function getOrientation(){
       </v-card-title>
     </v-card>
     <v-spacer></v-spacer>
+    <install-button/>
     <language-selector/>
     <theme-switcher/>
   </v-app-bar>

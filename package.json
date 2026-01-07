@@ -2,10 +2,9 @@
   "name": "freestylepedia",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "vite build",
+    "dev": "vite",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -15,19 +14,22 @@
     "googleapis": "^144.0.0",
     "js-yaml": "^4.1.0",
     "pinia": "^2.1.7",
+    "register-service-worker": "^1.7.2",
+    "rollup": ">=4.22.4",
+    "vite": ">=5.2.14",
     "vite-plugin-vuetify": "^2.0.4",
     "vue": "^3.4.21",
     "vue-i18n": "^9.14.5",
     "vue-router": "^4.3.0",
-    "vuetify": "^3.7.2",
-    "rollup": ">=4.22.4",
-    "vite": ">=5.2.14"
+    "vuetify": "^3.7.2"
   },
   "devDependencies": {
     "@mdi/font": "^7.4.47",
     "@modyfi/vite-plugin-yaml": "^1.1.0",
     "@vitejs/plugin-vue": "^5.0.3",
+    "@vue/cli-plugin-pwa": "~5.0.0",
     "rollup": ">=4.22.4",
     "vite": ">=5.2.14"
-  }
+  },
+  "type": "module"
 }

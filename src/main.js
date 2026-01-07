@@ -21,6 +21,8 @@ import {createPinia} from "pinia";
 // routing
 import {createRouter, createWebHistory} from 'vue-router'
 
+import './registerServiceWorker'
+
 const routes = [
     { path: '/', component: () => import('./pages/VideoList.vue') },
     { path: '/CategoryTree', component: () => import('./pages/CategoryTree.vue') },

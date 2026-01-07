@@ -1,0 +1,17 @@
+{
+  "name": "Freestylepedia",
+  "short_name": "Freestylepedia",
+  "description": "A place for ice freestyle tricks",
+  "start_url": ".",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#42b983",
+  "icons": [
+    {
+      "src": "../src/assets/blackbirdIcon.png",
+      "sizes": "176x176",
+      "type": "image/png"
+    }
+  ]
+}
