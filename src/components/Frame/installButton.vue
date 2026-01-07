@@ -1,6 +1,5 @@
 <template>
-    <v-btn variant="outlined">Install as App</v-btn>
-  <button v-if="deferredPrompt" @click="install">Install as App</button>
+  <button variant="outlined" v-if="deferredPrompt" @click="install">Install as App</button>
 </template>
 
 <script>
