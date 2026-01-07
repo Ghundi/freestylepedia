@@ -23,33 +23,17 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'My Vue PWA',
-        short_name: 'MyApp',
+        name: 'Freestylepedia',
+        short_name: 'Freestylepedia',
         start_url: '/',
         display: 'standalone',
         background_color: '#ffffff',
-        theme_color: '#42b983',
+        theme_color: '#000000',
         icons: [
           {
-            src: '/icons/icon-192.png',
-            sizes: '192x192',
+            src: './src/assets/blackbirdIcon.png',
+            sizes: '176x176',
             type: 'image/png'
-          },
-           {
-            src: '/icons/icon-512.png',
-            sizes: '512x512',
-            type: 'image/png'
-          }
-        ]
-      },
-      workbox: {
-        runtimeCaching: [
-          {
-            handler: 'NetworkFirst',
-            options: {
-              cacheName: 'api-cache',
-              expiration: { maxEntries: 50, maxAgeSeconds: 86400 }
-            }
           }
         ]
       }

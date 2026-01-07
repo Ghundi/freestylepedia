@@ -88,6 +88,8 @@ function hasHistory () {
             {{ videoStore.getLocalTrickTitles(trick, $i18n.locale).slice(-1)[0]}}
           </strong>
           &nbsp;
+        </v-col>
+        <v-col>
           <ShareDial/>
         </v-col>
       </v-row>
