@@ -1,32 +1,40 @@
 <template>
-  <button variant="outlined" v-if="deferredPrompt" @click="install">Install as App</button>
+  <v-btn 
+  v-if="deferredPrompt" 
+  variant="plain" 
+  @click="install" 
+  class="text-none">
+    {{ $t('navBar.installApp') }}
+  </v-btn>
 </template>
 
-<script>
-export default {
-  data() {
-    return { deferredPrompt: null };
-  },
-  created() {
-    window.addEventListener('beforeinstallprompt', (e) => {
-      // Prevent Chrome from showing its own mini-infobar
-      e.preventDefault();
-      this.deferredPrompt = e;   // stash the event
-    });
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-    // Optional: Detect when the app is installed
-    window.addEventListener('appinstalled', () => {
-      console.log('PWA was installed');
-    });
-  },
-  methods: {
-    async install() {
-      if (!this.deferredPrompt) return;
-      this.deferredPrompt.prompt();
-      const { outcome } = await this.deferredPrompt.userChoice;
-      console.log('User response to the install prompt:', outcome);
-      this.deferredPrompt = null;
-    }
+const deferredPrompt = ref<Event | null>(null)
+
+onMounted(() => {
+  const before = (e: Event) => {
+    e.preventDefault()
+    deferredPrompt.value = e
   }
-};
+  const installed = () => console.log('PWA was installed')
+
+  window.addEventListener('beforeinstallprompt', before)
+  window.addEventListener('appinstalled', installed)
+
+  onBeforeUnmount(() => {
+    window.removeEventListener('beforeinstallprompt', before)
+    window.removeEventListener('appinstalled', installed)
+  })
+})
+
+async function install() {
+  if (!deferredPrompt.value) return
+  const ev: any = deferredPrompt.value
+  ev.prompt()
+  const { outcome } = await ev.userChoice
+  console.log('User response to the install prompt:', outcome)
+  deferredPrompt.value = null
+}
 </script>

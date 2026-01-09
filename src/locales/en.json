@@ -33,7 +33,10 @@
     "freestylepedia": "Freestylepedia",
     "categoryTree": "Category Tree",
     "trickTree": "Trick Tree",
-    "myProgress": "My Progress"
+    "myProgress": "My Progress",
+    "switchToLightMode": "Switch to Light Mode",
+    "switchToDarkMode": "Switch to Dark Mode",
+    "installApp": "Install App"
   },
   "toolbar": {
     "resetFilters": "Reset Filters",
