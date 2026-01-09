@@ -9,7 +9,7 @@
   "theme_color": "#42b983",
   "icons": [
     {
-      "src": "../src/assets/blackbirdIcon.png",
+      "src": "../src/assets/blackbirdLogoInverted.jpg",
       "sizes": "176x176",
       "type": "image/png"
     }
