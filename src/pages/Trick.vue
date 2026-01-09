@@ -44,8 +44,8 @@ function hasHistory () {
     <div class="text-center pa-5 ma-15">
       <v-empty-state
           icon="mdi-alert-circle-outline"
-          :text="$t('trickNotFoundSuggestion')"
-          :title="pathToStr(useRoute().params.trickname) + ' ' + $t('trickNotFound')"
+          :text="$t('error.trickNotFoundSuggestion')"
+          :title="pathToStr(useRoute().params.trickname) + ' ' + $t('error.trickNotFound')"
       ></v-empty-state>
     </div>
   </div>

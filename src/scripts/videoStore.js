@@ -110,27 +110,28 @@ export const useTrickStore = defineStore('trickStore', {
                 categoryMap.set(categories[i], categoryNode);
             }
 
-            let videos = null;
+            let tricks = null;
             // check if videos already loaded from YAML
-            if (state.videos !== undefined) {
-                videos = state.videos;
+            if (state.tricks !== undefined) {
+                tricks = state.tricks;
             }
             else {
-                videos = state.loadYAML()
+                state.loadYAML()
+                tricks = state.tricks
             }
             const visitedIDs = new Set();
-            for (let i = 0; i < videos.length; i++) {
-                if(!visitedIDs.has(videos[i].trickID)) {
-                    const categoryNode = categoryMap.get(videos[i].category);
-                    categoryNode.children.push(trickToNode(videos[i]));
+            for (let i = 0; i < tricks.length; i++) {
+                if(!visitedIDs.has(tricks[i].trickID)) {
+                    const categoryNode = categoryMap.get(tricks[i].category);
+                    categoryNode.children.push(trickToNode(tricks[i]));
                     // add connections if base trick and mark variants as visited
-                    if(videos[i].connections.length > 0) {
-                        for (let j = 0; j < videos[i].connections.length; j++) {
+                    if(tricks[i].connections.length > 0) {
+                        for (let j = 0; j < tricks[i].connections.length; j++) {
                             try {
-                                categoryNode.children.at(-1).children.push(trickToNode(state.getTrickByID(videos[i].connections[j], state)));
-                                visitedIDs.add(videos[i].connections[j]);
+                                categoryNode.children.at(-1).children.push(trickToNode(state.getTrickByID(tricks[i].connections[j], state)));
+                                visitedIDs.add(tricks[i].connections[j]);
                             } catch (e) {
-                                console.log(`${videos[i].connections[j]} not available`);
+                                console.log(`${tricks[i].connections[j]} not available`);
                             }
                         }
                     }
@@ -205,8 +206,8 @@ export const useTrickStore = defineStore('trickStore', {
             const xScaleFactor = (orientation === 'Portrait') ? 1 : 3;
             // compute num children for categories
             const num_children = new Array(categories.length).fill(0);
-            for (let i = 0; i < videos.length; i++) {
-                num_children[categories.indexOf(videos[i].category)]++;
+            for (let i = 0; i < tricks.length; i++) {
+                num_children[categories.indexOf(tricks[i].category)]++;
             }
 
             [nodes, edges] = convGraph(nodes, edges, null, graph[0], null)
@@ -220,16 +221,17 @@ export const useTrickStore = defineStore('trickStore', {
             let visitedIDs = [];
             let i = 0;
 
-            let videos = null;
+            let tricks = null;
             // check if videos already loaded from YAML
             if (state.videos !== undefined) {
-                videos = state.videos;
+                tricks = state.tricks;
             }
             else {
-                videos = state.loadYAML()
+                state.loadYAML()
+                tricks = state.tricks
             }
 
-            videos.sort((a, b) => {
+            tricks.sort((a, b) => {
                 if (a.category < b.category) {
                     return -1;  // a comes before b
                 }
@@ -238,32 +240,32 @@ export const useTrickStore = defineStore('trickStore', {
                 }
                 return 0;       // a and b are equal
             });
-            while (visitedIDs.length <= videos.length) {
-                if(!visitedIDs.includes(videos[i].trickID)) {
+            while (visitedIDs.length <= tricks.length) {
+                if(!visitedIDs.includes(tricks[i].trickID)) {
                     // check if requirements exist
-                    if(videos[i].requirements.length > 0) {
-                        for (let j = 0; j < videos[i].requirements.length; j++) {
+                    if(tricks[i].requirements.length > 0) {
+                        for (let j = 0; j < tricks[i].requirements.length; j++) {
                             try {
-                                const parent = graphSearch(state.getTrickByID(videos[i].requirements[j], state).title[0], graph[0]);
+                                const parent = graphSearch(state.getTrickByID(tricks[i].requirements[j], state).title[0], graph[0]);
                                 if(parent != null) {
-                                    parent.children.push(trickToNode(videos[i]));
-                                    visitedIDs.push(videos[i].trickID);
+                                    parent.children.push(trickToNode(tricks[i]));
+                                    visitedIDs.push(tricks[i].trickID);
                                 }
                             }
                             catch (e) {
-                                console.log(`${videos[i].requirements[j]} not available`)
-                                visitedIDs.push(videos[i].trickID);
+                                console.log(`${tricks[i].requirements[j]} not available`)
+                                visitedIDs.push(tricks[i].trickID);
                             }
                         }
                     }
                     // start new subtree
                     else {
                         // decide if left or right
-                        graph[0].children.push(trickToNode(videos[i], 2));
-                        visitedIDs.push(videos[i].trickID);
+                        graph[0].children.push(trickToNode(tricks[i], 2));
+                        visitedIDs.push(tricks[i].trickID);
                     }
                 }
-                i = (i + 1) % videos.length;tricks
+                i = (i + 1) % tricks.length;tricks
             }
 
             // calculate tree widths and height

@@ -42,6 +42,9 @@ function getOrientation(){
       <v-list-item to="/">
         {{ $t("navBar.freestylepedia") }}
       </v-list-item>
+      <v-list-item to="/MyProgress">
+        {{ $t("navBar.myProgress") }}
+      </v-list-item>
       <v-list-item to="/CategoryTree">
         {{ $t("navBar.categoryTree") }}
       </v-list-item>

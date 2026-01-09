@@ -60,9 +60,6 @@ export default {
       </v-col>
     </v-row>
     <v-row>
-      <ProgressBar/>
-    </v-row>
-    <v-row>
       <v-chip
           v-for="category in selCategoriesStore.categories"
           class="ma-1 text-black"

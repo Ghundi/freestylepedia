@@ -32,7 +32,8 @@
   "navBar": {
     "freestylepedia": "Freestylepedia",
     "categoryTree": "Category Tree",
-    "trickTree": "Skill Tree"
+    "trickTree": "Skill Tree",
+    "myProgress": "Mein Fortschritt"
   },
   "toolbar": {
     "resetFilters": "Filter zurücksetzen",
@@ -72,16 +73,22 @@
     "mastered": "Mastered",
     "non-mastered": "Nicht-Mastered"
   },
+  "error": {
+    "noResults": "Wir konnten keine Tricks finden",
+    "noResultsSuggestions": "Versuche deine Suche und Filter zu verändern. Manchmal helfen allgemeinere Filter und Suchterme bei deiner Suche weiter.",
+    "pageNotFound": "Seite nicht gefunden",
+    "pageNotFoundSuggestion": "Vielleicht ist die URL falsch geschrieben",
+    "trickNotFound": "nicht gefunden",
+    "trickNotFoundSuggestion": "Vielleicht ist der Trick in der URL falsch geschrieben. Nur der Name vom YouTube Thumbnail wird akzeptiert."
+  },
+  "myProgress": {
+    "myProgress": "Mein Fortschritt",
+    "progress": "Fortschritt"
+  },
   "close": "Schließen",
   "difficulty": "Schwierigkeit",
   "category": "Kategorie",
   "similarTricks": "Ähnliche Tricks",
   "requirements": "Erfordert",
-  "otherTutorials": "Andere Tutorials",
-  "noResults": "Wir konnten keine Tricks finden",
-  "noResultsSuggestions": "Versuche deine Suche und Filter zu verändern. Manchmal helfen allgemeinere Filter und Suchterme bei deiner Suche weiter.",
-  "pageNotFound": "Seite nicht gefunden",
-  "pageNotFoundSuggestion": "Vielleicht ist die URL falsch geschrieben",
-  "trickNotFound": "nicht gefunden",
-  "trickNotFoundSuggestion": "Vielleicht ist der Trick in der URL falsch geschrieben. Nur der Name vom YouTube Thumbnail wird akzeptiert."
+  "otherTutorials": "Andere Tutorials"
 }

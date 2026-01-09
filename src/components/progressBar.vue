@@ -1,7 +1,5 @@
 <script setup>
 
-    import { ref } from 'vue'
-
     import { useMasteredStore } from '@/scripts/store'
     import { useTrickStore } from '@/scripts/videoStore';
 
@@ -13,11 +11,11 @@
 <template>
     <v-progress-linear
     color="green-lighten-1"
-    :model-value="(mastered.calcShareMastered(videoStore.shownTricks) / videoStore.shownTricks.length) * 100"
+    :model-value="(mastered.calcShareMastered(videoStore.tricks) / videoStore.tricks.length) * 100"
     :height="20"
     rounded
     >
-        <strong>{{ Math.ceil((mastered.calcShareMastered(videoStore.shownTricks) / videoStore.shownTricks.length) * 100) }}% ( {{ mastered.calcShareMastered(videoStore.shownTricks) }} / {{ videoStore.shownTricks.length }})</strong>
+        <strong>{{ Math.ceil((mastered.calcShareMastered(videoStore.tricks) / videoStore.tricks.length) * 100) }}% ( {{ mastered.calcShareMastered(videoStore.tricks) }} / {{ videoStore.tricks.length }})</strong>
     </v-progress-linear>
 </template>
 

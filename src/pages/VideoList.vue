@@ -42,8 +42,8 @@ const trickStore = useTrickStore();
         <v-col>
           <v-empty-state
               icon="mdi-magnify"
-              :text="$t('noResultsSuggestions')"
-              :title="$t('noResults')"
+              :text="$t('error.noResultsSuggestions')"
+              :title="$t('error.noResults')"
           ></v-empty-state>
         </v-col>
       </template>

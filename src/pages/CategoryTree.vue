@@ -8,14 +8,14 @@ import { getBgColor } from "@/scripts/helpers.js";
 import ClickableNode from '../components/mindMap/ClickableNode.vue';
 import CategoryNode from '../components/mindMap/CategoryNode.vue';
 
-const videoStore = useTrickStore();
-videoStore.categoryTree = videoStore.getConnectionsGraph(videoStore, getOrientation());
+const trickStore = useTrickStore();
+trickStore.categoryTree = trickStore.getConnectionsGraph(trickStore, getOrientation());
 
 function getOrientation() {
   return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
 }
 
-const graph = ref(videoStore.categoryTree);
+const graph = ref(trickStore.categoryTree);
 const theme = useTheme();
 
 // Function to set edge color dynamically based on theme

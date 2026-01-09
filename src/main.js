@@ -28,6 +28,7 @@ const routes = [
     { path: '/', component: () => import('./pages/VideoList.vue') },
     { path: '/CategoryTree', component: () => import('./pages/CategoryTree.vue') },
     { path: '/TrickTree', component: () => import('./pages/TrickTree.vue') },
+    { path: '/MyProgress', component: () => import('./pages/MyProgress.vue') },
     { path: '/AboutUs', component: () => import('./pages/AboutUs.vue') },
     { path: '/Help', component: () => import('./pages/Help.vue') },
     { path: '/trick/:trickname', component: () => import('./pages/Trick.vue') },
