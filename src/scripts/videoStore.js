@@ -1,8 +1,7 @@
 import {defineStore} from "pinia";
 import tricksYAML from "@/DB/freestylepedia.yaml";
-import {checkSpace, getNodeIdxById, getSpaceIdx, graphSearch, isReleased, trickToNode} from "@/scripts/helpers.js";
-import {useCategoryStore, useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore, useSortingOrderStore} from "@/scripts/store.js";
-import { computed } from 'vue'
+import {checkSpace, getNodeIdxById, getSpaceIdx, graphSearch, isReleased, trickToNode, sortedVideos, filteredVideos } from "@/scripts/helpers.js";
+import {useCategoryStore, useSelSortingOrderStore, useSortingOrderStore} from "@/scripts/store.js";
 
 export const useTrickStore = defineStore('trickStore', {
     state: () => ({
@@ -13,9 +12,9 @@ export const useTrickStore = defineStore('trickStore', {
     }),
     getters: {
         shownTricks(state) {
-            const selSortingOrderStore = useSortingOrderStore()
-            const sorted = state.sortedVideos(state, selSortingOrderStore.by)
-            const filtered = state.filteredVideos(sorted)
+            const selSortingOrderStore = useSelSortingOrderStore()
+            const sorted = sortedVideos(state.tricks, selSortingOrderStore.by)
+            const filtered = filteredVideos(sorted)
             return filtered
         }
     },
@@ -410,42 +409,7 @@ export const useTrickStore = defineStore('trickStore', {
                 }
             }
             catch(e) {
-                return e
-            }
-        },
-        filteredVideos: (videos) => {
-            const selDifficulties = useSelDifficultyStore().val;
-            const selCategories = useSelCategoryStore().categories;
-            const curSearch = useCurSearchStore().val;
-            const markedStore = useMarkedStore();
-            const masteredStore = useMasteredStore();
-            const filtered = [];
-            try{
-                for(let i = 0; i < videos.length; i++) {
-                    // if in between difficulty
-                    if( selDifficulties[0] <= videos[i].difficulty && videos[i].difficulty <= selDifficulties[1]) {
-                        // if matches selected categories
-                        if((selCategories.length > 0) ? selCategories.includes(videos[i].category) : true) {
-                            for (let j = 0; j < videos[i].title.length; j++) {
-                                // if search at least partially matches
-                                if((curSearch) ? videos[i].title[j].toLowerCase().includes(curSearch.toLowerCase()) : true) {
-                                    // if trick is mastered
-                                    if(markedStore.selMarkers.includes('mastered') && masteredStore.isMastered(videos[i].title[0])) {
-                                        filtered.push(videos[i]);
-                                        break;
-                                    }
-                                    else if(markedStore.selMarkers.includes('non-mastered') && !masteredStore.isMastered(videos[i].title[0])) {
-                                        filtered.push(videos[i]);
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                return filtered;
-            }
-            catch(e) {
+                console.log(e)
                 return e
             }
         },

@@ -1,4 +1,67 @@
 //helpers
+import {useCategoryStore, useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore} from "@/scripts/store.js";
+
+
+export function sortedVideos(tricks, sortOption)  {
+    try{
+        switch (sortOption) {
+            case 'difficultyDown':
+                return [...tricks].sort((a, b) => b.difficulty - a.difficulty || a.title[0].localeCompare(b.title[0]));
+            case 'difficultyUp':
+                return [...tricks].sort((a, b) => a.difficulty - b.difficulty || a.title[0].localeCompare(b.title[0]));
+            case 'nameUp':
+                return [...tricks].sort((a, b) => a.title[0].localeCompare(b.title[0]));
+            case 'nameDown':
+                return [...tricks].sort((a, b) => b.title[0].localeCompare(a.title[0]));
+            case 'releasedDown':
+                return [...tricks].sort((a, b) => a.releaseDate - b.releaseDate);
+            case 'releasedUp':
+                return [...tricks].sort((a, b) => b.releaseDate - a.releaseDate);
+            default:
+                return [...tricks];
+        }
+    }
+    catch(e) {
+        return e
+    }
+}
+
+export function filteredVideos(videos) {
+            const selDifficulties = useSelDifficultyStore().val;
+            const selCategories = useSelCategoryStore().categories;
+            const curSearch = useCurSearchStore().val;
+            const markedStore = useMarkedStore();
+            const masteredStore = useMasteredStore();
+            const filtered = [];
+            try{
+                for(let i = 0; i < videos.length; i++) {
+                    // if in between difficulty
+                    if( selDifficulties[0] <= videos[i].difficulty && videos[i].difficulty <= selDifficulties[1]) {
+                        // if matches selected categories
+                        if((selCategories.length > 0) ? selCategories.includes(videos[i].category) : true) {
+                            for (let j = 0; j < videos[i].title.length; j++) {
+                                // if search at least partially matches
+                                if((curSearch) ? videos[i].title[j].toLowerCase().includes(curSearch.toLowerCase()) : true) {
+                                    // if trick is mastered
+                                    if(markedStore.selMarkers.includes('mastered') && masteredStore.isMastered(videos[i].title[0])) {
+                                        filtered.push(videos[i]);
+                                        break;
+                                    }
+                                    else if(markedStore.selMarkers.includes('non-mastered') && !masteredStore.isMastered(videos[i].title[0])) {
+                                        filtered.push(videos[i]);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                return filtered;
+            }
+            catch(e) {
+                return e
+            }
+        }
 
 export function trickToNode(trick, orientation = 3) {
     return {

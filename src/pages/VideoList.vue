@@ -14,7 +14,6 @@ const trickStore = useTrickStore();
 
   const trickStore = useTrickStore();
   const selSortingOrderStore = useSelSortingOrderStore();
-  trickStore.filteredVideos(trickStore.sortedVideos(trickStore, selSortingOrderStore.by))
 </script>
 
 <template>

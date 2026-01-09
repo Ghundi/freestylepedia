@@ -7,7 +7,6 @@
 
     const mastered = useMasteredStore()
     const videoStore = useTrickStore()
-    const tricksMastered = ref(mastered.calcShareMastered(videoStore.shownTricks))
 
 </script>
 
