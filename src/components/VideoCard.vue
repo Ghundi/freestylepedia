@@ -81,8 +81,8 @@ function isMobile() {
           <template v-if="mastered.isMastered(title[0])">
             <v-icon 
               icon='mdi-medal'
-              :style="{'bottom': isMobile() ? '80px' : '8px',
-                      'right': isMobile() ? '105px' : '-197px'}"
+              :style="{'bottom': isMobile() ? '10px' : '8px',
+                      'right': isMobile() ? '-120px' : '-197px'}"
               />
           </template>
         </v-card>
