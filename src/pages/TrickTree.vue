@@ -1,7 +1,7 @@
 <script setup>
 import {ref, watch} from 'vue';
 import {VueFlow} from '@vue-flow/core';
-import {useVideoStore} from '@/scripts/videoStore.js';
+import {useTrickStore} from '@/scripts/videoStore.js';
 import {useTheme} from 'vuetify';
 import {getBgColor} from "@/scripts/helpers.js";
 
@@ -9,7 +9,7 @@ import ClickableNode from '../components/mindMap/ClickableNode.vue';
 import CategoryNode from '../components/mindMap/CategoryNode.vue';
 import DifficultyNode from '../components/mindMap/DifficultyNode.vue';
 
-const videoStore = useVideoStore();
+const videoStore = useTrickStore();
 videoStore.trickTree = videoStore.getTrickTreeGraph(videoStore, getOrientation());
 
 function getOrientation() {

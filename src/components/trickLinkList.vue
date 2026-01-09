@@ -1,7 +1,7 @@
 <script setup>
-import {useVideoStore} from "@/scripts/videoStore.js";
+import {useTrickStore} from "@/scripts/videoStore.js";
 
-const videoStore = useVideoStore()
+const videoStore = useTrickStore()
 const props = defineProps({
   title: String,
   list: Array[String],

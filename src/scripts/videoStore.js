@@ -1,15 +1,24 @@
 import {defineStore} from "pinia";
 import tricksYAML from "@/DB/freestylepedia.yaml";
 import {checkSpace, getNodeIdxById, getSpaceIdx, graphSearch, isReleased, trickToNode} from "@/scripts/helpers.js";
-import {useCategoryStore, useCurSearchStore, useSelCategoryStore, useSelDifficultyStore} from "@/scripts/store.js";
+import {useCategoryStore, useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore, useSortingOrderStore} from "@/scripts/store.js";
+import { computed } from 'vue'
 
-export const useVideoStore = defineStore('videoStore', {
+export const useTrickStore = defineStore('trickStore', {
     state: () => ({
-        videos: [],
+        tricks: [],
         categoryTree: [],
         trickTree: [],
         newestTrick: null,
     }),
+    getters: {
+        shownTricks(state) {
+            const selSortingOrderStore = useSortingOrderStore()
+            const sorted = state.sortedVideos(state, selSortingOrderStore.by)
+            const filtered = state.filteredVideos(sorted)
+            return filtered
+        }
+    },
     actions: {
         loadYAML() {
             const tricks = [];
@@ -39,7 +48,7 @@ export const useVideoStore = defineStore('videoStore', {
                 this.newestTrick = newestTrick.title[0];
             }
 
-            return tricks;
+            this.tricks = tricks;
         },
         getThumbnailUrl(videoId) {
             return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
@@ -53,12 +62,17 @@ export const useVideoStore = defineStore('videoStore', {
             return -1;
         },
         getTrickByTitle(trickTitle, state) {
-            for (let i = 0; i < state.videos.length; i++) {
-                if(state.videos[i].title[0] === trickTitle) {
-                    return state.videos[i];
+            try {
+                for (let i = 0; i < state.videos.length; i++) {
+                    if(state.videos[i].title[0] === trickTitle) {
+                        return state.videos[i];
+                    }
                 }
+                return -1;
             }
-            return -1;
+            catch(e) {
+                return -1;
+            }
         },
         getLocalTrickTitles(trick, lang) {
             let res = [];
@@ -76,9 +90,9 @@ export const useVideoStore = defineStore('videoStore', {
         },
         getTitlesStr(state, lang) {
             let res = [];
-            for (let i = 0; i < state.videos.length; i++) {
-                state.getLocalTrickTitles(state.videos[i], lang)
-                res.push(state.getLocalTrickTitles(state.videos[i], lang));
+            for (let i = 0; i < state.tricks.length; i++) {
+                state.getLocalTrickTitles(state.tricks[i], lang)
+                res.push(state.getLocalTrickTitles(state.tricks[i], lang));
             }
             return res.flat();
         },
@@ -249,7 +263,7 @@ export const useVideoStore = defineStore('videoStore', {
                         visitedIDs.push(videos[i].trickID);
                     }
                 }
-                i = (i + 1) % videos.length;
+                i = (i + 1) % videos.length;tricks
             }
 
             // calculate tree widths and height
@@ -376,42 +390,63 @@ export const useVideoStore = defineStore('videoStore', {
             return [nodes, edges];
         },
         sortedVideos: (state, sortOption) => {
-            switch (sortOption) {
-                case 'difficultyDown':
-                    return [...state.videos].sort((a, b) => b.difficulty - a.difficulty || a.title[0].localeCompare(b.title[0]));
-                case 'difficultyUp':
-                    return [...state.videos].sort((a, b) => a.difficulty - b.difficulty || a.title[0].localeCompare(b.title[0]));
-                case 'nameUp':
-                    return [...state.videos].sort((a, b) => a.title[0].localeCompare(b.title[0]));
-                case 'nameDown':
-                    return [...state.videos].sort((a, b) => b.title[0].localeCompare(a.title[0]));
-                case 'releasedDown':
-                    return [...state.videos].sort((a, b) => a.releaseDate - b.releaseDate);
-                case 'releasedUp':
-                    return [...state.videos].sort((a, b) => b.releaseDate - a.releaseDate);
-                default:
-                    return [...state.videos];
+            try{
+                switch (sortOption) {
+                    case 'difficultyDown':
+                        return [...state.tricks].sort((a, b) => b.difficulty - a.difficulty || a.title[0].localeCompare(b.title[0]));
+                    case 'difficultyUp':
+                        return [...state.tricks].sort((a, b) => a.difficulty - b.difficulty || a.title[0].localeCompare(b.title[0]));
+                    case 'nameUp':
+                        return [...state.tricks].sort((a, b) => a.title[0].localeCompare(b.title[0]));
+                    case 'nameDown':
+                        return [...state.tricks].sort((a, b) => b.title[0].localeCompare(a.title[0]));
+                    case 'releasedDown':
+                        return [...state.tricks].sort((a, b) => a.releaseDate - b.releaseDate);
+                    case 'releasedUp':
+                        return [...state.tricks].sort((a, b) => b.releaseDate - a.releaseDate);
+                    default:
+                        return [...state.tricks];
+                }
+            }
+            catch(e) {
+                return e
             }
         },
         filteredVideos: (videos) => {
             const selDifficulties = useSelDifficultyStore().val;
             const selCategories = useSelCategoryStore().categories;
             const curSearch = useCurSearchStore().val;
+            const markedStore = useMarkedStore();
+            const masteredStore = useMasteredStore();
             const filtered = [];
-
-            for(let i = 0; i < videos.length; i++) {
-                if( selDifficulties[0] <= videos[i].difficulty && videos[i].difficulty <= selDifficulties[1]) {
-                    if((selCategories.length > 0) ? selCategories.includes(videos[i].category) : true) {
-                        for (let j = 0; j < videos[i].title.length; j++) {
-                            if((curSearch) ? videos[i].title[j].toLowerCase().includes(curSearch.toLowerCase()) : true) {
-                                filtered.push(videos[i]);
-                                break;
+            try{
+                for(let i = 0; i < videos.length; i++) {
+                    // if in between difficulty
+                    if( selDifficulties[0] <= videos[i].difficulty && videos[i].difficulty <= selDifficulties[1]) {
+                        // if matches selected categories
+                        if((selCategories.length > 0) ? selCategories.includes(videos[i].category) : true) {
+                            for (let j = 0; j < videos[i].title.length; j++) {
+                                // if search at least partially matches
+                                if((curSearch) ? videos[i].title[j].toLowerCase().includes(curSearch.toLowerCase()) : true) {
+                                    // if trick is mastered
+                                    if(markedStore.selMarkers.includes('mastered') && masteredStore.isMastered(videos[i].title[0])) {
+                                        filtered.push(videos[i]);
+                                        break;
+                                    }
+                                    else if(markedStore.selMarkers.includes('non-mastered') && !masteredStore.isMastered(videos[i].title[0])) {
+                                        filtered.push(videos[i]);
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
                 }
+                return filtered;
             }
-            return filtered;
+            catch(e) {
+                return e
+            }
         },
     }
 })

@@ -1,4 +1,28 @@
+<script setup>
+import { useCategoryStore, useMasteredStore } from "@/scripts/store.js";
+import { useTrickStore} from "@/scripts/videoStore.js";
+import { toPath } from "@/scripts/helpers.js";
+
+const videoStore = useTrickStore();
+const categoryStore = useCategoryStore();
+
+const props = defineProps({
+  id: Array[String],
+  title: Array[String],
+  difficulty: Number,
+  category: String,
+  releaseDate: Date,
+  thumbnailUrl: String,
+  requirements: Array[String],
+  connections: Array[String],
+});
+
+  const mastered = useMasteredStore();
+
+</script>
+
 <script>
+
 export default {
   data () {
     return {
@@ -54,29 +78,15 @@ function isMobile() {
               New!
             </v-card-title>
           </template>
+          <template v-if="mastered.isMastered(title[0])">
+            <v-icon 
+              icon='mdi-medal'
+              :style="{'bottom': isMobile() ? '80px' : '8px',
+                      'right': isMobile() ? '105px' : '-197px'}"
+              />
+          </template>
         </v-card>
 </template>
-
-<script setup>
-import { useCategoryStore } from "@/scripts/store.js";
-import { useVideoStore} from "@/scripts/videoStore.js";
-import {toPath} from "@/scripts/helpers.js";
-
-const videoStore = useVideoStore();
-const categoryStore = useCategoryStore();
-
-const props = defineProps({
-  id: Array[String],
-  title: Array[String],
-  difficulty: Number,
-  category: String,
-  releaseDate: Date,
-  thumbnailUrl: String,
-  requirements: Array[String],
-  connections: Array[String],
-});
-
-</script>
 
 <style scoped>
 .smaller-font {

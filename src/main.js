@@ -21,6 +21,7 @@ import {createPinia} from "pinia";
 // routing
 import {createRouter, createWebHistory} from 'vue-router'
 
+// PWA
 import './registerServiceWorker'
 
 const routes = [

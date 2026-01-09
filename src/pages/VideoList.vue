@@ -1,17 +1,20 @@
 <script setup>
 import VideoCard from '../components/VideoCard.vue';
 import Toolbar from "@/components/Toolbar/Toolbar.vue";
-import {useSelSortingOrderStore} from "@/scripts/store.js";
-import {useVideoStore} from "@/scripts/videoStore.js";
+import { useSelSortingOrderStore } from "@/scripts/store.js";
+import { useTrickStore } from "@/scripts/videoStore.js";
 
-const videoStore = useVideoStore();
-const selSortingOrderStore = useSelSortingOrderStore();
+const trickStore = useTrickStore();
 </script>
 
 <script>
-function isMobile() {
-  return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
+  function isMobile() {
+    return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+
+  const trickStore = useTrickStore();
+  const selSortingOrderStore = useSelSortingOrderStore();
+  trickStore.filteredVideos(trickStore.sortedVideos(trickStore, selSortingOrderStore.by))
 </script>
 
 <template>
@@ -21,22 +24,22 @@ function isMobile() {
     </v-row>
     <v-row :justify="isMobile() ? 'center' : 'start'" align-content="center">
       <template
-          v-for="video in videoStore.filteredVideos(videoStore.sortedVideos(videoStore, selSortingOrderStore.by))"
-          :key="video.title[0]">
+          v-for="trick in trickStore.shownTricks"
+          :key="trick.title[0]">
         <v-col cols="auto">
             <VideoCard
-                :id="video.id"
-                :title="video.title"
-                :difficulty="video.difficulty"
-                :category="video.category"
-                :releaseDate="video.releaseDate"
-                :thumbnailUrl="useVideoStore().getThumbnailUrl(video.id[0])"
-                :connections="video.connections"
-                :requirements="video.requirements"
+                :id="trick.id"
+                :title="trick.title"
+                :difficulty="trick.difficulty"
+                :category="trick.category"
+                :releaseDate="trick.releaseDate"
+                :thumbnailUrl="useTrickStore().getThumbnailUrl(trick.id[0])"
+                :connections="trick.connections"
+                :requirements="trick.requirements"
             />
         </v-col>
       </template>
-      <template v-if="videoStore.filteredVideos(videoStore.sortedVideos(videoStore, selSortingOrderStore.by)).length === 0">
+      <template v-if="trickStore.tricks.length === 0">
         <v-col>
           <v-empty-state
               icon="mdi-magnify"

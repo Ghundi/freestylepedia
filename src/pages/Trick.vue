@@ -1,16 +1,17 @@
 <script setup>
-import {useVideoStore} from "@/scripts/videoStore.js";
+import {useTrickStore} from "@/scripts/videoStore.js";
 import { useRoute } from "vue-router";
 import ShareDial from "@/components/shareDial.vue";
 import { pathToStr } from "@/scripts/helpers.js";
 import OtherTutorials from "@/components/otherTutorials.vue";
 import TrickLinkList from "@/components/trickLinkList.vue";
+import MasteredBtn from "@/components/masteredBtn.vue";
 
 function getEmbedURL(id) {
   return 'https://www.youtube-nocookie.com/embed/' + id + '?si=9jysKI0zbGHvpMCD&mute=1&start=4'
 }
 
-const videoStore = useVideoStore()
+const videoStore = useTrickStore()
 const trick = videoStore.getTrickByTitle(pathToStr(useRoute().params.trickname), videoStore);
 
 </script>
@@ -18,7 +19,7 @@ const trick = videoStore.getTrickByTitle(pathToStr(useRoute().params.trickname),
 <script>
 export default {
   mounted() {
-    const videoStore = useVideoStore()
+    const videoStore = useTrickStore()
     const trick = videoStore.getTrickByTitle(pathToStr(useRoute().params.trickname), videoStore);
     if (trick != -1) {
       // Ensure the div is focusable to capture key events
@@ -91,6 +92,9 @@ function hasHistory () {
         </v-col>
         <v-col>
           <ShareDial/>
+        </v-col>
+        <v-col>
+          <MasteredBtn :title="trick.title[0]"/>
         </v-col>
       </v-row>
       <v-row>

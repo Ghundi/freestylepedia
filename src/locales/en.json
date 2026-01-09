@@ -38,7 +38,8 @@
     "resetFilters": "Reset Filters",
     "search": "Search",
     "sortBy": "sort by",
-    "categories": "categories"
+    "categories": "Categories",
+    "marked": "Marked"
   },
   "videoCard": {
     "open": "Open"
@@ -69,6 +70,10 @@
   "languages": {
     "en": "English",
     "de": "German"
+  },
+  "marked": {
+    "mastered": "Mastered",
+    "non-mastered": "Non-Mastered"
   },
   "close": "Close",
   "difficulty": "Difficulty",

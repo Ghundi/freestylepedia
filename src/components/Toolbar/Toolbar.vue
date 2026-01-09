@@ -4,7 +4,9 @@ import OrderBySelector from "@/components/Toolbar/OrderBySelector.vue";
 import CategorySelector from "@/components/Toolbar/CategorySelector.vue";
 import DifficultySlider from "@/components/Toolbar/DifficultySlider.vue";
 import SearchBar from "@/components/Toolbar/SearchBar.vue";
-import { useCurSearchStore, useSelCategoryStore, useSelDifficultyStore, useCategoryStore} from "@/scripts/store.js";
+import { useCurSearchStore, useSelCategoryStore, useSelDifficultyStore, useCategoryStore, useMarkedStore} from "@/scripts/store.js";
+import ProgressBar from "../progressBar.vue";
+import MarkedTricksSelector from "./MarkedTricksSelector.vue";
 const selCategoriesStore = useSelCategoryStore()
 const categoryStore = useCategoryStore();
 </script>
@@ -18,9 +20,12 @@ export default {
       const selCategoryStore = useSelCategoryStore();
       const selDifficultyStore = useSelDifficultyStore();
       const curSearchStore = useCurSearchStore();
+      const markedStore = useMarkedStore();
+
       selCategoryStore.reset();
       selDifficultyStore.reset();
       curSearchStore.reset();
+      markedStore.reset();
     },
     removeCategory(category) {
       const selCategoryStore = useSelCategoryStore();
@@ -39,6 +44,9 @@ export default {
       <v-col>
         <CategorySelector/>
       </v-col>
+      <v-col>
+        <MarkedTricksSelector/>
+      </v-col>
       <v-col class="minWidth">
         <DifficultySlider/>
       </v-col>
@@ -50,6 +58,9 @@ export default {
       <v-col>
         <OrderBySelector/>
       </v-col>
+    </v-row>
+    <v-row>
+      <ProgressBar/>
     </v-row>
     <v-row>
       <v-chip

@@ -2,12 +2,12 @@
 import {useCurSearchStore} from "@/scripts/store.js";
 
 const searchStore = useCurSearchStore();
-const videoStore = useVideoStore();
+const videoStore = useTrickStore();
 </script>
 
 <script>
 import { useCurSearchStore } from "@/scripts/store.js";
-import { useVideoStore} from "@/scripts/videoStore.js";
+import { useTrickStore} from "@/scripts/videoStore.js";
 
 export default {
   data: () => ({

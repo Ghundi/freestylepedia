@@ -2,7 +2,7 @@
 
 import 'vuetify/styles';
 import NavBar from "@/components/Frame/navBar.vue";
-import {useVideoStore} from "@/scripts/videoStore.js";
+import { useTrickStore } from "@/scripts/videoStore.js";
 import Footer from "@/components/Frame/footer.vue"
 import { useTheme } from 'vuetify'
 import { getBgColor } from "@/scripts/helpers.js";
@@ -13,10 +13,11 @@ function getOrientation() {
   return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
 }
 
-const videoStore = useVideoStore();
-videoStore.videos = videoStore.loadYAML();
+const videoStore = useTrickStore();
+videoStore.loadYAML();
 // videoStore.categoryTree = videoStore.getConnectionsGraph(videoStore, getOrientation());
 // videoStore.trickTree = videoStore.getTrickTreeGraph(videoStore, getOrientation());
+
 </script>
 
 

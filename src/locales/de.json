@@ -38,7 +38,8 @@
     "resetFilters": "Filter zurücksetzen",
     "search": "Suchen",
     "sortBy": "Sortieren",
-    "categories": "Kategorien"
+    "categories": "Kategorien",
+    "marked": "Markiert"
   },
   "footer": {
     "help": "Hilfe",
@@ -66,6 +67,10 @@
   "languages": {
     "en": "Englisch",
     "de": "Deutsch"
+  },  
+  "marked": {
+    "mastered": "Mastered",
+    "non-mastered": "Nicht-Mastered"
   },
   "close": "Schließen",
   "difficulty": "Schwierigkeit",

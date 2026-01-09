@@ -1,5 +1,10 @@
 import {defineStore} from 'pinia';
 
+import { markRaw, ref, watch } from 'vue'
+
+// Cookies
+import { useCookies } from 'vue3-cookies' 
+
 // suporter logos
 import AIF from "../assets/supporters/aif w.webp";
 import GlobalIce from '../assets/supporters/GlobalIce.webp';
@@ -11,6 +16,84 @@ import IceRad from "../assets/supporters/ICERAD.webp"
 import Guardians from "../assets/supporters/Guardians.webp"
 import IFP from "../assets/supporters/IFP Print Brust Link.webp"
 import ICD from "../assets/supporters/ICD.webp"
+
+export const useMarkedStore = defineStore('marked', {
+    state: () => {
+        return {
+            markers: ['mastered', 'non-mastered'],
+            selMarkers : ['mastered', 'non-mastered']
+        }
+    },
+    actions: {
+        update(value){
+            this.selMarkers = value;
+        },
+        add(value) {
+            if(markers.includes(value)) {
+                selMarkers.push(value)
+            }
+        },
+        remove(value) {
+            const index = this.selMarkers.indexOf(value);
+            if (index > -1) { // only splice array when item is found
+                this.selMarkers.splice(index, 1); // 2nd parameter means remove one item only
+            }
+        },
+        reset() {
+            this.selMarkers = this.markers
+        }
+    }
+})
+
+export const useMasteredStore = defineStore('Mastered', () => {
+  const { cookies } = useCookies()
+  const list = ref([])
+
+  // initialise from cookie
+  const raw = cookies.get('mastered')
+  if (raw) {
+    list.value = JSON.parse(raw)
+  }
+  else {
+    list.value = []
+  }
+
+  // keep cookie in sync whenever list changes
+  watch(list, (newVal) => {
+    // remove cookie if not necessary
+    if (newVal.length == 0) {
+        cookies.remove('mastered')
+    }
+    else {
+        cookies.set('mastered', JSON.stringify(newVal))
+    }
+  }, { deep: true })
+
+  function toggle(title) {
+    const idx = list.value.indexOf(title)
+    if (idx > -1) list.value.splice(idx, 1)
+    else list.value.push(title)
+  }
+
+  const calcShareMastered = (tricks) => {
+    var tricks_mastered = 0
+    if(tricks) {
+        for (let i = 0; i < tricks.length; i++) {
+            if (isMastered(tricks[i].title[0])) {
+                tricks_mastered += 1
+            }
+        }
+        return tricks_mastered
+    }
+    else {
+        return 0
+    }
+  }
+
+  const isMastered = (title) => list.value.includes(title)
+
+  return { list, toggle, isMastered, calcShareMastered }
+})
 
 export const useFAQ = defineStore('FAQ', {
     state: () => {
