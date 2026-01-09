@@ -11,16 +11,16 @@ function getEmbedURL(id) {
   return 'https://www.youtube-nocookie.com/embed/' + id + '?si=9jysKI0zbGHvpMCD&mute=1&start=4'
 }
 
-const videoStore = useTrickStore()
-const trick = videoStore.getTrickByTitle(pathToStr(useRoute().params.trickname), videoStore);
+const trickStore = useTrickStore()
+const trick = trickStore.getTrickByTitle(pathToStr(useRoute().params.trickname), trickStore);
 
 </script>
 
 <script>
 export default {
   mounted() {
-    const videoStore = useTrickStore()
-    const trick = videoStore.getTrickByTitle(pathToStr(useRoute().params.trickname), videoStore);
+    const trickStore = useTrickStore()
+    const trick = trickStore.getTrickByTitle(pathToStr(useRoute().params.trickname), trickStore);
     if (trick != -1) {
       // Ensure the div is focusable to capture key events
       document.getElementById('main').focus();
@@ -79,14 +79,14 @@ function hasHistory () {
         ></iframe>
       </v-row>
       <v-row >
-        <v-col v-for="title in videoStore.getLocalTrickTitles(trick, $i18n.locale).slice(0, -1)">
+        <v-col v-for="title in trickStore.getLocalTrickTitles(trick, $i18n.locale).slice(0, -1)">
           <strong>
             {{title}}
           </strong>
         </v-col>
         <v-col>
           <strong>
-            {{ videoStore.getLocalTrickTitles(trick, $i18n.locale).slice(-1)[0]}}
+            {{ trickStore.getLocalTrickTitles(trick, $i18n.locale).slice(-1)[0]}}
           </strong>
           &nbsp;
         </v-col>

@@ -54,23 +54,24 @@ export const useTrickStore = defineStore('trickStore', {
             return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
         },
         getTrickByID(trickID, state) {
-            for (let i = 0; i < state.videos.length; i++) {
-                if(state.videos[i].trickID === trickID) {
-                    return state.videos[i];
+            for (let i = 0; i < state.tricks.length; i++) {
+                if(state.tricks[i].trickID === trickID) {
+                    return state.tricks[i];
                 }
             }
             return -1;
         },
         getTrickByTitle(trickTitle, state) {
             try {
-                for (let i = 0; i < state.videos.length; i++) {
-                    if(state.videos[i].title[0] === trickTitle) {
-                        return state.videos[i];
+                for (let i = 0; i < state.tricks.length; i++) {
+                    if(state.tricks[i].title[0] === trickTitle) {
+                        return state.tricks[i];
                     }
                 }
                 return -1;
             }
             catch(e) {
+                console.log(e)
                 return -1;
             }
         },
