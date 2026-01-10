@@ -9,10 +9,6 @@ import { getBgColor } from "@/scripts/helpers.js";
 
 const theme = useTheme();
 
-function getOrientation() {
-  return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
-}
-
 const videoStore = useTrickStore();
 videoStore.loadYAML();
 // videoStore.categoryTree = videoStore.getConnectionsGraph(videoStore, getOrientation());

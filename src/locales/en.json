@@ -43,7 +43,8 @@
     "search": "Search",
     "sortBy": "sort by",
     "categories": "Categories",
-    "marked": "Marked"
+    "marked": "Marked",
+    "filters": "Filters"
   },
   "videoCard": {
     "open": "Open"

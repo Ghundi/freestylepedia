@@ -43,7 +43,8 @@
     "search": "Suchen",
     "sortBy": "Sortieren",
     "categories": "Kategorien",
-    "marked": "Markiert"
+    "marked": "Markiert",
+    "filters": "Filter"
   },
   "footer": {
     "help": "Hilfe",
