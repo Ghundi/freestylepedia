@@ -81,18 +81,19 @@ export default {
     </v-container>
   </template>
   <template v-else>
-    <v-container>
-      <v-row justify="center">
+    <v-container fluid>
+      <v-row 
+        justify="center">
         <v-col class="minWidth">
           <SearchBar/>
         </v-col>
-        <v-col>
+        <v-col cols="auto">
           <CategorySelector/>
         </v-col>
-        <v-col>
+        <v-col cols="auto">
           <MarkedTricksSelector/>
         </v-col>
-        <v-col class="minWidth">
+        <v-col>
           <DifficultySlider/>
         </v-col>
         <v-col>
