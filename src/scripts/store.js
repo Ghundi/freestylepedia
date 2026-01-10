@@ -75,6 +75,21 @@ export const useMasteredStore = defineStore('Mastered', () => {
     else list.value.push(title)
   }
 
+  const getMasteredTricks = (tricks) => {
+    const res = []
+    if(tricks) {
+        for (let i = 0; i < tricks.length; i++) {
+            if (isMastered(tricks[i].title[0])) {
+                res.push(tricks[i])
+            }
+        }
+        return res
+    }
+    else {
+        return res
+    }
+  }
+
   const calcCategoryShareMastered = (tricks, categories) => {
     var tricks_mastered = new Array(categories.length).fill(0)
     var tricks_category = new Array(categories.length).fill(0)
@@ -112,7 +127,7 @@ export const useMasteredStore = defineStore('Mastered', () => {
 
   const isMastered = (title) => list.value.includes(title)
 
-  return { list, toggle, isMastered, calcShareMastered, calcCategoryShareMastered }
+  return { list, toggle, isMastered, calcShareMastered, calcCategoryShareMastered, getMasteredTricks }
 })
 
 export const useFAQ = defineStore('FAQ', {

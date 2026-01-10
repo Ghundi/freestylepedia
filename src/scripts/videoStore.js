@@ -16,6 +16,17 @@ export const useTrickStore = defineStore('trickStore', {
             const sorted = sortedVideos(state.tricks, selSortingOrderStore.by)
             const filtered = filteredVideos(sorted)
             return filtered
+        },
+        getHardestMasteredTrick: (state) => (masteredTricks) => {
+            if (!masteredTricks?.length) return null;
+            
+            // Filter mastered tricks from ALL tricks
+            const mastered = state.tricks.filter(trick => 
+            masteredTricks.some(m => m.id === trick.id)
+            );
+            
+            // Sort by difficulty descending
+            return [...mastered].sort((a, b) => b.difficulty - a.difficulty)[0] || null;
         }
     },
     actions: {
@@ -415,5 +426,50 @@ export const useTrickStore = defineStore('trickStore', {
                 return e
             }
         },
+        getRecommendedTricks: (state, masteredStore) => {
+            try {
+                const recommendedTricks = []
+                const masteredTricks = masteredStore.getMasteredTricks(state.tricks);
+                const resLength = 10
+                
+                const baseTrickTitles = ['Triangle', 'Donut', 'Hockey Stop', 'Eagle', 'Grapevine']
+                // Starter Tricks if not mastered
+                for (let i = 0; i < baseTrickTitles.length; i++) {
+                    const trick = state.getTrickByTitle(baseTrickTitles[i], state)
+                    if(!masteredStore.isMastered(trick.title[0])) {
+                        recommendedTricks.push(trick)
+                    }
+                }
+               
+                // Tricks that require mastered tricks 
+                for (let i = 0; i < state.tricks.length; i++) {
+                    if(!masteredStore.isMastered(state.tricks[i].title[0])) {
+                        const requirementIds = state.tricks[i].requirements
+                        const masteredIdSet = new Set(masteredTricks.map(t => t.trickID));
+                        const allRequirementsMastered = requirementIds.every(id =>
+                            masteredIdSet.has(id)
+                        );
+                        if(allRequirementsMastered && requirementIds.length > 0) {
+                            recommendedTricks.push(state.tricks[i])
+                        }
+                    }
+                }
+
+                // fill with easiest non mastered tricks
+                if(recommendedTricks.length < resLength) {
+                    for (let i = 0; i < state.tricks.length; i++) {
+                        if(!masteredStore.isMastered(state.tricks[i].title[0]) && !recommendedTricks.includes(state.tricks[i])) {
+                            recommendedTricks.push(state.tricks[i])
+                        }
+                    }
+                }
+
+                return sortedVideos(recommendedTricks, 'difficultyUp').slice(0, resLength)
+            }
+            catch(e) {
+                console.log(e)
+                return []
+            }
+        }
     }
 })

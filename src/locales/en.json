@@ -88,9 +88,11 @@
     "trickNotFound": "not found",
     "trickNotFoundSuggestion": "Maybe the trick in the URL is spelled wrong. Only the name of the YouTube Thumbnail is valid."
   },
-    "myProgress": {
+  "myProgress": {
     "myProgress": "My Progress",
-    "progress": "Progress"
+    "progress": "Progress",
+    "recommendedTricks": "Recommended Tricks",
+    "hardestTrick": "hardest Trick"
   },
   "close": "Close",
   "difficulty": "Difficulty",

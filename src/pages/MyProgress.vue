@@ -1,7 +1,21 @@
 <script setup>
 import ProgressBar from '@/components/progressBar.vue';
 import ProgressSpiderChart from '@/components/ProgressSpiderChart.vue';
+import RecommendedTricks from '@/components/recommendedTricks.vue';
+import VideoCard from '@/components/VideoCard.vue';
+import { useMasteredStore } from '@/scripts/store';
+import { useTrickStore } from '@/scripts/videoStore';
+import { computed } from 'vue'
+</script>
 
+<script>
+  const trickStore = useTrickStore()
+  const masteredStore = useMasteredStore()
+  const hardestMasteredTrick = computed(() => {
+  return trickStore.getHardestMasteredTrick(
+    masteredStore.getMasteredTricks(trickStore.tricks)
+  )
+})
 </script>
 
 <template>
@@ -10,8 +24,31 @@ import ProgressSpiderChart from '@/components/ProgressSpiderChart.vue';
       {{ $t("myProgress.myProgress") }}
     </v-card-title>
     <progress-bar/>
-    <div class="ma-5">
-        <progress-spider-chart/>
+    <v-container>
+      <v-row>
+        <v-col>
+            <progress-spider-chart/>
+        </v-col>
+        <v-col>
+            <v-card-title>
+              {{ $t('myProgress.hardestTrick') }}
+            </v-card-title>
+            <VideoCard
+              class="ma-1"
+              :id="hardestMasteredTrick.id"
+              :title="hardestMasteredTrick.title"
+              :difficulty="hardestMasteredTrick.difficulty"
+              :category="hardestMasteredTrick.category"
+              :releaseDate="hardestMasteredTrick.releaseDate"
+              :thumbnailUrl="trickStore.getThumbnailUrl(hardestMasteredTrick.id[0])"
+              :connections="hardestMasteredTrick.connections"
+              :requirements="hardestMasteredTrick.requirements"
+            />
+        </v-col>
+      </v-row>
+    </v-container>
+    <div class="text-center justify-center">
+      <recommended-tricks/>
     </div>
   </v-card>
 

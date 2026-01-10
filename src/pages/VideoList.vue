@@ -32,7 +32,7 @@ const trickStore = useTrickStore();
                 :difficulty="trick.difficulty"
                 :category="trick.category"
                 :releaseDate="trick.releaseDate"
-                :thumbnailUrl="useTrickStore().getThumbnailUrl(trick.id[0])"
+                :thumbnailUrl="trickStore.getThumbnailUrl(trick.id[0])"
                 :connections="trick.connections"
                 :requirements="trick.requirements"
             />

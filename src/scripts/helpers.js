@@ -1,5 +1,5 @@
 //helpers
-import {useCategoryStore, useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore} from "@/scripts/store.js";
+import {useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore} from "@/scripts/store.js";
 
 
 export function sortedVideos(tricks, sortOption)  {

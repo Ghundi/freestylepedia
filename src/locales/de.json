@@ -87,7 +87,9 @@
   },
   "myProgress": {
     "myProgress": "Mein Fortschritt",
-    "progress": "Fortschritt"
+    "progress": "Fortschritt",
+    "recommendedTricks": "Für dich passende Tricks",
+    "hardestTrick": "schwerster Trick"
   },
   "close": "Schließen",
   "difficulty": "Schwierigkeit",
