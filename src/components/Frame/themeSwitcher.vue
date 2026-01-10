@@ -7,8 +7,9 @@ function toggleTheme () {
   theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
 }
 function isDarkTheme() {
-  return theme.global.current.value.dark == 'dark'
-}
+  return theme.global.name.value  == 'dark'
+} 
+
 </script>
 
 <template>
@@ -16,12 +17,7 @@ function isDarkTheme() {
   @click="toggleTheme" 
   variant="plain" 
   class="text-none">
-    <template v-if="isDarkTheme">
-      {{ $t('navBar.switchToDarkMode') }}
-    </template>
-      <template v-else>
-      {{ $t('navBar.switchToLightMode') }}
-    </template>
+      {{ (isDarkTheme()) ? $t('navBar.switchToLightMode') : $t('navBar.switchToDarkMode')}}
   </v-btn>
 </template>
 

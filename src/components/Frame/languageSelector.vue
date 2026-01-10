@@ -18,16 +18,12 @@ export default {
   methods: {
     updateLang(lang) {
       this.$i18n.locale = lang;
-    },
-    getOrientation(){
-      return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
     }
   }
 }
 </script>
 
 <template>
-  <template v-if="getOrientation() === 'Landscape'">
     <v-btn
         id="menu-activator"
         variant="plain"
@@ -37,15 +33,6 @@ export default {
         {{ $t("languages." + this.$i18n.locale)  }}
       </v-card-subtitle>
     </v-btn>
-  </template>
-  <template v-else>
-    <v-btn
-        id="menu-activator"
-        variant="plain"
-    >
-      <v-icon icon="mdi-translate"></v-icon>
-    </v-btn>
-  </template>
   <v-form v-model="valid">
     <v-menu activator="#menu-activator">
       <v-list>
