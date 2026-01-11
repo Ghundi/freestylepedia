@@ -70,11 +70,11 @@
     "stop": "Bremsungen"
   },
   "languages": {
-    "en": "Englisch",
+    "en": "English",
     "de": "Deutsch",
-    "fr": "Französisch",
-    "pl": "Polnisch"
-  },  
+    "fr": "Français",
+    "pl": "Polski"
+  },
   "marked": {
     "mastered": "Mastered",
     "non-mastered": "Nicht-Mastered"
