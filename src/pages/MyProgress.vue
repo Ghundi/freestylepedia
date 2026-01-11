@@ -29,21 +29,21 @@ import { computed } from 'vue'
         <v-col>
             <progress-spider-chart/>
         </v-col>
-        <v-col>
-            <v-card-title>
-              {{ $t('myProgress.hardestTrick') }}
-            </v-card-title>
-            <VideoCard
-              class="ma-1"
-              :id="hardestMasteredTrick.id"
-              :title="hardestMasteredTrick.title"
-              :difficulty="hardestMasteredTrick.difficulty"
-              :category="hardestMasteredTrick.category"
-              :releaseDate="hardestMasteredTrick.releaseDate"
-              :thumbnailUrl="trickStore.getThumbnailUrl(hardestMasteredTrick.id[0])"
-              :connections="hardestMasteredTrick.connections"
-              :requirements="hardestMasteredTrick.requirements"
-            />
+        <v-col class="d-flex flex-column align-center">
+          <v-card-title>
+            {{ $t('myProgress.hardestTrick') }}
+          </v-card-title>
+          <VideoCard
+            class="ma-1"
+            :id="hardestMasteredTrick.id"
+            :title="hardestMasteredTrick.title"
+            :difficulty="hardestMasteredTrick.difficulty"
+            :category="hardestMasteredTrick.category"
+            :releaseDate="hardestMasteredTrick.releaseDate"
+            :thumbnailUrl="trickStore.getThumbnailUrl(hardestMasteredTrick.id[0])"
+            :connections="hardestMasteredTrick.connections"
+            :requirements="hardestMasteredTrick.requirements"
+          />
         </v-col>
       </v-row>
     </v-container>
