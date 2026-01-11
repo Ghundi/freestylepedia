@@ -70,8 +70,10 @@
     "stop": "Freinages"
   },
   "languages": {
-    "en": "Anglais",
-    "de": "Allemand"
+    "en": "English",
+    "de": "Deutsch",
+    "fr": "Français",
+    "pl": "Polski"
   },
   "marked": {
     "mastered": "Maîtrisé",
