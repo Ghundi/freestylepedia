@@ -70,8 +70,10 @@
     "stop": "Hamowania"
   },
   "languages": {
-    "en": "Angielski",
-    "de": "Niemiecki"
+    "en": "English",
+    "de": "Deutsch",
+    "fr": "Français",
+    "pl": "Polski"
   },
   "marked": {
     "mastered": "Opanowane",
