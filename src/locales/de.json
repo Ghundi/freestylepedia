@@ -71,7 +71,9 @@
   },
   "languages": {
     "en": "Englisch",
-    "de": "Deutsch"
+    "de": "Deutsch",
+    "fr": "Französisch",
+    "pl": "Polnisch"
   },  
   "marked": {
     "mastered": "Mastered",
