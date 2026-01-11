@@ -1,26 +1,13 @@
-<script>
-function createLangObj() {
-  const dict = {};
-  const locales = ['de', 'en'];
-  for (let x = 0; x < locales.length; x++) {
-    dict[x] = {
-      title: locales[x]
-    };
-  }
-  return dict
-}
+<script setup>
+  import { useI18n } from 'vue-i18n';
 
-export default {
-  data: () => ({
-    valid: true,
-    items: createLangObj(),
-  }),
-  methods: {
-    updateLang(lang) {
-      this.$i18n.locale = lang;
-    }
+  const { locale, availableLocales} = useI18n()
+  const items = availableLocales.map(l => ({ title: l }))
+
+  function updateLang(lang) {
+    locale.value = lang
   }
-}
+
 </script>
 
 <template>
@@ -30,10 +17,9 @@ export default {
     >
       {{ $t("footer.language") }}
       <v-card-subtitle class="smaller-font">
-        {{ $t("languages." + this.$i18n.locale)  }}
+        {{ $t("languages." + locale)  }}
       </v-card-subtitle>
     </v-btn>
-  <v-form v-model="valid">
     <v-menu activator="#menu-activator">
       <v-list>
         <v-list-item
@@ -47,7 +33,6 @@ export default {
         </v-list-item>
       </v-list>
     </v-menu>
-  </v-form>
 </template>
 
 <style scoped>

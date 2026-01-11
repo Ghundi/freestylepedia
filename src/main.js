@@ -51,7 +51,7 @@ const i18n = createI18n({
     globalInjection: true,
     locale: getLang(),
     fallbackLocale: "en",
-    availableLocales: ["en", "de"],
+    availableLocales: ["en", "de", "fr"],
     messages: messages,
 });
 const pinia = createPinia()
