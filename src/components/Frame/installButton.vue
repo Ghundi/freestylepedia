@@ -1,40 +1,35 @@
+<script setup lang="ts">
+
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>;
+}
+
+const props = defineProps<{
+  prompt: BeforeInstallPromptEvent | null;
+}>();
+
+async function install() {
+  const ev = props.prompt;
+  if (!ev) return; // safety guard – should never happen if UI is hidden
+
+  try {
+    await ev.prompt();                       // show the install dialog
+    const { outcome } = await ev.userChoice; // wait for the user decision
+    console.log('User response to the install prompt:', outcome);
+  } catch (err) {
+    console.error('Error while showing PWA install prompt:', err);
+  }
+}
+</script>
+
 <template>
-  <v-btn 
-  v-if="deferredPrompt" 
-  variant="plain" 
-  @click="install" 
-  class="text-none">
+  <v-btn
+    variant="plain"
+    @click="install"
+    class="text-none"
+    aria-label="Install this app"
+  >
     {{ $t('navBar.installApp') }}
   </v-btn>
 </template>
-
-<script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-
-const deferredPrompt = ref<Event | null>(null)
-
-onMounted(() => {
-  const before = (e: Event) => {
-    e.preventDefault()
-    deferredPrompt.value = e
-  }
-  const installed = () => console.log('PWA was installed')
-
-  window.addEventListener('beforeinstallprompt', before)
-  window.addEventListener('appinstalled', installed)
-
-  onBeforeUnmount(() => {
-    window.removeEventListener('beforeinstallprompt', before)
-    window.removeEventListener('appinstalled', installed)
-  })
-})
-
-async function install() {
-  if (!deferredPrompt.value) return
-  const ev: any = deferredPrompt.value
-  ev.prompt()
-  const { outcome } = await ev.userChoice
-  console.log('User response to the install prompt:', outcome)
-  deferredPrompt.value = null
-}
-</script>
