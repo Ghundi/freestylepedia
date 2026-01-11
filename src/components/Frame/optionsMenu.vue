@@ -47,7 +47,7 @@ onMounted(() => {
       </v-list-item>
 
       <v-list-item v-if="deferredPrompt">
-        <install-button :prompt="true" />
+        <install-button :prompt="deferredPrompt" />
       </v-list-item>
     </v-list>
   </v-menu>
