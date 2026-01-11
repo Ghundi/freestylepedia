@@ -1,0 +1,100 @@
+{
+  "categoryTree": {
+    "description": "Ta mapa myśli grupuje triki z tej samej rodziny i pokazuje ich powiązania z trikami bazowymi."
+  },
+  "trickTree": {
+    "description": "Graf staje się coraz trudniejszy w kierunku prawej strony. Każde drzewo umiejętności rozgałęzia się na trudniejsze triki i jest połączone liniami. Zalecamy naukę jednego drzewa umiejętności od lewej do prawej."
+  },
+  "faq": {
+    "naming_question": "Skąd pochodzą nazwy trików?",
+    "naming_answer": "Wszystkie triki nazywamy wspólnie ze społecznością.",
+    "scoring_question": "Jak określane są poziomy trudności?",
+    "scoring_answer": "Staramy się oceniać każdy trik jak najbardziej sprawiedliwie. Trudność jest przedstawiona za pomocą liczby łyżew.",
+    "categories_question": "Co oznaczają kategorie?",
+    "categories_answer": "Kategorie grupują triki według ich podobieństwa.",
+    "usage_question": "Jak korzystać z Freestylepedia?",
+    "usage_answer": "Możesz sprawdzić szczegółowe informacje na stronie freestylepedia, uczyć się przez drzewo kategorii lub zobaczyć, które triki na sobie bazują w drzewie umiejętności.",
+    "existence_question": "",
+    "existence_answer": "Na Freestylepedia możesz szybko wyszukiwać triki i uczyć się ich na lodzie.",
+    "improve_question": "Jak mogę używać Freestylepedia, aby stać się lepszym na lodzie?",
+    "improve_answer": "Dzięki Freestylepedia możesz zobaczyć, które triki są dla ciebie osiągalne i które są do nich podobne.",
+    "help_question": "Jak mogę pomóc ulepszyć Freestylepedia?",
+    "help_answer": "Możesz napisać do nas w mediach społecznościowych lub utworzyć zgłoszenie (issue) na naszej stronie GitHub, jeśli się na tym znasz. Wszystkie linki znajdziesz na dole naszej strony."
+  },
+  "aboutUs": {
+    "members": "Członkowie",
+    "aboutUs": "O nas",
+    "findUs": "Znajdź nas na",
+    "story": "Dwóch członków grup wpadło na pomysł stworzenia strony internetowej, aby szybko i łatwo znajdować triki. Często używaliśmy różnych nazw dla tego samego triku. Mamy nadzieję, że ta strona pomoże wam znaleźć triki pod znanymi wam nazwami oraz nauczyć się nowych. Długo pracowaliśmy nad tym projektem i podejmowaliśmy kilka prób. Jesteśmy dumni z efektu i mamy nadzieję, że to nowe źródło okaże się pomocne.",
+    "MisgDescription": "Mainz Ice Skate Group to mała grupa Ice Breaking z Moguncji, w pobliżu Frankfurtu. Często jeździmy na lodowiska w naszej okolicy.",
+    "BlackbirdDescription": "Blackbirds to monachijska grupa Ice Freestyle składająca się z ośmiu członków. Można nas spotkać na Olympia Eisstadion München oraz na Weststadion."
+  },
+  "navBar": {
+    "freestylepedia": "Freestylepedia",
+    "categoryTree": "Drzewo kategorii",
+    "trickTree": "Drzewo umiejętności",
+    "myProgress": "Mój postęp",
+    "switchToLightMode": "Przełącz na tryb jasny",
+    "switchToDarkMode": "Przełącz na tryb ciemny",
+    "installApp": "Zainstaluj aplikację"
+  },
+  "toolbar": {
+    "resetFilters": "Resetuj filtry",
+    "search": "Szukaj",
+    "sortBy": "Sortuj",
+    "categories": "Kategorie",
+    "marked": "Oznaczone",
+    "filters": "Filtry"
+  },
+  "footer": {
+    "help": "Pomoc",
+    "language": "Język",
+    "byBlackbirdAndMISG": "od Blackbird i MISG",
+    "supportedBy": "wspierane przez"
+  },
+  "sortOptions": {
+    "difficultyDown": "Trudność (Trudne – Łatwe)",
+    "difficultyUp": "Trudność (Łatwe – Trudne)",
+    "nameUp": "Nazwa (A – Z)",
+    "nameDown": "Nazwa (Z – A)",
+    "releasedDown": "Opublikowane (Stare – Nowe)",
+    "releasedUp": "Opublikowane (Nowe – Stare)"
+  },
+  "categories": {
+    "footwork": "Footwork",
+    "ground": "Breakdance",
+    "jump": "Skoki",
+    "acrobatic": "Akrobatyka",
+    "hydroblading": "Hydroblading",
+    "spin": "Obroty",
+    "stop": "Hamowania"
+  },
+  "languages": {
+    "en": "Angielski",
+    "de": "Niemiecki"
+  },
+  "marked": {
+    "mastered": "Opanowane",
+    "non-mastered": "Nieopanowane"
+  },
+  "error": {
+    "noResults": "Nie znaleźliśmy żadnych trików",
+    "noResultsSuggestions": "Spróbuj zmienić wyszukiwanie lub filtry. Czasami bardziej ogólne filtry i hasła pomagają w znalezieniu wyników.",
+    "pageNotFound": "Strona nie znaleziona",
+    "pageNotFoundSuggestion": "Możliwe, że adres URL jest błędnie wpisany",
+    "trickNotFound": "nie znaleziono",
+    "trickNotFoundSuggestion": "Możliwe, że nazwa triku w URL jest błędna. Akceptowana jest tylko nazwa z miniatury YouTube."
+  },
+  "myProgress": {
+    "myProgress": "Mój postęp",
+    "progress": "Postęp",
+    "recommendedTricks": "Triki polecane dla ciebie",
+    "hardestTrick": "najtrudniejszy trik"
+  },
+  "close": "Zamknij",
+  "difficulty": "Trudność",
+  "category": "Kategoria",
+  "similarTricks": "Podobne triki",
+  "requirements": "Wymaga",
+  "otherTutorials": "Inne poradniki"
+}
