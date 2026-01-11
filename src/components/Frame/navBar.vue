@@ -1,8 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import LanguageSelector from "@/components/Frame/languageSelector.vue";
-import ThemeSwitcher from "@/components/Frame/themeSwitcher.vue";
-import InstallButton from './installButton.vue';
 import OptionsMenu from './optionsMenu.vue';
 
 const drawer = ref(null)
