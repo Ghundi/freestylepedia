@@ -456,10 +456,15 @@ export const useTrickStore = defineStore('trickStore', {
                 }
 
                 // fill with easiest non mastered tricks
+                const sortedTricks = sortedVideos(state.tricks, 'difficultyUp')
                 if(recommendedTricks.length < resLength) {
-                    for (let i = 0; i < state.tricks.length; i++) {
-                        if(!masteredStore.isMastered(state.tricks[i].title[0]) && !recommendedTricks.includes(state.tricks[i])) {
-                            recommendedTricks.push(state.tricks[i])
+                    for (let i = 0; i < sortedTricks.length; i++) {
+                        if(!masteredStore.isMastered(sortedTricks[i].title[0]) && !recommendedTricks.includes(sortedTricks[i])) {
+                            recommendedTricks.push(sortedTricks[i])
+                            if(recommendedTricks.length == resLength) {
+                                break;
+                            }
+                            console.log(sortedTricks[i].title[0])
                         }
                     }
                 }
