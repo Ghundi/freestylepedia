@@ -1,0 +1,100 @@
+{
+  "categoryTree": {
+    "description": "Cette mind map regroupe des tricks de la même famille et montre les liens avec les tricks de base correspondants."
+  },
+  "trickTree": {
+    "description": "Le graphe devient de plus en plus difficile vers la droite. Chaque arbre de compétences se divise en tricks plus complexes et est relié par des lignes. Nous recommandons d’apprendre un seul skill tree de gauche à droite."
+  },
+  "faq": {
+    "naming_question": "D’où viennent les noms des tricks ?",
+    "naming_answer": "Nous nommons tous les tricks avec la communauté.",
+    "scoring_question": "Comment les niveaux de difficulté sont-ils déterminés ?",
+    "scoring_answer": "Nous essayons d’évaluer chaque trick de la manière la plus juste possible. La difficulté est représentée par le nombre de patins.",
+    "categories_question": "Que signifient les catégories ?",
+    "categories_answer": "Les catégories regroupent les tricks selon leur similarité.",
+    "usage_question": "Comment utiliser Freestylepedia ?",
+    "usage_answer": "Tu peux consulter des infos détaillées sur la page Freestylepedia, apprendre via l’arbre des catégories ou voir quels tricks se construisent les uns sur les autres dans le skill tree.",
+    "existence_question": "",
+    "existence_answer": "Avec Freestylepedia, tu peux rapidement consulter des tricks et les apprendre sur la glace.",
+    "improve_question": "Comment puis-je utiliser Freestylepedia pour m’améliorer sur la glace ?",
+    "improve_answer": "Freestylepedia te permet de voir quels tricks sont accessibles pour toi et lesquels sont similaires.",
+    "help_question": "Comment puis-je aider à améliorer Freestylepedia ?",
+    "help_answer": "Tu peux nous contacter sur les réseaux sociaux ou ouvrir une issue sur notre page GitHub si tu t’y connais. Tu trouveras tout en bas de notre site."
+  },
+  "aboutUs": {
+    "members": "Membres",
+    "aboutUs": "À propos de nous",
+    "findUs": "Retrouve-nous sur",
+    "story": "Deux membres des groupes ont eu l’idée de créer un site web pour trouver des tricks rapidement et facilement. Nous avions souvent des noms différents pour un même trick. Nous espérons donc que ce site t’aidera à trouver des tricks sous les noms que tu connais et à en apprendre de nouveaux. Nous avons travaillé longtemps sur ce projet et lancé plusieurs tentatives. Nous sommes fiers du résultat et espérons que cette nouvelle ressource t’aidera.",
+    "MisgDescription": "Le Mainz Ice Skate Group est un petit groupe d’ice breaking basé à Mainz, près de Francfort. Nous aimons aller dans de nombreuses patinoires de la région.",
+    "BlackbirdDescription": "Les Blackbirds sont un groupe de ice freestyle de Munich composé de huit membres. On peut nous trouver à l’Olympia-Eisstadion de Munich ainsi qu’au Weststadion."
+  },
+  "navBar": {
+    "freestylepedia": "Freestylepedia",
+    "categoryTree": "Arbre des catégories",
+    "trickTree": "Arbre de compétences",
+    "myProgress": "Ma progression",
+    "switchToLightMode": "Passer en mode clair",
+    "switchToDarkMode": "Passer en mode sombre",
+    "installApp": "Installer l’application"
+  },
+  "toolbar": {
+    "resetFilters": "Réinitialiser les filtres",
+    "search": "Rechercher",
+    "sortBy": "Trier par",
+    "categories": "Catégories",
+    "marked": "Marqué",
+    "filters": "Filtres"
+  },
+  "footer": {
+    "help": "Aide",
+    "language": "Langue",
+    "byBlackbirdAndMISG": "par Blackbird et MISG",
+    "supportedBy": "soutenu par"
+  },
+  "sortOptions": {
+    "difficultyDown": "Difficulté (difficile → facile)",
+    "difficultyUp": "Difficulté (facile → difficile)",
+    "nameUp": "Nom (A → Z)",
+    "nameDown": "Nom (Z → A)",
+    "releasedDown": "Publication (ancien → récent)",
+    "releasedUp": "Publication (récent → ancien)"
+  },
+  "categories": {
+    "footwork": "Footwork",
+    "ground": "Breakdance",
+    "jump": "Sauts",
+    "acrobatic": "Acrobaties",
+    "hydroblading": "Hydroblading",
+    "spin": "Rotations",
+    "stop": "Freinages"
+  },
+  "languages": {
+    "en": "Anglais",
+    "de": "Allemand"
+  },
+  "marked": {
+    "mastered": "Maîtrisé",
+    "non-mastered": "Non maîtrisé"
+  },
+  "error": {
+    "noResults": "Aucun trick trouvé",
+    "noResultsSuggestions": "Essaie de modifier ta recherche ou tes filtres. Des filtres et termes plus généraux peuvent parfois aider.",
+    "pageNotFound": "Page introuvable",
+    "pageNotFoundSuggestion": "L’URL est peut-être mal orthographiée",
+    "trickNotFound": "introuvable",
+    "trickNotFoundSuggestion": "Le nom du trick dans l’URL est peut-être incorrect. Seul le nom du thumbnail YouTube est accepté."
+  },
+  "myProgress": {
+    "myProgress": "Ma progression",
+    "progress": "Progression",
+    "recommendedTricks": "Tricks recommandés pour toi",
+    "hardestTrick": "trick le plus difficile"
+  },
+  "close": "Fermer",
+  "difficulty": "Difficulté",
+  "category": "Catégorie",
+  "similarTricks": "Tricks similaires",
+  "requirements": "Prérequis",
+  "otherTutorials": "Autres tutoriels"
+}
