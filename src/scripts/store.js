@@ -1,9 +1,6 @@
 import {defineStore} from 'pinia';
 
-import { markRaw, ref, watch } from 'vue'
-
-// Cookies
-import { useCookies } from 'vue3-cookies' 
+import { ref, watch } from 'vue'
 
 // suporter logos
 import AIF from "../assets/supporters/aif w.webp";
@@ -46,28 +43,29 @@ export const useMarkedStore = defineStore('marked', {
 })
 
 export const useMasteredStore = defineStore('Mastered', () => {
-  const { cookies } = useCookies()
   const list = ref([])
 
-  // initialise from cookie
-  const raw = cookies.get('mastered')
-  if (raw) {
-    list.value = JSON.parse(raw)
-  }
-  else {
+    // Initialise from localStorage
+    const raw = localStorage.getItem('mastered')
+    if (raw) {
+    try {
+        list.value = JSON.parse(raw)
+    } catch (e) {
+        console.warn('Failed to parse mastered from localStorage, resetting to empty array')
+        list.value = []
+    }
+    } else {
     list.value = []
-  }
+    }
 
-  // keep cookie in sync whenever list changes
-  watch(list, (newVal) => {
-    // remove cookie if not necessary
-    if (newVal.length == 0) {
-        cookies.remove('mastered')
+    // Keep localStorage in sync whenever list changes
+    watch(list, (newVal) => {
+    if (newVal.length === 0) {
+        localStorage.removeItem('mastered')
+    } else {
+        localStorage.setItem('mastered', JSON.stringify(newVal))
     }
-    else {
-        cookies.set('mastered', JSON.stringify(newVal))
-    }
-  }, { deep: true })
+    }, { deep: true })
 
   function toggle(title) {
     const idx = list.value.indexOf(title)
