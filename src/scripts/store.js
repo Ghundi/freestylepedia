@@ -14,10 +14,47 @@ import Guardians from "../assets/supporters/Guardians.webp"
 import IFP from "../assets/supporters/IFP Print Brust Link.webp"
 import ICD from "../assets/supporters/ICD.webp"
 
+export const useTodoStore = defineStore('Todo', () => {
+  const list = ref([])
+
+    // Initialise from localStorage
+    const raw = localStorage.getItem('todo')
+    if (raw) {
+        try {
+            list.value = JSON.parse(raw)
+        } catch (e) {
+            console.warn('Failed to parse todo from localStorage, resetting to empty array')
+            list.value = []
+        }
+    } 
+    else {
+        list.value = []
+    }
+
+    // Keep localStorage in sync whenever list changes
+    watch(list, (newVal) => {
+    if (newVal.length === 0) {
+        localStorage.removeItem('todo')
+    } else {
+        localStorage.setItem('todo', JSON.stringify(newVal))
+    }
+    }, { deep: true })
+
+    function toggle(title) {
+        const idx = list.value.indexOf(title)
+        if (idx > -1) list.value.splice(idx, 1)
+        else list.value.push(title)
+    }
+
+        const isOnTodo = (title) => list.value.includes(title)
+
+    return { list, toggle, isOnTodo }
+})
+
 export const useMarkedStore = defineStore('marked', {
     state: () => {
         return {
-            markers: ['mastered', 'non-mastered'],
+            markers: ['mastered', 'non-mastered', 'todo'],
             selMarkers : ['mastered', 'non-mastered']
         }
     },
@@ -37,7 +74,7 @@ export const useMarkedStore = defineStore('marked', {
             }
         },
         reset() {
-            this.selMarkers = this.markers
+            this.selMarkers = ['mastered', 'non-mastered']
         }
     }
 })

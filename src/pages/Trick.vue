@@ -1,18 +1,28 @@
 <script setup>
-import {useTrickStore} from "@/scripts/videoStore.js";
-import { useRoute } from "vue-router";
-import ShareDial from "@/components/shareDial.vue";
-import { pathToStr } from "@/scripts/helpers.js";
-import OtherTutorials from "@/components/otherTutorials.vue";
-import TrickLinkList from "@/components/trickLinkList.vue";
-import MasteredBtn from "@/components/masteredBtn.vue";
+  import {useTrickStore} from "@/scripts/videoStore.js";
+  import { useRoute } from "vue-router";
+  import ShareDial from "@/components/shareDial.vue";
+  import { pathToStr } from "@/scripts/helpers.js";
+  import OtherTutorials from "@/components/otherTutorials.vue";
+  import TrickLinkList from "@/components/trickLinkList.vue";
+import { useMasteredStore, useTodoStore } from "@/scripts/store";
 
-function getEmbedURL(id) {
-  return 'https://www.youtube-nocookie.com/embed/' + id + '?si=9jysKI0zbGHvpMCD&mute=1&start=4'
-}
+  function getEmbedURL(id) {
+    return 'https://www.youtube-nocookie.com/embed/' + id + '?si=9jysKI0zbGHvpMCD&mute=1&start=4'
+  }
 
-const trickStore = useTrickStore()
-const trick = trickStore.getTrickByTitle(pathToStr(useRoute().params.trickname), trickStore);
+  const trickStore = useTrickStore()
+  const trick = trickStore.getTrickByTitle(pathToStr(useRoute().params.trickname), trickStore);
+
+  const TodoStore = useTodoStore()
+
+  const isOnTodo = () => TodoStore.isOnTodo(trick.title[0])
+  function toggleTodo() { TodoStore.toggle(trick.title[0]) }
+
+  const mastered = useMasteredStore()
+
+  const isMastered = () => mastered.isMastered(trick.title[0])
+  function toggleMastered() { mastered.toggle(trick.title[0]) }
 
 </script>
 
@@ -91,10 +101,23 @@ function hasHistory () {
           &nbsp;
         </v-col>
         <v-col>
-          <ShareDial/>
+          <v-btn 
+            @click="toggleTodo"
+            :append-icon="(isOnTodo()) ? 'mdi-check-bold' : 'mdi-plus'"
+          >
+          {{ $t("marked.todo") }}
+          </v-btn>
         </v-col>
         <v-col>
-          <MasteredBtn :title="trick.title[0]"/>
+            <v-btn 
+              @click="toggleMastered"
+              :append-icon="(isMastered()) ? 'mdi-medal' : 'mdi-medal-outline'"
+            >
+            {{ $t("marked.mastered") }}
+            </v-btn>
+        </v-col>
+        <v-col>
+          <ShareDial/>
         </v-col>
       </v-row>
       <v-row>

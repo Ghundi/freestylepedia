@@ -77,7 +77,8 @@
   },
   "marked": {
     "mastered": "Opanowane",
-    "non-mastered": "Nieopanowane"
+    "non-mastered": "Nieopanowane",
+    "todo": "zadań"
   },
   "error": {
     "noResults": "Nie znaleźliśmy żadnych trików",

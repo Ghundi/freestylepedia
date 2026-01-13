@@ -80,7 +80,8 @@
   },
   "marked": {
     "mastered": "Mastered",
-    "non-mastered": "Non-Mastered"
+    "non-mastered": "Non-Mastered",
+    "todo": "Todo"
   },
   "error": {
     "noResults": "We couldn't find any tricks",

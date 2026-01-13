@@ -1,5 +1,5 @@
 //helpers
-import {useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore} from "@/scripts/store.js";
+import {useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore, useTodoStore} from "@/scripts/store.js";
 
 
 export function sortedVideos(tricks, sortOption)  {
@@ -32,6 +32,8 @@ export function filteredVideos(videos) {
             const curSearch = useCurSearchStore().val;
             const markedStore = useMarkedStore();
             const masteredStore = useMasteredStore();
+            const todoStore = useTodoStore()
+
             const filtered = [];
             try{
                 for(let i = 0; i < videos.length; i++) {
@@ -43,12 +45,14 @@ export function filteredVideos(videos) {
                                 // if search at least partially matches
                                 if((curSearch) ? videos[i].title[j].toLowerCase().includes(curSearch.toLowerCase()) : true) {
                                     // if trick is mastered
-                                    if(markedStore.selMarkers.includes('mastered') && masteredStore.isMastered(videos[i].title[0])) {
-                                        filtered.push(videos[i]);
-                                        break;
-                                    }
-                                    else if(markedStore.selMarkers.includes('non-mastered') && !masteredStore.isMastered(videos[i].title[0])) {
-                                        filtered.push(videos[i]);
+                                    if( (markedStore.selMarkers.includes('mastered') && masteredStore.isMastered(videos[i].title[0]))
+                                        || (markedStore.selMarkers.includes('non-mastered') && !masteredStore.isMastered(videos[i].title[0]))
+                                    ) {
+                                        // if trick is on TODO list
+                                        if( (markedStore.selMarkers.includes('todo') && todoStore.isOnTodo(videos[i].title[0]))
+                                            || !markedStore.selMarkers.includes('todo')) {
+                                            filtered.push(videos[i]);
+                                        }
                                         break;
                                     }
                                 }
