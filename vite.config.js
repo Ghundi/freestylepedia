@@ -31,7 +31,7 @@ export default defineConfig({
         theme_color: '#000000',
         icons: [
           {
-            src: './src/assets/blackbirdIcon.png',
+            src: './src/assets/blackbirdLogoInverted.jpg',
             sizes: '176x176',
             type: 'image/png'
           }
