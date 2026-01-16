@@ -33,16 +33,18 @@ import { computed } from 'vue'
           <v-card-title>
             {{ $t('myProgress.hardestTrick') }}
           </v-card-title>
-          <VideoCard
-            class="ma-1"
-            :id="hardestMasteredTrick.id"
-            :title="hardestMasteredTrick.title"
-            :difficulty="hardestMasteredTrick.difficulty"
-            :category="hardestMasteredTrick.category"
-            :releaseDate="hardestMasteredTrick.releaseDate"
-            :connections="hardestMasteredTrick.connections"
-            :requirements="hardestMasteredTrick.requirements"
-          />
+          <div>
+            <VideoCard
+              class="ma-1"
+              :id="hardestMasteredTrick.id"
+              :title="hardestMasteredTrick.title"
+              :difficulty="hardestMasteredTrick.difficulty"
+              :category="hardestMasteredTrick.category"
+              :releaseDate="hardestMasteredTrick.releaseDate"
+              :connections="hardestMasteredTrick.connections"
+              :requirements="hardestMasteredTrick.requirements"
+            />
+          </div>
         </v-col>
       </v-row>
     </v-container>

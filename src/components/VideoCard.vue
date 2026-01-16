@@ -68,7 +68,7 @@
 
 <template>
   <v-card
-    :width="isMobile() ? '40cqw' : '100%'"
+    width="100%"
     :height="isMobile() ? '25cqw' : '100%'"
     :style="cardStyle"
     :to="'/trick/' + toPath(title[0])"
@@ -128,7 +128,4 @@
     text-align: center;
     white-space: nowrap;
   }
-
 </style>
-
-
