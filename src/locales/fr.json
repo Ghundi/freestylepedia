@@ -7,17 +7,17 @@
   },
   "faq": {
     "naming_question": "D’où viennent les noms des tricks ?",
-    "naming_answer": "Nous nommons tous les tricks avec la communauté.",
+    "naming_answer": "Les tricks sont en général nommés par la communauté et diffèrent souvent selon les régions et les pays.",
     "scoring_question": "Comment les niveaux de difficulté sont-ils déterminés ?",
     "scoring_answer": "Nous essayons d’évaluer chaque trick de la manière la plus juste possible. La difficulté est représentée par le nombre de patins.",
     "categories_question": "Que signifient les catégories ?",
     "categories_answer": "Les catégories regroupent les tricks selon leur similarité.",
     "usage_question": "Comment utiliser Freestylepedia ?",
-    "usage_answer": "Tu peux consulter des infos détaillées sur la page Freestylepedia, apprendre via l’arbre des catégories ou voir quels tricks se construisent les uns sur les autres dans le skill tree.",
+    "usage_answer": "Tu peux consulter des infos détaillées sur la page Freestylepedia, apprendre avec differentes catégories ou voir quels tricks se construisent les uns sur les autres dans les structure de competences.",
     "existence_question": "",
     "existence_answer": "Avec Freestylepedia, tu peux rapidement consulter des tricks et les apprendre sur la glace.",
     "improve_question": "Comment puis-je utiliser Freestylepedia pour m’améliorer sur la glace ?",
-    "improve_answer": "Freestylepedia te permet de voir quels tricks sont accessibles pour toi et lesquels sont similaires.",
+    "improve_answer": "Freestylepedia te permet de voir quels tricks sont accessibles à ton niveau et ceux qui sont similaires.",
     "help_question": "Comment puis-je aider à améliorer Freestylepedia ?",
     "help_answer": "Tu peux nous contacter sur les réseaux sociaux ou ouvrir une issue sur notre page GitHub si tu t’y connais. Tu trouveras tout en bas de notre site."
   },
@@ -30,9 +30,9 @@
     "BlackbirdDescription": "Les Blackbirds sont un groupe de ice freestyle de Munich composé de huit membres."
   },
   "navBar": {
-    "freestylepedia": "Freestylepedia",
-    "categoryTree": "Arbre des catégories",
-    "trickTree": "Arbre de compétences",
+    "freestylepedia": "Encyclopédie Freestyle",
+    "categoryTree": "Structure des Catégories",
+    "trickTree": "Structure des Compétences",
     "myProgress": "Ma progression",
     "switchToLightMode": "Passer en mode clair",
     "switchToDarkMode": "Passer en mode sombre",
@@ -47,7 +47,7 @@
     "filters": "Filtres"
   },
   "footer": {
-    "help": "Aide",
+    "help": "FAQ",
     "language": "Langue",
     "byBlackbirdAndMISG": "par Blackbird et MISG",
     "supportedBy": "soutenu par"
