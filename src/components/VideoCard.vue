@@ -90,7 +90,7 @@
         </template>
         <template v-for="_ in (5 - difficulty)">
           <v-col :style="{margin: '0 1px'}">
-            <v-img :src="difficultyImg" :width="isMobile() ? '4.4cqw' : '1.8vw'" class="opacity-50" />
+            <v-img :src="difficultyImg" :width="isMobile() ? '4.4cqw' : '1.8vw'" class="opacity-30" />
           </v-col>
         </template>
       </v-row>
@@ -128,4 +128,5 @@
     text-align: center;
     white-space: nowrap;
   }
+
 </style>
