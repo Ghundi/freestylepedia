@@ -50,8 +50,8 @@
   }))
 
   const medalStyle = computed(() => ({
-    bottom: isMobile() ? '0cqw' : '0.3vw',
-    right: isMobile() ? '-33cqw' : '-13.5vw',
+    bottom: '3%',
+    right: '-85%',
   }))
   
   const getTitleFontSize = (title) => {
@@ -68,8 +68,8 @@
 
 <template>
   <v-card
-    :width="isMobile() ? '40cqw' : '15vw'"
-    :height="isMobile() ? '25cqw' : '8vw'"
+    :width="isMobile() ? '40cqw' : '100%'"
+    :height="isMobile() ? '25cqw' : '100%'"
     :style="cardStyle"
     :to="'/trick/' + toPath(title[0])"
   >
