@@ -78,7 +78,8 @@
   "marked": {
     "mastered": "Maîtrisé",
     "non-mastered": "Non maîtrisé",
-    "todo": "Todo"
+    "todo": "Todo",
+    "irrelevant": "inutiles"
   },
   "error": {
     "noResults": "Aucun trick trouvé",

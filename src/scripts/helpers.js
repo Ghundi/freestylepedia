@@ -44,13 +44,15 @@ export function filteredVideos(videos) {
                             for (let j = 0; j < videos[i].title.length; j++) {
                                 // if search at least partially matches
                                 if((curSearch) ? videos[i].title[j].toLowerCase().includes(curSearch.toLowerCase()) : true) {
-                                    // if trick is mastered
+                                    // if selected mastered matches 
                                     if( (markedStore.selMarkers.includes('mastered') && masteredStore.isMastered(videos[i].title[0]))
                                         || (markedStore.selMarkers.includes('non-mastered') && !masteredStore.isMastered(videos[i].title[0]))
                                     ) {
-                                        // if trick is on TODO list
+                                        // if selected todo matches
                                         if( (markedStore.selMarkers.includes('todo') && todoStore.isOnTodo(videos[i].title[0]))
-                                            || !markedStore.selMarkers.includes('todo')) {
+                                            || (!markedStore.selMarkers.includes('todo') && !markedStore.selMarkers.includes('irrelevant'))
+                                            || (markedStore.selMarkers.includes('irrelevant') && !todoStore.isOnTodo(videos[i].title[0]))) 
+                                        {
                                             filtered.push(videos[i]);
                                         }
                                         break;

@@ -78,7 +78,8 @@
   "marked": {
     "mastered": "Opanowane",
     "non-mastered": "Nieopanowane",
-    "todo": "Todo"
+    "todo": "Todo",
+    "irrelevant": "nieistotność"
   },
   "error": {
     "noResults": "Nie znaleźliśmy żadnych trików",

@@ -54,7 +54,7 @@ export const useTodoStore = defineStore('Todo', () => {
 export const useMarkedStore = defineStore('marked', {
     state: () => {
         return {
-            markers: ['mastered', 'non-mastered', 'todo'],
+            markers: ['mastered', 'non-mastered', 'todo', 'irrelevant'],
             selMarkers : ['mastered', 'non-mastered']
         }
     },

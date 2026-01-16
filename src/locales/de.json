@@ -78,7 +78,8 @@
   "marked": {
     "mastered": "Mastered",
     "non-mastered": "Nicht-Mastered",
-    "todo": "ToDo"
+    "todo": "ToDo",
+    "irrelevant": "Irrelevant"
   },
   "error": {
     "noResults": "Wir konnten keine Tricks finden",
