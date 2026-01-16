@@ -234,7 +234,7 @@ export const useTrickStore = defineStore('trickStore', {
 
             let tricks = null;
             // check if videos already loaded from YAML
-            if (state.videos !== undefined) {
+            if (state.tricks !== undefined) {
                 tricks = state.tricks;
             }
             else {

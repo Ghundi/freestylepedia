@@ -40,7 +40,6 @@ import { computed } from 'vue'
             :difficulty="hardestMasteredTrick.difficulty"
             :category="hardestMasteredTrick.category"
             :releaseDate="hardestMasteredTrick.releaseDate"
-            :thumbnailUrl="trickStore.getThumbnailUrl(hardestMasteredTrick.id[0])"
             :connections="hardestMasteredTrick.connections"
             :requirements="hardestMasteredTrick.requirements"
           />

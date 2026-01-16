@@ -76,10 +76,14 @@ export default {
       </v-row>
 
       <v-row class="justify-center">
-        
+        <v-col cols="auto">
+          <OrderBySelector />
+        </v-col>
       </v-row>
     </v-container>
   </template>
+
+  <!-- Desktop -->
   <template v-else>
     <v-container fluid>
       <v-row 
@@ -101,14 +105,13 @@ export default {
             {{ $t('toolbar.resetFilters') }}
           </v-btn>
         </v-col>
-        <v-col>
-          <OrderBySelector/>
-        </v-col>
+        <v-col cols="auto">
+        <OrderBySelector />
+      </v-col>
       </v-row>
     </v-container>
   </template>
 
-  <!-- category chips -->
    <v-container>
     <v-row>
       <v-chip
