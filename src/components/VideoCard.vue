@@ -36,11 +36,11 @@
     position: 'relative',
   }))
 
-  const badgeStyle = computed(() => ({
+  const newBadgeStyle = computed(() => ({
     width: isMobile() ? '50px' : '80px',
     fontSize: isMobile() ? '0.8em' : '1.2em',
-    top: isMobile() ? '-1cqw' : '-0.3cqw',
-    right: isMobile() ? '-4cqw' : '-1.1cqw',
+    top: isMobile() ? '-1cqw' : '-0.3vw',
+    right: isMobile() ? '-4cqw' : '-1.1vw',
     transform: 'rotate(30deg)',
     lineHeight: '0',
     borderRadius: '1em',
@@ -50,8 +50,8 @@
   }))
 
   const medalStyle = computed(() => ({
-    bottom: isMobile() ? '0cqw' : '0.5cqw',
-    right: isMobile() ? '-33cqw' : '-197px',
+    bottom: isMobile() ? '0cqw' : '0.3vw',
+    right: isMobile() ? '-33cqw' : '-13.5vw',
   }))
   
   const getTitleFontSize = (title) => {
@@ -68,8 +68,8 @@
 
 <template>
   <v-card
-    :width="isMobile() ? '40cqw' : '14em'"
-    :height="isMobile() ? '25cqw' : '9em'"
+    :width="isMobile() ? '40cqw' : '15vw'"
+    :height="isMobile() ? '25cqw' : '8vw'"
     :style="cardStyle"
     :to="'/trick/' + toPath(title[0])"
   >
@@ -85,12 +85,12 @@
       <v-row dense no-gutters class="justify-center">
         <template v-for="_ in difficulty">
           <v-col :style="{margin: '0 1px'}">
-            <v-img :src="difficultyImg" :width="isMobile() ? '4.4cqw' : '1.8cqw'" />
+            <v-img :src="difficultyImg" :width="isMobile() ? '4.4cqw' : '1.8vw'" />
           </v-col>
         </template>
         <template v-for="_ in (5 - difficulty)">
           <v-col :style="{margin: '0 1px'}">
-            <v-img :src="difficultyImg" :width="isMobile() ? '4.4cqw' : '1.8cqw'" class="opacity-50" />
+            <v-img :src="difficultyImg" :width="isMobile() ? '4.4cqw' : '1.8vw'" class="opacity-50" />
           </v-col>
         </template>
       </v-row>
@@ -103,7 +103,7 @@
     </template>
 
     <template v-if="title[0] === videoStore.newestTrick">
-      <v-card-title :style="badgeStyle">New!</v-card-title>
+      <v-card-title :style="newBadgeStyle">New!</v-card-title>
     </template>
 
     <template v-if="mastered.isMastered(title[0])">
