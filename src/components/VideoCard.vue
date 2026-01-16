@@ -57,7 +57,7 @@
   const getTitleFontSize = (title) => {
     const len = title.length;
     if (isMobile()) {
-      const size = Math.min(15, Math.max(6, 20 - len * 0.7));
+      const size = Math.min(15, Math.max(6, 20 - len * 0.8));
       return `${size}cqw`;
     } else {
       const size = Math.min(12, Math.max(6, 15 - len * 0.4));
