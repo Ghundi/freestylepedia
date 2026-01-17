@@ -1,6 +1,6 @@
 <script setup>
 import { useMasteredStore } from '@/scripts/store';
-import VideoCard from '../components/VideoCard.vue';
+import TrickCard from './TrickCard.vue';
 import { useTrickStore } from "@/scripts/videoStore.js";
 
 const trickStore = useTrickStore();
@@ -24,7 +24,7 @@ const masteredTricks = useMasteredStore();
           v-for="trick in trickStore.getRecommendedTricks(trickStore, masteredTricks)"
           :key="trick.id">
         <v-col cols="auto">
-          <VideoCard
+          <TrickCard
             class="ma-1"
             :id="trick.id"
             :title="trick.title"

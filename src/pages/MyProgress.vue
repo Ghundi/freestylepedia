@@ -2,7 +2,7 @@
 import ProgressBar from '@/components/progressBar.vue';
 import ProgressSpiderChart from '@/components/ProgressSpiderChart.vue';
 import RecommendedTricks from '@/components/recommendedTricks.vue';
-import VideoCard from '@/components/VideoCard.vue';
+import TrickCard from '@/components/TrickCard.vue';
 import { useMasteredStore } from '@/scripts/store';
 import { useTrickStore } from '@/scripts/videoStore';
 import { computed } from 'vue'
@@ -34,7 +34,7 @@ import { computed } from 'vue'
             {{ $t('myProgress.hardestTrick') }}
           </v-card-title>
           <div>
-            <VideoCard
+            <TrickCard
               class="ma-1"
               :id="hardestMasteredTrick.id"
               :title="hardestMasteredTrick.title"

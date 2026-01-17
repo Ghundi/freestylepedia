@@ -77,12 +77,12 @@ import ScalingText from './scalingText.vue'
       <v-row dense no-gutters class="justify-center">
         <template v-for="_ in difficulty">
           <v-col :style="{margin: '0 1px'}">
-            <v-img :src="difficultyImg" :width="isMobile() ? '4.4cqw' : '1.8vw'" />
+            <v-img :src="difficultyImg" :width="isMobile() ? '80%' : '65%'" />
           </v-col>
         </template>
         <template v-for="_ in (5 - difficulty)">
           <v-col :style="{margin: '0 1px'}">
-            <v-img :src="difficultyImg" :width="isMobile() ? '4.4cqw' : '1.8vw'" class="opacity-20" />
+            <v-img :src="difficultyImg" :width="isMobile() ? '80%' : '65%'" class="opacity-20" />
           </v-col>
         </template>
       </v-row>
@@ -106,7 +106,8 @@ import ScalingText from './scalingText.vue'
 
 <style scoped>
   .title-wrapper {
-    height: 30%;
+    padding-top: 3%;
+    height: 40%;
     width: 90%;
     margin: 0 auto;
     justify-content: center;

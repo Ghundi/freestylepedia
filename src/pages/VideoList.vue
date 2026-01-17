@@ -1,5 +1,5 @@
 <script setup>
-import VideoCard from '../components/VideoCard.vue';
+import TrickCard from '../components/TrickCard.vue';
 import Toolbar from "@/components/Toolbar/Toolbar.vue";
 import { useSelSortingOrderStore } from "@/scripts/store.js";
 import { useTrickStore } from "@/scripts/videoStore.js";
@@ -26,7 +26,7 @@ const trickStore = useTrickStore();
           v-for="trick in trickStore.shownTricks"
           :key="trick.title[0]">
         <v-col cols="auto">
-            <VideoCard
+            <TrickCard
                 :id="trick.id"
                 :title="trick.title"
                 :difficulty="trick.difficulty"
