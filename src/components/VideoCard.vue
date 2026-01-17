@@ -51,9 +51,10 @@ import ScalingText from './scalingText.vue'
   }))
 
   const medalStyle = computed(() => ({
-    bottom: isMobile() ? '4vw' : '0vw',
-    right: isMobile() ? '-29vw' :  '-13vw',
-    fontSize: isMobile() ? '5vw' : '1.5vw',
+    position: 'absolute',
+    bottom: isMobile() ? '6%' : '4%',
+    right: isMobile() ? '-12%' :  '0%',
+    fontSize: isMobile() ? '5%' : '150%',
   }))
 </script>
 
@@ -66,6 +67,10 @@ import ScalingText from './scalingText.vue'
   >
     <div class="title-wrapper">
       <scaling-text class="pa-2" :title="title[0]"/>
+    </div>
+
+    <div class="text-center pb-2" :style="{ color: 'black', fontSize: isMobile() ? '8px' : '12px' }">
+        ({{ $t('categories.' + category) }})
     </div>
 
     <v-container class="justify-center pt-1 m-5">
@@ -101,7 +106,7 @@ import ScalingText from './scalingText.vue'
 
 <style scoped>
   .title-wrapper {
-    height: 40%;
+    height: 30%;
     width: 90%;
     margin: 0 auto;
     justify-content: center;
