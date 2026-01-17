@@ -4,6 +4,7 @@
   import { useTrickStore } from '@/scripts/videoStore.js'
   import { toPath } from '@/scripts/helpers.js'
   import difficultyImg from '../assets/Silouette_Schlittschuh.png'
+import ScalingText from './scalingText.vue'
 
   const videoStore = useTrickStore()
   const categoryStore = useCategoryStore()
@@ -50,35 +51,21 @@
   }))
 
   const medalStyle = computed(() => ({
-    bottom: '3%',
-    right: '-85%',
+    bottom: isMobile() ? '4vw' : '0vw',
+    right: isMobile() ? '-29vw' :  '-13vw',
+    fontSize: isMobile() ? '5vw' : '1.5vw',
   }))
-  
-  const getTitleFontSize = (title) => {
-    const len = title.length;
-    if (isMobile()) {
-      const size = Math.min(15, Math.max(6, 20 - len * 0.8));
-      return `${size}cqw`;
-    } else {
-      const size = Math.min(12, Math.max(6, 15 - len * 0.4));
-      return `${size}cqw`;
-    }
-  }
 </script>
 
 <template>
   <v-card
-    width="100%"
-    :height="isMobile() ? '25cqw' : '100%'"
+    :width="isMobile() ? '35vw' : '15vw'"
+    :height="isMobile() ? '20vw' : '9vw'"
     :style="cardStyle"
     :to="'/trick/' + toPath(title[0])"
   >
-    <div class="title-wrapper" ref="containerRef">
-      <v-card-title 
-        :style="{fontSize: getTitleFontSize(title[0])}"
-        class="title-text">
-        {{ title[0] }}
-      </v-card-title>
+    <div class="title-wrapper">
+      <scaling-text class="pa-2" :title="title[0]"/>
     </div>
 
     <v-container class="justify-center pt-1 m-5">
