@@ -52,9 +52,9 @@ import ScalingText from './scalingText.vue'
 
   const medalStyle = computed(() => ({
     position: 'absolute',
-    bottom: isMobile() ? '6%' : '4%',
-    right: isMobile() ? '-12%' :  '0%',
-    fontSize: isMobile() ? '5%' : '150%',
+    bottom: '4%',
+    right: '0%',
+    fontSize: isMobile() ? '100%' : '150%',
   }))
 </script>
 

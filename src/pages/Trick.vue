@@ -120,9 +120,9 @@ function hasHistory () {
           <ShareDial/>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row class="d-flex" justify="center">
         <v-col>
-          <v-card class="pa-3 ma-auto" elevation="5" max-width="300px" justify-center align-center>
+          <v-card class="pa-3 mx-auto" elevation="5" max-width="300px" justify-center align-center>
             <p class="font-weight-bold">{{ $t('difficulty') }}:</p>
              {{ trick.difficulty }}
             <br>
@@ -130,11 +130,18 @@ function hasHistory () {
             {{ $t('categories.' + trick.category) }}
           </v-card>
         </v-col>
-        <v-col v-if="trick.connections.length > 0">
-          <trick-link-list :list="trick.connections" :title="$t('similarTricks')"/>
+        <v-col 
+          v-if="trick.connections.length > 0"
+          class="d-flex flex-column justify-center">
+          <trick-link-list 
+            :list="trick.connections" :title="$t('similarTricks')"
+            class="mx-auto"/>
         </v-col>
-        <v-col v-if="trick.requirements.length > 0">
-          <trick-link-list :list="trick.requirements" :title="$t('requirements')"/>
+        <v-col 
+          v-if="trick.requirements.length > 0">
+          <trick-link-list 
+            :list="trick.requirements" :title="$t('requirements')"
+            class="mx-auto"/>
         </v-col>
         <template v-if="trick.id.length > 1">
           <other-tutorials :id="trick.id"/>
