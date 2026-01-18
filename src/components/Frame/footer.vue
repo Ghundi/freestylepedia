@@ -1,6 +1,6 @@
 <script setup>
 import WebpageIcon from "@/components/Frame/WebpageIcon.vue";
-import Blackbird from "../../assets/blackbirdLogoInverted.jpg"
+import Blackbird from "../../assets/blackbirdIcon.png"
 import MISG from "../../assets/MISG-white-Icon.png"
 import { useSupporters} from "@/scripts/store.js";
 const supporters = useSupporters().images
@@ -50,7 +50,7 @@ const supporters = useSupporters().images
           <v-row justify="center">
             <v-col cols="auto">
               <a href="https://www.youtube.com/@BlackbirdIceFreestyle" target="_blank">
-                <v-avatar size="50">
+                <v-avatar size="50" color="black">
                   <v-img
                       contain
                       :src="Blackbird"
@@ -62,7 +62,7 @@ const supporters = useSupporters().images
             </v-col>
             <v-col cols="auto">
               <a href="https://www.instagram.com/mainziceskategroup/" target="_blank">
-                <v-avatar size="50">
+                <v-avatar size="50" color="black">
                   <v-img
                       contain
                       :src="MISG"
@@ -80,7 +80,7 @@ const supporters = useSupporters().images
             <v-row justify="center">
               <v-col cols="auto" v-for="(team, index) in supporters" :key="index">
                 <a :href="team.link" target="_blank">
-                  <v-avatar size="50">
+                  <v-avatar size="50" color="black">
                     <v-img
                         contain
                         :src="team.imgSrc"
