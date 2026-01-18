@@ -1,11 +1,21 @@
 <script setup>
   import { useI18n } from 'vue-i18n';
+import { useRoute, useRouter } from "vue-router";
 
-  const { locale, availableLocales} = useI18n()
+  const { locale, availableLocales } = useI18n()
   const items = availableLocales.map(l => ({ title: l }))
 
-  function updateLang(lang) {
-    locale.value = lang
+  const router = useRouter()
+  const route = useRoute()
+
+  function updateLang(newLang) {
+    if(!availableLocales.includes(newLang) || locale.value === newLang) return
+
+    locale.value = newLang
+    router.replace({
+      name: route.name,
+      params: { ...route.params, lang: newLang }
+    })
   }
 
 </script>

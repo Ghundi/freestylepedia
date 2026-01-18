@@ -14,7 +14,7 @@ function getOrientation(){
   <v-app-bar :elevation="8" class="bg-black pa-3" prominent>
     <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     <v-card
-        to="/"
+        :to="{ name: 'Home', params: { lang: $i18n.locale } }"
         class="bg-black"
         :ripple="false"
         >
@@ -35,19 +35,19 @@ function getOrientation(){
       class="bg-black mt-3"
   >
     <v-list>
-      <v-list-item to="/">
+      <v-list-item :to="{ name: 'Home', params: { lang: $i18n.locale } }">
         {{ $t("navBar.freestylepedia") }}
       </v-list-item>
-      <v-list-item to="/MyProgress">
+      <v-list-item :to="{ name: 'MyProgress', params: { lang: $i18n.locale } }">
         {{ $t("navBar.myProgress") }}
       </v-list-item>
-      <v-list-item to="/CategoryTree">
+      <v-list-item :to="{ name: 'CategoryTree', params: { lang: $i18n.locale } }">
         {{ $t("navBar.categoryTree") }}
       </v-list-item>
-      <v-list-item to="/TrickTree">
+      <v-list-item :to="{ name: 'TrickTree', params: { lang: $i18n.locale } }">
         {{ $t("navBar.trickTree") }}
       </v-list-item>
-      <v-list-item to="/Help">
+      <v-list-item :to="{ name: 'Help', params: { lang: $i18n.locale } }">
         {{ $t("footer.help") }}
       </v-list-item>
     </v-list>

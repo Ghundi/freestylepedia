@@ -69,7 +69,7 @@ import { useTheme } from 'vuetify/lib/composables/theme'
     :width="isMobile() ? '35vw' : '15vw'"
     :height="isMobile() ? '20vw' : '9vw'"
     :style="cardStyle"
-    :to="'/trick/' + toPath(title[0])"
+    :to="{ name: 'Trick', params: { lang: $i18n.locale, trickname: title[0] } }"
   >
     <div class="title-wrapper">
       <scaling-text class="pa-2" :title="title[0]"/>

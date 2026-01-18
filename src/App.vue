@@ -6,13 +6,12 @@ import { useTrickStore } from "@/scripts/videoStore.js";
 import Footer from "@/components/Frame/footer.vue"
 import { useTheme } from 'vuetify'
 import { getBgColor } from "@/scripts/helpers.js";
+import LocaleLayout from './components/localeLayout.vue';
 
 const theme = useTheme();
 
 const videoStore = useTrickStore();
 videoStore.loadYAML();
-// videoStore.categoryTree = videoStore.getConnectionsGraph(videoStore, getOrientation());
-// videoStore.trickTree = videoStore.getTrickTreeGraph(videoStore, getOrientation());
 
 </script>
 
@@ -29,7 +28,8 @@ videoStore.loadYAML();
     <nav-bar/>
     <br>
     <v-main class="pb-5" :style="{backgroundColor: getBgColor(theme.global.current.value.dark)}">
-      <router-view :key="$route.fullPath"/>
+      <!-- <router-view :key="$route.fullPath"/> -->
+       <LocaleLayout/>
     </v-main>
     <Footer/>
     </v-app>

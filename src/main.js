@@ -24,21 +24,6 @@ import {createRouter, createWebHistory} from 'vue-router'
 // PWA
 import './registerServiceWorker'
 
-const routes = [
-    { path: '/', component: () => import('./pages/VideoList.vue') },
-    { path: '/CategoryTree', component: () => import('./pages/CategoryTree.vue') },
-    { path: '/TrickTree', component: () => import('./pages/TrickTree.vue') },
-    { path: '/MyProgress', component: () => import('./pages/MyProgress.vue') },
-    { path: '/AboutUs', component: () => import('./pages/AboutUs.vue') },
-    { path: '/Help', component: () => import('./pages/Help.vue') },
-    { path: '/trick/:trickname', component: () => import('./pages/Trick.vue') },
-    { path: '/:pathMatch(.*)*', component: () => import('./pages/notFound.vue') },
-]
-
-const router = createRouter({
-    history: createWebHistory(),
-    routes,
-})
 
 function getLang() {
     if (navigator.languages !== undefined)
@@ -46,20 +31,82 @@ function getLang() {
     return navigator.language;
 }
 
-const i18n = createI18n({
-    legacy: false,
-    globalInjection: true,
-    locale: getLang(),
-    fallbackLocale: "en",
-    availableLocales: ["en", "de", "fr"],
-    messages: messages,
-});
 const pinia = createPinia()
+
 const vuetify = createVuetify({
     theme: {
         defaultTheme: 'light'
     }
 })
+
+const availableLocales = ["en", "de", "fr", "pl"];
+const fallbackLocale = 'en';
+
+const i18n = createI18n({
+    legacy: false,
+    globalInjection: true,
+    locale: getLang(),
+    fallbackLocale: fallbackLocale,
+    availableLocales: availableLocales,
+    messages: messages,
+});
+
+const routes = [
+    { 
+        path: '/', 
+        redirect: () => {
+            const locale = availableLocales.includes(getLang()) ? getLang() : fallbackLocale;
+            return { name: 'Home', params: { lang: locale} };
+        }
+    },
+    { 
+        path: '/:lang',
+        component: () => import('./components/localeLayout.vue'),
+        beforeEnter: (to, from, next) => {
+            const { lang } = to.params;
+            if(!availableLocales.includes(lang)) {
+                return next({name: 'Home', params: { lang: fallbackLocale} });
+            }
+
+            i18n.global.locale.value = lang;
+            next();
+        },
+        children: [
+            { path: '',                 name: 'Home', component: () => import('./pages/VideoList.vue')},
+            { path: 'CategoryTree',     name: 'CategoryTree', component: () => import('./pages/CategoryTree.vue') },
+            { path: 'TrickTree',        name: 'TrickTree', component: () => import('./pages/TrickTree.vue') },
+            { path: 'MyProgress',       name: 'MyProgress', component: () => import('./pages/MyProgress.vue') },
+            { path: 'AboutUs',          name: 'AboutUs', component: () => import('./pages/AboutUs.vue') },
+            { path: 'Help',             name: 'Help', component: () => import('./pages/Help.vue') },
+            { path: 'trick/:trickname', name: 'Trick', component: () => import('./pages/Trick.vue') },
+            { path: ':pathMatch(.*)*', component: () => import('./pages/notFound.vue') },
+        ]
+    },
+    { 
+        path: '/:pathMatch(.*)*', 
+        redirect: (to) => ({
+            name: 'Home',
+            params: {lang: fallbackLocale, pathMatch: to.params.pathMatch }
+        })    
+    },
+]
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+})
+
+
+router.beforeEach((to, from, next) => {
+  if(!to.params.lang) return next();
+
+  const lang = to.params.lang;
+  if(!availableLocales.includes(lang)) {
+    return next({name: 'home', params: { lang: fallbackLocale }});
+  }
+  i18n.global.locale.value = lang;
+  next();
+});
 
 createApp(App)
     .use(pinia) // Use Pinia plugin

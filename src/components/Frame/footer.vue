@@ -29,13 +29,13 @@ const supporters = useSupporters().images
     <div>
       <v-btn
           variant="plain"
-          to="/AboutUs"
+          :to="{ name: 'AboutUs', params: { lang: $i18n.locale } }"
       >
         {{ $t("aboutUs.aboutUs") }}
       </v-btn>
       <v-btn
           variant="plain"
-          to="/Help"
+          :to="{ name: 'Help', params: { lang: $i18n.locale } }"
       >
         {{ $t("footer.help") }}
       </v-btn>
