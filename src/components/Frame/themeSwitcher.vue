@@ -4,7 +4,7 @@ import { useTheme } from 'vuetify'
 const theme = useTheme()
 
 function toggleTheme () {
-  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+  theme.change( theme.global.current.value.dark ? 'light' : 'dark' )
 }
 function isDarkTheme() {
   return theme.global.name.value  == 'dark'

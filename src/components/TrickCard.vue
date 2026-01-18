@@ -5,10 +5,12 @@
   import { toPath } from '@/scripts/helpers.js'
   import difficultyImg from '../assets/Silouette_Schlittschuh.png'
 import ScalingText from './scalingText.vue'
+import { useTheme } from 'vuetify/lib/composables/theme'
 
-  const videoStore = useTrickStore()
+  const trickStore = useTrickStore()
   const categoryStore = useCategoryStore()
   const mastered = useMasteredStore()
+  const themeStore = useTheme()
 
   const props = defineProps({
     id: Array[String],
@@ -19,6 +21,10 @@ import ScalingText from './scalingText.vue'
     requirements: Array[String],
     connections: Array[String],
   })
+
+  function isDarkTheme() {
+    return themeStore.global.name.value  == 'dark'
+  } 
 
   function getLocalDate(date, locale) {
     const opts = locale === 'en'
@@ -69,7 +75,7 @@ import ScalingText from './scalingText.vue'
       <scaling-text class="pa-2" :title="title[0]"/>
     </div>
 
-    <div class="text-center pb-2" :style="{ color: 'black', fontSize: isMobile() ? '8px' : '12px' }">
+    <div class="text-center pb-2" :style="{ color: (isDarkTheme()) ? 'white' : 'black', fontSize: isMobile() ? '8px' : '12px' }">
         ({{ $t('categories.' + category) }})
     </div>
 
@@ -77,12 +83,19 @@ import ScalingText from './scalingText.vue'
       <v-row dense no-gutters class="justify-center">
         <template v-for="_ in difficulty">
           <v-col :style="{margin: '0 1px'}">
-            <v-img :src="difficultyImg" :width="isMobile() ? '80%' : '65%'" />
+            <v-img 
+              :src="difficultyImg" 
+              :width="isMobile() ? '80%' : '65%'"
+              :class="{ 'invert-image' : isDarkTheme() }"/>
           </v-col>
         </template>
         <template v-for="_ in (5 - difficulty)">
           <v-col :style="{margin: '0 1px'}">
-            <v-img :src="difficultyImg" :width="isMobile() ? '80%' : '65%'" class="opacity-20" />
+            <v-img 
+              :src="difficultyImg" 
+              :width="isMobile() ? '80%' : '65%'" 
+              class="opacity-20"
+              :class="{ 'invert-image' : isDarkTheme() }"/>
           </v-col>
         </template>
       </v-row>
@@ -94,7 +107,7 @@ import ScalingText from './scalingText.vue'
       </v-card-subtitle>
     </template>
 
-    <template v-if="title[0] === videoStore.newestTrick">
+    <template v-if="title[0] === trickStore.newestTrick">
       <v-card-title :style="newBadgeStyle">New!</v-card-title>
     </template>
 
@@ -105,6 +118,9 @@ import ScalingText from './scalingText.vue'
 </template>
 
 <style scoped>
+  .invert-image {
+    filter: invert(100%);
+  }
   .title-wrapper {
     padding-top: 3%;
     height: 40%;
