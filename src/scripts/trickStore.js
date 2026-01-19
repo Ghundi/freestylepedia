@@ -440,7 +440,6 @@ export const useTrickStore = defineStore('trickStore', {
                             if(recommendedTricks.length == resLength) {
                                 break;
                             }
-                            console.log(sortedTricks[i].title[0])
                         }
                     }
                 }
