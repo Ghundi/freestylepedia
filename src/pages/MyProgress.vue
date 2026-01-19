@@ -4,7 +4,7 @@ import ProgressSpiderChart from '@/components/ProgressSpiderChart.vue';
 import RecommendedTricks from '@/components/recommendedTricks.vue';
 import TrickCard from '@/components/TrickCard.vue';
 import { useMasteredStore } from '@/scripts/store';
-import { useTrickStore } from '@/scripts/videoStore';
+import { useTrickStore } from '@/scripts/trickStore';
 import { computed } from 'vue'
 </script>
 

@@ -1,7 +1,7 @@
 <script setup>
   import { computed } from 'vue'
   import { useCategoryStore, useMasteredStore } from '@/scripts/store.js'
-  import { useTrickStore } from '@/scripts/videoStore.js'
+  import { useTrickStore } from '@/scripts/trickStore.js'
   import { toPath } from '@/scripts/helpers.js'
   import difficultyImg from '../assets/Silouette_Schlittschuh.png'
 import ScalingText from './scalingText.vue'

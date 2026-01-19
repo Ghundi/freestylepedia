@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useCategoryStore, useMasteredStore } from '@/scripts/store'
-import { useTrickStore } from '@/scripts/videoStore'
+import { useTrickStore } from '@/scripts/trickStore'
 import {
   Chart as ChartJS,
   RadialLinearScale,

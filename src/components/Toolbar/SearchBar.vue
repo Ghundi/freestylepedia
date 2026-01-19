@@ -2,12 +2,12 @@
 import {useCurSearchStore} from "@/scripts/store.js";
 
 const searchStore = useCurSearchStore();
-const videoStore = useTrickStore();
+const trickStore = useTrickStore();
 </script>
 
 <script>
 import { useCurSearchStore } from "@/scripts/store.js";
-import { useTrickStore} from "@/scripts/videoStore.js";
+import { useTrickStore} from "@/scripts/trickStore.js";
 
 export default {
   data: () => ({
@@ -35,7 +35,7 @@ function getSuggestions(state, search, lang) {
       v-bind:label="$t('toolbar.search')"
       :rules="updateStore"
       v-model="searchStore.val"
-      :items="getSuggestions(videoStore, searchStore.val, $i18n.locale)"
+      :items="getSuggestions(trickStore, searchStore.val, $i18n.locale)"
       density="compact"
       class="mx-auto"
       hide-details

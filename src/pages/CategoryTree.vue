@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { VueFlow } from '@vue-flow/core';
-import { useTrickStore } from "@/scripts/videoStore.js";
+import { useTrickStore } from "@/scripts/trickStore.js";
 import { useTheme } from "vuetify";
 import { getBgColor } from "@/scripts/helpers.js";
 

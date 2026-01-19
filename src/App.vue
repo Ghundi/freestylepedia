@@ -2,7 +2,7 @@
 
 import 'vuetify/styles';
 import NavBar from "@/components/Frame/navBar.vue";
-import { useTrickStore } from "@/scripts/videoStore.js";
+import { useTrickStore } from "@/scripts/trickStore.js";
 import Footer from "@/components/Frame/footer.vue"
 import { useTheme } from 'vuetify'
 import { getBgColor } from "@/scripts/helpers.js";
@@ -10,8 +10,8 @@ import LocaleLayout from './components/localeLayout.vue';
 
 const theme = useTheme();
 
-const videoStore = useTrickStore();
-videoStore.loadYAML();
+const trickStore = useTrickStore();
+trickStore.loadYAML();
 
 </script>
 

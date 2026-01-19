@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import tricksYAML from "@/DB/freestylepedia.yaml";
-import {checkSpace, getNodeIdxById, getSpaceIdx, graphSearch, isReleased, trickToNode, sortedVideos, filteredVideos } from "@/scripts/helpers.js";
-import {useCategoryStore, useSelSortingOrderStore, useSortingOrderStore} from "@/scripts/store.js";
+import {checkSpace, getNodeIdxById, getSpaceIdx, graphSearch, isReleased, trickToNode, getSortedTricks, getFilteredTricks } from "@/scripts/helpers.js";
+import {useCategoryStore, useSelSortingOrderStore} from "@/scripts/store.js";
 
 export const useTrickStore = defineStore('trickStore', {
     state: () => ({
@@ -13,8 +13,8 @@ export const useTrickStore = defineStore('trickStore', {
     getters: {
         shownTricks(state) {
             const selSortingOrderStore = useSelSortingOrderStore()
-            const sorted = sortedVideos(state.tricks, selSortingOrderStore.by)
-            const filtered = filteredVideos(sorted)
+            const sorted = getSortedTricks(state.tricks, selSortingOrderStore.by)
+            const filtered = getFilteredTricks(sorted)
             return filtered
         },
         getHardestMasteredTrick: (state) => (masteredTricks) => {
@@ -402,30 +402,6 @@ export const useTrickStore = defineStore('trickStore', {
 
             return [nodes, edges];
         },
-        sortedVideos: (state, sortOption) => {
-            try{
-                switch (sortOption) {
-                    case 'difficultyDown':
-                        return [...state.tricks].sort((a, b) => b.difficulty - a.difficulty || a.title[0].localeCompare(b.title[0]));
-                    case 'difficultyUp':
-                        return [...state.tricks].sort((a, b) => a.difficulty - b.difficulty || a.title[0].localeCompare(b.title[0]));
-                    case 'nameUp':
-                        return [...state.tricks].sort((a, b) => a.title[0].localeCompare(b.title[0]));
-                    case 'nameDown':
-                        return [...state.tricks].sort((a, b) => b.title[0].localeCompare(a.title[0]));
-                    case 'releasedDown':
-                        return [...state.tricks].sort((a, b) => a.releaseDate - b.releaseDate);
-                    case 'releasedUp':
-                        return [...state.tricks].sort((a, b) => b.releaseDate - a.releaseDate);
-                    default:
-                        return [...state.tricks];
-                }
-            }
-            catch(e) {
-                console.log(e)
-                return e
-            }
-        },
         getRecommendedTricks: (state, masteredStore) => {
             try {
                 const recommendedTricks = []
@@ -456,7 +432,7 @@ export const useTrickStore = defineStore('trickStore', {
                 }
 
                 // fill with easiest non mastered tricks
-                const sortedTricks = sortedVideos(state.tricks, 'difficultyUp')
+                const sortedTricks = getSortedTricks(state.tricks, 'difficultyUp')
                 if(recommendedTricks.length < resLength) {
                     for (let i = 0; i < sortedTricks.length; i++) {
                         if(!masteredStore.isMastered(sortedTricks[i].title[0]) && !recommendedTricks.includes(sortedTricks[i])) {
@@ -469,7 +445,7 @@ export const useTrickStore = defineStore('trickStore', {
                     }
                 }
 
-                return sortedVideos(recommendedTricks, 'difficultyUp').slice(0, resLength)
+                return getSortedTricks(recommendedTricks, 'difficultyUp').slice(0, resLength)
             }
             catch(e) {
                 console.log(e)

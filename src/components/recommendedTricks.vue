@@ -1,7 +1,7 @@
 <script setup>
 import { useMasteredStore } from '@/scripts/store';
 import TrickCard from './TrickCard.vue';
-import { useTrickStore } from "@/scripts/videoStore.js";
+import { useTrickStore } from "@/scripts/trickStore.js";
 
 const trickStore = useTrickStore();
 const masteredTricks = useMasteredStore();

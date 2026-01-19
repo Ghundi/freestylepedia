@@ -1,6 +1,6 @@
 <script setup>
   import { watch, ref, nextTick } from "vue";
-  import { useTrickStore } from "@/scripts/videoStore.js";
+  import { useTrickStore } from "@/scripts/trickStore.js";
   import { useRoute, useRouter } from "vue-router";
   import ShareDial from "@/components/shareDial.vue";
   import { pathToStr } from "@/scripts/helpers.js";
@@ -52,7 +52,7 @@
     if (window.history.length > 1) {
       router.back();
     } else {
-      router.replace({ name: "VideoList", params: { lang: route.params.lang } });
+      router.replace({ name: "Home", params: { lang: route.params.lang } });
     }
   }
 

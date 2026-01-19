@@ -2,7 +2,7 @@
 import {useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore, useTodoStore} from "@/scripts/store.js";
 
 
-export function sortedVideos(tricks, sortOption)  {
+export function getSortedTricks(tricks, sortOption)  {
     try{
         switch (sortOption) {
             case 'difficultyDown':
@@ -26,7 +26,7 @@ export function sortedVideos(tricks, sortOption)  {
     }
 }
 
-export function filteredVideos(videos) {
+export function getFilteredTricks(tricks) {
             const selDifficulties = useSelDifficultyStore().val;
             const selCategories = useSelCategoryStore().categories;
             const curSearch = useCurSearchStore().val;
@@ -36,24 +36,24 @@ export function filteredVideos(videos) {
 
             const filtered = [];
             try{
-                for(let i = 0; i < videos.length; i++) {
+                for(let i = 0; i < tricks.length; i++) {
                     // if in between difficulty
-                    if( selDifficulties[0] <= videos[i].difficulty && videos[i].difficulty <= selDifficulties[1]) {
+                    if( selDifficulties[0] <= tricks[i].difficulty && tricks[i].difficulty <= selDifficulties[1]) {
                         // if matches selected categories
-                        if((selCategories.length > 0) ? selCategories.includes(videos[i].category) : true) {
-                            for (let j = 0; j < videos[i].title.length; j++) {
+                        if((selCategories.length > 0) ? selCategories.includes(tricks[i].category) : true) {
+                            for (let j = 0; j < tricks[i].title.length; j++) {
                                 // if search at least partially matches
-                                if((curSearch) ? videos[i].title[j].toLowerCase().includes(curSearch.toLowerCase()) : true) {
+                                if((curSearch) ? tricks[i].title[j].toLowerCase().includes(curSearch.toLowerCase()) : true) {
                                     // if selected mastered matches 
-                                    if( (markedStore.selMarkers.includes('mastered') && masteredStore.isMastered(videos[i].title[0]))
-                                        || (markedStore.selMarkers.includes('non-mastered') && !masteredStore.isMastered(videos[i].title[0]))
+                                    if( (markedStore.selMarkers.includes('mastered') && masteredStore.isMastered(tricks[i].title[0]))
+                                        || (markedStore.selMarkers.includes('non-mastered') && !masteredStore.isMastered(tricks[i].title[0]))
                                     ) {
                                         // if selected todo matches
-                                        if( (markedStore.selMarkers.includes('todo') && todoStore.isOnTodo(videos[i].title[0]))
+                                        if( (markedStore.selMarkers.includes('todo') && todoStore.isOnTodo(tricks[i].title[0]))
                                             || (!markedStore.selMarkers.includes('todo') && !markedStore.selMarkers.includes('irrelevant'))
-                                            || (markedStore.selMarkers.includes('irrelevant') && !todoStore.isOnTodo(videos[i].title[0]))) 
+                                            || (markedStore.selMarkers.includes('irrelevant') && !todoStore.isOnTodo(tricks[i].title[0]))) 
                                         {
-                                            filtered.push(videos[i]);
+                                            filtered.push(tricks[i]);
                                         }
                                         break;
                                     }

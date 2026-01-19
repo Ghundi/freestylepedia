@@ -72,7 +72,7 @@ const routes = [
             next();
         },
         children: [
-            { path: '',                 name: 'Home', component: () => import('./pages/VideoList.vue')},
+            { path: '',                 name: 'Home', component: () => import('./pages/TrickList.vue')},
             { path: 'CategoryTree',     name: 'CategoryTree', component: () => import('./pages/CategoryTree.vue') },
             { path: 'TrickTree',        name: 'TrickTree', component: () => import('./pages/TrickTree.vue') },
             { path: 'MyProgress',       name: 'MyProgress', component: () => import('./pages/MyProgress.vue') },

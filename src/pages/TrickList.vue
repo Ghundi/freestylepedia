@@ -2,7 +2,7 @@
 import TrickCard from '../components/TrickCard.vue';
 import Toolbar from "@/components/Toolbar/Toolbar.vue";
 import { useSelSortingOrderStore } from "@/scripts/store.js";
-import { useTrickStore } from "@/scripts/videoStore.js";
+import { useTrickStore } from "@/scripts/trickStore.js";
 
 const trickStore = useTrickStore();
 </script>
