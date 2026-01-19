@@ -20,7 +20,10 @@ function getTrickNames(id_list) {
   <v-card class="pa-3" elevation="5" max-width="300px" justify-center align-center>
     <p class="font-weight-bold">{{ title }}:</p>
     <template v-for="name in getTrickNames(list, videoStore)">
-      <v-btn :to="'/trick/' + name" variant="flat" class="ma-2">
+      <v-btn 
+        :to="{ name: 'Trick', params: { lang: $i18n.locale, trickname: name } }"
+        variant="flat" 
+        class="ma-2">
         {{ name }}
       </v-btn>
     </template>

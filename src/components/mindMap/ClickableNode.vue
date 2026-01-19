@@ -1,6 +1,7 @@
 <script setup>
 import { Handle, Position} from '@vue-flow/core'
 import { useTheme } from 'vuetify'
+
 const theme = useTheme()
 
 const props = defineProps(['label', 'orientation', 'n_children', 'color'])
@@ -27,7 +28,7 @@ function getPosition(orientation) {
   <Handle type="source" :position="getPosition(props.orientation)" style="opacity: 0" />
   <Handle type="target" :position="getPosition((props.orientation + 2) % 4)" style="opacity: 0" />
   <v-btn
-      @click="$router.push('/trick/' + props.label)"
+      @click="$router.push({ name: 'Trick', params: { lang: $i18n.locale, trickname: label } });"
       variant="elevated"
       rounded="xl"
       min-width="200px"
@@ -41,7 +42,7 @@ function getPosition(orientation) {
     }"
       size="x-large"
   >
-    {{ props.label }}
+    {{ label }}
   </v-btn>
 </template>
 

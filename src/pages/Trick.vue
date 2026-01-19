@@ -1,81 +1,106 @@
 <script setup>
-  import {useTrickStore} from "@/scripts/videoStore.js";
-  import { useRoute } from "vue-router";
+  import { watch, ref, nextTick } from "vue";
+  import { useTrickStore } from "@/scripts/videoStore.js";
+  import { useRoute, useRouter } from "vue-router";
   import ShareDial from "@/components/shareDial.vue";
   import { pathToStr } from "@/scripts/helpers.js";
   import OtherTutorials from "@/components/otherTutorials.vue";
   import TrickLinkList from "@/components/trickLinkList.vue";
-import { useMasteredStore, useTodoStore } from "@/scripts/store";
+  import { useMasteredStore, useTodoStore } from "@/scripts/store";
 
   function getEmbedURL(id) {
     return 'https://www.youtube-nocookie.com/embed/' + id + '?si=9jysKI0zbGHvpMCD&mute=1&start=4'
   }
 
+  const route = useRoute()
+  const router = useRouter()
   const trickStore = useTrickStore()
-  const trick = trickStore.getTrickByTitle(pathToStr(useRoute().params.trickname), trickStore);
+  const trick = ref(null)
+
+  watch(
+    () => route.params.trickname,
+    async (newName) => {
+      if (!newName) return;
+      
+      const foundTrick = trickStore.getTrickByTitle(pathToStr(newName), trickStore);
+      trick.value = foundTrick;
+      
+      await nextTick();
+      
+      if (trick.value && trick.value !== -1) {
+        document.getElementById('main')?.focus();
+        document.title = trick.value.title[0] || "Trick Details";
+      }
+    },
+    { immediate: true }
+  );
 
   const TodoStore = useTodoStore()
+  const masteredStore = useMasteredStore()
 
-  const isOnTodo = () => TodoStore.isOnTodo(trick.title[0])
-  function toggleTodo() { TodoStore.toggle(trick.title[0]) }
+  const isOnTodo = () => trick.value && trick.value !== -1 && TodoStore.isOnTodo(trick.value.title[0])
+  function toggleTodo() {
+    if (trick.value && trick.value !== -1) TodoStore.toggle(trick.value.title[0])
+  }
+  
+  const isMastered = () => trick.value && trick.value !== -1 && masteredStore.isMastered(trick.value.title[0])
+  function toggleMastered() {
+    if (trick.value && trick.value !== -1) masteredStore.toggle(trick.value.title[0])
+  }
 
-  const mastered = useMasteredStore()
-
-  const isMastered = () => mastered.isMastered(trick.title[0])
-  function toggleMastered() { mastered.toggle(trick.title[0]) }
-
-</script>
-
-<script>
-export default {
-  mounted() {
-    const trickStore = useTrickStore()
-    const trick = trickStore.getTrickByTitle(pathToStr(useRoute().params.trickname), trickStore);
-    if (trick != -1) {
-      // Ensure the div is focusable to capture key events
-      document.getElementById('main').focus();
+  function goBack() {
+    if (window.history.length > 1) {
+      router.back();
+    } else {
+      router.replace({ name: "VideoList", params: { lang: route.params.lang } });
     }
   }
-};
-function hasHistory () {
-  return window.history.length > 2
-}
+
+  // Helper function for navigating to a new trick
+  function navigateToTrick(newTrickName) {
+    router.push({ 
+      name: 'TrickDetails', // Ensure this matches your route name in router/index.js
+      params: { trickname: newTrickName.toLowerCase().replace(/\s+/g, '-') } 
+    });
+  }
+
 </script>
 
 <template>
-  <head v-if="trick != -1">
-    <title>{{ trick.title.toString() }}</title>
-    <meta name="description" :content="'Here you can learn the ice freestyle trick or move ' + trick.title.toString() +'.' +
-     'Here is more information about the trick: ' + trick.toString()">
-  </head>
-  <div
-      v-if="trick === -1"
-      v-once>
+  <div v-if="trick && trick !== -1">
+    <component :is="'script'" type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "{{ trick.title[0] }}",
+        "description": "Learn how to do {{ trick.title[0] }}"
+      }
+    </component>
+  </div>
+
+  <div v-if="trick === -1">
     <div class="text-center pa-5 ma-15">
       <v-empty-state
           icon="mdi-alert-circle-outline"
           :text="$t('error.trickNotFoundSuggestion')"
-          :title="pathToStr(useRoute().params.trickname) + ' ' + $t('error.trickNotFound')"
+          :title="pathToStr(route.params.trickname) + ' ' + $t('error.trickNotFound')"
       ></v-empty-state>
     </div>
   </div>
+
   <div
       id="main"
-      v-else
-      v-once
+      v-else-if="trick"
       class="text-center mt-2"
-      @keyup.esc="hasHistory()
-            ? $router.back()
-            : $router.push('/')" tabindex="0">
+      @keyup.esc="goBack()"
+      tabindex="0">
     <v-fab
         icon="mdi-close"
         :ripple="true"
         density="comfortable"
         variant="elevated"
         size="x-large"
-        @click="hasHistory()
-            ? $router.back()
-            : $router.push('/')"
+        @click="goBack()"
         class="Right"></v-fab>
     <v-container>
       <v-row>
@@ -85,21 +110,13 @@ function hasHistory () {
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
-            name="Freestylepedia Video"
         ></iframe>
       </v-row>
       <v-row >
-        <v-col v-for="title in trickStore.getLocalTrickTitles(trick, $i18n.locale).slice(0, -1)">
-          <strong>
-            {{title}}
-          </strong>
+        <v-col v-for="(title, index) in trickStore.getLocalTrickTitles(trick, $i18n.locale)" :key="index">
+          <strong>{{ title }}</strong>
         </v-col>
-        <v-col>
-          <strong>
-            {{ trickStore.getLocalTrickTitles(trick, $i18n.locale).slice(-1)[0]}}
-          </strong>
-          &nbsp;
-        </v-col>
+        
         <v-col>
           <v-btn 
             @click="toggleTodo"
@@ -120,9 +137,10 @@ function hasHistory () {
           <ShareDial/>
         </v-col>
       </v-row>
+
       <v-row class="d-flex" justify="center">
         <v-col>
-          <v-card class="pa-3 mx-auto" elevation="5" max-width="300px" justify-center align-center>
+          <v-card class="pa-3 mx-auto" elevation="5" max-width="300px">
             <p class="font-weight-bold">{{ $t('difficulty') }}:</p>
              {{ trick.difficulty }}
             <br>
@@ -130,20 +148,24 @@ function hasHistory () {
             {{ $t('categories.' + trick.category) }}
           </v-card>
         </v-col>
-        <v-col 
-          v-if="trick.connections.length > 0"
-          class="d-flex flex-column justify-center">
+        
+        <v-col v-if="trick.connections && trick.connections.length > 0">
           <trick-link-list 
-            :list="trick.connections" :title="$t('similarTricks')"
-            class="mx-auto"/>
+            :list="trick.connections" 
+            :title="$t('similarTricks')"
+            class="mx-auto"
+          />
         </v-col>
-        <v-col 
-          v-if="trick.requirements.length > 0">
+
+        <v-col v-if="trick.requirements && trick.requirements.length > 0">
           <trick-link-list 
-            :list="trick.requirements" :title="$t('requirements')"
-            class="mx-auto"/>
+            :list="trick.requirements" 
+            :title="$t('requirements')"
+            class="mx-auto"
+          />
         </v-col>
-        <template v-if="trick.id.length > 1">
+
+        <template v-if="trick.id && trick.id.length > 1">
           <other-tutorials :id="trick.id"/>
         </template>
       </v-row>
@@ -159,11 +181,11 @@ function hasHistory () {
 
 .Right{
   position: absolute;
-  float: right;
   right: 60px;
   top: 120px;
+  z-index: 10;
 }
-div {
+#main {
   outline: none;
 }
 </style>
