@@ -1,6 +1,15 @@
 //helpers
-import {useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore, useTodoStore} from "@/scripts/store.js";
+import {useCategoryStore, useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore, useTodoStore} from "@/scripts/store.js";
 
+export function getCategorySizes(tricks) {
+    const categories = useCategoryStore().categories;
+    const catSizes = new Array(categories.length).fill(0)
+    for (let i = 0; i < tricks.length; i++) {
+        const idx = categories.indexOf(tricks[i].category)
+        catSizes[idx] += 1; 
+    }
+    return catSizes
+}
 
 export function getSortedTricks(tricks, sortOption)  {
     try{

@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import tricksYAML from "@/DB/freestylepedia.yaml";
-import {checkSpace, getNodeIdxById, getSpaceIdx, graphSearch, isReleased, trickToNode, getSortedTricks, getFilteredTricks } from "@/scripts/helpers.js";
+import {checkSpace, getNodeIdxById, getSpaceIdx, graphSearch, isReleased, trickToNode, getSortedTricks, getFilteredTricks, getCategorySizes } from "@/scripts/helpers.js";
 import {useCategoryStore, useSelSortingOrderStore} from "@/scripts/store.js";
 
 export const useTrickStore = defineStore('trickStore', {
@@ -130,6 +130,9 @@ export const useTrickStore = defineStore('trickStore', {
                 state.loadYAML()
                 tricks = state.tricks
             }
+
+            const catSizes = getCategorySizes(tricks)
+
             const visitedIDs = new Set();
             for (let i = 0; i < tricks.length; i++) {
                 if(!visitedIDs.has(tricks[i].trickID)) {
@@ -160,9 +163,12 @@ export const useTrickStore = defineStore('trickStore', {
                         id: g_node.name,
                         type: 'category',
                         // root node + x_offset scaled
-                        position: { x: ((categoryIdx < splitIdx) ? -100 : 100) * xScaleFactor,
-                            // if first in column -1500, else 100 under previous node
-                            y: ((prev_idx >= 0 && categoryIdx !== splitIdx) ? nodes[getNodeIdxById(g_parent.children[prev_idx].name, nodes)].position.y + 100 : -1500)
+                        position: { 
+                            x: ((categoryIdx < splitIdx) ? -100 : 100) * xScaleFactor,
+                            // if first in column -1500, else scaled to amount of tricks in category under previous node
+                            y: ((prev_idx >= 0 && categoryIdx !== splitIdx) ? 
+                                nodes[getNodeIdxById(g_parent.children[prev_idx].name, nodes)].position.y + catSizes[categoryIdx] * 70
+                                : -1500)
                                 // children.length + prev.children.length if exists / 2 * 100
                                 + ((g_node.children.length +
                                     ((prev_idx >= 0) ? g_parent.children[prev_idx].children.length : 0)) / 2) * 100},

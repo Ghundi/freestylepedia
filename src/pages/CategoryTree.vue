@@ -54,7 +54,7 @@ watch(() => theme.global.current.value.dark, () => {
         :style="{ backgroundColor: getBgColor(theme.global.current.value.dark) }">
       {{ $t('categoryTree.description') }}
     </v-card-text>
-    <div style="width: 100%; height: 800px">
+    <div style="width: 100%; height: 200%">
       <VueFlow
           :nodes="graph[0]"
           :edges="graph[1]"
@@ -69,8 +69,8 @@ watch(() => theme.global.current.value.dark, () => {
           class="basic-flow"
           :default-viewport="{ zoom: (getOrientation() === 'Landscape') ? 0.05 : 0.14 }"
           :translate-extent="[
-          [(getOrientation() === 'Landscape') ? -4000 : -2000, -2000],
-          [(getOrientation() === 'Landscape') ? 5000 : 2000, 3000]
+          [-4000, -2000],  // canvas x min, y min
+          [4000, 10000]      // Canvas x max, y max
         ]"
           :min-zoom="(getOrientation() === 'Landscape') ? 0.2 : 0.12"
           :max-zoom="(getOrientation() === 'Landscape') ? 0.5 : 1"
