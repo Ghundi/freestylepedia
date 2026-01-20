@@ -69,8 +69,8 @@ watch(() => theme.global.current.value.dark, () => {
           class="basic-flow"
           :default-viewport="{ zoom: (getOrientation() === 'Landscape') ? 0.05 : 0.14 }"
           :translate-extent="[
-          [-4000, -2000],  // canvas x min, y min
-          [4000, 10000]      // Canvas x max, y max
+          [-3000, -2000],  // canvas x min, y min
+          [3000, 13000]      // Canvas x max, y max
         ]"
           :min-zoom="(getOrientation() === 'Landscape') ? 0.2 : 0.12"
           :max-zoom="(getOrientation() === 'Landscape') ? 0.5 : 1"

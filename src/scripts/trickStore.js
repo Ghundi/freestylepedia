@@ -167,7 +167,7 @@ export const useTrickStore = defineStore('trickStore', {
                             x: ((categoryIdx < splitIdx) ? -100 : 100) * xScaleFactor,
                             // if first in column -1500, else scaled to amount of tricks in category under previous node
                             y: ((prev_idx >= 0 && categoryIdx !== splitIdx) ? 
-                                nodes[getNodeIdxById(g_parent.children[prev_idx].name, nodes)].position.y + catSizes[categoryIdx] * 70
+                                nodes[getNodeIdxById(g_parent.children[prev_idx].name, nodes)].position.y + catSizes[categoryIdx] * 60
                                 : -1500)
                                 // children.length + prev.children.length if exists / 2 * 100
                                 + ((g_node.children.length +
