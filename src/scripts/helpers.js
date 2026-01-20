@@ -1,6 +1,14 @@
 //helpers
 import {useCategoryStore, useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore, useTodoStore} from "@/scripts/store.js";
 
+export function strToUrl(str) {
+    return str.replaceAll(' ', '+')
+}
+
+export function UrlToStr(str) {
+    return str.replaceAll('+', ' ')
+}
+
 export function getCategorySizes(tricks) {
     const categories = useCategoryStore().categories;
     const catSizes = new Array(categories.length).fill(0)
@@ -142,14 +150,6 @@ export function checkSpace(y, x, width, height, spaces) {
 
 export function getBgColor(dark) {
     return dark ? '#222222' : '#eeeeee'
-}
-
-export function toPath(str) {
-    return str.replaceAll(' ', '_');
-}
-
-export function pathToStr(path) {
-    return path.replaceAll('_', ' ');
 }
 
 function changeTimeZone(date, timeZone) {

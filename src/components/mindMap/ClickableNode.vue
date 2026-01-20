@@ -1,4 +1,5 @@
 <script setup>
+import { strToUrl } from '@/scripts/helpers';
 import { Handle, Position} from '@vue-flow/core'
 import { useTheme } from 'vuetify'
 
@@ -28,7 +29,7 @@ function getPosition(orientation) {
   <Handle type="source" :position="getPosition(props.orientation)" style="opacity: 0" />
   <Handle type="target" :position="getPosition((props.orientation + 2) % 4)" style="opacity: 0" />
   <v-btn
-      @click="$router.push({ name: 'Trick', params: { lang: $i18n.locale, trickname: label } });"
+      @click="$router.push({ name: 'Trick', params: { lang: $i18n.locale, trickname: strToUrl(label) } });"
       variant="elevated"
       rounded="xl"
       min-width="200px"

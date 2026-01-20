@@ -1,14 +1,14 @@
 <script>
 
-import {useRoute} from "vue-router";
-import {toPath} from "@/scripts/helpers.js";
-import {getActivePinia} from "pinia";
+import { useRoute } from "vue-router";
+import { strToUrl } from "@/scripts/helpers.js";
+import { getActivePinia } from "pinia";
 
 export default {
   data() {
     return {
       dialShare: false,
-      pageUrl: 'https://freestylepedia.org/trick/' + toPath(useRoute().params.trickname.toString()),
+      pageUrl: 'https://freestylepedia.org/trick/' + strToUrl(useRoute().params.trickname.toString()),
     };
   },
   methods: {

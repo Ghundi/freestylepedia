@@ -1,4 +1,5 @@
 <script setup>
+import { strToUrl } from "@/scripts/helpers";
 import {useTrickStore} from "@/scripts/trickStore.js";
 
 const trickStore = useTrickStore()
@@ -21,7 +22,7 @@ function getTrickNames(id_list) {
     <p class="font-weight-bold">{{ title }}:</p>
     <template v-for="name in getTrickNames(list, trickStore)">
       <v-btn 
-        :to="{ name: 'Trick', params: { lang: $i18n.locale, trickname: name } }"
+        :to="{ name: 'Trick', params: { lang: $i18n.locale, trickname: strToUrl(name) } }"
         variant="flat" 
         class="ma-2">
         {{ name }}

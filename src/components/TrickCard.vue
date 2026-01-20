@@ -5,6 +5,7 @@
   import difficultyImg from '../assets/Silouette_Schlittschuh.png'
 import ScalingText from './scalingText.vue'
 import { useTheme } from 'vuetify/lib/composables/theme'
+import { strToUrl } from '@/scripts/helpers'
 
   const trickStore = useTrickStore()
   const categoryStore = useCategoryStore()
@@ -62,7 +63,7 @@ import { useTheme } from 'vuetify/lib/composables/theme'
     :width="isMobile() ? '35vw' : '15vw'"
     :height="isMobile() ? '20vw' : '9vw'"
     :style="cardStyle"
-    :to="{ name: 'Trick', params: { lang: $i18n.locale, trickname: trick.title[0] } }"
+    :to="{ name: 'Trick', params: { lang: $i18n.locale, trickname: strToUrl(trick.title[0]) } }"
   >
     <div class="title-wrapper">
       <scaling-text class="pa-2" :title="trick.title[0]"/>

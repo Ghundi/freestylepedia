@@ -3,7 +3,7 @@
   import { useTrickStore } from "@/scripts/trickStore.js";
   import { useRoute, useRouter } from "vue-router";
   import ShareDial from "@/components/shareDial.vue";
-  import { pathToStr } from "@/scripts/helpers.js";
+  import { UrlToStr } from "@/scripts/helpers.js";
   import OtherTutorials from "@/components/otherTutorials.vue";
   import TrickLinkList from "@/components/trickLinkList.vue";
   import { useMasteredStore, useTodoStore } from "@/scripts/store";
@@ -22,7 +22,7 @@
     async (newName) => {
       if (!newName) return;
       
-      const foundTrick = trickStore.getTrickByTitle(pathToStr(newName), trickStore);
+      const foundTrick = trickStore.getTrickByTitle(UrlToStr(newName), trickStore);
       trick.value = foundTrick;
       
       await nextTick();
@@ -84,7 +84,7 @@
       <v-empty-state
           icon="mdi-alert-circle-outline"
           :text="$t('error.trickNotFoundSuggestion')"
-          :title="pathToStr(route.params.trickname) + ' ' + $t('error.trickNotFound')"
+          :title="UrlToStr(route.params.trickname) + ' ' + $t('error.trickNotFound')"
       ></v-empty-state>
     </div>
   </div>
