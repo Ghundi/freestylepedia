@@ -36,13 +36,7 @@ import { computed } from 'vue'
           <div>
             <TrickCard
               class="ma-1"
-              :id="hardestMasteredTrick.id"
-              :title="hardestMasteredTrick.title"
-              :difficulty="hardestMasteredTrick.difficulty"
-              :category="hardestMasteredTrick.category"
-              :releaseDate="hardestMasteredTrick.releaseDate"
-              :connections="hardestMasteredTrick.connections"
-              :requirements="hardestMasteredTrick.requirements"
+              :trick="hardestMasteredTrick"
             />
           </div>
         </v-col>

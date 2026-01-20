@@ -2,7 +2,6 @@
   import { computed } from 'vue'
   import { useCategoryStore, useMasteredStore } from '@/scripts/store.js'
   import { useTrickStore } from '@/scripts/trickStore.js'
-  import { toPath } from '@/scripts/helpers.js'
   import difficultyImg from '../assets/Silouette_Schlittschuh.png'
 import ScalingText from './scalingText.vue'
 import { useTheme } from 'vuetify/lib/composables/theme'
@@ -13,13 +12,7 @@ import { useTheme } from 'vuetify/lib/composables/theme'
   const themeStore = useTheme()
 
   const props = defineProps({
-    id: Array[String],
-    title: Array[String],
-    difficulty: Number,
-    category: String,
-    releaseDate: Date,
-    requirements: Array[String],
-    connections: Array[String],
+    trick: Object
   })
 
   function isDarkTheme() {
@@ -37,7 +30,7 @@ import { useTheme } from 'vuetify/lib/composables/theme'
   }
 
   const cardStyle = computed(() => ({
-    boxShadow: `0px 0px 8px 2px ${categoryStore.getColor(props.category)}`,
+    boxShadow: `0px 0px 8px 2px ${categoryStore.getColor(props.trick.category)}`,
     overflow: 'visible',
     borderRadius: '5%',
     position: 'relative',
@@ -69,19 +62,19 @@ import { useTheme } from 'vuetify/lib/composables/theme'
     :width="isMobile() ? '35vw' : '15vw'"
     :height="isMobile() ? '20vw' : '9vw'"
     :style="cardStyle"
-    :to="{ name: 'Trick', params: { lang: $i18n.locale, trickname: title[0] } }"
+    :to="{ name: 'Trick', params: { lang: $i18n.locale, trickname: trick.title[0] } }"
   >
     <div class="title-wrapper">
-      <scaling-text class="pa-2" :title="title[0]"/>
+      <scaling-text class="pa-2" :title="trick.title[0]"/>
     </div>
 
     <div class="text-center pb-2" :style="{ color: (isDarkTheme()) ? 'white' : 'black', fontSize: isMobile() ? '8px' : '12px' }">
-        ({{ $t('categories.' + category) }})
+        ({{ $t('categories.' + trick.category) }})
     </div>
 
     <v-container class="justify-center pt-1 m-5">
       <v-row dense no-gutters class="justify-center">
-        <template v-for="_ in difficulty">
+        <template v-for="_ in trick.difficulty">
           <v-col :style="{margin: '0 1px'}">
             <v-img 
               :src="difficultyImg" 
@@ -89,7 +82,7 @@ import { useTheme } from 'vuetify/lib/composables/theme'
               :class="{ 'invert-image' : isDarkTheme() }"/>
           </v-col>
         </template>
-        <template v-for="_ in (5 - difficulty)">
+        <template v-for="_ in (5 - trick.difficulty)">
           <v-col :style="{margin: '0 1px'}">
             <v-img 
               :src="difficultyImg" 
@@ -103,15 +96,15 @@ import { useTheme } from 'vuetify/lib/composables/theme'
 
     <template v-if="!isMobile()">
       <v-card-subtitle :style="{fontSize: '0.6em', textTransform: 'none'}" class="text-center">
-        {{ getLocalDate(releaseDate, $i18n.locale) }}
+        {{ getLocalDate(trick.releaseDate, $i18n.locale) }}
       </v-card-subtitle>
     </template>
 
-    <template v-if="title[0] === trickStore.newestTrick">
+    <template v-if="trick.title[0] === trickStore.newestTrick">
       <v-card-title :style="newBadgeStyle">New!</v-card-title>
     </template>
 
-    <template v-if="mastered.isMastered(title[0])">
+    <template v-if="mastered.isMastered(trick)">
       <v-icon icon="mdi-medal" :style="medalStyle" />
     </template>
   </v-card>

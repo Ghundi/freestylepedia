@@ -38,14 +38,15 @@
   const TodoStore = useTodoStore()
   const masteredStore = useMasteredStore()
 
-  const isOnTodo = () => trick.value && trick.value !== -1 && TodoStore.isOnTodo(trick.value.title[0])
+  const isOnTodo = () => trick.value && trick.value !== -1 && TodoStore.isOnTodo(trick.value)
   function toggleTodo() {
-    if (trick.value && trick.value !== -1) TodoStore.toggle(trick.value.title[0])
+    if (trick.value && trick.value !== -1) 
+      TodoStore.toggle(trick.value)
   }
   
-  const isMastered = () => trick.value && trick.value !== -1 && masteredStore.isMastered(trick.value.title[0])
+  const isMastered = () => trick.value && trick.value !== -1 && masteredStore.isMastered(trick.value)
   function toggleMastered() {
-    if (trick.value && trick.value !== -1) masteredStore.toggle(trick.value.title[0])
+    if (trick.value && trick.value !== -1) masteredStore.toggle(trick.value)
   }
 
   function goBack() {

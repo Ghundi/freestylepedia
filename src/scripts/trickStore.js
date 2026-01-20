@@ -412,14 +412,14 @@ export const useTrickStore = defineStore('trickStore', {
                 // Starter Tricks if not mastered
                 for (let i = 0; i < baseTrickTitles.length; i++) {
                     const trick = state.getTrickByTitle(baseTrickTitles[i], state)
-                    if(!masteredStore.isMastered(trick.title[0])) {
+                    if(!masteredStore.isMastered(trick)) {
                         recommendedTricks.push(trick)
                     }
                 }
                
                 // Tricks that require mastered tricks 
                 for (let i = 0; i < state.tricks.length; i++) {
-                    if(!masteredStore.isMastered(state.tricks[i].title[0])) {
+                    if(!masteredStore.isMastered(state.tricks[i])) {
                         const requirementIds = state.tricks[i].requirements
                         const masteredIdSet = new Set(masteredTricks.map(t => t.trickID));
                         const allRequirementsMastered = requirementIds.every(id =>
@@ -435,7 +435,7 @@ export const useTrickStore = defineStore('trickStore', {
                 const sortedTricks = getSortedTricks(state.tricks, 'difficultyUp')
                 if(recommendedTricks.length < resLength) {
                     for (let i = 0; i < sortedTricks.length; i++) {
-                        if(!masteredStore.isMastered(sortedTricks[i].title[0]) && !recommendedTricks.includes(sortedTricks[i])) {
+                        if(!masteredStore.isMastered(sortedTricks[i]) && !recommendedTricks.includes(sortedTricks[i])) {
                             recommendedTricks.push(sortedTricks[i])
                             if(recommendedTricks.length == resLength) {
                                 break;

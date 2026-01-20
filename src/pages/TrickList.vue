@@ -27,14 +27,7 @@ const trickStore = useTrickStore();
           :key="trick.title[0]">
         <v-col cols="auto">
             <TrickCard
-                :id="trick.id"
-                :title="trick.title"
-                :difficulty="trick.difficulty"
-                :category="trick.category"
-                :releaseDate="trick.releaseDate"
-                :thumbnailUrl="trickStore.getThumbnailUrl(trick.id[0])"
-                :connections="trick.connections"
-                :requirements="trick.requirements"
+                :trick="trick"
             />
         </v-col>
       </template>

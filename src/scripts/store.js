@@ -2,7 +2,7 @@ import {defineStore} from 'pinia';
 
 import { ref, watch } from 'vue'
 
-// suporter logos
+// supporter logos
 import AIF from "../assets/supporters/aif w.webp";
 import GlobalIce from '../assets/supporters/GlobalIce.webp';
 import IFO from "../assets/supporters/Logo_IFO_schwarz-1.webp";
@@ -40,13 +40,31 @@ export const useTodoStore = defineStore('Todo', () => {
     }
     }, { deep: true })
 
-    function toggle(title) {
-        const idx = list.value.indexOf(title)
+    function toggle(trick) {
+        // work with trickID
+        const idx = list.value.indexOf(trick.trickID)
         if (idx > -1) list.value.splice(idx, 1)
-        else list.value.push(title)
+        else list.value.push(trick.trickID)
+
+        // fallback remove title
+        // only adding trickID
+        const idxT = list.value.indexOf(trick.title[0])
+        if (idxT > -1) list.value.splice(idxT, 1)
     }
 
-        const isOnTodo = (title) => list.value.includes(title)
+        const isOnTodo = (trick) => {
+            const retID = list.value.includes(trick.trickID)
+            if(retID) return retID
+            
+            const retTitle = list.value.includes(trick.title[0])
+            if(retTitle) {
+                // remove title and add trickID
+                const idx = list.value.indexOf(trick.title[0])
+                if (idx > -1) list.value.splice(idx, 1)
+                list.value.push(trick.trickID)
+            }
+            return retTitle
+        }
 
     return { list, toggle, isOnTodo }
 })
@@ -104,17 +122,22 @@ export const useMasteredStore = defineStore('Mastered', () => {
     }
     }, { deep: true })
 
-  function toggle(title) {
-    const idx = list.value.indexOf(title)
+  function toggle(trick) {
+    // work with trickID
+    const idx = list.value.indexOf(trick.trickID)
     if (idx > -1) list.value.splice(idx, 1)
-    else list.value.push(title)
+    else list.value.push(trick.trickID)
+
+    // fallback to title
+    const idxT = list.value.indexOf(trick.title[0])
+    if (idxT > -1) list.value.splice(idxT, 1)
   }
 
   const getMasteredTricks = (tricks) => {
     const res = []
     if(tricks) {
         for (let i = 0; i < tricks.length; i++) {
-            if (isMastered(tricks[i].title[0])) {
+            if (isMastered(tricks[i])) {
                 res.push(tricks[i])
             }
         }
@@ -132,7 +155,7 @@ export const useMasteredStore = defineStore('Mastered', () => {
         for (let i = 0; i < tricks.length; i++) {
             const idx = categories.indexOf(tricks[i].category)
             tricks_category[idx] += 1
-            if (isMastered(tricks[i].title[0])) {
+            if (isMastered(tricks[i])) {
                 tricks_mastered[idx] += 1
             }
         }
@@ -149,7 +172,7 @@ export const useMasteredStore = defineStore('Mastered', () => {
     var tricks_mastered = 0
     if(tricks) {
         for (let i = 0; i < tricks.length; i++) {
-            if (isMastered(tricks[i].title[0])) {
+            if (isMastered(tricks[i])) {
                 tricks_mastered += 1
             }
         }
@@ -160,7 +183,20 @@ export const useMasteredStore = defineStore('Mastered', () => {
     }
   }
 
-  const isMastered = (title) => list.value.includes(title)
+  const isMastered = (trick) => {
+    const retID = list.value.includes(trick.trickID)
+    if(retID) return retID
+
+    const retTitle = list.value.includes(trick.title[0])
+    if(retTitle) {
+        // remove title and add trickID
+        const idx = list.value.indexOf(trick.title[0])
+        if (idx > -1) list.value.splice(idx, 1)
+        list.value.push(trick.trickID)
+        console.log('removed: ' + trick.title[0])
+    }
+    return retTitle
+  }
 
   return { list, toggle, isMastered, calcShareMastered, calcCategoryShareMastered, getMasteredTricks }
 })

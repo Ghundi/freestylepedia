@@ -45,13 +45,13 @@ export function getFilteredTricks(tricks) {
                                 // if search at least partially matches
                                 if((curSearch) ? tricks[i].title[j].toLowerCase().includes(curSearch.toLowerCase()) : true) {
                                     // if selected mastered matches 
-                                    if( (markedStore.selMarkers.includes('mastered') && masteredStore.isMastered(tricks[i].title[0]))
-                                        || (markedStore.selMarkers.includes('non-mastered') && !masteredStore.isMastered(tricks[i].title[0]))
+                                    if( (markedStore.selMarkers.includes('mastered') && masteredStore.isMastered(tricks[i]))
+                                        || (markedStore.selMarkers.includes('non-mastered') && !masteredStore.isMastered(tricks[i]))
                                     ) {
                                         // if selected todo matches
-                                        if( (markedStore.selMarkers.includes('todo') && todoStore.isOnTodo(tricks[i].title[0]))
+                                        if( (markedStore.selMarkers.includes('todo') && todoStore.isOnTodo(tricks[i]))
                                             || (!markedStore.selMarkers.includes('todo') && !markedStore.selMarkers.includes('irrelevant'))
-                                            || (markedStore.selMarkers.includes('irrelevant') && !todoStore.isOnTodo(tricks[i].title[0]))) 
+                                            || (markedStore.selMarkers.includes('irrelevant') && !todoStore.isOnTodo(tricks[i]))) 
                                         {
                                             filtered.push(tricks[i]);
                                         }

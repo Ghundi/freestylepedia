@@ -26,14 +26,7 @@ const masteredTricks = useMasteredStore();
         <v-col cols="auto">
           <TrickCard
             class="ma-1"
-            :id="trick.id"
-            :title="trick.title"
-            :difficulty="trick.difficulty"
-            :category="trick.category"
-            :releaseDate="trick.releaseDate"
-            :thumbnailUrl="trickStore.getThumbnailUrl(trick.id[0])"
-            :connections="trick.connections"
-            :requirements="trick.requirements"
+            :trick="trick"
           />
         </v-col>
       </template>
