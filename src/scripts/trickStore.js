@@ -414,7 +414,7 @@ export const useTrickStore = defineStore('trickStore', {
                 const masteredTricks = masteredStore.getMasteredTricks(state.tricks);
                 const resLength = 12
                 
-                const baseTrickTitles = ['Triangle', 'Donut', 'Hockey Stop', 'Eagle', 'Grapevine']
+                const baseTrickTitles = ['Triangle', 'Backwards Donut', 'Hockey Stop', 'Eagle', 'Grapevine']
                 // Starter Tricks if not mastered
                 for (let i = 0; i < baseTrickTitles.length; i++) {
                     const trick = state.getTrickByTitle(baseTrickTitles[i], state)
