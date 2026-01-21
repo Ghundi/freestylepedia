@@ -48,7 +48,7 @@ tricks:
     - [trick0042]
     - []
 - trick0006:
-    - ["Donut", "Fulcrum", "de{Kreisel}"]
+    - ["Forward Donut", "Forward Fulcrum", "de{Vorwärts Kreisel}", "de{Vorwärts Donut}"]
     - ["-BclH8x0eXQ", "JD4Zzz3Fn_Y", "uvMoWEuBdCQ", "yZJmSqoVM_k"]
     - 1
     - "Ground"
@@ -77,7 +77,7 @@ tricks:
     - 3
     - "Ground"
     - "2020-01-31"
-    - [trick0006]
+    - [trick0075]
     - []
 - trick0010:
       - ["Spiderman", "Hydro", "Hydroglide"]
@@ -88,7 +88,7 @@ tricks:
       - [trick0045]
       - [trick0014, trick0011]
 - trick0011:
-      - ["Forward Spiderman", "Forward Hydro", "Limbo", "Dragon Squat"]
+      - ["Forward Spiderman", "Forward Hydro", "Limbo", "Dragon Squat", "de{Vorwärts Spiderman}"]
       - ["K7mM-kyIfLw"]
       - 4
       - "Hydroblading"
@@ -125,7 +125,7 @@ tricks:
     - 2
     - "Ground"
     - "2024-02-02"
-    - [trick0006]
+    - [trick0006, trick0075]
     - []
 - trick0016:
     - ["Sliding Headstand"]
@@ -360,7 +360,7 @@ tricks:
       - [trick0022]
       - [trick0022]
 - trick0045:
-      - ["Cannon", "Shoot-the-duck", "de{Kannone}"]
+      - ["Forward Cannon", "Forward Shoot-the-duck", "de{Vorwärts Kannone}"]
       - ["qVQYXi9jMSU", "Esut7pZO924"]
       - 2
       - "Hydroblading"
@@ -400,7 +400,7 @@ tricks:
     - []
     - []
 - trick0050:
-    - ["8", "Eight", "The 8", "de{Acht}"]
+    - ["Forward 8", "Forward Eight", "The forward 8", "de{Vorärts Acht}"]
     - ["mg7hCXAQBPY", "EAe764_8uBo", "hlDx5X_Ej-E" ,"-LC17fFWQF0"]
     - 3
     - "Footwork"
@@ -536,7 +536,7 @@ tricks:
     - [trick0034]
     - []
 - trick0067:
-    - ["Forward Knee Circle"]
+    - ["Forward Knee Circle", "de{Vorwärts Knee Circle}"]
     - ["DdDInpsHz2M"]
     - 2
     - "Hydroblading"
@@ -568,7 +568,7 @@ tricks:
     - []
     - []     
 - trick0071:
-    - ["Forward V-Spin", "Forward Cross foot spin", "Forward Cross 2 foot spin", "Cross foot spin"]
+    - ["Forward V-Spin", "Forward Cross foot spin", "Forward Cross 2 foot spin", "Cross foot spin", "de{Vorwärts V-Spin}"]
     - ["yJrcTFon_DE"]
     - 2
     - "Spin"
@@ -591,3 +591,27 @@ tricks:
     - "2026-01-27"
     - []
     - [] 
+- trick0074:
+    - ["Backwards 8", "Backwards Eight", "The backwards 8", "de{Rückwarts Acht}"]
+    - ["mg7hCXAQBPY", "EAe764_8uBo", "hlDx5X_Ej-E" ,"-LC17fFWQF0"]
+    - 3
+    - "Footwork"
+    - "2019-03-21"
+    - [trick0020]
+    - []
+- trick0075:
+    - ["Backwards Donut", "Backwards Fulcrum", "de{Rückwarts Kreisel}", "de{Rückwarts Donut}"]
+    - ["-BclH8x0eXQ", "JD4Zzz3Fn_Y", "uvMoWEuBdCQ", "yZJmSqoVM_k"]
+    - 1
+    - "Ground"
+    - "2019-11-10"
+    - []
+    - []
+- trick0076:
+      - ["Backwards Cannon", "Backwards Shoot-the-duck", "de{Rückwarts Kannone}"]
+      - ["qVQYXi9jMSU", "Esut7pZO924"]
+      - 3
+      - "Hydroblading"
+      - "2019-03-14"
+      - []
+      - [trick0051]
