@@ -49,7 +49,7 @@ tricks:
     - []
 - trick0006:
     - ["Forward Donut", "Forward Fulcrum", "de{Vorwärts Kreisel}", "de{Vorwärts Donut}"]
-    - ["-BclH8x0eXQ", "JD4Zzz3Fn_Y", "uvMoWEuBdCQ", "yZJmSqoVM_k"]
+    - ["-BclH8x0eXQ", "JD4Zzz3Fn_Y", "uvMoWEuBdCQ", "yZJmSqoVM_k", "ezfEiPjpg00"]
     - 1
     - "Ground"
     - "2019-11-10"
@@ -105,7 +105,7 @@ tricks:
     - []
 - trick0013:
     - ["Compass", "de{Kompass}"]
-    - ["A7Q907vPMuQ", "N5q2P-syZIc", "vW-KqolxQqo", "Ps1RDZqsdXU"]
+    - ["A7Q907vPMuQ", "N5q2P-syZIc", "vW-KqolxQqo", "Ps1RDZqsdXU", "v5DoCvhV9UQ"]
     - 2
     - "Footwork"
     - "2019-02-22"
@@ -129,7 +129,7 @@ tricks:
     - []
 - trick0016:
     - ["Sliding Headstand"]
-    - ["hXUuTnMaTio"]
+    - ["hXUuTnMaTio", "gfNIkS6wuBc"]
     - 5
     - "Acrobatic"
     - "2024-01-26"
@@ -161,7 +161,7 @@ tricks:
     - []
 - trick0020:
     - ["Grapevine", "de{Knoten}", "de{Gummifuß}", "de{Achter}"]
-    - ["xrxxASySDs0", "FwtzestNMwQ", "nDhvTDuobDE", "c9YokTcE_bY"]
+    - ["xrxxASySDs0", "FwtzestNMwQ", "nDhvTDuobDE", "c9YokTcE_bY", "8RsXYG9eITM"]
     - 2
     - "Footwork"
     - "2020-02-14"
@@ -225,7 +225,7 @@ tricks:
     - []
 - trick0028:
       - ["Scissors"]
-      - ["C2-Ioubk5SY", "ohdaWIY273Y"]
+      - ["C2-Ioubk5SY", "ohdaWIY273Y", "B3jtQ-bjFNs"]
       - 3
       - "Footwork"
       - "2019-11-16"
@@ -297,7 +297,7 @@ tricks:
     - [trick0020]
 - trick0037:
     - ["Insanity"]
-    - ["sO_cSB6Buy8", "N5q2P-syZIc"]
+    - ["sO_cSB6Buy8", "N5q2P-syZIc", "aZdZ2LuPeRI"]
     - 2
     - "Footwork"
     - "2020-02-07"
@@ -305,7 +305,7 @@ tricks:
     - []
 - trick0038:
     - ["Butterfly", "B-Kick"]
-    - ["AmZFtgm9Is4", "sDPCN0nnqp0","xibQVI-6WVY"]
+    - ["AmZFtgm9Is4", "sDPCN0nnqp0","xibQVI-6WVY", "ISgXZU-BNnk"]
     - 4
     - "Acrobatic"
     - "2020-01-23"
@@ -417,7 +417,7 @@ tricks:
       - [trick0045, trick0076]
 - trick0052:
     - ["Split jump"]
-    - ["lrwQ1GLtL6o"]
+    - ["lrwQ1GLtL6o", "xI4eFHvOpq4"]
     - 5
     - "Jump"
     - "2019-03-07"

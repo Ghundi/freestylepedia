@@ -13,6 +13,7 @@ import IceRad from "../assets/supporters/ICERAD.webp"
 import Guardians from "../assets/supporters/Guardians.webp"
 import IFP from "../assets/supporters/IFP Print Brust Link.webp"
 import ICD from "../assets/supporters/ICD.webp"
+import IceIceDilly from "../assets/supporters/IceIceDilly.webp"
 
 export const useTodoStore = defineStore('Todo', () => {
   const list = ref([])
@@ -251,6 +252,10 @@ export const useSupporters = defineStore('supporters', {
                 {
                     imgSrc: Turtle,
                     link: 'https://www.instagram.com/turtlestyleofficial'
+                },
+                {
+                    imgSrc: IceIceDilly,
+                    link: 'https://www.youtube.com/@IceIceDilly'
                 },
             ]
         }
