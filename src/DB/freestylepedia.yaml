@@ -197,8 +197,8 @@ tricks:
     - 3
     - "Jump"
     - "2021-02-19"
-    - [trick0022]
-    - [trick0022]
+    - [trick0022, trick0078]
+    - [trick0022, trick0078]
 - trick0025:
     - ["Knee Stop"]
     - ["QXcGMJhpMpM"]
@@ -608,18 +608,26 @@ tricks:
     - []
     - []
 - trick0076:
-      - ["Backwards Cannon", "Backwards Shoot-the-duck", "de{Rückwarts Kannone}"]
-      - ["qVQYXi9jMSU", "Esut7pZO924"]
-      - 3
-      - "Hydroblading"
-      - "2019-03-14"
-      - [trick0045]
-      - [trick0051]
+    - ["Backwards Cannon", "Backwards Shoot-the-duck", "de{Rückwarts Kannone}"]
+    - ["qVQYXi9jMSU", "Esut7pZO924"]
+    - 3
+    - "Hydroblading"
+    - "2019-03-14"
+    - [trick0045]
+    - [trick0051]
 - trick0077:
-      - ["Cross Acid Toe Stop"]
-      - ["oND_F4FJ9hI", "2jSAPee3e1c"]
-      - 3
-      - "Stop"
-      - "2025-01-31"
-      - [trick0047]
-      - []
+    - ["Cross Acid Toe Stop"]
+    - ["oND_F4FJ9hI", "2jSAPee3e1c"]
+    - 3
+    - "Stop"
+    - "2025-01-31"
+    - [trick0047]
+    - []
+- trick0078:
+    - ["Forward Groundtouch"]
+    - ["Z33itM59Q2E"]
+    - 2
+    - "Hydroblading"
+    - "2026-01-30"
+    - []
+    - [trick0024]

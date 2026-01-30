@@ -21,9 +21,6 @@ import {createPinia} from "pinia";
 // routing
 import {createRouter, createWebHistory} from 'vue-router'
 
-// PWA
-import './registerServiceWorker'
-
 
 function getLang() {
     if (navigator.languages !== undefined)

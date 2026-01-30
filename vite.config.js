@@ -22,18 +22,28 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: 'autoUpdate',
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}']
+      },
+      injectRegister: 'auto',
       manifest: {
         name: 'Freestylepedia',
         short_name: 'Freestylepedia',
+        description: "A place to lookup tricks and watch your progress",
         start_url: '/',
         display: 'standalone',
         background_color: '#ffffff',
         theme_color: '#000000',
         icons: [
           {
-            src: './src/assets/blackbirdLogoInverted.jpg',
-            sizes: '176x176',
-            type: 'image/png'
+            src: '/src/assets/Blackbirdlogoneuwei - 192x192.jpg',
+            sizes: '192x192',
+            type: 'image/jpg'
+          },
+          {
+            src: '/src/assets/Blackbirdlogoneuwei - 512x512.jpg',
+            sizes: '512x512',
+            type: 'image/jpg'
           }
         ]
       }
