@@ -470,7 +470,7 @@ tricks:
     - "Footwork"
     - "2024-10-23"
     - [trick0013]
-    - []
+    - [trick0079]
 - trick0059:
     - ["B-Twist", "Butterflytwist", "BTwist", "B Twist"]
     - ["PlfMsc67YCM"]
@@ -631,3 +631,11 @@ tricks:
     - "2026-01-30"
     - []
     - [trick0024]
+- trick0079:
+    - ["Backwards Korean"]
+    - ["lloqbwSq7jU"]
+    - 3
+    - "Footwork"
+    - "2026-02-03"
+    - [trick0013]
+    - [trick0058]
