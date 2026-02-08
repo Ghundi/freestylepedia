@@ -14,7 +14,7 @@ tricks:
       - "Footwork"
       - "2019-02-15"
       - []
-      - [trick0003]
+      - [trick0003, trick0081]
 - trick0002:
     - ["Crazy Legs"]
     - ["JRwQ3GLsysQ"]
@@ -318,7 +318,7 @@ tricks:
     - "Footwork"
     - "2020-01-17"
     - []
-    - []
+    - [trick0082]
 - trick0040:
     - ["Sweep Spin", "Sweep Pirouette"]
     - ["V-Qj-V3Ov3k"]
@@ -639,3 +639,59 @@ tricks:
     - "2026-02-03"
     - [trick0013]
     - [trick0058]
+- trick0080:
+    - ["Spiderman 360", "Hydro 360"]
+    - ["7ZHmF2sZxF0"]
+    - 5
+    - "Hydroblading"
+    - "2016-02-10"
+    - [trick0014]
+    - [trick0014, trick0011, trick0010]
+- trick0081:
+    - ["Double Brush"]
+    - ["Pd_fowbKeBg"]
+    - 3
+    - "Footwork"
+    - "2026-02-17"
+    - [trick0001]
+    - [trick0001]
+- trick0082:
+    - ["Windmill"]
+    - ["TMP"]
+    - 4
+    - "Ground"
+    - "2056-02-24"
+    - [trick0013]
+    - [trick0013]
+- trick0083:
+    - ["Deep Compass"]
+    - ["TMP"]
+    - 4
+    - "Hydroblading"
+    - "2056-02-05"
+    - [trick0013]
+    - [trick0013]
+- trick0084:
+    - ["Twizzle"]
+    - ["TMP"]
+    - 3
+    - "Spin"
+    - "2056-02-07"
+    - [trick0034]
+    - []
+- trick0085:
+    - ["Bootslide"]
+    - ["TMP"]
+    - 3
+    - "Hydroblading"
+    - "2056-02-07"
+    - []
+    - []
+- trick0086:
+    - ["Triangle Twist"]
+    - ["TMP"]
+    - 3
+    - "Footwork"
+    - "2056-02-08"
+    - [trick0070]
+    - []
