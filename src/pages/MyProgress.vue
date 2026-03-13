@@ -18,15 +18,6 @@ import { computed } from 'vue'
   )
 })
 
-  async function getExportUrl()  {
-    try {
-      const exportUrl = 'https://freestylepedia.org/en?todo=' + useTodoStore().getHash() + "&mastered=" + useMasteredStore().getHash();
-      await navigator.clipboard.writeText(exportUrl);
-    } catch($e) {
-      console.log('failed copying to clipboard. Make sure you have a secure connection');
-    }
-  }
-
 </script>
 
 <template>
