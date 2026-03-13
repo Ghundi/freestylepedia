@@ -1,10 +1,21 @@
 <script setup>
-import TrickCard from '../components/TrickCard.vue';
-import Toolbar from "@/components/Toolbar/Toolbar.vue";
-import { useSelSortingOrderStore } from "@/scripts/store.js";
-import { useTrickStore } from "@/scripts/trickStore.js";
+  import TrickCard from '../components/TrickCard.vue';
+  import Toolbar from "@/components/Toolbar/Toolbar.vue";
+  import { useMasteredStore, useTodoStore } from '@/scripts/store';
+  import { useTrickStore } from "@/scripts/trickStore.js";
+  import { useRoute } from 'vue-router';
 
-const trickStore = useTrickStore();
+  const trickStore = useTrickStore();
+
+  console.log(useTodoStore().list)
+
+  const route = useRoute()
+  if(route.query.todo) {
+    console.log(route.query.todo)
+    useTodoStore().loadHash(route.query.todo);
+    useMasteredStore().loadHash(route.query.mastered);
+  }
+
 </script>
 
 <script>
@@ -12,8 +23,6 @@ const trickStore = useTrickStore();
     return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
 
-  const trickStore = useTrickStore();
-  const selSortingOrderStore = useSelSortingOrderStore();
 </script>
 
 <template>

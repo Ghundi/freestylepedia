@@ -3,7 +3,7 @@ import ProgressBar from '@/components/progressBar.vue';
 import ProgressSpiderChart from '@/components/ProgressSpiderChart.vue';
 import RecommendedTricks from '@/components/recommendedTricks.vue';
 import TrickCard from '@/components/TrickCard.vue';
-import { useMasteredStore } from '@/scripts/store';
+import { useMasteredStore, useTodoStore } from '@/scripts/store';
 import { useTrickStore } from '@/scripts/trickStore';
 import { computed } from 'vue'
 </script>
@@ -16,6 +16,16 @@ import { computed } from 'vue'
     masteredStore.getMasteredTricks(trickStore.tricks)
   )
 })
+
+  async function getExportUrl()  {
+    try {
+      const exportUrl = 'https://freestylepedia.org/en?todo=' + useTodoStore().getHash() + "&mastered=" + useMasteredStore().getHash();
+      await navigator.clipboard.writeText(exportUrl);
+    } catch($e) {
+      console.log('failed copying to clipboard. Make sure you have a secure connection');
+    }
+  }
+
 </script>
 
 <template>
@@ -42,6 +52,11 @@ import { computed } from 'vue'
         </v-col>
       </v-row>
     </v-container>
+    <div class="text-center">
+      <v-btn variant="elevated" @click="getExportUrl()">
+        {{ $t('myProgress.transferProgress') }}
+      </v-btn>
+    </div>
     <div class="text-center justify-center">
       <recommended-tricks/>
     </div>

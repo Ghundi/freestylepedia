@@ -93,7 +93,8 @@
     "myProgress": "My Progress",
     "progress": "Progress",
     "recommendedTricks": "Recommended Tricks",
-    "hardestTrick": "hardest Trick"
+    "hardestTrick": "hardest Trick",
+    "transferProgress": "transfer progress"
   },
   "close": "Close",
   "difficulty": "Difficulty",

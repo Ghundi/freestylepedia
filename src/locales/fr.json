@@ -93,7 +93,8 @@
     "myProgress": "Ma progression",
     "progress": "Progression",
     "recommendedTricks": "Tricks recommandés pour toi",
-    "hardestTrick": "trick le plus difficile"
+    "hardestTrick": "trick le plus difficile",
+    "transferProgress": "Progression du transfert"
   },
   "close": "Fermer",
   "difficulty": "Difficulté",

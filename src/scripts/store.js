@@ -53,21 +53,31 @@ export const useTodoStore = defineStore('Todo', () => {
         if (idxT > -1) list.value.splice(idxT, 1)
     }
 
-        const isOnTodo = (trick) => {
-            const retID = list.value.includes(trick.trickID)
-            if(retID) return retID
-            
-            const retTitle = list.value.includes(trick.title[0])
-            if(retTitle) {
-                // remove title and add trickID
-                const idx = list.value.indexOf(trick.title[0])
-                if (idx > -1) list.value.splice(idx, 1)
-                list.value.push(trick.trickID)
-            }
-            return retTitle
+    const isOnTodo = (trick) => {
+        const retID = list.value.includes(trick.trickID)
+        if(retID) return retID
+        
+        const retTitle = list.value.includes(trick.title[0])
+        if(retTitle) {
+            // remove title and add trickID
+            const idx = list.value.indexOf(trick.title[0])
+            if (idx > -1) list.value.splice(idx, 1)
+            list.value.push(trick.trickID)
         }
+        return retTitle
+    }
 
-    return { list, toggle, isOnTodo }
+    const getHash = () => {
+        return list.value.toString();
+    }
+
+    const loadHash = (hash) => {
+        const newList = hash.split(",");
+        list.value = newList;
+        return newList
+    }
+
+    return { list, toggle, isOnTodo, getHash, loadHash }
 })
 
 export const useMarkedStore = defineStore('marked', {
@@ -199,7 +209,17 @@ export const useMasteredStore = defineStore('Mastered', () => {
     return retTitle
   }
 
-  return { list, toggle, isMastered, calcShareMastered, calcCategoryShareMastered, getMasteredTricks }
+    const getHash = () => {
+        return list.value.toString();
+    }
+
+    const loadHash = (hash) => {
+        const newList = hash.split(",");
+        list.value = newList;
+        return newList
+    }
+
+  return { list, toggle, isMastered, calcShareMastered, calcCategoryShareMastered, getMasteredTricks, getHash, loadHash }
 })
 
 export const useFAQ = defineStore('FAQ', {
