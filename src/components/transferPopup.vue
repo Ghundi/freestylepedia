@@ -1,4 +1,6 @@
 <script setup>
+    import { useMasteredStore, useTodoStore } from '@/scripts/store';
+
   async function getExportUrl()  {
     try {
       const exportUrl = 'https://freestylepedia.org/en?todo=' + useTodoStore().getHash() + "&mastered=" + useMasteredStore().getHash();
@@ -15,7 +17,7 @@
         <v-btn
         v-bind="activatorProps"
         variant="elevated"
-        @click="getExportUrl()"
+        @click.stop="getExportUrl()"
         >
         {{ $t('myProgress.transferProgress') }}
     </v-btn>
