@@ -94,7 +94,8 @@
     "progress": "Progress",
     "recommendedTricks": "Recommended Tricks",
     "hardestTrick": "hardest Trick",
-    "transferProgress": "transfer progress"
+    "transferProgress": "transfer progress",
+    "transferInfo": "Enter the copied URL in your clipboard on the new device"
   },
   "close": "Close",
   "difficulty": "Difficulty",

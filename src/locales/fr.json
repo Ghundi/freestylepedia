@@ -94,7 +94,8 @@
     "progress": "Progression",
     "recommendedTricks": "Tricks recommandés pour toi",
     "hardestTrick": "trick le plus difficile",
-    "transferProgress": "Progression du transfert"
+    "transferProgress": "Progression du transfert",
+    "transferInfo": "Collez l’URL copiée depuis votre presse-papiers sur le nouvel appareil"
   },
   "close": "Fermer",
   "difficulty": "Difficulté",

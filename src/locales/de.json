@@ -94,7 +94,8 @@
     "progress": "Fortschritt",
     "recommendedTricks": "Für dich passende Tricks",
     "hardestTrick": "schwerster Trick",
-    "transferProgress": "Fortschritt übertragen"
+    "transferProgress": "Fortschritt übertragen",
+    "transferInfo": "Gebe die kopierte URL in deiner Zwischenablage auf dem neuen Gerät ein"
   },
   "close": "Schließen",
   "difficulty": "Schwierigkeit",

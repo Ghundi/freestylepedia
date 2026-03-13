@@ -2,6 +2,7 @@
 import ProgressBar from '@/components/progressBar.vue';
 import ProgressSpiderChart from '@/components/ProgressSpiderChart.vue';
 import RecommendedTricks from '@/components/recommendedTricks.vue';
+import TransferPopup from '@/components/transferPopup.vue';
 import TrickCard from '@/components/TrickCard.vue';
 import { useMasteredStore, useTodoStore } from '@/scripts/store';
 import { useTrickStore } from '@/scripts/trickStore';
@@ -53,9 +54,7 @@ import { computed } from 'vue'
       </v-row>
     </v-container>
     <div class="text-center">
-      <v-btn variant="elevated" @click="getExportUrl()">
-        {{ $t('myProgress.transferProgress') }}
-      </v-btn>
+      <TransferPopup/>
     </div>
     <div class="text-center justify-center">
       <recommended-tricks/>
