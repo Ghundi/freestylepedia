@@ -7,12 +7,11 @@
 
   const trickStore = useTrickStore();
 
-  console.log(useTodoStore().list)
-
   const route = useRoute()
   if(route.query.todo) {
-    console.log(route.query.todo)
     useTodoStore().loadHash(route.query.todo);
+  }
+  if(route.query.mastered) {
     useMasteredStore().loadHash(route.query.mastered);
   }
 

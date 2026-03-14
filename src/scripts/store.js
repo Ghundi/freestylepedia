@@ -74,6 +74,7 @@ export const useTodoStore = defineStore('Todo', () => {
     const loadHash = (hash) => {
         const newList = hash.split(",");
         list.value = newList;
+        console.log("Loaded following todo list: ", list.value)
         return newList
     }
 
@@ -216,6 +217,7 @@ export const useMasteredStore = defineStore('Mastered', () => {
     const loadHash = (hash) => {
         const newList = hash.split(",");
         list.value = newList;
+        console.log("Loaded following mastered list: ", list.value)
         return newList
     }
 
@@ -225,7 +227,7 @@ export const useMasteredStore = defineStore('Mastered', () => {
 export const useFAQ = defineStore('FAQ', {
     state: () => {
         return {
-            val: ['usage', 'naming', 'scoring', 'categories', 'existence', 'improve', 'help']
+            val: ['usage', 'naming', 'scoring', 'categories', 'existence', 'improve', 'help', 'transfer']
         }
     },
 })

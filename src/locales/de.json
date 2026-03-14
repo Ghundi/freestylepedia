@@ -19,7 +19,9 @@
     "improve_question": "Wie kann ich Freestylepedia nutzen um auf dem Eis besser zu werden?",
     "improve_answer": "Mit Freestylepedia kannst du sehen, welche Tricks für dich erreichbar sind und welche ähnlich.",
     "help_question": "Wie kann ich helfen Freestylepedia zu verbessern?",
-    "help_answer": "Du kannst uns auf Social Media anschreiben oder auf unserer Github-Seite einen Issue eröffnen, falls du dich damit auskennst. Alles kannst du unten auf unserer Website finden."
+    "help_answer": "Du kannst uns auf Social Media anschreiben oder auf unserer Github-Seite einen Issue eröffnen, falls du dich damit auskennst. Alles kannst du unten auf unserer Website finden.",
+    "transfer_question": "Wie kann ich meinen Fortschritt auf ein neues Gerät übertragen?",
+    "transfer_answer": "Klicke auf den Knopf \"Fortschritt Übertragen\" auf der Seite \"Mein Fortschritt\". Anschließend erhaltst du einen speziellen Link in deiner Zwischenablage, den du auf deinem neuen Gerät in das URL-Feld einfügen kannst."
   },
   "aboutUs": {
     "members": "Mitglieder",
