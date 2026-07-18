@@ -30,7 +30,6 @@ function trickMatchesSearch(trick, searchVal) {
     }
     const search = searchVal.toLowerCase();
     if(!search.includes("-") && trick.title.toString().includes("-")) {
-        console.log("special check")
         return trick.title.map( x => x.toLowerCase().replaceAll("-", " ").includes(search) ).reduce(logicalOR, false)        
     }
     return trick.title.map( x => x.toLowerCase().includes(search) ).reduce(logicalOR, false)
