@@ -19,6 +19,23 @@ export function getCategorySizes(tricks) {
     return catSizes
 }
 
+function logicalOR(res, x) {
+    return res || x;
+}
+
+function trickMatchesSearch(trick, searchVal) {
+    // empty search field
+    if(!searchVal) {
+        return true;
+    }
+    const search = searchVal.toLowerCase();
+    if(!search.includes("-") && trick.title.toString().includes("-")) {
+        console.log("special check")
+        return trick.title.map( x => x.toLowerCase().replaceAll("-", " ").includes(search) ).reduce(logicalOR, false)        
+    }
+    return trick.title.map( x => x.toLowerCase().includes(search) ).reduce(logicalOR, false)
+}
+
 export function getSortedTricks(tricks, sortOption)  {
     try{
         switch (sortOption) {
@@ -39,6 +56,7 @@ export function getSortedTricks(tricks, sortOption)  {
         }
     }
     catch(e) {
+        console.log("Error while sorting tricks");
         return e
     }
 }
@@ -58,21 +76,18 @@ export function getFilteredTricks(tricks) {
                     if( selDifficulties[0] <= tricks[i].difficulty && tricks[i].difficulty <= selDifficulties[1]) {
                         // if matches selected categories
                         if((selCategories.length > 0) ? selCategories.includes(tricks[i].category) : true) {
-                            for (let j = 0; j < tricks[i].title.length; j++) {
-                                // if search at least partially matches
-                                if((curSearch) ? tricks[i].title[j].toLowerCase().includes(curSearch.toLowerCase()) : true) {
-                                    // if selected mastered matches 
-                                    if( (markedStore.selMarkers.includes('mastered') && masteredStore.isMastered(tricks[i]))
-                                        || (markedStore.selMarkers.includes('non-mastered') && !masteredStore.isMastered(tricks[i]))
-                                    ) {
-                                        // if selected todo matches
-                                        if( (markedStore.selMarkers.includes('todo') && todoStore.isOnTodo(tricks[i]))
-                                            || (!markedStore.selMarkers.includes('todo') && !markedStore.selMarkers.includes('irrelevant'))
-                                            || (markedStore.selMarkers.includes('irrelevant') && !todoStore.isOnTodo(tricks[i]))) 
-                                        {
-                                            filtered.push(tricks[i]);
-                                        }
-                                        break;
+                            // if search at least partially matches
+                            if(trickMatchesSearch(tricks[i], curSearch)) {
+                                // if selected mastered matches 
+                                if( (markedStore.selMarkers.includes('mastered') && masteredStore.isMastered(tricks[i]))
+                                    || (markedStore.selMarkers.includes('non-mastered') && !masteredStore.isMastered(tricks[i]))
+                                ) {
+                                    // if selected todo matches
+                                    if( (markedStore.selMarkers.includes('todo') && todoStore.isOnTodo(tricks[i]))
+                                        || (!markedStore.selMarkers.includes('todo') && !markedStore.selMarkers.includes('irrelevant'))
+                                        || (markedStore.selMarkers.includes('irrelevant') && !todoStore.isOnTodo(tricks[i]))) 
+                                    {
+                                        filtered.push(tricks[i]);
                                     }
                                 }
                             }
@@ -82,6 +97,7 @@ export function getFilteredTricks(tricks) {
                 return filtered;
             }
             catch(e) {
+                console.log("Error occured while filtering tricks", e)
                 return e
             }
         }

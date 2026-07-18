@@ -224,7 +224,7 @@ tricks:
     - [trick0038]
     - []
 - trick0028:
-      - ["Scissors"]
+      - ["Scissors", "Wiper"]
       - ["C2-Ioubk5SY", "ohdaWIY273Y", "B3jtQ-bjFNs"]
       - 3
       - "Footwork"
@@ -464,7 +464,7 @@ tricks:
     - [trick0005]
     - []
 - trick0058:
-    - ["Korean Spin"]
+    - ["Korean Spin", "J-Turn"]
     - ["SoT2zJHMSoI"]
     - 2
     - "Footwork"
@@ -632,7 +632,7 @@ tricks:
     - []
     - [trick0024]
 - trick0079:
-    - ["Backwards Korean"]
+    - ["Backwards Korean", "Backwards J-Turn"]
     - ["lloqbwSq7jU"]
     - 3
     - "Footwork"
@@ -695,3 +695,4 @@ tricks:
     - "2056-02-08"
     - [trick0070]
     - []
+	
