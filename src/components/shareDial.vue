@@ -6,9 +6,10 @@ import { getActivePinia } from "pinia";
 
 export default {
   data() {
+    console.log(window.location.href);
     return {
       dialShare: false,
-      pageUrl: 'https://freestylepedia.org/trick/' + strToUrl(useRoute().params.trickname.toString()),
+      pageUrl: window.location.href,
     };
   },
   methods: {
