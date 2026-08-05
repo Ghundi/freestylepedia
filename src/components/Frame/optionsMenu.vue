@@ -1,66 +1,61 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import LanguageSelector from './languageSelector.vue'
-import ThemeSwitcher from './themeSwitcher.vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import LanguageSelector from './languageSelector.vue';
+import ThemeSwitcher from './themeSwitcher.vue';
 
-/* ===== 1. TYPE SAFETY (CRITICAL FOR PWAs) ===== */
-interface BeforeInstallPromptEvent extends Event {
-  prompt: () => Promise<void>;
-  userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>;
+type InstallPromptEvent = BeforeInstallPromptEvent;
+
+// 1️⃣ Reactive state
+const deferredPrompt = ref<InstallPromptEvent | null>(null);
+
+// 2️⃣ Detect “installed” state (Chrome/Edge/Opera + iOS Safari)
+const isStandalone = computed(() => {
+  return (
+    window.matchMedia('(display-mode: standalone)').matches ||
+    // iOS Safari exposes a non‑standard flag
+    (navigator as any).standalone === true
+  );
+});
+
+// 3️⃣ Show button only when we have a saved prompt *and* we are not already
+//    running as a PWA
+const showInstallButton = computed(() => !!deferredPrompt.value && !isStandalone.value);
+
+// 4️⃣ Event listeners -------------------------------------------------
+function handleBeforeInstall(e: InstallPromptEvent) {
+  e.preventDefault();               // Required – tells the browser we’ll show it later
+  deferredPrompt.value = e;         // Save the event for later use
 }
 
-/* ===== 2. REACTIVE STATE ===== */
-const deferredPrompt = ref<BeforeInstallPromptEvent | null>(null)
-
-// Detect if already installed (works on Chrome, Edge, Opera, iOS)
-const isStandalone = computed(() => 
-  window.matchMedia('(display-mode: standalone)').matches || 
-  !!(navigator as any).standalone
-)
-
-// Only show button when installable AND not already installed
-const showInstallButton = computed(() => 
-  !!deferredPrompt.value && !isStandalone.value
-)
-
-/* ===== 3. PWA EVENT HANDLING (ALL IN ONE PLACE) ===== */
-const handleBeforeInstall = (e: Event) => {
-  e.preventDefault() // REQUIRED to defer the prompt
-  deferredPrompt.value = e as BeforeInstallPromptEvent
-}
-
-const handleAppInstalled = () => {
-  console.log('PWA successfully installed')
-  deferredPrompt.value = null // Clear after install
+function handleAppInstalled() {
+  console.log('✅ PWA successfully installed');
+  deferredPrompt.value = null;      // Clean up so the button disappears
 }
 
 onMounted(() => {
-  window.addEventListener('beforeinstallprompt', handleBeforeInstall)
-  window.addEventListener('appinstalled', handleAppInstalled)
-})
+  window.addEventListener('beforeinstallprompt', handleBeforeInstall);
+  window.addEventListener('appinstalled', handleAppInstalled);
+});
 
 onBeforeUnmount(() => {
-  window.removeEventListener('beforeinstallprompt', handleBeforeInstall)
-  window.removeEventListener('appinstalled', handleAppInstalled)
-})
+  window.removeEventListener('beforeinstallprompt', handleBeforeInstall);
+  window.removeEventListener('appinstalled', handleAppInstalled);
+});
 
-/* ===== 4. INSTALL HANDLER (NO CHILD COMPONENT NEEDED) ===== */
+// 5️⃣ Install button click handler ----------------------------------
 async function triggerInstall() {
-  if (!deferredPrompt.value) return
+  const promptEvent = deferredPrompt.value;
+  if (!promptEvent) return;         // Safety guard
 
-  try {
-    // Show native install prompt
-    await deferredPrompt.value.prompt()
-    
-    // Wait for user decision
-    const { outcome } = await deferredPrompt.value.userChoice
-    console.log('Install outcome:', outcome)
-    
-    // Cleanup (prompt can only be used once)
-    deferredPrompt.value = null
-  } catch (err) {
-    console.error('Install failed:', err)
-  }
+  // Show the native install UI
+  promptEvent.prompt();
+
+  // Wait for the user’s decision
+  const { outcome } = await promptEvent.userChoice;
+  console.log('Install outcome:', outcome);
+
+  // Reset – the prompt can’t be shown again
+  deferredPrompt.value = null;
 }
 </script>
 
@@ -79,11 +74,11 @@ async function triggerInstall() {
 
     <v-list class="text-center">
       <v-list-item>
-        <language-selector />
+        <languageSelector />
       </v-list-item>
       
       <v-list-item>
-        <theme-switcher />
+        <themeSwitcher />
       </v-list-item>
       
       <v-list-item v-if="showInstallButton">
@@ -91,7 +86,7 @@ async function triggerInstall() {
           variant="plain"
           @click="triggerInstall"
           class="text-none"
-          aria-label="Install this app"
+          :aria-label="$t('navBar.installApp')"
         >
           {{ $t('navBar.installApp') }}
         </v-btn>
