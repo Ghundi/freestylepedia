@@ -36,7 +36,7 @@ const vuetify = createVuetify({
     }
 })
 
-const availableLocales = ["en", "de", "fr", "pl"];
+const availableLocales = ["en", "de", "fr", "pl", "jp"];
 const fallbackLocale = 'en';
 
 const i18n = createI18n({

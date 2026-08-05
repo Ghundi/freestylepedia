@@ -1,0 +1,109 @@
+{
+  "categoryTree": {
+    "description": "このマインドマップは、同じカテゴリーに属するトリックをグループ化し、ベーストリックとの関連性を示します。"
+  },
+  "trickTree": {
+    "description": "グラフ全体は右に行くほど難易度が高くなります。各トリックツリーはより難しいトリックに分岐し、線でつながっています。個々のトリックツリーは左から右へ順に学ぶことをおすすめします。"
+  },
+  "faq": {
+    "naming_question": "トリック名はどこから来ているのですか？",
+    "naming_answer": "名前は私たちがコミュニティの意見をもとに決定しています。",
+    "scoring_question": "難易度スコアはどのように割り当てられていますか？",
+    "scoring_answer": "可能な限り公平にすべてのトリックにスコアをつけています。スコアはスケートの数で表されます。",
+    "categories_question": "カテゴリーとは何を意味しますか？",
+    "categories_answer": "カテゴリーは、類似した特徴を持つトリックをグループ化するものです。",
+    "usage_question": "Freestylepediaの使い方は？",
+    "usage_answer": "Freestylepediaページですべてのトリックの詳細情報を得たり、マインドマップでカテゴリーを学んだり、トリックツリーでどのトリックが他のトリックの上に構築されているか確認できます。",
+    "existence_question": "なぜFreestylepediaを作ったのですか？",
+    "existence_answer": "友人に見せたり、アイス上で見て練習したりするために、トリックを素早く調べられるようにするためです。",
+    "improve_question": "Freestylepediaを使ってアイス上で上達するにはどうすればいいですか？",
+    "improve_answer": "Freestylepediaを使えば、あなたが現在達成可能なトリックや、すでに習得したトリックと似たトリックを簡単に見つけられます。",
+    "help_question": "Freestylepediaの改善にどう貢献できますか？",
+    "help_answer": "SNSで私たちに連絡するか、GitHubに慣れている場合はGitHubページでIssueを立ててください。すべてのリンクはこのサイトの下部にあります。",
+    "transfer_question": "進捗を別のデバイスに移行するにはどうすればいいですか？",
+    "transfer_answer": "「My Progress」ページの「進捗を移行」ボタンをクリックしてください。その後、クリップボードに特別なリンクがコピーされるので、新しいデバイスのURL欄に貼り付けてください。"
+  },
+  "aboutUs": {
+    "members": "メンバー",
+    "aboutUs": "私たちについて",
+    "findUs": "私たちをフォロー",
+    "story": "私たちのグループの2名が、トリックを調べられる場所を作りたいというアイデアを思いつきました。同じトリックでも、私たちが異なる名前で呼ぶことがよくあるため、このコレクションを通じて、誰もが知っている名前でトリックを見つけられ、他の別名も学べることを願っています。このプロジェクトには長い時間をかけ、何度も試行錯誤を重ねました。そして今、この新しいリソースを皆様にお届けできることを誇りに思います。",
+    "MisgDescription": "Mainz Ice Skate Group（MISG）はドイツ・マインツにある小さなアイスブレイキンググループです。地域内のあらゆるスケートリンクでスケートを楽しんでいます。",
+    "BlackbirdDescription": "Blackbirdsはミュンヘンを拠点とする8名のアイスフリースタイルグループです。主にミュンヘン東スタジアムや新しいオリンピックアイススタジアムで活動しています。"
+  },
+  "navBar": {
+    "freestylepedia": "Freestylepedia",
+    "categoryTree": "カテゴリー・ツリー",
+    "trickTree": "トリック・ツリー",
+    "myProgress": "私の進捗",
+    "switchToLightMode": "ライトモードに切り替え",
+    "switchToDarkMode": "ダークモードに切り替え",
+    "installApp": "アプリをインストール"
+  },
+  "toolbar": {
+    "resetFilters": "フィルターをリセット",
+    "search": "検索",
+    "sortBy": "並び替え",
+    "categories": "カテゴリー",
+    "marked": "マーク済み",
+    "filters": "フィルター"
+  },
+  "footer": {
+    "help": "ヘルプ",
+    "language": "言語",
+    "byBlackbirdAndMISG": "Blackbird と MISG による",
+    "supportedBy": "支援："
+  },
+  "sortOptions": {
+    "difficultyDown": "難易度（難 → 簡単）",
+    "difficultyUp": "難易度（簡単 → 難）",
+    "nameUp": "名前（A → Z）",
+    "nameDown": "名前（Z → A）",
+    "releasedDown": "公開日（古い → 新しい）",
+    "releasedUp": "公開日（新しい → 古い）"
+  },
+  "categories": {
+    "footwork": "フットワーク",
+    "ground": "グラウンド",
+    "jump": "ジャンプ",
+    "acrobatic": "アクロバティック",
+    "hydroblading": "ハイドロブレーディング",
+    "spin": "スピン",
+    "stop": "ストップ"
+  },
+  "languages": {
+    "en": "English",
+    "de": "Deutsch",
+    "fr": "Français",
+    "pl": "Polski",
+    "jp": "日本語"
+  },
+  "marked": {
+    "mastered": "習得済み",
+    "non-mastered": "未習得",
+    "todo": "やる予定",
+    "irrelevant": "関係なし"
+  },
+  "error": {
+    "noResults": "該当するトリックが見つかりませんでした",
+    "noResultsSuggestions": "検索語やフィルターを調整してみてください。より広いキーワードや曖昧な検索でヒットする場合があります。",
+    "pageNotFound": "ページが見つかりません",
+    "pageNotFoundSuggestion": "スペルミスの可能性があります",
+    "trickNotFound": "見つかりません",
+    "trickNotFoundSuggestion": "URLのトリック名が誤って入力されている可能性があります。YouTubeサムネイルの名前のみが有効です。"
+  },
+  "myProgress": {
+    "myProgress": "私の進捗",
+    "progress": "進捗",
+    "recommendedTricks": "おすすめのトリック",
+    "hardestTrick": "最も難しいトリック",
+    "transferProgress": "進捗を移行",
+    "transferInfo": "新しいデバイスのクリップボードにコピーされたURLを入力してください"
+  },
+  "close": "閉じる",
+  "difficulty": "難易度",
+  "category": "カテゴリー",
+  "similarTricks": "類似のトリック",
+  "requirements": "必要なスキル",
+  "otherTutorials": "他のチュートリアル"
+}
