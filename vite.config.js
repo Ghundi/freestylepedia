@@ -33,6 +33,9 @@ export default defineConfig({
       strictMessage: false
     }),
     VitePWA({
+      devOptions: {
+        enabled: false,
+      },
       registerType: 'autoUpdate',
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg}']
@@ -43,21 +46,41 @@ export default defineConfig({
         short_name: 'Freestylepedia',
         description: "A place to lookup tricks and watch your progress",
         start_url: '/',
+        display_override: ["fullscreen", "minimal-ui"],
         display: 'standalone',
         background_color: '#ffffff',
         theme_color: '#000000',
         icons: [
           {
-            src: '/src/assets/Blackbirdlogoneuwei - 192x192.jpg',
-            sizes: '192x192',
-            type: 'image/jpg'
+            src: '/src/assets/Blackbirdlogoneuweiss-144x144.png',
+            sizes: '144x144',
+            type: 'image/png'
           },
           {
-            src: '/src/assets/Blackbirdlogoneuwei - 512x512.jpg',
+            src: '/src/assets/Blackbirdlogoneuweiss-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: '/src/assets/Blackbirdlogoneuweiss-512x512.png',
             sizes: '512x512',
-            type: 'image/jpg'
+            type: 'image/png'
           }
-        ]
+        ],
+        screenshots: [
+          {
+              "src": "/src/assets/ScreenshotDesktop.png",
+              "type": "image/png",
+              "sizes": "1916x929",
+              "form_factor": "wide",
+          },
+          {
+              "src": "src/assets/ScreenshotMobile.png",
+              "type": "image/png",
+              "sizes": "389x840",
+              "form_factor": "narrow",
+          },
+        ],
       }
     })
   ],

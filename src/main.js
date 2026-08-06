@@ -21,6 +21,8 @@ import {createPinia} from "pinia";
 // routing
 import {createRouter, createWebHistory} from 'vue-router'
 
+import { checkIfInstallable } from '@/scripts/pwaInstall.ts'
+
 
 function getLang() {
     if (navigator.languages !== undefined)
@@ -112,3 +114,4 @@ createApp(App)
     .use(router)
     .mount('#app');
 
+checkIfInstallable()
