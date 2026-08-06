@@ -1,5 +1,6 @@
 //helpers
 import {useCategoryStore, useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore, useTodoStore} from "@/scripts/store.js";
+import { useTrickStore } from "./trickStore";
 
 export function strToUrl(str) {
     return str.replaceAll(' ', '+')
@@ -23,12 +24,13 @@ function logicalOR(res, x) {
     return res || x;
 }
 
-function trickMatchesSearch(trick, searchVal) {
+function trickMatchesSearch(trickStore, trick, searchVal) {
     // empty search field
     if(!searchVal) {
         return true;
     }
     const search = searchVal.toLowerCase();
+    // include results with hyphens
     if(!search.includes("-") && trick.title.toString().includes("-")) {
         return trick.title.map( x => x.toLowerCase().replaceAll("-", " ").includes(search) ).reduce(logicalOR, false)        
     }
@@ -66,7 +68,8 @@ export function getFilteredTricks(tricks) {
             const curSearch = useCurSearchStore().val;
             const markedStore = useMarkedStore();
             const masteredStore = useMasteredStore();
-            const todoStore = useTodoStore()
+            const todoStore = useTodoStore();
+            const trickStore = useTrickStore();
 
             const filtered = [];
             try{
@@ -76,7 +79,7 @@ export function getFilteredTricks(tricks) {
                         // if matches selected categories
                         if((selCategories.length > 0) ? selCategories.includes(tricks[i].category) : true) {
                             // if search at least partially matches
-                            if(trickMatchesSearch(tricks[i], curSearch)) {
+                            if(trickMatchesSearch(trickStore, tricks[i], curSearch)) {
                                 // if selected mastered matches 
                                 if( (markedStore.selMarkers.includes('mastered') && masteredStore.isMastered(tricks[i]))
                                     || (markedStore.selMarkers.includes('non-mastered') && !masteredStore.isMastered(tricks[i]))

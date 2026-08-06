@@ -93,9 +93,6 @@ export const useTrickStore = defineStore('trickStore', {
                         res.push(trick.title[i].substring(3, trick.title[i].length - 1))
                     }
                 }
-                else {
-                    res.push(trick.title[i]);
-                }
             }
             return res;
         },
@@ -103,7 +100,24 @@ export const useTrickStore = defineStore('trickStore', {
             let res = [];
             for (let i = 0; i < state.tricks.length; i++) {
                 state.getLocalTrickTitles(state.tricks[i], lang)
-                res.push(state.getLocalTrickTitles(state.tricks[i], lang));
+                const localTitles = state.getLocalTrickTitles(state.tricks[i], lang)
+                res.push(localTitles);
+
+                // add alias when hyphen in name
+                // only one title available
+                if(localTitles.length == 1) {
+                    if(localTitles[0].includes("-")) {
+                        res.push(localTitles[0].replace("-", " "));
+                    }
+                }
+                // multiple titles
+                else {
+                    for (let j = 0; j < localTitles.length; j++) {
+                        if(localTitles[j].includes("-")) {
+                            res.push(localTitles[j].replace("-", " "));
+                        }
+                    }
+                }
             }
             return res.flat();
         },
