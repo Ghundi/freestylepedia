@@ -2,10 +2,10 @@
   import { watch, ref, nextTick } from "vue";
   import { useTrickStore } from "@/scripts/trickStore.js";
   import { useRoute, useRouter } from "vue-router";
-  import ShareDial from "@/components/TrickPage/shareDial.vue";
+  import ShareDial from "@/components/trickPage/shareDial.vue";
   import { UrlToStr } from "@/scripts/helpers.js";
-  import OtherTutorials from "@/components/TrickPage/otherTutorials.vue";
-  import TrickLinkList from "@/components/trickLinkList.vue";
+  import otherTutorials from "@/components/trickPage/otherTutorials.vue";
+  import trickLinkList from "@/components/trickPage/trickLinkList.vue";
   import { useMasteredStore, useTodoStore } from "@/scripts/store";
 
   function getEmbedURL(id) {
