@@ -35,7 +35,7 @@ export default defineConfig({
     }),
     VitePWA({
       devOptions: {
-        enabled: true,
+        enabled: false,
       },
       registerType: 'autoUpdate',
       workbox: {
@@ -47,7 +47,7 @@ export default defineConfig({
         short_name: 'Freestylepedia',
         description: "A place to lookup tricks and watch your progress",
         start_url: '/',
-        display_override: ["fullscreen", "minimal-ui"],
+        display_override: ["standalone", "fullscreen"],
         display: 'standalone',
         background_color: '#ffffff',
         theme_color: '#000000',
