@@ -71,13 +71,6 @@
     "spin": "Obroty",
     "stop": "Hamowania"
   },
-  "languages": {
-    "en": "English",
-    "de": "Deutsch",
-    "fr": "Français",
-    "pl": "Polski",
-    "jp": "日本語"
-  },
   "marked": {
     "mastered": "Opanowane",
     "non-mastered": "Nieopanowane",

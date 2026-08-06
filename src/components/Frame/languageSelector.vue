@@ -1,9 +1,11 @@
 <script setup>
   import { useI18n } from 'vue-i18n';
-import { useRoute, useRouter } from "vue-router";
+  import { useRoute, useRouter } from "vue-router";
 
   const { locale, availableLocales } = useI18n()
-  const items = availableLocales.map(l => ({ title: l }))
+  const langs = ["Deutsch", "English", "Français", "日本語", "Polski"];
+  const languages = Object.fromEntries(langs.map( (lang, i) => ( [availableLocales[i], lang] )))
+
 
   const router = useRouter()
   const route = useRoute()
@@ -27,19 +29,19 @@ import { useRoute, useRouter } from "vue-router";
     >
       {{ $t("footer.language") }}
       <v-card-subtitle class="smaller-font">
-        {{ $t("languages." + locale)  }}
+        {{ languages[locale] }}
       </v-card-subtitle>
     </v-btn>
     <v-menu activator="#menu-activator">
       <v-list>
         <v-list-item
-          v-for="(item, index) in items"
+          v-for="(item, index) in availableLocales"
           :key="index"
           :value="item"
-          @click="updateLang(item.title)"
+          @click="updateLang(item)"
           class="text-center"
         >
-          {{ $t("languages." + item.title) }}
+          {{ languages[item] }}
         </v-list-item>
       </v-list>
     </v-menu>
