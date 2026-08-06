@@ -52,30 +52,30 @@ export default defineConfig({
         theme_color: '#000000',
         icons: [
           {
-            src: '/src/assets/Blackbirdlogoneuweiss-144x144.png',
+            src: './src/assets/Blackbirdlogoneuweiss-144x144.png',
             sizes: '144x144',
             type: 'image/png'
           },
           {
-            src: '/src/assets/Blackbirdlogoneuweiss-192x192.png',
+            src: './src/assets/Blackbirdlogoneuweiss-192x192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: '/src/assets/Blackbirdlogoneuweiss-512x512.png',
+            src: './src/assets/Blackbirdlogoneuweiss-512x512.png',
             sizes: '512x512',
             type: 'image/png'
           }
         ],
         screenshots: [
           {
-              "src": "/src/assets/ScreenshotDesktop.png",
+              "src": "./src/assets/ScreenshotDesktop.png",
               "type": "image/png",
               "sizes": "1916x929",
               "form_factor": "wide",
           },
           {
-              "src": "src/assets/ScreenshotMobile.png",
+              "src": "./src/assets/ScreenshotMobile.png",
               "type": "image/png",
               "sizes": "389x840",
               "form_factor": "narrow",
