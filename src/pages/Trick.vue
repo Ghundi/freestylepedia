@@ -2,9 +2,9 @@
   import { watch, ref, nextTick } from "vue";
   import { useTrickStore } from "@/scripts/trickStore.js";
   import { useRoute, useRouter } from "vue-router";
-  import ShareDial from "@/components/shareDial.vue";
+  import ShareDial from "@/components/TrickPage/shareDial.vue";
   import { UrlToStr } from "@/scripts/helpers.js";
-  import OtherTutorials from "@/components/otherTutorials.vue";
+  import OtherTutorials from "@/components/TrickPage/otherTutorials.vue";
   import TrickLinkList from "@/components/trickLinkList.vue";
   import { useMasteredStore, useTodoStore } from "@/scripts/store";
 

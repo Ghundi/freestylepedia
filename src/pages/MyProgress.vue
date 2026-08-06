@@ -1,8 +1,8 @@
 <script setup>
-import ProgressBar from '@/components/progressBar.vue';
-import ProgressSpiderChart from '@/components/ProgressSpiderChart.vue';
-import RecommendedTricks from '@/components/recommendedTricks.vue';
-import TransferPopup from '@/components/transferPopup.vue';
+import ProgressBar from '@/components/progressPage/progressBar.vue';
+import ProgressSpiderChart from '@/components/progressPage/ProgressSpiderChart.vue';
+import recommendedTricks from '@/components/progressPage/recommendedTricks.vue';
+import TransferPopup from '@/components/progressPage/transferPopup.vue';
 import TrickCard from '@/components/TrickCard.vue';
 import { useMasteredStore } from '@/scripts/store';
 import { useTrickStore } from '@/scripts/trickStore';
