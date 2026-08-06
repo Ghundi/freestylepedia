@@ -15,6 +15,7 @@ import ViteYaml from '@modyfi/vite-plugin-yaml';
 import { resolve, dirname } from "node:path";
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 
+
 export default defineConfig({
   plugins: [
     vue(),
@@ -34,7 +35,7 @@ export default defineConfig({
     }),
     VitePWA({
       devOptions: {
-        enabled: false,
+        enabled: true,
       },
       registerType: 'autoUpdate',
       workbox: {
@@ -52,30 +53,30 @@ export default defineConfig({
         theme_color: '#000000',
         icons: [
           {
-            src: './src/assets/Blackbirdlogoneuweiss-144x144.png',
+            src: '/icons/Blackbirdlogoneuweiss-144x144.png',
             sizes: '144x144',
             type: 'image/png'
           },
           {
-            src: './src/assets/Blackbirdlogoneuweiss-192x192.png',
+            src: '/icons/Blackbirdlogoneuweiss-192x192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: './src/assets/Blackbirdlogoneuweiss-512x512.png',
+            src: '/icons/Blackbirdlogoneuweiss-512x512.png',
             sizes: '512x512',
             type: 'image/png'
           }
         ],
         screenshots: [
           {
-              "src": "./src/assets/ScreenshotDesktop.png",
+              "src": "/icons/ScreenshotWide.png",
               "type": "image/png",
               "sizes": "1916x929",
               "form_factor": "wide",
           },
           {
-              "src": "./src/assets/ScreenshotMobile.png",
+              "src": "/icons/ScreenshotNarrow.png",
               "type": "image/png",
               "sizes": "389x840",
               "form_factor": "narrow",
