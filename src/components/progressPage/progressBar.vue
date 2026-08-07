@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 
     import { useMasteredStore } from '@/scripts/store'
     import { useTrickStore } from '@/scripts/trickStore';

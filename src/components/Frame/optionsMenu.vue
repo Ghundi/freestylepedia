@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import LanguageSelector from './languageSelector.vue';
 import ThemeSwitcher from './themeSwitcher.vue';
-import { pwaInstallPromptEvent } from '@/scripts/pwaInstall.ts'
+import { pwaInstallPromptEvent } from '@/scripts/pwaInstall'
 </script>
 
 <template>

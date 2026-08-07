@@ -1,26 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import {useTheme} from "vuetify";
-import { getBgColor } from "@/scripts/helpers.js";
-import { Handle, Position} from '@vue-flow/core'
+import { getBgColor, getPosition, getOrientation } from "@/scripts/helpers.js";
+import { Handle } from '@vue-flow/core'
 
 const props = defineProps(['label', 'orientation', 'n_children', 'color'])
 
-function getOrientation(){
-  return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
-}
-
-function getPosition(orientation) {
-  switch (orientation) {
-    case 0:
-      return Position.Top;
-    case 1:
-      return Position.Right;
-    case 2:
-      return Position.Bottom;
-    case 3:
-      return Position.Left;
-  }
-}
 const theme = useTheme()
 </script>
 

@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
     import { useMasteredStore, useTodoStore } from '@/scripts/store';
 
-  async function getExportUrl()  {
+  async function getExportUrl(): Promise<void> {
     try {
       const exportUrl = 'https://freestylepedia.org/en?todo=' + useTodoStore().getHash() + "&mastered=" + useMasteredStore().getHash();
       await navigator.clipboard.writeText(exportUrl);

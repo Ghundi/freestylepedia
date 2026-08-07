@@ -1,28 +1,15 @@
-<script>
+<script setup lang="ts">
+  import { ref } from "vue";
 
-import { useRoute } from "vue-router";
-import { strToUrl } from "@/scripts/helpers.js";
-import { getActivePinia } from "pinia";
+  const pageUrl = ref<string>(window.location.href);
 
-export default {
-  data() {
-    console.log(window.location.href);
-    return {
-      dialShare: false,
-      pageUrl: window.location.href,
-    };
-  },
-  methods: {
-    getActivePinia,
-    async copyURL(url) {
-      try {
-        await navigator.clipboard.writeText(url);
-      } catch($e) {
-        console.log('failed copying to clipboard. Make sure you have a secure connection');
-      }
+  async function copyURL(url: string) {
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch($e) {
+      console.log('failed copying to clipboard. Make sure you have a secure connection');
     }
   }
-};
 </script>
 
 <template>

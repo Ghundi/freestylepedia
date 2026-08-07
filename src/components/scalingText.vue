@@ -8,25 +8,37 @@
   </v-card-title>
 </template>
 
-<script setup>
-    import { ref, onMounted, nextTick} from 'vue'
+<script setup lang="ts">
+  import {
+    ref,
+    shallowRef,
+    onMounted,
+    nextTick,
+    type ComponentPublicInstance,
+  } from 'vue'
+  import type { VCardTitle } from 'vuetify/components'   // ← Vuetify 3 export
+
+  // The component instance always has a `$el: Element` property
+  type VCardTitleInst = ComponentPublicInstance & {
+    $el: HTMLElement
+  }
 
   const props = defineProps({
     title: String,
   })
 
-    const BASE_FONT_SIZE = 50
+  const BASE_FONT_SIZE = 50
 
-    const titleEl = ref(null)       
-    const computedFontSize = ref(BASE_FONT_SIZE)
+  const titleEl = shallowRef<VCardTitleInst | null>(null)     
+  const computedFontSize = ref(BASE_FONT_SIZE)
 
-    let debounceTimer = null
-    const handleResize = () => {
-    clearTimeout(debounceTimer)
-        debounceTimer = setTimeout(adjustFontSize, 80)
-    }
+  let debounceTimer:  NodeJS.Timeout | undefined = undefined
+  const handleResize = () => {
+  clearTimeout(debounceTimer)
+      debounceTimer = setTimeout(adjustFontSize, 80)
+  }
 
-    async function adjustFontSize() {
+  async function adjustFontSize() {
     computedFontSize.value = BASE_FONT_SIZE
     await nextTick()
 
@@ -51,12 +63,12 @@
     const scale = Math.min(1, widthScale, heightScale)
 
     computedFontSize.value = Math.floor(BASE_FONT_SIZE * scale)
-    }
+  }
 
-    onMounted(() => {
-        adjustFontSize()
-        window.addEventListener('resize', handleResize);
-    })
+  onMounted(() => {
+      adjustFontSize()
+      window.addEventListener('resize', handleResize);
+  })
 </script>
 
 <style scoped>

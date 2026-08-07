@@ -1,17 +1,11 @@
-<script setup>
-const props = defineProps({
-  page: String,
-  icon: String,
-});
-</script>
+<script setup lang="ts">
+  const props = defineProps({
+    page: String,
+    icon: String,
+  });
 
-<script>
-  export default {
-    methods: {
-      openWebpage() {
-          window.open(this.page);
-      }
-    }
+  function openWebpage() {
+    window.open(props.page, '_blank')
   }
 </script>
 
@@ -21,7 +15,7 @@ const props = defineProps({
       class="mx-4"
       size="medium"
       variant="plain"
-      @click="openWebpage(0)"
+      @click="openWebpage()"
   ></v-btn>
 </template>
 

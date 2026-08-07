@@ -1,6 +1,28 @@
 //helpers
 import {useCategoryStore, useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore, useTodoStore} from "@/scripts/store.js";
 import { useTrickStore } from "./trickStore";
+import { Position} from '@vue-flow/core'
+
+export function isMobile() {
+    return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+export function getOrientation(){
+  return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
+}
+
+export function getPosition(orientation) {
+  switch (orientation) {
+    case 0:
+      return Position.Top;
+    case 1:
+      return Position.Right;
+    case 2:
+      return Position.Bottom;
+    case 3:
+      return Position.Left;
+  }
+}
 
 export function strToUrl(str) {
     return str.replaceAll(' ', '+')

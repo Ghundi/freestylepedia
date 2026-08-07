@@ -1,10 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import OptionsMenu from './optionsMenu.vue';
 
-const drawer = ref(null)
+const drawer = ref<boolean | null>(null)
 
-function getOrientation(){
+function getOrientation(): string {
   return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
 }
 

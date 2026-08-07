@@ -1,33 +1,25 @@
-<script setup>
-import {useCurSearchStore} from "@/scripts/store.js";
+<script setup lang="ts">
+  import { useCurSearchStore } from "@/scripts/store.js";
+  import { useTrickStore } from "@/scripts/trickStore";
+  import { Store } from "pinia";
 
-const searchStore = useCurSearchStore();
-const trickStore = useTrickStore();
-</script>
+  const searchStore = useCurSearchStore();
+  const trickStore = useTrickStore();
 
-<script>
-import { useCurSearchStore } from "@/scripts/store.js";
-import { useTrickStore} from "@/scripts/trickStore.js";
+  const updateStore: ((newVal: Array<number>) => boolean)[] = [
+    (newVal: Array<number>) => {
+      searchStore.update(newVal);
+      return true;
+    },
+  ]
 
-export default {
-  data: () => ({
-    value: useCurSearchStore().val,
-    updateStore: [
-      value => {
-        const selCurSearchStore = useCurSearchStore();
-        selCurSearchStore.update(value);
-        return true
-      }
-    ]
-  }),
-}
-
-function getSuggestions(state, search, lang) {
-  if(search) {
-    return state.getTitlesStr(state, lang);
+  function getSuggestions(state: Store<'curSearchStore', any>, search: string | null, lang: string): Array<string> {
+    if(search) {
+      return state.getTitlesStr(state, lang);
+    }
+    return [];
   }
-  return [];
-}
+
 </script>
 
 <template>

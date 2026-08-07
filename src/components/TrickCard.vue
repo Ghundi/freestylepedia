@@ -1,11 +1,11 @@
-<script setup>
-  import { computed } from 'vue'
+<script setup lang="ts">
+  import { computed, CSSProperties } from 'vue'
   import { useCategoryStore, useMasteredStore } from '@/scripts/store.js'
   import { useTrickStore } from '@/scripts/trickStore.js'
   import difficultyImg from '../assets/Silouette_Schlittschuh.png'
-import ScalingText from './scalingText.vue'
-import { useTheme } from 'vuetify/lib/composables/theme'
-import { strToUrl } from '@/scripts/helpers'
+  import ScalingText from './scalingText.vue'
+  import { useTheme } from 'vuetify'
+  import { strToUrl } from '@/scripts/helpers'
 
   const trickStore = useTrickStore()
   const categoryStore = useCategoryStore()
@@ -20,24 +20,27 @@ import { strToUrl } from '@/scripts/helpers'
     return themeStore.global.name.value  == 'dark'
   } 
 
-  function getLocalDate(date, locale) {
-    const opts = locale === 'en'
-      ? { year: 'numeric', month: 'long', day: 'numeric' }
-      : { year: 'numeric', month: 'numeric', day: 'numeric' }
+  function getLocalDate(date: Date, locale: string) {
+    const opts: Intl.DateTimeFormatOptions = {
+      year:  'numeric',
+      month: locale === 'en' ? 'long' : 'numeric',
+      day:   'numeric',
+    }
+
     return date.toLocaleDateString(locale, opts)
   }
   function isMobile() {
     return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
   }
 
-  const cardStyle = computed(() => ({
-    boxShadow: `0px 0px 8px 2px ${categoryStore.getColor(props.trick.category)}`,
+  const cardStyle = computed<CSSProperties>(() => ({
+    boxShadow: `0px 0px 8px 2px ${categoryStore.getColor(props.trick!.category)}`,
     overflow: 'visible',
     borderRadius: '5%',
     position: 'relative',
   }))
 
-  const newBadgeStyle = computed(() => ({
+  const newBadgeStyle = computed<CSSProperties>(() => ({
     width: isMobile() ? '50px' : '80px',
     fontSize: isMobile() ? '0.8em' : '1.2em',
     top: isMobile() ? '-1cqw' : '-0.3vw',
@@ -50,7 +53,7 @@ import { strToUrl } from '@/scripts/helpers'
     position: 'absolute',
   }))
 
-  const medalStyle = computed(() => ({
+  const medalStyle = computed<CSSProperties>(() => ({
     position: 'absolute',
     bottom: '4%',
     right: '0%',
@@ -63,19 +66,19 @@ import { strToUrl } from '@/scripts/helpers'
     :width="isMobile() ? '35vw' : '15vw'"
     :height="isMobile() ? '20vw' : '9vw'"
     :style="cardStyle"
-    :to="{ name: 'Trick', params: { lang: $i18n.locale, trickname: strToUrl(trick.title[0]) } }"
+    :to="{ name: 'Trick', params: { lang: $i18n.locale, trickname: strToUrl(trick!.title[0]) } }"
   >
     <div class="title-wrapper">
-      <scaling-text class="pa-2" :title="trick.title[0]"/>
+      <scaling-text class="pa-2" :title="trick!.title[0]"/>
     </div>
 
     <div class="text-center pb-2" :style="{ color: (isDarkTheme()) ? 'white' : 'black', fontSize: isMobile() ? '8px' : '12px' }">
-        ({{ $t('categories.' + trick.category) }})
+        ({{ $t('categories.' + trick!.category) }})
     </div>
 
     <v-container class="justify-center pt-1 m-5">
       <v-row dense no-gutters class="justify-center">
-        <template v-for="_ in trick.difficulty">
+        <template v-for="_ in trick!.difficulty">
           <v-col :style="{margin: '0 1px'}">
             <v-img 
               :src="difficultyImg" 
@@ -83,7 +86,7 @@ import { strToUrl } from '@/scripts/helpers'
               :class="{ 'invert-image' : isDarkTheme() }"/>
           </v-col>
         </template>
-        <template v-for="_ in (5 - trick.difficulty)">
+        <template v-for="_ in (5 - trick!.difficulty)">
           <v-col :style="{margin: '0 1px'}">
             <v-img 
               :src="difficultyImg" 
@@ -97,11 +100,11 @@ import { strToUrl } from '@/scripts/helpers'
 
     <template v-if="!isMobile()">
       <v-card-subtitle :style="{fontSize: '0.6em', textTransform: 'none'}" class="text-center">
-        {{ getLocalDate(trick.releaseDate, $i18n.locale) }}
+        {{ getLocalDate(trick!.releaseDate, $i18n.locale) }}
       </v-card-subtitle>
     </template>
 
-    <template v-if="trick.title[0] === trickStore.newestTrick">
+    <template v-if="trick!.title[0] === trickStore.newestTrick">
       <v-card-title :style="newBadgeStyle">New!</v-card-title>
     </template>
 

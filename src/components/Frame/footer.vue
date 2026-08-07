@@ -1,13 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import WebpageIcon from "@/components/Frame/WebpageIcon.vue";
 import Blackbird from "../../assets/blackbirdIcon.png"
 import MISG from "../../assets/MISG-white-Icon.png"
 import { useSupporters} from "@/scripts/store.js";
 const supporters = useSupporters().images
-</script>
-
-<script>
-
 </script>
 
 <template>

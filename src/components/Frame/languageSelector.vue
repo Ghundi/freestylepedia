@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
   import { useI18n } from 'vue-i18n';
   import { useRoute, useRouter } from "vue-router";
 
@@ -7,10 +7,10 @@
   const languages = Object.fromEntries(langs.map( (lang, i) => ( [availableLocales[i], lang] )))
 
 
-  const router = useRouter()
+  const router= useRouter()
   const route = useRoute()
 
-  function updateLang(newLang) {
+  function updateLang(newLang: string) {
     if(!availableLocales.includes(newLang) || locale.value === newLang) return
 
     locale.value = newLang

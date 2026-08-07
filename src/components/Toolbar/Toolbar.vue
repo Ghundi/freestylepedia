@@ -1,40 +1,34 @@
-<script setup>
+<script setup lang="ts">
+  import OrderBySelector from "@/components/Toolbar/OrderBySelector.vue";
+  import CategorySelector from "@/components/Toolbar/CategorySelector.vue";
+  import DifficultySlider from "@/components/Toolbar/DifficultySlider.vue";
+  import SearchBar from "@/components/Toolbar/SearchBar.vue";
+  import { useCurSearchStore, useSelCategoryStore, useSelDifficultyStore, useCategoryStore, useMarkedStore} from "@/scripts/store.js";
+  import { getOrientation } from "@/scripts/helpers";
+  import MarkedTricksSelector from "./MarkedTricksSelector.vue";
 
-import OrderBySelector from "@/components/Toolbar/OrderBySelector.vue";
-import CategorySelector from "@/components/Toolbar/CategorySelector.vue";
-import DifficultySlider from "@/components/Toolbar/DifficultySlider.vue";
-import SearchBar from "@/components/Toolbar/SearchBar.vue";
-import { useCurSearchStore, useSelCategoryStore, useSelDifficultyStore, useCategoryStore, useMarkedStore} from "@/scripts/store.js";
-import MarkedTricksSelector from "./MarkedTricksSelector.vue";
-const selCategoriesStore = useSelCategoryStore()
-const categoryStore = useCategoryStore();
-</script>
+  const selCategoriesStore = useSelCategoryStore()
+  const categoryStore = useCategoryStore();
 
-<script>
+  function reset(): boolean {
+    const selCategoryStore = useSelCategoryStore();
+    const selDifficultyStore = useSelDifficultyStore();
+    const curSearchStore = useCurSearchStore();
+    const markedStore = useMarkedStore();
 
-function getOrientation() {
-  return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
-}
+    selCategoryStore.reset();
+    selDifficultyStore.reset();
+    curSearchStore.reset();
+    markedStore.reset();
+    return true;
+  }
 
-export default {
-  methods: {
-    reset () {
-      const selCategoryStore = useSelCategoryStore();
-      const selDifficultyStore = useSelDifficultyStore();
-      const curSearchStore = useCurSearchStore();
-      const markedStore = useMarkedStore();
+  function removeCategory(category: string): true {
+    const selCategoryStore = useSelCategoryStore();
+    selCategoryStore.remove(category);
+    return true;
+  }
 
-      selCategoryStore.reset();
-      selDifficultyStore.reset();
-      curSearchStore.reset();
-      markedStore.reset();
-    },
-    removeCategory(category) {
-      const selCategoryStore = useSelCategoryStore();
-      selCategoryStore.remove(category);
-    }
-  },
-}
 </script>
 
 <template>

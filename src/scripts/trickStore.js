@@ -88,10 +88,15 @@ export const useTrickStore = defineStore('trickStore', {
         getLocalTrickTitles(trick, lang) {
             let res = [];
             for (let i = 0; i < trick.title.length; i++) {
+                // only add locale alias when current language
                 if(trick.title[i].includes('{')) {
                     if(trick.title[i].substring(0, 2) === lang) {
                         res.push(trick.title[i].substring(3, trick.title[i].length - 1))
                     }
+                }
+                // add non language specific aliases
+                else {
+                    res.push(trick.title[i]);
                 }
             }
             return res;
@@ -99,7 +104,6 @@ export const useTrickStore = defineStore('trickStore', {
         getTitlesStr(state, lang) {
             let res = [];
             for (let i = 0; i < state.tricks.length; i++) {
-                state.getLocalTrickTitles(state.tricks[i], lang)
                 const localTitles = state.getLocalTrickTitles(state.tricks[i], lang)
                 res.push(localTitles);
 

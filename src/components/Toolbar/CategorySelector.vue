@@ -1,27 +1,19 @@
-<script setup>
-import { useCategoryStore, useSelCategoryStore } from '@/scripts/store.js';
-const categoryStore = useCategoryStore();
-const selCategoryStore = useSelCategoryStore();
+<script setup lang="ts">
+  import { useCategoryStore, useSelCategoryStore } from '@/scripts/store.js';
+  import { ref } from 'vue';
+  const categoryStore = useCategoryStore();
+  const selCategoryStore = useSelCategoryStore();
+
+  const extended = ref<boolean>(false)
+  const updateStore: ((newVal: Array<string>) => boolean)[] = [
+    (newVal: Array<string>) => {
+      selCategoryStore.update(newVal);
+      return true;
+    },
+  ]
+
 </script>
 
-<script>
-
-import {useSelCategoryStore} from "@/scripts/store.js";
-
-export default {
-  data: () => ({
-    extended: false,
-    selected: useSelCategoryStore().categories,
-    updateStore: [
-      value => {
-        const selCategoryStore = useSelCategoryStore();
-        selCategoryStore.update(value);
-        return true
-      }
-    ]
-  }),
-}
-</script>
 
 <template>
   <v-menu v-model="extended" :close-on-content-click="false">

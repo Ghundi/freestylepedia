@@ -1,16 +1,14 @@
-<script setup>
-const props = defineProps({
-  id: Array[String]
-});
-</script>
+<script setup lang="ts">
+  const props = defineProps({
+    id: Array<string>
+  });
 
-<script>
-function getThumbnailUrl(videoId) {
-  return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-}
-function openVideo(id) {
-  window.open("https://www.youtube.com/watch?v=" + id + "?mute=1");
-}
+  function getThumbnailUrl(videoId: string) {
+    return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+  }
+  function openVideo(id: string) {
+    window.open("https://www.youtube.com/watch?v=" + id + "?mute=1");
+  }
 </script>
 
 <template>
@@ -22,7 +20,7 @@ function openVideo(id) {
     </v-row>
     <v-row justify="center" align="center">
       <v-col
-          v-for="video in id.slice(1)"
+          v-for="video in id!.slice(1)"
           :key="video"
           cols="auto"
       >

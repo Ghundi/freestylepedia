@@ -1,31 +1,28 @@
-<script setup>
-import { useSortingOrderStore, useSelSortingOrderStore} from '@/scripts/store.js';
-const selSortingOrder = useSelSortingOrderStore()
-</script>
+<script setup lang="ts">
+  import { useSortingOrderStore, useSelSortingOrderStore} from '@/scripts/store.js';
+  import { ref } from 'vue';
+  interface Dictionary<T> {
+      [key: string]: T;
+  }
 
-<script>
-function createSortingOrderObject() {
-  const translated = {};
-  const sortingOrders = useSortingOrderStore().sortingOrders;
-  for (let x = 0; x < sortingOrders.length; x++) {
-    translated[x] = {
-      title: sortingOrders[x]
-    };
+  const selSortingOrder = useSelSortingOrderStore()
+
+  const extended = ref<boolean>(true);
+  const translated = ref(createSortingOrderObject());
+
+  function updateStore(newVal: string): void {
+    selSortingOrder.update(newVal)
   }
-  return translated;
-}
-export default {
-  data: () => ({
-    extended: true,
-    translated: createSortingOrderObject(),
-  }),
-  methods: {
-    updateStore(title) {
-      const selSortingOrder = useSelSortingOrderStore();
-      selSortingOrder.update(title);
+
+  function createSortingOrderObject(): Dictionary<string> {
+    const translated: Dictionary<string>  = {};
+    const sortingOrders = useSortingOrderStore().sortingOrders;
+    for (let x = 0; x < sortingOrders.length; x++) {
+      translated[x] = sortingOrders[x];
     }
+    return translated;
   }
-}
+
 </script>
 
 <template>
@@ -48,8 +45,8 @@ export default {
             :key="index"
             :value="item"
         >
-          <v-btn block @click="updateStore(item.title)" class="smaller-font">
-            {{ $t("sortOptions." + item.title) }}
+          <v-btn block @click="updateStore(item)" class="smaller-font">
+            {{ $t("sortOptions." + item) }}
           </v-btn>
         </v-list-item>
       </v-list>

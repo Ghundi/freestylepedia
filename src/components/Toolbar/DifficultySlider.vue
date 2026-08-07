@@ -1,24 +1,16 @@
-<script setup>
-import { useSelDifficultyStore } from "@/scripts/store.js";
-const selDifficultyStore = useSelDifficultyStore();
-</script>
+<script setup lang="ts">
+  import { useSelDifficultyStore } from "@/scripts/store.js";
+  import { ref } from "vue";
 
-<script>
-import { useSelDifficultyStore } from "@/scripts/store.js";
+  const selDifficultyStore = useSelDifficultyStore();
 
-export default {
-  data: () => ({
-    valid: false,
-    value: useSelDifficultyStore().val,
-    updateStore: [
-        value => {
-          const selDifficultyStore = useSelDifficultyStore();
-          selDifficultyStore.update(value);
-          return true
-        }
-    ]
-  }),
-}
+  const valid = ref<boolean>(false)
+  const updateStore: ((newVal: Array<number>) => boolean)[] = [
+    (newVal: Array<number>) => {
+      selDifficultyStore.update(newVal);
+      return true;
+    },
+  ]
 </script>
 
 <template>

@@ -1,25 +1,15 @@
-<script setup>
+<script setup lang="ts">
   import { useMarkedStore } from '@/scripts/store.js';
+  import { ref } from 'vue';
   const markedStore = useMarkedStore()
-</script>
 
-<script>
-
-import { useMarkedStore} from "@/scripts/store.js";
-
-export default {
-  data: () => ({
-    extended: false,
-    selected: useMarkedStore().selMarkers,
-    updateStore: [
-      value => {
-        const markedStore = useMarkedStore();
-        markedStore.update(value);
-        return true
-      }
-    ]
-  }),
-}
+  const extended = ref<boolean>(false)
+  const updateStore: ((newVal: Array<string>) => boolean)[] = [
+    (newVal: Array<string>) => {
+      markedStore.update(newVal);
+      return true;
+    },
+  ]
 </script>
 
 <template>

@@ -1,16 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import { useMasteredStore } from '@/scripts/store';
 import TrickCard from '../TrickCard.vue';
 import { useTrickStore } from "@/scripts/trickStore.js";
+import { isMobile } from '@/scripts/helpers.js';
 
 const trickStore = useTrickStore();
 const masteredTricks = useMasteredStore();
-</script>
-
-<script>
-  function isMobile() {
-    return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  }
 </script>
 
 <template>
