@@ -1,6 +1,3 @@
-<script setup>
-</script>
-
 <template>
   <div class="text-center pa-5 ma-15">
     <v-empty-state
@@ -10,7 +7,3 @@
     ></v-empty-state>
   </div>
 </template>
-
-<style scoped>
-
-</style>

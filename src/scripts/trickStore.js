@@ -78,11 +78,11 @@ export const useTrickStore = defineStore('trickStore', {
                         return state.tricks[i];
                     }
                 }
-                return -1;
+                return null;
             }
             catch(e) {
                 console.log(e)
-                return -1;
+                return null;
             }
         },
         getLocalTrickTitles(trick, lang) {

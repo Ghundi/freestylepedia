@@ -86,9 +86,3 @@ watch(() => theme.global.current.value.dark, () => {
     </div>
   </v-card>
 </template>
-
-<style scoped>
-.bg-color {
-  background-color: v-bind(getBgColor(theme.global.current.value.dark));
-}
-</style>

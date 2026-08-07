@@ -1,22 +1,20 @@
-<script setup>
-import ProgressBar from '@/components/progressPage/progressBar.vue';
-import ProgressSpiderChart from '@/components/progressPage/ProgressSpiderChart.vue';
-import recommendedTricks from '@/components/progressPage/recommendedTricks.vue';
-import TransferPopup from '@/components/progressPage/transferPopup.vue';
-import TrickCard from '@/components/TrickCard.vue';
-import { useMasteredStore } from '@/scripts/store';
-import { useTrickStore } from '@/scripts/trickStore';
-import { computed } from 'vue'
-</script>
+<script setup lang="ts">
+  import ProgressBar from '@/components/progressPage/progressBar.vue';
+  import ProgressSpiderChart from '@/components/progressPage/ProgressSpiderChart.vue';
+  import recommendedTricks from '@/components/progressPage/recommendedTricks.vue';
+  import TransferPopup from '@/components/progressPage/transferPopup.vue';
+  import TrickCard from '@/components/TrickCard.vue';
+  import { useMasteredStore } from '@/scripts/store';
+  import { useTrickStore } from '@/scripts/trickStore';
+  import { computed } from 'vue'
 
-<script>
   const trickStore = useTrickStore()
   const masteredStore = useMasteredStore()
   const hardestMasteredTrick = computed(() => {
-  return trickStore.getHardestMasteredTrick(
-    masteredStore.getMasteredTricks(trickStore.tricks)
-  )
-})
+    return trickStore.getHardestMasteredTrick(
+      masteredStore.getMasteredTricks(trickStore.tricks)
+    )
+  })
 
 </script>
 

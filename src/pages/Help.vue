@@ -1,5 +1,5 @@
-<script setup>
-import {useFAQ} from "@/scripts/store.js";
+<script setup lang="ts">
+import { useFAQ } from "@/scripts/store.js";
 
 const FAQ_store = useFAQ();
 </script>
@@ -20,7 +20,3 @@ const FAQ_store = useFAQ();
   </v-card>
 
 </template>
-
-<style scoped>
-
-</style>

@@ -1,9 +1,10 @@
-<script setup>
+<script setup lang="ts">
   import TrickCard from '../components/TrickCard.vue';
   import Toolbar from "@/components/Toolbar/Toolbar.vue";
   import { useMasteredStore, useTodoStore } from '@/scripts/store';
   import { useTrickStore } from "@/scripts/trickStore.js";
   import { useRoute } from 'vue-router';
+  import { isMobile } from '@/scripts/helpers.js';
 
   const trickStore = useTrickStore();
 
@@ -17,13 +18,6 @@
 
 </script>
 
-<script>
-  function isMobile() {
-    return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  }
-
-</script>
-
 <template>
   <v-container>
     <v-row class="mt-3" justify="center">
@@ -31,8 +25,7 @@
     </v-row>
     <v-row :justify="isMobile() ? 'center' : 'start'" align-content="center">
       <template
-          v-for="trick in trickStore.shownTricks"
-          :key="trick.title[0]">
+          v-for="trick in trickStore.shownTricks">
         <v-col cols="auto">
             <TrickCard
                 :trick="trick"

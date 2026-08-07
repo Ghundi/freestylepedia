@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import BlackbirdLogo from "@/assets/blackbirdIconInverted.png"
 import MISGLogo from "@/assets/MISG-Icon.png"
 import WebpageIcon from "@/components/Frame/WebpageIcon.vue";
