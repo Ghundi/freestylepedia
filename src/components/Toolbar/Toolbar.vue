@@ -3,7 +3,7 @@
   import CategorySelector from "@/components/Toolbar/CategorySelector.vue";
   import DifficultySlider from "@/components/Toolbar/DifficultySlider.vue";
   import SearchBar from "@/components/Toolbar/SearchBar.vue";
-  import { useCurSearchStore, useSelCategoryStore, useSelDifficultyStore, useCategoryStore, useMarkedStore} from "@/scripts/store.js";
+  import { useCurSearchStore, useSelCategoryStore, useSelDifficultyStore, useCategoryStore, useMarkedStore} from "@/scripts/store";
   import { getOrientation } from "@/scripts/helpers";
   import MarkedTricksSelector from "./MarkedTricksSelector.vue";
 

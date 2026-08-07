@@ -2,7 +2,7 @@
 
 import 'vuetify/styles';
 import NavBar from "@/components/Frame/navBar.vue";
-import { useTrickStore } from "@/scripts/trickStore.js";
+import { useTrickStore } from "@/scripts/trickStore";
 import Footer from "@/components/Frame/footer.vue"
 import { useTheme } from 'vuetify'
 import { getBgColor } from "@/scripts/helpers.js";

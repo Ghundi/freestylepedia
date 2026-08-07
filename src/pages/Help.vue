@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useFAQ } from "@/scripts/store.js";
+import { useFAQ } from "@/scripts/store";
 
 const FAQ_store = useFAQ();
 </script>

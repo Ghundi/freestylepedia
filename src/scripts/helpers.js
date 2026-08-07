@@ -1,5 +1,5 @@
 //helpers
-import {useCategoryStore, useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore, useTodoStore} from "@/scripts/store.js";
+import {useCategoryStore, useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore, useTodoStore} from "@/scripts/store";
 import { useTrickStore } from "./trickStore";
 import { Position} from '@vue-flow/core'
 

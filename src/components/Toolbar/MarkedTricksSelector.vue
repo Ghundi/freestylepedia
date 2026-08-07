@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useMarkedStore } from '@/scripts/store.js';
+  import { useMarkedStore } from '@/scripts/store';
   import { ref } from 'vue';
   const markedStore = useMarkedStore()
 

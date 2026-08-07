@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useSelDifficultyStore } from "@/scripts/store.js";
+  import { useSelDifficultyStore } from "@/scripts/store";
   import { ref } from "vue";
 
   const selDifficultyStore = useSelDifficultyStore();

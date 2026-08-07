@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import tricksYAML from "@/DB/freestylepedia.yaml";
 import {checkSpace, getNodeIdxById, getSpaceIdx, graphSearch, isReleased, trickToNode, getSortedTricks, getFilteredTricks, getCategorySizes } from "@/scripts/helpers.js";
-import {useCategoryStore, useSelSortingOrderStore} from "@/scripts/store.js";
+import {useCategoryStore, useSelSortingOrderStore} from "@/scripts/store";
 
 export const useTrickStore = defineStore('trickStore', {
     state: () => ({

@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { computed, CSSProperties } from 'vue'
-  import { useCategoryStore, useMasteredStore } from '@/scripts/store.js'
+  import { useCategoryStore, useMasteredStore } from '@/scripts/store'
   import { useTrickStore } from '@/scripts/trickStore.js'
   import difficultyImg from '../assets/Silouette_Schlittschuh.png'
   import ScalingText from './scalingText.vue'

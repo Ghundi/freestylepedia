@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useSortingOrderStore, useSelSortingOrderStore} from '@/scripts/store.js';
+  import { useSortingOrderStore, useSelSortingOrderStore} from '@/scripts/store';
   import { ref } from 'vue';
   interface Dictionary<T> {
       [key: string]: T;

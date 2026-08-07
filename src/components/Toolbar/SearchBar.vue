@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useCurSearchStore } from "@/scripts/store.js";
+  import { useCurSearchStore } from "@/scripts/store";
   import { useTrickStore } from "@/scripts/trickStore";
   import { Store } from "pinia";
 

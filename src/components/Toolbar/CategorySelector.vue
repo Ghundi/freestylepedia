@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useCategoryStore, useSelCategoryStore } from '@/scripts/store.js';
+  import { useCategoryStore, useSelCategoryStore } from '@/scripts/store';
   import { ref } from 'vue';
   const categoryStore = useCategoryStore();
   const selCategoryStore = useSelCategoryStore();
