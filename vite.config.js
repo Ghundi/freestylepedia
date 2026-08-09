@@ -49,7 +49,7 @@ export default defineConfig({
         start_url: '/',
         display_override: ["standalone", "fullscreen"],
         display: 'standalone',
-        background_color: '#ffffff',
+        background_color: '#000000',
         theme_color: '#000000',
         icons: [
           {

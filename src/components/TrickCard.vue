@@ -6,6 +6,7 @@
   import ScalingText from './scalingText.vue'
   import { useTheme } from 'vuetify'
   import { strToUrl } from '@/scripts/helpers'
+  import { Trick } from '@/pages/Trick.vue'
 
   const trickStore = useTrickStore()
   const categoryStore = useCategoryStore()
@@ -13,7 +14,7 @@
   const themeStore = useTheme()
 
   const props = defineProps({
-    trick: Object
+    trick: Object as ()=> Trick
   })
 
   function isDarkTheme() {
@@ -108,7 +109,7 @@
       <v-card-title :style="newBadgeStyle">New!</v-card-title>
     </template>
 
-    <template v-if="mastered.isMastered(trick)">
+    <template v-if="mastered.isMastered(trick!)">
       <v-icon icon="mdi-medal" :style="medalStyle" />
     </template>
   </v-card>
