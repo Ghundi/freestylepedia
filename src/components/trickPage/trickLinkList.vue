@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { strToUrl } from "@/scripts/helpers";
-import { useTrickStore } from "@/scripts/trickStore.js";
+import { useTrickStore } from "@/scripts/trickStore";
 
 const trickStore = useTrickStore()
 const props = defineProps({
@@ -9,9 +9,9 @@ const props = defineProps({
 });
 
 function getTrickNames(id_list: Array<string>) {
-  let res = [trickStore.getTrickByID(id_list[0], trickStore).title[0]];
+  let res = [trickStore.getTrickByID(id_list[0])!.title[0]];
   for (let i = 1; i < id_list.length; i++) {
-    res.push(trickStore.getTrickByID(id_list[i], trickStore).title[0]);
+    res.push(trickStore.getTrickByID(id_list[i])!.title[0]);
   }
   return res;
 }

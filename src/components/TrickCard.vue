@@ -1,12 +1,11 @@
 <script setup lang="ts">
   import { computed, CSSProperties } from 'vue'
   import { useCategoryStore, useMasteredStore } from '@/scripts/store'
-  import { useTrickStore } from '@/scripts/trickStore.js'
+  import { useTrickStore, Trick } from '@/scripts/trickStore'
   import difficultyImg from '../assets/Silouette_Schlittschuh.png'
   import ScalingText from './scalingText.vue'
   import { useTheme } from 'vuetify'
   import { strToUrl } from '@/scripts/helpers'
-  import { Trick } from '@/pages/Trick.vue'
 
   const trickStore = useTrickStore()
   const categoryStore = useCategoryStore()
@@ -105,7 +104,7 @@
       </v-card-subtitle>
     </template>
 
-    <template v-if="trick!.title[0] === trickStore.newestTrick">
+    <template v-if="trick! == trickStore.newestTrick">
       <v-card-title :style="newBadgeStyle">New!</v-card-title>
     </template>
 

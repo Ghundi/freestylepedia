@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useMasteredStore } from '@/scripts/store';
 import TrickCard from '../TrickCard.vue';
-import { useTrickStore } from "@/scripts/trickStore.js";
-import { isMobile } from '@/scripts/helpers.js';
+import { useTrickStore } from "@/scripts/trickStore";
+import { isMobile } from '@/scripts/helpers';
 
 const trickStore = useTrickStore();
 const masteredTricks = useMasteredStore();
@@ -16,8 +16,8 @@ const masteredTricks = useMasteredStore();
   <v-container>
     <v-row :justify="isMobile() ? 'center' : 'start'" align-content="center">
       <template
-          v-for="trick in trickStore.getRecommendedTricks(trickStore, masteredTricks)"
-          :key="trick.id">
+          v-for="trick in trickStore.getRecommendedTricks(masteredTricks)"
+          :key="trick.trickID">
         <v-col cols="auto">
           <TrickCard
             class="ma-1"

@@ -1,14 +1,39 @@
-import {defineStore} from "pinia";
+import { defineStore } from "pinia";
+import { checkSpace, getNodeIdxById, getSpaceIdx, graphSearch, isReleased, trickToNode, getSortedTricks, getFilteredTricks, getCategorySizes, list2Trick } from "@/scripts/helpers";
+import { useCategoryStore, useMasteredStore, useSelSortingOrderStore} from "@/scripts/store";
+
+import type { Node, Edge } from '@vue-flow/core'  
+
 import tricksYAML from "@/DB/freestylepedia.yaml";
-import {checkSpace, getNodeIdxById, getSpaceIdx, graphSearch, isReleased, trickToNode, getSortedTricks, getFilteredTricks, getCategorySizes } from "@/scripts/helpers.js";
-import {useCategoryStore, useSelSortingOrderStore} from "@/scripts/store";
+
+export interface Trick {
+    trickID: string
+    title: Array<string>;
+    difficulty: number;
+    category: string,
+    releaseDate: Date,
+    videoID: Array<string>,
+    requirements: Array<string>,
+    connections: Array<string>
+  }
+
+type Graph = [Array<Node>, Array<Edge>];
+
+export interface TrickNode {
+    name: string,
+    children: Array<TrickNode>,
+    orientation?: number,
+    difficulty?: number,
+    width?: number,
+    height?: number
+}
 
 export const useTrickStore = defineStore('trickStore', {
     state: () => ({
-        tricks: [],
-        categoryTree: [],
-        trickTree: [],
-        newestTrick: null,
+        tricks: [] as Array<Trick>,
+        categoryTree: [[], []] as Graph,
+        trickTree: [[], []] as Graph,
+        newestTrick: null as Trick | null,
     }),
     getters: {
         shownTricks(state) {
@@ -17,12 +42,12 @@ export const useTrickStore = defineStore('trickStore', {
             const filtered = getFilteredTricks(sorted)
             return filtered
         },
-        getHardestMasteredTrick: (state) => (masteredTricks) => {
+        getHardestMasteredTrick: (state) => (masteredTricks: Array<Trick>) => {
             if (!masteredTricks?.length) return null;
             
             // Filter mastered tricks from ALL tricks
             const mastered = state.tricks.filter(trick => 
-            masteredTricks.some(m => m.id === trick.id)
+            masteredTricks.some(m => m.trickID === trick.trickID)
             );
             
             // Sort by difficulty descending
@@ -30,24 +55,23 @@ export const useTrickStore = defineStore('trickStore', {
         }
     },
     actions: {
-        loadYAML() {
-            const tricks = [];
-            for (let i = 0; i < tricksYAML["tricks"].length; i++) {
-                const j = i + 1;
-                const lst = tricksYAML["tricks"][i][("trick" + ("000" + j).slice(-4))];
-                const trick = { trickID: ("trick" + ("000" + j).slice(-4)), id: lst[1], title: lst[0], difficulty: lst[2], category: lst[3].toLowerCase(), releaseDate: new Date(lst[4]), requirements: lst[5], connections: lst[6] }
+        loadYAML(): boolean {
+            const readTricks = tricksYAML.tricks as Array<Object>;
+            for (let i = 0; i < readTricks.length; i++) {
+                const trickID: string = Object.keys(readTricks[i])[0]
+                const trick = list2Trick([trickID].concat(Object.values(readTricks[i])[0]))
                 if(isReleased(trick))
-                    tricks.push(trick);
+                    this.tricks.push(trick);
                 else
                     console.log(trick.title[0], 'not released')
             }
 
             // find the newest trick
-            const tmp = tricks.slice()
+            const tmp = this.tricks.slice()
             const newestTrick = tmp.sort(function(a,b){
                 // Turn your strings into dates, and then subtract them
                 // to get a value that is either negative, positive, or zero.
-                return new Date(b.releaseDate) - new Date(a.releaseDate);
+                return b.releaseDate.getTime() - a.releaseDate.getTime();
             })[0];
 
             //helper for datetime one month ago
@@ -55,27 +79,26 @@ export const useTrickStore = defineStore('trickStore', {
             d.setMonth(d.getMonth()-1);
             // set newestTrick Tag if max 1 month-old
             if(newestTrick.releaseDate >= d) {
-                this.newestTrick = newestTrick.title[0];
+                this.newestTrick = newestTrick;
             }
-
-            this.tricks = tricks;
+            return true;
         },
-        getThumbnailUrl(videoId) {
+        getThumbnailUrl(videoId: string): string {
             return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
         },
-        getTrickByID(trickID, state) {
-            for (let i = 0; i < state.tricks.length; i++) {
-                if(state.tricks[i].trickID === trickID) {
-                    return state.tricks[i];
+        getTrickByID(trickID: string): Trick | null {
+            for (let i = 0; i < this.tricks.length; i++) {
+                if(this.tricks[i].trickID === trickID) {
+                    return this.tricks[i];
                 }
             }
-            return -1;
+            return null;
         },
-        getTrickByTitle(trickTitle, state) {
+        getTrickByTitle(trickTitle: string): Trick | null {
             try {
-                for (let i = 0; i < state.tricks.length; i++) {
-                    if(state.tricks[i].title[0] === trickTitle) {
-                        return state.tricks[i];
+                for (let i = 0; i < this.tricks.length; i++) {
+                    if(this.tricks[i].title[0] === trickTitle) {
+                        return this.tricks[i];
                     }
                 }
                 return null;
@@ -85,8 +108,8 @@ export const useTrickStore = defineStore('trickStore', {
                 return null;
             }
         },
-        getLocalTrickTitles(trick, lang) {
-            let res = [];
+        getLocalTrickTitles(trick: Trick, lang: string): Array<string> {
+            let res: Array<string> = [];
             for (let i = 0; i < trick.title.length; i++) {
                 // only add locale alias when current language
                 if(trick.title[i].includes('{')) {
@@ -101,10 +124,10 @@ export const useTrickStore = defineStore('trickStore', {
             }
             return res;
         },
-        getTitlesStr(state, lang) {
+        getTitlesStr(lang: string): Array<string> {
             let res = [];
-            for (let i = 0; i < state.tricks.length; i++) {
-                const localTitles = state.getLocalTrickTitles(state.tricks[i], lang)
+            for (let i = 0; i < this.tricks.length; i++) {
+                const localTitles = this.getLocalTrickTitles(this.tricks[i], lang)
                 res.push(localTitles);
 
                 // add alias when hyphen in name
@@ -125,9 +148,9 @@ export const useTrickStore = defineStore('trickStore', {
             }
             return res.flat();
         },
-        getConnectionsGraph(state, orientation) {
+        getConnectionsGraph(orientation: string): Graph {
             // compute full graph for positioning
-            let graph= [{name: "Categories", children: []}];
+            let graph: Array<TrickNode> = [{name: "Categories", children: []}];
             const categoryStore = useCategoryStore();
             const categories = categoryStore.categories;
 
@@ -141,12 +164,12 @@ export const useTrickStore = defineStore('trickStore', {
 
             let tricks = null;
             // check if videos already loaded from YAML
-            if (state.tricks !== undefined) {
-                tricks = state.tricks;
+            if (this.tricks !== undefined) {
+                tricks = this.tricks;
             }
             else {
-                state.loadYAML()
-                tricks = state.tricks
+                this.loadYAML()
+                tricks = this.tricks
             }
 
             const catSizes = getCategorySizes(tricks)
@@ -160,7 +183,7 @@ export const useTrickStore = defineStore('trickStore', {
                     if(tricks[i].connections.length > 0) {
                         for (let j = 0; j < tricks[i].connections.length; j++) {
                             try {
-                                categoryNode.children.at(-1).children.push(trickToNode(state.getTrickByID(tricks[i].connections[j], state)));
+                                categoryNode.children.at(-1).children.push(trickToNode(this.getTrickByID(tricks[i].connections[j])!));
                                 visitedIDs.add(tricks[i].connections[j]);
                             } catch (e) {
                                 console.log(`${tricks[i].connections[j]} not available`);
@@ -170,7 +193,7 @@ export const useTrickStore = defineStore('trickStore', {
                 }
             }
             // convert graph to flow chart
-            function convGraph(nodes, edges, parent, g_node, g_parent) {
+            function convGraph(nodes: Array<Node>, edges: Array<Edge>, parent: Node | null, g_node: TrickNode, g_parent: TrickNode | null): Graph {
                 const categoryIdx = categories.indexOf(g_node.name);
                 const splitIdx = 2;
                 // category node
@@ -185,11 +208,11 @@ export const useTrickStore = defineStore('trickStore', {
                             x: ((categoryIdx < splitIdx) ? -100 : 100) * xScaleFactor,
                             // if first in column -1500, else scaled to amount of tricks in category under previous node
                             y: ((prev_idx >= 0 && categoryIdx !== splitIdx) ? 
-                                nodes[getNodeIdxById(g_parent.children[prev_idx].name, nodes)].position.y + catSizes[categoryIdx] * 60
+                                nodes[getNodeIdxById(g_parent!.children[prev_idx].name, nodes)].position.y + catSizes[categoryIdx] * 60
                                 : -1500)
                                 // children.length + prev.children.length if exists / 2 * 100
                                 + ((g_node.children.length +
-                                    ((prev_idx >= 0) ? g_parent.children[prev_idx].children.length : 0)) / 2) * 100},
+                                    ((prev_idx >= 0) ? g_parent!.children[prev_idx].children.length : 0)) / 2) * 100},
                         data: {
                             label: g_node.name,
                             n_children: 0,
@@ -236,8 +259,8 @@ export const useTrickStore = defineStore('trickStore', {
                 return [nodes, edges];
             }
 
-            let nodes = [];
-            let edges = [];
+            let nodes: Array<Node<any>> = [];
+            let edges: Array<Edge> = [];
             const xScaleFactor = (orientation === 'Portrait') ? 1 : 3;
             // compute num children for categories
             const num_children = new Array(categories.length).fill(0);
@@ -245,25 +268,25 @@ export const useTrickStore = defineStore('trickStore', {
                 num_children[categories.indexOf(tricks[i].category)]++;
             }
 
-            [nodes, edges] = convGraph(nodes, edges, null, graph[0], null)
+            [nodes, edges] = convGraph(nodes, edges, null, graph[0], null) as Graph
 
 
             return [nodes, edges];
         },
-        getTrickTreeGraph(state, orientation) {
+        getTrickTreeGraph(orientation: string): Graph {
             // generate base graph
-            let graph= [{name: "root", children: []}];
-            let visitedIDs = [];
+            let graph = [{name: "root", children: []} as TrickNode];
+            let visitedIDs: Array<string> = [];
             let i = 0;
 
             let tricks = null;
             // check if videos already loaded from YAML
-            if (state.tricks !== undefined) {
-                tricks = state.tricks;
+            if (this.tricks !== undefined) {
+                tricks = this.tricks;
             }
             else {
-                state.loadYAML()
-                tricks = state.tricks
+                this.loadYAML()
+                tricks = this.tricks
             }
 
             tricks.sort((a, b) => {
@@ -281,7 +304,7 @@ export const useTrickStore = defineStore('trickStore', {
                     if(tricks[i].requirements.length > 0) {
                         for (let j = 0; j < tricks[i].requirements.length; j++) {
                             try {
-                                const parent = graphSearch(state.getTrickByID(tricks[i].requirements[j], state).title[0], graph[0]);
+                                const parent = graphSearch(this.getTrickByID(tricks[i].requirements[j])!.title[0], graph[0]);
                                 if(parent != null) {
                                     parent.children.push(trickToNode(tricks[i]));
                                     visitedIDs.push(tricks[i].trickID);
@@ -304,10 +327,12 @@ export const useTrickStore = defineStore('trickStore', {
             }
 
             // calculate tree widths and height
-            function calcTreeSpace(node) {
+            function calcTreeSpace(node: TrickNode): [number, number] {
+                if(!node.difficulty) 
+                    throw Error("node missing difficulty for tree space calculation" + node.name);
                 if(node.children.length > 0) {
                     let max_children = node.children.length;
-                    let max_difficulty = node.difficulty;
+                    let max_difficulty = node.difficulty!;
                     for (let j = 0; j < node.children.length; j++) {
                         const [tmp_children, tmp_difficulty] = calcTreeSpace(node.children[j])
                         max_children = Math.max(max_children, tmp_children);
@@ -316,16 +341,18 @@ export const useTrickStore = defineStore('trickStore', {
                     return [max_children, max_difficulty];
                 }
                 else {
-                    return [1, node.difficulty];
+                    return [1, node.difficulty!];
                 }
             }
             // calc root tree height and max width
             let total_width = 0;
             for (let j = 0; j < graph[0].children.length; j++) {
+                if(!graph[0].children[j].difficulty) 
+                    throw Error("node missing difficulty for tree height/width calculation" + graph[0].children[j].name);
                 let max_difficulty = graph[0].children[j].difficulty;
                 [graph[0].children[j].width, max_difficulty] = calcTreeSpace(graph[0].children[j]);
-                graph[0].children[j].height = max_difficulty - graph[0].children[j].difficulty + 1;
-                total_width += graph[0].children[j].width;
+                graph[0].children[j].height = max_difficulty - graph[0].children[j].difficulty! + 1;
+                total_width += graph[0].children[j].width!;
             }
 
             // 2d array for allocating spaces
@@ -334,16 +361,24 @@ export const useTrickStore = defineStore('trickStore', {
             // place root nodes in allocation array
             for (let i = 0; i < graph[0].children.length; i++) {
                 const node = graph[0].children[i];
+
+                if(!node.difficulty) 
+                    throw Error("node missing difficulty for tree height/width calculation" + node.name);
+                if(!node.width) 
+                    throw Error("node missing width for tree height/width calculation" + node.name);
+                if(!node.height) 
+                    throw Error("node missing height for tree height/width calculation" + node.name);
+
                 for (let col = 0; col < rows; col++) {
                     // if space free and wide enough
-                    if(checkSpace(node.difficulty - 1, col, node.width, node.height, spaces)) {
+                    if(checkSpace(node.difficulty! - 1, col, node.width, node.height, spaces)) {
                         // mark space as used
-                        for (let x = col; x < col + node.width; x++) {
-                            for (let y = node.difficulty - 1; y < node.difficulty + node.height - 1; y++) {
+                        for (let x = col; x < col + node.width!; x++) {
+                            for (let y = node.difficulty! - 1; y < node.difficulty! + node.height! - 1; y++) {
                                 spaces[y][x] = true;
                             }
                         }
-                        spaces[node.difficulty - 1][Math.floor(col + (node.width / 2))] = node.name;
+                        spaces[node.difficulty! - 1][Math.floor(col + (node.width! / 2))] = node.name;
                         break;
                     }
                     else if(col === rows - 1) {
@@ -353,16 +388,21 @@ export const useTrickStore = defineStore('trickStore', {
             }
 
             // convert to Flow Chart
-            function convGraph(nodes, edges, parent, g_node, g_parent) {
+            const convGraph = (nodes: Array<Node>, edges: Array<Edge>, parent: Node | null, g_node: TrickNode, g_parent: TrickNode | null): Graph => {
                 // child node
                 if(parent && g_parent && g_parent.name !== 'root') {
+                    if(!g_node.difficulty) 
+                        throw Error("node missing difficulty for tree height/width calculation" + g_node.name);
+                    if(!g_parent.difficulty)
+                        throw Error("node missing difficulty for tree height/width calculation" + g_parent.name);
+
                     const prev_idx = g_parent.children.indexOf(g_node) - 1;
                     nodes.push({
                         id: g_node.name,
                         type: 'clickable',
                         position: {
                             // offset to prev node of parent
-                            x: (g_parent.difficulty < g_node.difficulty) ? g_node.difficulty * difficultySpacing * xScaleFactor : parent.position.x + 600,
+                            x: (g_parent.difficulty! < g_node.difficulty!) ? g_node.difficulty! * difficultySpacing * xScaleFactor : parent.position.x + 600,
                             y: (prev_idx >= 0) ? nodes[getNodeIdxById(g_parent.children[prev_idx].name, nodes)].position.y + 100 +
                                 // + offset to previous node if present and space for own children
                                 ((g_node.children.length > 0) ? (Math.max(0, g_parent.children[prev_idx].children.length - 1)) * 100 : 0)
@@ -383,7 +423,9 @@ export const useTrickStore = defineStore('trickStore', {
                 }
                 else if(g_node.name !== 'root') {
                     // root nodes
-                    const trick = state.getTrickByTitle(g_node.name, state)
+                    const trick = this.getTrickByTitle(g_node.name)
+                    if(!trick)
+                        throw Error("failed to find trick by title in Trick Tree convGraph: " + g_node.name);
                         // find node in space allocation array
                     const y = getSpaceIdx(trick.title[0], spaces)
                     nodes.push({
@@ -415,8 +457,8 @@ export const useTrickStore = defineStore('trickStore', {
                 return [nodes, edges];
             }
 
-            let nodes = [];
-            let edges = [];
+            let nodes: Array<Node> = [];
+            let edges: Array<Edge> = [];
             const difficultySpacing = 1500;
             const xScaleFactor = (orientation === 'Portrait') ? 0.7 : 1;
             const categoryStore = useCategoryStore();
@@ -426,37 +468,38 @@ export const useTrickStore = defineStore('trickStore', {
 
             return [nodes, edges];
         },
-        getRecommendedTricks: (state, masteredStore) => {
+        getRecommendedTricks (masteredStore:  ReturnType<typeof useMasteredStore>): Array<Trick>  {
             try {
                 const recommendedTricks = []
-                const masteredTricks = masteredStore.getMasteredTricks(state.tricks);
+                const masteredTricks = masteredStore.getMasteredTricks(this.tricks);
                 const resLength = 12
                 
                 const baseTrickTitles = ['Triangle', 'Backwards Donut', 'Hockey Stop', 'Eagle', 'Grapevine']
                 // Starter Tricks if not mastered
                 for (let i = 0; i < baseTrickTitles.length; i++) {
-                    const trick = state.getTrickByTitle(baseTrickTitles[i], state)
+                    const trick = this.getTrickByTitle(baseTrickTitles[i])
+                    if(!trick) throw Error("recommended trick not found by title: " + baseTrickTitles[i])
                     if(!masteredStore.isMastered(trick)) {
                         recommendedTricks.push(trick)
                     }
                 }
                
                 // Tricks that require mastered tricks 
-                for (let i = 0; i < state.tricks.length; i++) {
-                    if(!masteredStore.isMastered(state.tricks[i])) {
-                        const requirementIds = state.tricks[i].requirements
+                for (let i = 0; i < this.tricks.length; i++) {
+                    if(!masteredStore.isMastered(this.tricks[i])) {
+                        const requirementIds = this.tricks[i].requirements
                         const masteredIdSet = new Set(masteredTricks.map(t => t.trickID));
                         const allRequirementsMastered = requirementIds.every(id =>
                             masteredIdSet.has(id)
                         );
                         if(allRequirementsMastered && requirementIds.length > 0) {
-                            recommendedTricks.push(state.tricks[i])
+                            recommendedTricks.push(this.tricks[i])
                         }
                     }
                 }
 
                 // fill with easiest non mastered tricks
-                const sortedTricks = getSortedTricks(state.tricks, 'difficultyUp')
+                const sortedTricks: Array<Trick> = getSortedTricks(this.tricks, 'difficultyUp') as Array<Trick>
                 if(recommendedTricks.length < resLength) {
                     for (let i = 0; i < sortedTricks.length; i++) {
                         if(!masteredStore.isMastered(sortedTricks[i]) && !recommendedTricks.includes(sortedTricks[i])) {
@@ -468,7 +511,7 @@ export const useTrickStore = defineStore('trickStore', {
                     }
                 }
 
-                return getSortedTricks(recommendedTricks, 'difficultyUp').slice(0, resLength)
+                return (getSortedTricks(recommendedTricks, 'difficultyUp') as Array<Trick>).slice(0, resLength)
             }
             catch(e) {
                 console.log(e)

@@ -1,20 +1,16 @@
-<script setup>
-import {ref, watch} from 'vue';
-import {VueFlow} from '@vue-flow/core';
-import {useTrickStore} from '@/scripts/trickStore.js';
-import {useTheme} from 'vuetify';
-import {getBgColor} from "@/scripts/helpers.js";
+<script setup lang="ts">
+import { ref, watch } from 'vue';
+import { VueFlow, Edge } from '@vue-flow/core';
+import { useTrickStore } from '@/scripts/trickStore';
+import { useTheme } from 'vuetify';
+import { getBgColor, getOrientation } from "@/scripts/helpers";
 
 import ClickableNode from '../components/mindMap/ClickableNode.vue';
 import CategoryNode from '../components/mindMap/CategoryNode.vue';
 import DifficultyNode from '../components/mindMap/DifficultyNode.vue';
 
 const trickStore = useTrickStore();
-trickStore.trickTree = trickStore.getTrickTreeGraph(trickStore, getOrientation());
-
-function getOrientation() {
-  return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
-}
+trickStore.trickTree = trickStore.getTrickTreeGraph(getOrientation());
 
 const graph = ref(trickStore.trickTree);
 const theme = useTheme();
@@ -22,7 +18,7 @@ const theme = useTheme();
 // Function to update edge colors dynamically based on theme
 function updateEdgeColorsBasedOnTheme() {
   const edgeColor = theme.global.current.value.dark ? 'white' : 'black';
-  graph.value[1] = graph.value[1].map(edge => ({
+  graph.value[1] = graph.value[1].map((edge: Edge) => ({
     ...edge,
     style: {
       ...edge.style,

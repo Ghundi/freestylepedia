@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {useTheme} from "vuetify";
-import { getBgColor, getPosition, getOrientation } from "@/scripts/helpers.js";
+import { getBgColor, getPosition, getOrientation } from "@/scripts/helpers";
 import { Handle } from '@vue-flow/core'
 
 const props = defineProps(['label', 'orientation', 'n_children', 'color'])

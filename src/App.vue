@@ -5,7 +5,7 @@ import NavBar from "@/components/Frame/navBar.vue";
 import { useTrickStore } from "@/scripts/trickStore";
 import Footer from "@/components/Frame/footer.vue"
 import { useTheme } from 'vuetify'
-import { getBgColor } from "@/scripts/helpers.js";
+import { getBgColor } from "@/scripts/helpers";
 import LocaleLayout from './components/localeLayout.vue';
 
 const theme = useTheme();

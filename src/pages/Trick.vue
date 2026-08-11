@@ -1,26 +1,15 @@
 <script setup lang="ts">
   import { watch, ref, nextTick } from "vue";
-  import { useTrickStore } from "@/scripts/trickStore.js";
+  import { useTrickStore, Trick } from "@/scripts/trickStore";
   import { useRoute, useRouter } from "vue-router";
   import ShareDial from "@/components/trickPage/shareDial.vue";
-  import { UrlToStr } from "@/scripts/helpers.js";
+  import { UrlToStr } from "@/scripts/helpers";
   import otherTutorials from "@/components/trickPage/otherTutorials.vue";
   import trickLinkList from "@/components/trickPage/trickLinkList.vue";
   import { useMasteredStore, useTodoStore } from "@/scripts/store";
 
   function getEmbedURL(videoID: string) {
     return 'https://www.youtube-nocookie.com/embed/' + videoID + '?si=9jysKI0zbGHvpMCD&mute=1&start=4'
-  }
-
-  export interface Trick {
-    trickID: number
-    title: Array<string>;
-    difficulty: number;
-    category: string,
-    releaseDate: Date,
-    id: Array<string>,
-    requirements: Array<string>,
-    connections: Array<string>
   }
 
   const route = useRoute()
@@ -33,7 +22,7 @@
     async (newName) => {
       if (!newName) return;
       
-      const foundTrick = trickStore.getTrickByTitle(UrlToStr(newName), trickStore);
+      const foundTrick = trickStore.getTrickByTitle(UrlToStr(String(newName)));
       trick.value = foundTrick;
       
       await nextTick();
@@ -97,7 +86,7 @@
         <v-row>
           <iframe
               class="responsive-iframe"
-              :src="getEmbedURL(trick.id[0])"
+              :src="getEmbedURL(trick.videoID[0])"
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
@@ -156,8 +145,8 @@
             />
           </v-col>
 
-          <template v-if="trick.id && trick.id.length > 1">
-            <other-tutorials :id="trick.id"/>
+          <template v-if="trick.videoID && trick.videoID.length > 1">
+            <other-tutorials :id="trick.videoID"/>
           </template>
         </v-row>
       </v-container>
@@ -169,7 +158,7 @@
       <v-empty-state
           icon="mdi-alert-circle-outline"
           :text="$t('error.trickNotFoundSuggestion')"
-          :title="UrlToStr(route.params.trickname) + ' ' + $t('error.trickNotFound')"
+          :title="UrlToStr(String(route.params.trickname)) + ' ' + $t('error.trickNotFound')"
       ></v-empty-state>
     </div>
   </template>

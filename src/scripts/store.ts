@@ -14,10 +14,10 @@ import Guardians from "../assets/supporters/Guardians.webp"
 import IFP from "../assets/supporters/IFP Print Brust Link.webp"
 import ICD from "../assets/supporters/ICD.webp"
 import IceIceDilly from "../assets/supporters/IceIceDilly.webp"
-import { Trick } from '@/pages/Trick.vue';
+import { Trick } from '@/scripts/trickStore';
 
 export const useTodoStore = defineStore('Todo', () => {
-  const list = ref<Array<number>>([])
+  const list = ref<Array<string>>([])
 
     // Initialise from localStorage
     const raw = localStorage.getItem('todo')
@@ -76,7 +76,7 @@ export const useTodoStore = defineStore('Todo', () => {
 
     const loadHash: (hash: string) => Array<string> = (hash) => {
         const newList: Array<string> = hash.split(",");
-        list.value = newList.map(id => Number(id));
+        list.value = newList.map(id => String(id));
         console.log("Loaded following todo list: ", list.value)
         return newList
     }
@@ -114,7 +114,7 @@ export const useMarkedStore = defineStore('marked', {
 })
 
 export const useMasteredStore = defineStore('Mastered', () => {
-  const list = ref<Array<number>>([])
+  const list = ref<Array<string>>([])
 
     // Initialise from localStorage
     const raw = localStorage.getItem('mastered')
@@ -220,8 +220,8 @@ export const useMasteredStore = defineStore('Mastered', () => {
         return list.value.toString();
     }
 
-    const loadHash = (hash: string): Array<number> => {
-        const newList: Array<number> = hash.split(",").map(id => Number(id));
+    const loadHash = (hash: string): Array<string> => {
+        const newList: Array<string> = hash.split(",").map(id => String(id));
         list.value = newList;
         console.log("Loaded following mastered list: ", list.value)
         return newList

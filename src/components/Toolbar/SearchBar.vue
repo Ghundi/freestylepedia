@@ -6,8 +6,8 @@
   const searchStore = useCurSearchStore();
   const trickStore = useTrickStore();
 
-  const updateStore: ((newVal: Array<number>) => boolean)[] = [
-    (newVal: Array<number>) => {
+  const updateStore: ((newVal: string) => boolean)[] = [
+    (newVal: string) => {
       searchStore.update(newVal);
       return true;
     },

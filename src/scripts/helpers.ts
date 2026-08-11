@@ -1,17 +1,31 @@
 //helpers
 import {useCategoryStore, useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore, useSelDifficultyStore, useTodoStore} from "@/scripts/store";
-import { useTrickStore } from "./trickStore";
-import { Position} from '@vue-flow/core'
+import { TrickNode, Trick } from "@/scripts/trickStore";
+import { Position, Node } from '@vue-flow/core'
 
-export function isMobile() {
+
+export function list2Trick(list: Array<any>): Trick {
+    return Object({
+        trickID: list[0].slice(5),
+        title: list[1],
+        videoID: list[2],
+        difficulty: list[3],
+        category: list[4].toLowerCase(),
+        releaseDate: new Date(list[5]),
+        requirements: list[6].map((t: string) => t.slice(5)),
+        connections: list[7].map((t: string) => t.slice(5))
+    })
+}
+
+export function isMobile(): boolean {
     return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
-export function getOrientation(){
+export function getOrientation(): string {
   return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
 }
 
-export function getPosition(orientation) {
+export function getPosition(orientation: number): Position {
   switch (orientation) {
     case 0:
       return Position.Top;
@@ -21,18 +35,20 @@ export function getPosition(orientation) {
       return Position.Bottom;
     case 3:
       return Position.Left;
+    default:
+    return Position.Top;
   }
 }
 
-export function strToUrl(str) {
+export function strToUrl(str: string): string {
     return str.replaceAll(' ', '+')
 }
 
-export function UrlToStr(str) {
+export function UrlToStr(str: string): string {
     return str.replaceAll('+', ' ')
 }
 
-export function getCategorySizes(tricks) {
+export function getCategorySizes(tricks: Array<Trick>): Array<number> {
     const categories = useCategoryStore().categories;
     const catSizes = new Array(categories.length).fill(0)
     for (let i = 0; i < tricks.length; i++) {
@@ -42,11 +58,11 @@ export function getCategorySizes(tricks) {
     return catSizes
 }
 
-function logicalOR(res, x) {
+function logicalOR(res: boolean, x: boolean): boolean {
     return res || x;
 }
 
-function trickMatchesSearch(trickStore, trick, searchVal) {
+function trickMatchesSearch(trick: Trick, searchVal: string | null) {
     // empty search field
     if(!searchVal) {
         return true;
@@ -59,7 +75,7 @@ function trickMatchesSearch(trickStore, trick, searchVal) {
     return trick.title.map( x => x.toLowerCase().includes(search) ).reduce(logicalOR, false)
 }
 
-export function getSortedTricks(tricks, sortOption)  {
+export function getSortedTricks(tricks: Array<Trick>, sortOption: string): Array<Trick>  {
     try{
         switch (sortOption) {
             case 'difficultyDown':
@@ -71,27 +87,26 @@ export function getSortedTricks(tricks, sortOption)  {
             case 'nameDown':
                 return [...tricks].sort((a, b) => b.title[0].localeCompare(a.title[0]));
             case 'releasedDown':
-                return [...tricks].sort((a, b) => a.releaseDate - b.releaseDate);
+                return [...tricks].sort((a, b) => a.releaseDate.getTime() - b.releaseDate.getTime());
             case 'releasedUp':
-                return [...tricks].sort((a, b) => b.releaseDate - a.releaseDate);
+                return [...tricks].sort((a, b) => b.releaseDate.getTime() - a.releaseDate.getTime());
             default:
                 return [...tricks];
         }
     }
     catch(e) {
         console.log("Error while sorting tricks");
-        return e
+        return tricks;
     }
 }
 
-export function getFilteredTricks(tricks) {
+export function getFilteredTricks(tricks: Array<Trick>): Array<Trick> {
             const selDifficulties = useSelDifficultyStore().val;
             const selCategories = useSelCategoryStore().categories;
             const curSearch = useCurSearchStore().val;
             const markedStore = useMarkedStore();
             const masteredStore = useMasteredStore();
             const todoStore = useTodoStore();
-            const trickStore = useTrickStore();
 
             const filtered = [];
             try{
@@ -101,7 +116,7 @@ export function getFilteredTricks(tricks) {
                         // if matches selected categories
                         if((selCategories.length > 0) ? selCategories.includes(tricks[i].category) : true) {
                             // if search at least partially matches
-                            if(trickMatchesSearch(trickStore, tricks[i], curSearch)) {
+                            if(trickMatchesSearch(tricks[i], curSearch)) {
                                 // if selected mastered matches 
                                 if( (markedStore.selMarkers.includes('mastered') && masteredStore.isMastered(tricks[i]))
                                     || (markedStore.selMarkers.includes('non-mastered') && !masteredStore.isMastered(tricks[i]))
@@ -122,29 +137,31 @@ export function getFilteredTricks(tricks) {
             }
             catch(e) {
                 console.log("Error occured while filtering tricks", e)
-                return e
+                return tricks;
             }
         }
 
-export function trickToNode(trick, orientation = 3) {
-    return {
+export function trickToNode(trick: Trick, orientation = 3): TrickNode {
+    return Object({
         name: trick.title[0],
         children: [],
         orientation: orientation,
         difficulty: trick.difficulty,
         width: 1,
         height: 1
-    };
+    });
 }
 
-export function graphSearch(trickTitle, graph) {
-    let visited = [];
+export function graphSearch(trickTitle: string, graph: TrickNode): TrickNode {
+    let visited: Array<string> = [];
     for (let i = 0; i < graph.children.length; i++) {
-        if (!visited.includes(graph.children[i])) {
+        if (!visited.includes(graph.children[i].name)) {
             visited.push(graph.children[i].name)
+            console.log(visited)
             if (graph.children[i].name === trickTitle) {
                 return graph.children[i];
-            } else {
+            } 
+            else {
                 if (graph.children[i].children.length > 0) {
                     let res = graphSearch(trickTitle, graph.children[i]);
                     if (res != null) {
@@ -154,9 +171,11 @@ export function graphSearch(trickTitle, graph) {
             }
         }
     }
+    console.log("Error: graphSearch failed for node titled " + trickTitle);
+    return graph;
 }
 
-export function getNodeIdxById(id, nodes) {
+export function getNodeIdxById(id: string, nodes: Array<Node>) {
     for (let i = 0; i < nodes.length; i++) {
         if (nodes[i].id === id) {
             return i;
@@ -165,7 +184,7 @@ export function getNodeIdxById(id, nodes) {
     return -1;
 }
 
-export function getSpaceIdx(name, spaces) {
+export function getSpaceIdx(name: string, spaces: Array<Array<any>>): number {
     for (let y = 0; y < 5; y++) {
         for (let x = 0; x < spaces[0].length; x++) {
             if (spaces[y][x] === name) {
@@ -177,7 +196,7 @@ export function getSpaceIdx(name, spaces) {
     return 0;
 }
 
-export function checkSpace(y, x, width, height, spaces) {
+export function checkSpace(y: number, x: number, width: number, height: number, spaces: Array<Array<any>>): boolean {
     for (let i = y; i < y + height; i++) {
         for (let j = x; j < x + width; j++) {
             if (spaces[i][j] !== false) {
@@ -188,11 +207,11 @@ export function checkSpace(y, x, width, height, spaces) {
     return true;
 }
 
-export function getBgColor(dark) {
+export function getBgColor(dark: boolean): string {
     return dark ? '#222222' : '#eeeeee'
 }
 
-function changeTimeZone(date, timeZone) {
+function changeTimeZone(date: Date, timeZone: string) {
     if (typeof date === 'string') {
         return new Date(
             new Date(date).toLocaleString('en-US', {
@@ -208,7 +227,7 @@ function changeTimeZone(date, timeZone) {
     );
 }
 
-export function isReleased(trick) {
+export function isReleased(trick: Trick) {
     let trickDate = new Date(trick.releaseDate);
     let today = new Date();
     today = changeTimeZone(today, 'Europe/Berlin');

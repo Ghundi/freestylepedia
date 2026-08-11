@@ -1,19 +1,15 @@
-<script setup>
+<script setup lang="ts">
 import { ref, watch } from 'vue';
-import { VueFlow } from '@vue-flow/core';
-import { useTrickStore } from "@/scripts/trickStore.js";
+import { VueFlow, Edge, Node } from '@vue-flow/core';
+import { useTrickStore } from "@/scripts/trickStore";
 import { useTheme } from "vuetify";
-import { getBgColor } from "@/scripts/helpers.js";
+import { getBgColor, getOrientation } from "@/scripts/helpers";
 
 import ClickableNode from '../components/mindMap/ClickableNode.vue';
 import CategoryNode from '../components/mindMap/CategoryNode.vue';
 
 const trickStore = useTrickStore();
-trickStore.categoryTree = trickStore.getConnectionsGraph(trickStore, getOrientation());
-
-function getOrientation() {
-  return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
-}
+trickStore.categoryTree = trickStore.getConnectionsGraph(getOrientation());
 
 const graph = ref(trickStore.categoryTree);
 const theme = useTheme();
@@ -21,14 +17,16 @@ const theme = useTheme();
 // Function to set edge color dynamically based on theme
 function updateEdgeColorsBasedOnTheme() {
   const edgeColor = theme.global.current.value.dark ? 'white' : 'black';
-  graph.value[1] = graph.value[1].map(edge => ({
+
+  const newEdges = graph.value[1].map((edge: Edge) => ({
     ...edge,
     style: {
       ...edge.style,
-      stroke: edgeColor,  // Update stroke color based on theme
-    }
+      stroke: edgeColor,
+    },
   }));
 
+  graph.value = [graph.value[0], newEdges]; 
 }
 
 watch(() => theme.global.current.value.dark, () => {

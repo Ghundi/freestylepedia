@@ -2,18 +2,18 @@
   import TrickCard from '../components/TrickCard.vue';
   import Toolbar from "@/components/Toolbar/Toolbar.vue";
   import { useMasteredStore, useTodoStore } from '@/scripts/store';
-  import { useTrickStore } from "@/scripts/trickStore.js";
+  import { useTrickStore } from "@/scripts/trickStore";
   import { useRoute } from 'vue-router';
-  import { isMobile } from '@/scripts/helpers.js';
+  import { isMobile } from '@/scripts/helpers';
 
   const trickStore = useTrickStore();
 
   const route = useRoute()
   if(route.query.todo) {
-    useTodoStore().loadHash(route.query.todo);
+    useTodoStore().loadHash(route.query.todo.toString());
   }
   if(route.query.mastered) {
-    useMasteredStore().loadHash(route.query.mastered);
+    useMasteredStore().loadHash(route.query.mastered.toString());
   }
 
 </script>
