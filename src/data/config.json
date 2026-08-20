@@ -1,0 +1,11 @@
+{
+    "initialValues": 
+    {
+        "categoryStore": 
+            {
+            "categories": ["footwork", "ground", "jump", "acrobatic", "hydroblading", "spin", "stop"],
+            "colors": ["rgba(151,0,197,0.48)", "rgba(152,221,69,0.75)", "rgba(255,136,0,0.68)", "#e03030", "rgba(6,187,211,0.78)", "rgba(23,35,255,0.53)", "rgba(252,247,0,0.76)"]
+            },
+        "faqStore": ["usage", "naming", "scoring", "categories", "existence", "improve", "help", "transfer"]
+    }
+}

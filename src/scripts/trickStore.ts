@@ -4,7 +4,7 @@ import { useCategoryStore, useMasteredStore, useSelSortingOrderStore} from "@/sc
 
 import type { Node, Edge } from '@vue-flow/core'  
 
-import tricksYAML from "@/DB/freestylepedia.yaml";
+import tricksYAML from "@/data/tricks.yaml";
 
 export interface Trick {
     trickID: string

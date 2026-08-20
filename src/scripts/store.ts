@@ -15,6 +15,7 @@ import IFP from "../assets/supporters/IFP Print Brust Link.webp"
 import ICD from "../assets/supporters/ICD.webp"
 import IceIceDilly from "../assets/supporters/IceIceDilly.webp"
 import { Trick } from '@/scripts/trickStore';
+import configJSON from "@/data/config.json";
 
 export const useTodoStore = defineStore('Todo', () => {
   const list = ref<Array<string>>([])
@@ -233,7 +234,7 @@ export const useMasteredStore = defineStore('Mastered', () => {
 export const useFAQ = defineStore('FAQ', {
     state: () => {
         return {
-            val: ['usage', 'naming', 'scoring', 'categories', 'existence', 'improve', 'help', 'transfer']
+            val: configJSON.initialValues.faqStore,
         }
     },
 })
@@ -321,8 +322,8 @@ export const useSelSortingOrderStore = defineStore('SelSortingOrder', {
 export const useCategoryStore = defineStore('categoryStore', {
     state: () => {
         return {
-            categories: ['footwork', 'ground', 'jump', 'acrobatic', 'hydroblading', 'spin', 'stop'],
-            colors: ['rgba(151,0,197,0.48)', 'rgba(152,221,69,0.75)', 'rgba(255,136,0,0.68)', '#e03030', 'rgba(6,187,211,0.78)', 'rgba(23,35,255,0.53)', 'rgba(252,247,0,0.76)']
+            categories: configJSON.initialValues.categoryStore.categories, //['footwork', 'ground', 'jump', 'acrobatic', 'hydroblading', 'spin', 'stop'],
+            colors: configJSON.initialValues.categoryStore.colors //['rgba(151,0,197,0.48)', 'rgba(152,221,69,0.75)', 'rgba(255,136,0,0.68)', '#e03030', 'rgba(6,187,211,0.78)', 'rgba(23,35,255,0.53)', 'rgba(252,247,0,0.76)']
         }
     },
     actions: {
