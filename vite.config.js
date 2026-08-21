@@ -24,7 +24,7 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: 'src/DB',
+          src: 'src/data',
           dest: 'en',
         },
       ],
@@ -95,7 +95,7 @@ export default defineConfig({
     // `fs.allow` tells Vite it's okay to read from src/DB.
     fs: {
       // allow serving files from the project root and src/DB
-      allow: ['..', path.resolve(__dirname, 'src/DB')],
+      allow: ['..', path.resolve(__dirname, 'src/data')],
     },
 
     // Hook into the dev server to add a custom route
@@ -111,7 +111,7 @@ export default defineConfig({
       // Serve static files from src/DB under the URL prefix `/en/DB`
       express.use('/en/DB', (req, res, next) => {
         // Resolve the path inside src/DB
-        const filePath = path.resolve(__dirname, 'src', 'DB', req.path);
+        const filePath = path.resolve(__dirname, 'src', 'data', req.path);
         // Use native fs to check existence and stream the file
         fs.stat(filePath, (err, stats) => {
           if (err || !stats.isFile()) {
