@@ -1,14 +1,17 @@
 <script setup lang="ts">
     import { useMasteredStore, useTodoStore } from '@/scripts/store';
+    import Qrcode from '../qrcode.vue';
 
-  async function getExportUrl(): Promise<void> {
-    try {
-      const exportUrl = 'https://freestylepedia.org/en?todo=' + useTodoStore().getHash() + "&mastered=" + useMasteredStore().getHash();
-      await navigator.clipboard.writeText(exportUrl);
-    } catch($e) {
-      console.log('failed copying to clipboard. Make sure you have a secure connection');
+    const exportUrl = 'https://freestylepedia.org/en?todo=' + useTodoStore().getHash() + "&mastered=" + useMasteredStore().getHash();
+
+    async function copyExportUrl(): Promise<void> {
+        try {
+        
+        await navigator.clipboard.writeText(exportUrl);
+        } catch($e) {
+        console.log('failed copying to clipboard. Make sure you have a secure connection');
+        }
     }
-  }
 </script>
 
 <template>
@@ -17,17 +20,23 @@
         <v-btn
         v-bind="activatorProps"
         variant="elevated"
-        @click.stop="getExportUrl()"
+        @click.stop="copyExportUrl()"
         >
         {{ $t('myProgress.transferProgress') }}
     </v-btn>
     </template>
 
     <template v-slot:default="{ isActive }">
-        <v-card>
+        <v-card class="text-center justify-center">
             <v-card-text>
                 {{ $t('myProgress.transferInfo') }}
             </v-card-text>
+            
+            <div>
+                <qrcode 
+                    :text="exportUrl"
+                />
+            </div>
 
             <v-card-actions>
                 <v-spacer></v-spacer>

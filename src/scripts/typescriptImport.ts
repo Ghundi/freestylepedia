@@ -12,8 +12,3 @@ declare module "*.webp" {
   const value: string;
   export default value;
 }
-
-declare module "*.yaml" {
-  const value: any;
-  export default value;
-}

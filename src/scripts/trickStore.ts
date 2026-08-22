@@ -1,10 +1,9 @@
 import { defineStore } from "pinia";
 import { checkSpace, getNodeIdxById, getSpaceIdx, graphSearch, isReleased, trickToNode, getSortedTricks, getFilteredTricks, getCategorySizes, list2Trick } from "@/scripts/helpers";
 import { useCategoryStore, useMasteredStore, useSelSortingOrderStore} from "@/scripts/store";
+import tricks from "@/data/tricks.json"
 
 import type { Node, Edge } from '@vue-flow/core'  
-
-import tricksYAML from "@/data/tricks.yaml";
 
 export interface Trick {
     trickID: string
@@ -55,11 +54,14 @@ export const useTrickStore = defineStore('trickStore', {
         }
     },
     actions: {
-        loadYAML(): boolean {
-            const readTricks = tricksYAML.tricks as Array<Object>;
-            for (let i = 0; i < readTricks.length; i++) {
-                const trickID: string = Object.keys(readTricks[i])[0]
-                const trick = list2Trick([trickID].concat(Object.values(readTricks[i])[0]))
+        async loadTricks(): Promise<boolean> {
+            for (let i = 0; i < tricks.length; i++) {
+                const trick = Object.assign(
+                    tricks[i], 
+                    {
+                        releaseDate: new Date(tricks[i].releaseDate),
+                        category: tricks[i].category.toLowerCase()
+                    }) as Trick;
                 if(isReleased(trick))
                     this.tricks.push(trick);
                 else
@@ -168,7 +170,7 @@ export const useTrickStore = defineStore('trickStore', {
                 tricks = this.tricks;
             }
             else {
-                this.loadYAML()
+                this.loadTricks()
                 tricks = this.tricks
             }
 
@@ -285,7 +287,7 @@ export const useTrickStore = defineStore('trickStore', {
                 tricks = this.tricks;
             }
             else {
-                this.loadYAML()
+                this.loadTricks()
                 tricks = this.tricks
             }
 

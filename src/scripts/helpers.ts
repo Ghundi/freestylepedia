@@ -3,7 +3,6 @@ import {useCategoryStore, useCurSearchStore, useMarkedStore, useMasteredStore, u
 import { TrickNode, Trick } from "@/scripts/trickStore";
 import { Position, Node } from '@vue-flow/core'
 
-
 export function list2Trick(list: Array<any>): Trick {
     return Object({
         trickID: list[0].slice(5),
@@ -157,7 +156,6 @@ export function graphSearch(trickTitle: string, graph: TrickNode): TrickNode {
     for (let i = 0; i < graph.children.length; i++) {
         if (!visited.includes(graph.children[i].name)) {
             visited.push(graph.children[i].name)
-            console.log(visited)
             if (graph.children[i].name === trickTitle) {
                 return graph.children[i];
             } 

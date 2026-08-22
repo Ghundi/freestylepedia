@@ -1,0 +1,862 @@
+[
+  {
+    "trickID": "trick0001",
+    "title": ["Brush"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2019-02-15",
+    "videoID": ["Xo2frGP3Q8A", "f_yYPl1q1SQ"],
+    "requirements": [],
+    "connections": ["trick0003", "trick0081"]
+  },
+  {
+    "trickID": "trick0002",
+    "title": ["Crazy Legs"],
+    "difficulty": 2,
+    "category": "Footwork",
+    "releaseDate": "2024-02-16",
+    "videoID": ["JRwQ3GLsysQ"],
+    "requirements": ["trick0020"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0003",
+    "title": ["Forward Brush", "de{Vorwärts Brush}"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2024-02-23",
+    "videoID": ["bS6_Cx_OES8"],
+    "requirements": ["trick0001"],
+    "connections": ["trick0001"]
+  },
+  {
+    "trickID": "trick0004",
+    "title": ["Sweep"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2019-02-15",
+    "videoID": ["C3XfjSFDA80", "DeCh2nZgtbY", "P_f0_DF3Qbo"],
+    "requirements": [],
+    "connections": ["trick0040"]
+  },
+  {
+    "trickID": "trick0005",
+    "title": ["V-Stop", "Heel Stop", "de{Hacken Bremse}"],
+    "difficulty": 3,
+    "category": "Stop",
+    "releaseDate": "2019-04-19",
+    "videoID": ["QZBqAVg9GoM"],
+    "requirements": ["trick0042"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0006",
+    "title": ["Forward Donut", "Forward Fulcrum", "de{Vorwärts Kreisel}", "de{Vorwärts Donut}"],
+    "difficulty": 1,
+    "category": "Ground",
+    "releaseDate": "2019-11-10",
+    "videoID": ["-BclH8x0eXQ", "JD4Zzz3Fn_Y", "uvMoWEuBdCQ", "yZJmSqoVM_k", "ezfEiPjpg00"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0007",
+    "title": ["Hawk Stop", "Reverse T-Stop", "Angel Stop"],
+    "difficulty": 3,
+    "category": "Stop",
+    "releaseDate": "2019-11-22",
+    "videoID": ["1kd6_E4gKnA", "CfHDSzF7dPE"],
+    "requirements": ["trick0042"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0008",
+    "title": ["Axle-Kick"],
+    "difficulty": 5,
+    "category": "Jump",
+    "releaseDate": "2020-01-11",
+    "videoID": ["5mIml0jGIzE"],
+    "requirements": ["trick0027"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0009",
+    "title": ["Point Freeze"],
+    "difficulty": 3,
+    "category": "Ground",
+    "releaseDate": "2020-01-31",
+    "videoID": ["OAMtcIoTDCE", "3n8HVSwcfzU"],
+    "requirements": ["trick0075"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0010",
+    "title": ["Spiderman", "Hydro", "Hydroglide"],
+    "difficulty": 4,
+    "category": "Hydroblading",
+    "releaseDate": "2019-03-08",
+    "videoID": ["Ymh5bwfYAcs", "l5tVRffTzkY", "1Rt7HC1Pstg", "8MC0AMw3euQ"],
+    "requirements": ["trick0045"],
+    "connections": ["trick0014", "trick0011"]
+  },
+  {
+    "trickID": "trick0011",
+    "title": ["Forward Spiderman", "Forward Hydro", "Limbo", "Dragon Squat", "de{Vorwärts Spiderman}"],
+    "difficulty": 4,
+    "category": "Hydroblading",
+    "releaseDate": "2021-10-22",
+    "videoID": ["K7mM-kyIfLw"],
+    "requirements": ["trick0010"],
+    "connections": ["trick0045"]
+  },
+  {
+    "trickID": "trick0012",
+    "title": ["Backflip"],
+    "difficulty": 5,
+    "category": "Acrobatic",
+    "releaseDate": "2024-01-12",
+    "videoID": ["853hRI0UoMM"],
+    "requirements": ["trick0038"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0013",
+    "title": ["Compass", "de{Kompass}"],
+    "difficulty": 2,
+    "category": "Footwork",
+    "releaseDate": "2019-02-22",
+    "videoID": ["A7Q907vPMuQ", "N5q2P-syZIc", "vW-KqolxQqo", "Ps1RDZqsdXU", "v5DoCvhV9UQ"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0014",
+    "title": ["Spiderman 180", "Hydro 180"],
+    "difficulty": 5,
+    "category": "Hydroblading",
+    "releaseDate": "2021-11-06",
+    "videoID": ["3B9rCmLAfpg"],
+    "requirements": ["trick0011"],
+    "connections": ["trick0010", "trick0011"]
+  },
+  {
+    "trickID": "trick0015",
+    "title": ["Zulu Spin", "Tornado Spin"],
+    "difficulty": 2,
+    "category": "Ground",
+    "releaseDate": "2024-02-02",
+    "videoID": ["ot8MGzXZln0", "oDuJ3uL7bVo"],
+    "requirements": ["trick0006", "trick0075"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0016",
+    "title": ["Sliding Headstand"],
+    "difficulty": 5,
+    "category": "Acrobatic",
+    "releaseDate": "2024-01-26",
+    "videoID": ["hXUuTnMaTio", "gfNIkS6wuBc"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0017",
+    "title": ["Inverted Drunken Sailor"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2023-12-29",
+    "videoID": ["LCvWghOn5qQ"],
+    "requirements": ["trick0020", "trick0018"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0018",
+    "title": ["Inward Triangle", "Inverted Triangle"],
+    "difficulty": 2,
+    "category": "Footwork",
+    "releaseDate": "2023-11-08",
+    "videoID": ["yKWyPTtDCX8", "DeCh2nZgtbY", "GprO5Fvc-d4", "gr4xTgfIcFc"],
+    "requirements": ["trick0070"],
+    "connections": ["trick0070"]
+  },
+  {
+    "trickID": "trick0019",
+    "title": ["Head down", "Billard"],
+    "difficulty": 4,
+    "category": "Hydroblading",
+    "releaseDate": "2022-03-04",
+    "videoID": ["5_4m1NnS7D0", "czKbXDxQgX8", "KjkKkh5eKiY"],
+    "requirements": ["trick0013"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0020",
+    "title": ["Grapevine", "de{Knoten}", "de{Gummifuß}", "de{Achter}"],
+    "difficulty": 2,
+    "category": "Footwork",
+    "releaseDate": "2020-02-14",
+    "videoID": ["xrxxASySDs0", "FwtzestNMwQ", "nDhvTDuobDE", "c9YokTcE_bY", "8RsXYG9eITM"],
+    "requirements": ["trick0070"],
+    "connections": ["trick0035", "trick0036", "trick0070"]
+  },
+  {
+    "trickID": "trick0021",
+    "title": ["Kip-up", "Kick-up"],
+    "difficulty": 3,
+    "category": "Acrobatic",
+    "releaseDate": "2022-02-18",
+    "videoID": ["7FoqJiusIk0"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0022",
+    "title": ["180", "180 Jump"],
+    "difficulty": 2,
+    "category": "Jump",
+    "releaseDate": "2019-04-26",
+    "videoID": ["rkOAFBFmprI", "bRgD9-KI87Q"],
+    "requirements": [],
+    "connections": ["trick0044", "trick0024"]
+  },
+  {
+    "trickID": "trick0023",
+    "title": ["2 Feet Spin", "de{2 Fuß Pirouette}"],
+    "difficulty": 1,
+    "category": "Spin",
+    "releaseDate": "2021-10-08",
+    "videoID": ["VBMsmVZ8Mbs"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0024",
+    "title": ["Groundtouch 180", "The Nick"],
+    "difficulty": 3,
+    "category": "Jump",
+    "releaseDate": "2021-02-19",
+    "videoID": ["Utnp7ikIs9o", "6CXxUSMc0lQ"],
+    "requirements": ["trick0022", "trick0078"],
+    "connections": ["trick0022", "trick0078"]
+  },
+  {
+    "trickID": "trick0025",
+    "title": ["Knee Stop"],
+    "difficulty": 2,
+    "category": "Stop",
+    "releaseDate": "2021-02-05",
+    "videoID": ["QXcGMJhpMpM"],
+    "requirements": ["trick0042", "trick0046"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0026",
+    "title": ["Split-Stop (Heel Heel)"],
+    "difficulty": 4,
+    "category": "Stop",
+    "releaseDate": "2021-01-22",
+    "videoID": ["43fW4vzTpqU"],
+    "requirements": ["trick0033", "trick0005"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0027",
+    "title": ["Tornadokick"],
+    "difficulty": 4,
+    "category": "Jump",
+    "releaseDate": "2021-01-08",
+    "videoID": ["Kd8tHlMsrpE"],
+    "requirements": ["trick0038"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0028",
+    "title": ["Scissors", "Wiper"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2019-11-16",
+    "videoID": ["C2-Ioubk5SY", "ohdaWIY273Y", "B3jtQ-bjFNs"],
+    "requirements": ["trick0055"],
+    "connections": ["trick0043"]
+  },
+  {
+    "trickID": "trick0029",
+    "title": ["Russian Twist"],
+    "difficulty": 2,
+    "category": "Footwork",
+    "releaseDate": "2020-12-11",
+    "videoID": ["xVT7LnWchhc", "s4Nk4_gXOfs", "wm6CCK5x9vU"],
+    "requirements": ["trick0013"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0030",
+    "title": ["Split-Stop (Heel-Toe)"],
+    "difficulty": 4,
+    "category": "Stop",
+    "releaseDate": "2020-10-30",
+    "videoID": ["QR0cJ-B6u8Y"],
+    "requirements": ["trick0042"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0031",
+    "title": ["Drunken Sailor"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2020-10-16",
+    "videoID": ["03zZCrVV_m4"],
+    "requirements": ["trick0020"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0032",
+    "title": ["Shuffle Side Step"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2020-03-20",
+    "videoID": ["rjtOog9ySVY"],
+    "requirements": ["trick0041"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0033",
+    "title": ["Eagle Stop"],
+    "difficulty": 2,
+    "category": "Stop",
+    "releaseDate": "2020-03-13",
+    "videoID": ["gv1n3qTeRW0"],
+    "requirements": ["trick0068", "trick0047"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0034",
+    "title": ["Pirouette", "One Foot Spin", "Scratch Spin"],
+    "difficulty": 3,
+    "category": "Spin",
+    "releaseDate": "2020-03-16",
+    "videoID": ["iVzdUXbFT88"],
+    "requirements": ["trick0023"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0035",
+    "title": ["Inverted Grapevine"],
+    "difficulty": 4,
+    "category": "Footwork",
+    "releaseDate": "2020-02-28",
+    "videoID": ["ro8KtnS_aFY"],
+    "requirements": ["trick0020"],
+    "connections": ["trick0020"]
+  },
+  {
+    "trickID": "trick0036",
+    "title": ["Double Grapevine"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2020-02-21",
+    "videoID": ["qixbnkAfe2A", "U4cfIdFkM48", "hlDx5X_Ej-E"],
+    "requirements": ["trick0020"],
+    "connections": ["trick0020"]
+  },
+  {
+    "trickID": "trick0037",
+    "title": ["Insanity"],
+    "difficulty": 2,
+    "category": "Footwork",
+    "releaseDate": "2020-02-07",
+    "videoID": ["sO_cSB6Buy8", "N5q2P-syZIc", "aZdZ2LuPeRI"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0038",
+    "title": ["Butterfly", "B-Kick"],
+    "difficulty": 4,
+    "category": "Acrobatic",
+    "releaseDate": "2020-01-23",
+    "videoID": ["AmZFtgm9Is4", "sDPCN0nnqp0", "xibQVI-6WVY", "ISgXZU-BNnk"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0039",
+    "title": ["Inverse Compass", "Leg Breaker"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2020-01-17",
+    "videoID": ["38DbuwUi9Go", "N5q2P-syZIc", "Mrd8nc2d8HE", "onSdugiCYAk"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0040",
+    "title": ["Sweep Spin", "Sweep Pirouette"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2020-01-05",
+    "videoID": ["V-Qj-V3Ov3k"],
+    "requirements": ["trick0004"],
+    "connections": ["trick0004"]
+  },
+  {
+    "trickID": "trick0041",
+    "title": ["Shuffle"],
+    "difficulty": 2,
+    "category": "Footwork",
+    "releaseDate": "2019-12-20",
+    "videoID": ["1PIfbu_4HMk"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0042",
+    "title": ["Hockey Stop"],
+    "difficulty": 1,
+    "category": "Stop",
+    "releaseDate": "2019-12-15",
+    "videoID": ["Gox8MmXs0Bo", "EcEuu6zvnpM"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0043",
+    "title": ["Scissors Moonwalk"],
+    "difficulty": 4,
+    "category": "Footwork",
+    "releaseDate": "2020-12-25",
+    "videoID": ["JCq0Fz3guL0"],
+    "requirements": ["trick0028"],
+    "connections": ["trick0028"]
+  },
+  {
+    "trickID": "trick0044",
+    "title": ["Splitjump 180"],
+    "difficulty": 3,
+    "category": "Jump",
+    "releaseDate": "2021-12-03",
+    "videoID": ["SkneLgZt2d4"],
+    "requirements": ["trick0022"],
+    "connections": ["trick0022"]
+  },
+  {
+    "trickID": "trick0045",
+    "title": ["Forward Cannon", "Forward Shoot-the-duck", "de{Vorwärts Kannone}"],
+    "difficulty": 2,
+    "category": "Hydroblading",
+    "releaseDate": "2019-03-14",
+    "videoID": ["qVQYXi9jMSU", "Esut7pZO924"],
+    "requirements": [],
+    "connections": ["trick0051"]
+  },
+  {
+    "trickID": "trick0046",
+    "title": ["Knee Spin"],
+    "difficulty": 1,
+    "category": "Spin",
+    "releaseDate": "2019-04-05",
+    "videoID": ["QNoOStwZ5q0"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0047",
+    "title": ["Outside Edge"],
+    "difficulty": 3,
+    "category": "Stop",
+    "releaseDate": "2019-03-29",
+    "videoID": ["T80WCrKnaFg"],
+    "requirements": ["trick0042"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0048",
+    "title": ["720", "720 Jump"],
+    "difficulty": 5,
+    "category": "Jump",
+    "releaseDate": "2019-03-28",
+    "videoID": ["L8_dHLCbjxQ", "bRgD9-KI87Q"],
+    "requirements": ["trick0022"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0049",
+    "title": ["Handflip"],
+    "difficulty": 3,
+    "category": "Ground",
+    "releaseDate": "2019-03-22",
+    "videoID": ["DBGDZlK1Q-E"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0050",
+    "title": ["Forward 8", "Forward Eight", "The forward 8", "de{Vorärts Acht}"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2019-03-21",
+    "videoID": ["mg7hCXAQBPY", "EAe764_8uBo", "hlDx5X_Ej-E", "-LC17fFWQF0"],
+    "requirements": ["trick0020"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0051",
+    "title": ["Couch Potato", "Venom"],
+    "difficulty": 4,
+    "category": "Hydroblading",
+    "releaseDate": "2019-04-12",
+    "videoID": ["vfc2GukBBsk"],
+    "requirements": ["trick0076"],
+    "connections": ["trick0045", "trick0076"]
+  },
+  {
+    "trickID": "trick0052",
+    "title": ["Split jump"],
+    "difficulty": 5,
+    "category": "Jump",
+    "releaseDate": "2019-03-07",
+    "videoID": ["lrwQ1GLtL6o", "xI4eFHvOpq4"],
+    "requirements": ["trick0022"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0053",
+    "title": ["Cantilever"],
+    "difficulty": 5,
+    "category": "Hydroblading",
+    "releaseDate": "2019-03-01",
+    "videoID": ["uQNzU8hD0u4", "CLetSI4LIn8"],
+    "requirements": ["trick0068"],
+    "connections": ["trick0068"]
+  },
+  {
+    "trickID": "trick0054",
+    "title": ["Toe Donut", "Sitting Toe Spin"],
+    "difficulty": 2,
+    "category": "Footwork",
+    "releaseDate": "2019-02-28",
+    "videoID": ["GBdYeRkjkos", "T4Dehm969_Y"],
+    "requirements": ["trick0039"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0055",
+    "title": ["Jumped X"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2019-02-21",
+    "videoID": ["JbvdGJe0XSs"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0056",
+    "title": ["Plank"],
+    "difficulty": 2,
+    "category": "Stop",
+    "releaseDate": "2022-03-25",
+    "videoID": ["xaPXpPtqQa0"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0057",
+    "title": ["Inward Toe Stop"],
+    "difficulty": 5,
+    "category": "Stop",
+    "releaseDate": "2024-10-11",
+    "videoID": ["BKSmpdggLD4"],
+    "requirements": ["trick0005"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0058",
+    "title": ["Korean Spin", "J-Turn"],
+    "difficulty": 2,
+    "category": "Footwork",
+    "releaseDate": "2024-10-23",
+    "videoID": ["SoT2zJHMSoI"],
+    "requirements": ["trick0013"],
+    "connections": ["trick0079"]
+  },
+  {
+    "trickID": "trick0059",
+    "title": ["B-Twist", "Butterflytwist", "BTwist", "B Twist"],
+    "difficulty": 5,
+    "category": "Acrobatic",
+    "releaseDate": "2024-10-10",
+    "videoID": ["PlfMsc67YCM"],
+    "requirements": ["trick0038"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0060",
+    "title": ["Forward Sweep", "de{Vorwärts Sweep}"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2024-10-10",
+    "videoID": ["hqGZluT0ArQ"],
+    "requirements": ["trick0004"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0061",
+    "title": ["Knee Kick"],
+    "difficulty": 2,
+    "category": "Footwork",
+    "releaseDate": "2024-10-25",
+    "videoID": ["2MfvW-CmLI0"],
+    "requirements": ["trick0025"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0062",
+    "title": ["One Leg Knee Spin"],
+    "difficulty": 3,
+    "category": "Ground",
+    "releaseDate": "2024-10-31",
+    "videoID": ["8JvNssumr-U"],
+    "requirements": ["trick0046"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0063",
+    "title": ["Crescent Kick"],
+    "difficulty": 4,
+    "category": "Jump",
+    "releaseDate": "2024-11-15",
+    "videoID": ["PmKEjrpFA20"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0064",
+    "title": ["Backwards Toe Spin"],
+    "difficulty": 4,
+    "category": "Spin",
+    "releaseDate": "2024-11-29",
+    "videoID": ["BbTYCdpPse8"],
+    "requirements": ["trick0054"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0065",
+    "title": ["Heel Spin"],
+    "difficulty": 4,
+    "category": "Spin",
+    "releaseDate": "2025-01-03",
+    "videoID": ["X92ffU_ZRfk"],
+    "requirements": ["trick0034"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0066",
+    "title": ["2 Feet Heel Spin"],
+    "difficulty": 3,
+    "category": "Spin",
+    "releaseDate": "2025-01-24",
+    "videoID": ["6JjoKM-Ds70"],
+    "requirements": ["trick0034"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0067",
+    "title": ["Forward Knee Circle", "de{Vorwärts Knee Circle}"],
+    "difficulty": 2,
+    "category": "Hydroblading",
+    "releaseDate": "2025-02-14",
+    "videoID": ["DdDInpsHz2M"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0068",
+    "title": ["Eagle"],
+    "difficulty": 1,
+    "category": "Hydroblading",
+    "releaseDate": "2025-02-21",
+    "videoID": ["I7XVtvn3wDg"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0069",
+    "title": ["Handstand"],
+    "difficulty": 2,
+    "category": "Acrobatic",
+    "releaseDate": "2025-02-28",
+    "videoID": ["qZcnoomIHK8"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0070",
+    "title": ["Triangle", "Barrel Roll", "de{Dreieck}"],
+    "difficulty": 1,
+    "category": "Footwork",
+    "releaseDate": "2025-11-27",
+    "videoID": ["WX0KfZHTP9Y", "vdTV3Vp451Q", "nMyNphKbk4A", "xafVBme0U8U", "E40w1Iylpwo"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0071",
+    "title": ["Forward V-Spin", "Forward Cross foot spin", "Forward Cross 2 foot spin", "Cross foot spin", "de{Vorwärts V-Spin}"],
+    "difficulty": 2,
+    "category": "Spin",
+    "releaseDate": "2025-12-12",
+    "videoID": ["yJrcTFon_DE"],
+    "requirements": ["trick0023"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0072",
+    "title": ["X-Stop", "X Stop"],
+    "difficulty": 4,
+    "category": "Stop",
+    "releaseDate": "2026-01-20",
+    "videoID": ["_ObE7K7t5Ug"],
+    "requirements": ["trick0047", "trick0033"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0073",
+    "title": ["Coffee Grinder"],
+    "difficulty": 2,
+    "category": "Ground",
+    "releaseDate": "2026-01-27",
+    "videoID": ["OGB5NSNn3EY"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0074",
+    "title": ["Backwards 8", "Backwards Eight", "The backwards 8", "de{Rückwarts Acht}"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2019-03-21",
+    "videoID": ["mg7hCXAQBPY", "EAe764_8uBo", "hlDx5X_Ej-E", "-LC17fFWQF0"],
+    "requirements": ["trick0020"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0075",
+    "title": ["Backwards Donut", "Backwards Fulcrum", "de{Rückwarts Kreisel}", "de{Rückwarts Donut}"],
+    "difficulty": 1,
+    "category": "Ground",
+    "releaseDate": "2019-11-10",
+    "videoID": ["-BclH8x0eXQ", "JD4Zzz3Fn_Y", "uvMoWEuBdCQ", "yZJmSqoVM_k"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0076",
+    "title": ["Backwards Cannon", "Backwards Shoot-the-duck", "de{Rückwarts Kannone}"],
+    "difficulty": 3,
+    "category": "Hydroblading",
+    "releaseDate": "2019-03-14",
+    "videoID": ["qVQYXi9jMSU", "Esut7pZO924"],
+    "requirements": ["trick0045"],
+    "connections": ["trick0051"]
+  },
+  {
+    "trickID": "trick0077",
+    "title": ["Cross Acid Toe Stop"],
+    "difficulty": 3,
+    "category": "Stop",
+    "releaseDate": "2025-01-31",
+    "videoID": ["oND_F4FJ9hI", "2jSAPee3e1c"],
+    "requirements": ["trick0047"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0078",
+    "title": ["Forward Groundtouch"],
+    "difficulty": 2,
+    "category": "Hydroblading",
+    "releaseDate": "2026-01-30",
+    "videoID": ["Z33itM59Q2E"],
+    "requirements": [],
+    "connections": ["trick0024"]
+  },
+  {
+    "trickID": "trick0079",
+    "title": ["Backwards Korean", "Backwards J-Turn"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2026-02-03",
+    "videoID": ["lloqbwSq7jU"],
+    "requirements": ["trick0013"],
+    "connections": ["trick0058"]
+  },
+  {
+    "trickID": "trick0080",
+    "title": ["Spiderman 360", "Hydro 360"],
+    "difficulty": 5,
+    "category": "Hydroblading",
+    "releaseDate": "2026-02-10",
+    "videoID": ["7ZHmF2sZxF0"],
+    "requirements": ["trick0014"],
+    "connections": ["trick0014", "trick0011", "trick0010"]
+  },
+  {
+    "trickID": "trick0081",
+    "title": ["Double Brush"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2026-02-17",
+    "videoID": ["Pd_fowbKeBg"],
+    "requirements": ["trick0001"],
+    "connections": ["trick0001"]
+  },
+  {
+    "trickID": "trick0082",
+    "title": ["Windmill"],
+    "difficulty": 4,
+    "category": "Ground",
+    "releaseDate": "2056-02-24",
+    "videoID": ["TMP"],
+    "requirements": ["trick0013"],
+    "connections": ["trick0013"]
+  },
+  {
+    "trickID": "trick0083",
+    "title": ["Deep Compass"],
+    "difficulty": 4,
+    "category": "Hydroblading",
+    "releaseDate": "2056-02-05",
+    "videoID": ["TMP"],
+    "requirements": ["trick0013"],
+    "connections": ["trick0013"]
+  },
+  {
+    "trickID": "trick0084",
+    "title": ["Twizzle"],
+    "difficulty": 3,
+    "category": "Spin",
+    "releaseDate": "2056-02-07",
+    "videoID": ["TMP"],
+    "requirements": ["trick0034"],
+    "connections": []
+  },
+  {
+    "trickID": "trick0085",
+    "title": ["Bootslide"],
+    "difficulty": 3,
+    "category": "Hydroblading",
+    "releaseDate": "2056-02-07",
+    "videoID": ["TMP"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0086",
+    "title": ["Triangle Twist"],
+    "difficulty": 3,
+    "category": "Footwork",
+    "releaseDate": "2056-02-08",
+    "videoID": ["TMP"],
+    "requirements": ["trick0070"],
+    "connections": []
+  }
+]

@@ -34,10 +34,13 @@
             {{ $t('myProgress.hardestTrick') }}
           </v-card-title>
           <div>
-            <TrickCard
-              class="ma-1"
-              :trick="hardestMasteredTrick"
-            />
+            
+            <template v-if="hardestMasteredTrick">
+              <TrickCard
+                class="ma-1"
+                :trick="hardestMasteredTrick"
+              />
+            </template>
           </div>
         </v-col>
       </v-row>

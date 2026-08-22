@@ -11,7 +11,7 @@ import LocaleLayout from './components/localeLayout.vue';
 const theme = useTheme();
 
 const trickStore = useTrickStore();
-trickStore.loadYAML();
+trickStore.loadTricks();
 
 </script>
 
