@@ -61,7 +61,9 @@ export const useTrickStore = defineStore('trickStore', {
                     {
                         trickID: tricks[i].trickID.replace('trick', ''),
                         releaseDate: new Date(tricks[i].releaseDate),
-                        category: tricks[i].category.toLowerCase()
+                        category: tricks[i].category.toLowerCase(),
+                        connections: tricks[i].connections.map((el) => el.replace('trick', '')),
+                        requirements: tricks[i].requirements.map((el) => el.replace('trick', ''))
                     }) as Trick;
                 if(isReleased(trick))
                     this.tricks.push(trick);
@@ -314,7 +316,7 @@ export const useTrickStore = defineStore('trickStore', {
                                 }
                             }
                             catch (e) {
-                                console.log(`${tricks[i].requirements[j]} not available`)
+                                console.log(`${tricks[i].requirements[j]} not found`)
                                 visitedIDs.push(tricks[i].trickID);
                             }
                         }

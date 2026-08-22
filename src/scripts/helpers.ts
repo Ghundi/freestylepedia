@@ -152,26 +152,29 @@ export function trickToNode(trick: Trick, orientation = 3): TrickNode {
     });
 }
 
-export function graphSearch(trickTitle: string, graph: TrickNode): TrickNode {
-    let visited: Array<string> = [];
-    for (let i = 0; i < graph.children.length; i++) {
-        if (!visited.includes(graph.children[i].name)) {
-            visited.push(graph.children[i].name)
-            if (graph.children[i].name === trickTitle) {
-                return graph.children[i];
-            } 
-            else {
-                if (graph.children[i].children.length > 0) {
-                    let res = graphSearch(trickTitle, graph.children[i]);
-                    if (res != null) {
-                        return res
-                    }
+export function graphSearch(trickTitle: string, graph: TrickNode): TrickNode | null {
+    const visited = new Set<string>();
+
+    function dfs(node: TrickNode): TrickNode | null {
+        visited.add(node.name);
+
+        if (node.name === trickTitle) {
+            return node;
+        }
+
+        for (const child of node.children) {
+            if (!visited.has(child.name)) {
+                const result = dfs(child);
+                if (result) {
+                    return result;
                 }
             }
         }
+
+        return null;
     }
-    console.log("Error: graphSearch failed for node titled " + trickTitle);
-    return graph;
+
+    return dfs(graph);
 }
 
 export function getNodeIdxById(id: string, nodes: Array<Node>) {
