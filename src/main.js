@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import App from "@/App.vue";
+import config from "@/data/config.json";
 
 // vuetify styling
 import { createVuetify } from 'vuetify'
@@ -38,8 +39,8 @@ const vuetify = createVuetify({
     }
 })
 
-const availableLocales = ["en", "de", "fr", "pl", "jp"];
-const fallbackLocale = 'en';
+const availableLocales = config.locales.availableLocales;
+const fallbackLocale = config.locales.fallbackLocale;
 
 const i18n = createI18n({
     legacy: false,
@@ -51,42 +52,26 @@ const i18n = createI18n({
 });
 
 const routes = [
-    { 
-        path: '/', 
+    {
+        path: '/',
         redirect: () => {
             const locale = availableLocales.includes(getLang()) ? getLang() : fallbackLocale;
-            return { name: 'Home', params: { lang: locale} };
+            return { name: 'Home', params: { lang: locale } };
         }
     },
-    { 
+    {
         path: '/:lang',
         component: () => import('./components/localeLayout.vue'),
-        beforeEnter: (to, from, next) => {
-            const { lang } = to.params;
-            if(!availableLocales.includes(lang)) {
-                return next({name: 'Home', params: { lang: fallbackLocale} });
-            }
-
-            i18n.global.locale.value = lang;
-            next();
-        },
         children: [
-            { path: '',                 name: 'Home', component: () => import('./pages/TrickList.vue')},
+            { path: '',                 name: 'Home',         component: () => import('./pages/TrickList.vue') },
             { path: 'CategoryTree',     name: 'CategoryTree', component: () => import('./pages/CategoryTree.vue') },
-            { path: 'TrickTree',        name: 'TrickTree', component: () => import('./pages/TrickTree.vue') },
-            { path: 'MyProgress',       name: 'MyProgress', component: () => import('./pages/MyProgress.vue') },
-            { path: 'AboutUs',          name: 'AboutUs', component: () => import('./pages/AboutUs.vue') },
-            { path: 'Help',             name: 'Help', component: () => import('./pages/Help.vue') },
-            { path: 'trick/:trickname', name: 'Trick', component: () => import('./pages/Trick.vue') },
-            { path: ':pathMatch(.*)*', component: () => import('./pages/notFound.vue') },
+            { path: 'TrickTree',        name: 'TrickTree',    component: () => import('./pages/TrickTree.vue') },
+            { path: 'MyProgress',       name: 'MyProgress',   component: () => import('./pages/MyProgress.vue') },
+            { path: 'AboutUs',          name: 'AboutUs',      component: () => import('./pages/AboutUs.vue') },
+            { path: 'Help',             name: 'Help',         component: () => import('./pages/Help.vue') },
+            { path: 'trick/:trickname', name: 'Trick',        component: () => import('./pages/Trick.vue') },
+            { path: ':pathMatch(.*)*',  name: 'NotFound',     component: () => import('./pages/notFound.vue') },
         ]
-    },
-    { 
-        path: '/:pathMatch(.*)*', 
-        redirect: (to) => ({
-            name: 'Home',
-            params: {lang: fallbackLocale, pathMatch: to.params.pathMatch }
-        })    
     },
 ]
 
@@ -94,6 +79,26 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
 })
+
+router.beforeEach((to, from, next) => {
+    const { lang } = to.params;
+
+    if (!lang) return next();                     // '/' redirect handles this
+
+    if (!availableLocales.includes(lang)) {
+        // First segment isn't a valid locale → send to 404
+        return next({
+            name: 'NotFound',
+            params: {
+                lang: fallbackLocale,
+                pathMatch: to.path.split('/').filter(Boolean).join('/')
+            }
+        });
+    }
+
+    i18n.global.locale.value = lang;
+    next();
+});
 
 
 router.beforeEach((to, from, next) => {
