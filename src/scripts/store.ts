@@ -57,18 +57,7 @@ export const useTodoStore = defineStore('Todo', () => {
     }
 
     const isOnTodo: (trick: Trick) => boolean = (trick) => {
-        const retID = list.value.includes(trick.trickID)
-        return retID
-        
-        // removed to migrate to typescript
-        // const retTitle = list.value.includes(trick.title[0])
-        // if(retTitle) {
-        //     // remove title and add trickID
-        //     const idx = list.value.indexOf(trick.title[0])
-        //     if (idx > -1) list.value.splice(idx, 1)
-        //     list.value.push(trick.trickID)
-        // }
-        // return retTitle
+        return list.value.map((val, i) => val.replace('trick', '')).includes(trick.trickID)
     }
 
     const getHash: () => string = () => {
@@ -202,19 +191,7 @@ export const useMasteredStore = defineStore('Mastered', () => {
   }
 
   const isMastered = (trick: Trick): boolean => {
-    const retID: boolean = list.value.includes(trick.trickID)
-    return retID
-
-    // removed to migrate to typescript
-    // const retTitle = list.value.includes(trick.title[0])
-    // if(retTitle) {
-    //     // remove title and add trickID
-    //     const idx = list.value.indexOf(trick.title[0])
-    //     if (idx > -1) list.value.splice(idx, 1)
-    //     list.value.push(trick.trickID)
-    //     console.log('removed: ' + trick.title[0])
-    // }
-    // return retTitle
+    return list.value.map((val, i) => val.replace('trick', '')).includes(trick.trickID)
   }
 
     const getHash = (): string => {

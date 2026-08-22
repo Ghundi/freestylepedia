@@ -59,6 +59,7 @@ export const useTrickStore = defineStore('trickStore', {
                 const trick = Object.assign(
                     tricks[i], 
                     {
+                        trickID: tricks[i].trickID.replace('trick', ''),
                         releaseDate: new Date(tricks[i].releaseDate),
                         category: tricks[i].category.toLowerCase()
                     }) as Trick;

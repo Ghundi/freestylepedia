@@ -120,6 +120,7 @@ export function getFilteredTricks(tricks: Array<Trick>): Array<Trick> {
                                 if( (markedStore.selMarkers.includes('mastered') && masteredStore.isMastered(tricks[i]))
                                     || (markedStore.selMarkers.includes('non-mastered') && !masteredStore.isMastered(tricks[i]))
                                 ) {
+                                    // console.log(tricks.find((val, i) => val.title.includes("Hockey Stop")))
                                     // if selected todo matches
                                     if( (markedStore.selMarkers.includes('todo') && todoStore.isOnTodo(tricks[i]))
                                         || (!markedStore.selMarkers.includes('todo') && !markedStore.selMarkers.includes('irrelevant'))
