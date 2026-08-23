@@ -210,7 +210,7 @@ export function checkSpace(y: number, x: number, width: number, height: number, 
 }
 
 export function getBgColor(dark: boolean): string {
-    return dark ? '#222222' : '#eeeeee'
+    return dark ? '#333333' : '#eeeeee'
 }
 
 function changeTimeZone(date: Date, timeZone: string) {

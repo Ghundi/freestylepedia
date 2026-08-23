@@ -10,6 +10,9 @@ import LocaleLayout from './components/localeLayout.vue';
 
 const theme = useTheme();
 
+const prefersDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+theme.change( prefersDarkTheme && prefersDarkTheme.matches ? 'dark' : 'light' )
+
 const trickStore = useTrickStore();
 trickStore.loadTricks();
 
