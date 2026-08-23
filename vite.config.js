@@ -79,6 +79,14 @@ export default defineConfig({
               "form_factor": "narrow",
           },
         ],
+        "shortcuts": [
+          {
+            "name": "My Progress",
+            "url": "/MyProgress",
+            "short_name": "Progress",
+            "description": "On this page you can track your progress and see what tricks to learn next."
+          },
+        ]
       }
     })
   ],

@@ -60,6 +60,48 @@ const routes = [
         }
     },
     {
+        path: '/CategoryTree',
+        redirect: () => {
+            const locale = availableLocales.includes(getLang()) ? getLang() : fallbackLocale;
+            return { name: 'CategoryTree', params: { lang: locale } };
+        }
+    },
+    {
+        path: '/TrickTree',
+        redirect: () => {
+            const locale = availableLocales.includes(getLang()) ? getLang() : fallbackLocale;
+            return { name: 'TrickTree', params: { lang: locale } };
+        }
+    },
+    {
+        path: '/MyProgress',
+        redirect: () => {
+            const locale = availableLocales.includes(getLang()) ? getLang() : fallbackLocale;
+            return { name: 'MyProgress', params: { lang: locale } };
+        }
+    },
+    {
+        path: '/AboutUs',
+        redirect: () => {
+            const locale = availableLocales.includes(getLang()) ? getLang() : fallbackLocale;
+            return { name: 'AboutUs', params: { lang: locale } };
+        }
+    },
+    {
+        path: '/Help',
+        redirect: () => {
+            const locale = availableLocales.includes(getLang()) ? getLang() : fallbackLocale;
+            return { name: 'Help', params: { lang: locale } };
+        }
+    },
+    {
+        path: '/trick/:trickname',
+        redirect: (to) => {
+            const locale = availableLocales.includes(getLang()) ? getLang() : fallbackLocale;
+            return { path: `/${locale}/trick/${to.params.trickname}` };
+        }
+    },
+    {
         path: '/:lang',
         component: () => import('./components/localeLayout.vue'),
         children: [
@@ -98,18 +140,6 @@ router.beforeEach((to, from, next) => {
 
     i18n.global.locale.value = lang;
     next();
-});
-
-
-router.beforeEach((to, from, next) => {
-  if(!to.params.lang) return next();
-
-  const lang = to.params.lang;
-  if(!availableLocales.includes(lang)) {
-    return next({name: 'home', params: { lang: fallbackLocale }});
-  }
-  i18n.global.locale.value = lang;
-  next();
 });
 
 createApp(App)
