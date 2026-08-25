@@ -44,7 +44,7 @@ export default defineConfig({
         short_name: 'Freestylepedia',
         description: "A place to lookup tricks and watch your progress",
         start_url: '/',
-        display_override: ["window-controls-overlay", "standalone", "fullscreen"],
+        display_override: ["standalone", "fullscreen"],
         display: 'standalone',
         background_color: '#000000',
         theme_color: '#000000',
@@ -57,7 +57,8 @@ export default defineConfig({
           {
             src: '/icons/Blackbirdlogoneuweiss-192x192.png',
             sizes: '192x192',
-            type: 'image/png'
+            type: 'image/png',
+            purpose: "maskable"
           },
           {
             src: '/icons/Blackbirdlogoneuweiss-512x512.png',
