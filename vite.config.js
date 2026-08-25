@@ -89,7 +89,13 @@ export default defineConfig({
             "name": "My Progress",
             "url": "/MyProgress",
             "short_name": "Progress",
-            "description": "On this page you can track your progress and see what tricks to learn next."
+            "description": "On this page you can track your progress and see what tricks to learn next.",
+            "icons": [
+              {
+                "src": "icon/Silouette_Schlittschuh.png",
+                "purpose": "monochrome maskable"
+              }
+            ]
           },
         ]
       }
