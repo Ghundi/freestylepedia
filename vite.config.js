@@ -44,8 +44,12 @@ export default defineConfig({
         short_name: 'Freestylepedia',
         description: "A place to lookup tricks and watch your progress",
         start_url: '/',
-        display_override: ["standalone", "fullscreen"],
+        display_override: ["window-controls-overlay", "minimal-ui", "browser"],
         display: 'standalone',
+        orientation: "any",
+        id: "https://freestylepedia.org",
+        categories: ["education", "lifestyle", "entertainment", "sports"],
+        dir: "ltr",
         background_color: '#000000',
         theme_color: '#000000',
         icons: [
