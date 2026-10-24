@@ -94,10 +94,14 @@
   "myProgress": {
     "myProgress": "Ma progression",
     "progress": "Progression",
-    "recommendedTricks": "Tricks recommandés pour toi",
-    "hardestTrick": "trick le plus difficile",
-    "transferProgress": "Progression du transfert",
-    "transferInfo": "Collez l’URL copiée depuis votre presse-papiers sur le nouvel appareil"
+    "recommendedTricks": "Figures recommandées",
+    "hardestTrick": "Ta figure la plus difficile",
+    "transferProgress": "Transférer ma progression",
+    "transferInfo": "Ouvre ce lien sur ton nouvel appareil pour retrouver ta progression.",
+    "summary": "{n} figures acquises sur {total}",
+    "empty": "Marque tes premières figures comme acquises pour suivre ta progression.",
+    "byCategory": "Par catégorie",
+    "browse": "Voir les figures"
   },
   "close": "Fermer",
   "level": "Niveau {n}",

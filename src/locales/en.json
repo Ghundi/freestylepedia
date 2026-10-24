@@ -95,10 +95,14 @@
   "myProgress": {
     "myProgress": "My Progress",
     "progress": "Progress",
-    "recommendedTricks": "Recommended Tricks",
-    "hardestTrick": "hardest Trick",
-    "transferProgress": "transfer progress",
-    "transferInfo": "Enter the copied URL in your clipboard on the new device"
+    "recommendedTricks": "Recommended tricks",
+    "hardestTrick": "Your hardest trick",
+    "transferProgress": "Transfer my progress",
+    "transferInfo": "Open this link on your new device to bring your progress with you.",
+    "summary": "{n} of {total} tricks mastered",
+    "empty": "Mark your first tricks as mastered to follow your progress.",
+    "byCategory": "By category",
+    "browse": "Browse tricks"
   },
   "close": "Close",
   "level": "Level {n}",
