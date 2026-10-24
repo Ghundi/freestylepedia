@@ -42,7 +42,7 @@ async function show() {
   <AppDialog v-model:open="open" :title="t('myProgress.transferProgress')">
     <div class="body">
       <p class="info">{{ t('myProgress.transferInfo') }}</p>
-      <div class="qr"><Qrcode :text="url" :size="200" /></div>
+      <div class="qr"><Qrcode v-if="url" :text="url" :size="200" /></div>
       <p class="link">{{ url }}</p>
       <AppButton :icon="copied ? mdiCheck : mdiContentCopy" @click="copy">
         <span aria-live="polite">{{ copied ? t('share.copied') : t('share.copy') }}</span>
