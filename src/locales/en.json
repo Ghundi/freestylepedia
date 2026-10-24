@@ -1,6 +1,6 @@
 {
   "categoryTree": {
-    "description": "This mind map groups together tricks in the same category and the connection to a base trick."
+    "description": "This graph groups tricks of the same category and shows how they connect to a base trick."
   },
   "trickTree": {
     "description": "The whole graph gets increasingly more difficult to the right. Each trick tree splits up into more difficult tricks and is connected by lines. We recommend learning an individual trick tree from left to right."
