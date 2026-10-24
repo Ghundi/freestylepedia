@@ -32,12 +32,13 @@ h2 { margin: 0; font-size: var(--t-lg); font-weight: 600; color: var(--text); }
 .list {
   display: flex;
   gap: var(--space-3);
-  margin: 0;
-  padding: var(--space-1);
+  /* room for the 2px focus ring + 3px offset of each thumbnail, which overflow-x would clip */
+  padding: var(--space-2);
+  margin: calc(-1 * var(--space-2));
   list-style: none;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--space-1);
+  scroll-padding-inline: var(--space-2);
 }
 .item { flex: 0 0 148px; scroll-snap-align: start; }
 @media (min-width: 900px) {
