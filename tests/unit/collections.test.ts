@@ -34,6 +34,9 @@ describe('getNextTrick', () => {
   it('next trick ignores todo ids that no longer exist', () => {
     expect(getNextTrick(tricks, ['9999'], rec, () => false)).toBe(rec[0])
   })
+  it('next trick skips the todo list when every entry is mastered', () => {
+    expect(getNextTrick(tricks, ['0003', '0001'], rec, () => true)).toBe(rec[0])
+  })
   it('next trick falls back to the first recommendation, then null', () => {
     expect(getNextTrick(tricks, [], rec, () => false)).toBe(rec[0])
     expect(getNextTrick(tricks, [], [], () => false)).toBeNull()

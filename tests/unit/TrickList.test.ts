@@ -80,6 +80,14 @@ describe('TrickList (home)', () => {
     expect(tricks.filter(t => mastered.isMastered(t)).map(t => t.trickID)).toEqual(['0001', '0003'])
   })
 
+  it('shows a todo trick saved with a legacy "trick" id as next', async () => {
+    localStorage.setItem('todo', JSON.stringify(['trick0042']))
+    const w = await mountAt('/en')
+    const card = w.get('.next')
+    expect(card.text()).toContain('Scratch Spin')
+    expect(card.text()).toContain(en.home.next)
+  })
+
   it('suggests a starter trick when nothing is on the todo list', async () => {
     const w = await mountAt('/en')
     expect(w.get('.next').text()).toContain(en.home.suggested)

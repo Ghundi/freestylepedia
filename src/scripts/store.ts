@@ -17,22 +17,34 @@ import IceIceDilly from "../assets/supporters/IceIceDilly.webp"
 import { Trick } from '@/scripts/trickStore';
 import configJSON from "@/data/config.json";
 
-export const useTodoStore = defineStore('Todo', () => {
-  const list = ref<Array<string>>([])
+// Ids saved before the "trick" prefix was dropped from tricks.json ("trick0042") are
+// normalized to the current form ("0042"); duplicates go, order is kept.
+export function normalizeIds(ids: Array<unknown>): Array<string> {
+    return [...new Set(ids.map(id => String(id).replace('trick', '')))]
+}
 
-    // Initialise from localStorage
-    const raw = localStorage.getItem('todo')
-    if (raw) {
-        try {
-            list.value = JSON.parse(raw)
-        } catch (e) {
-            console.warn('Failed to parse todo from localStorage, resetting to empty array')
-            list.value = []
+// Reads a stored id list, normalizes it and writes the normalized list back.
+function loadStoredIds(key: string): Array<string> {
+    const raw = localStorage.getItem(key)
+    if (!raw) return []
+    try {
+        const parsed = JSON.parse(raw)
+        if (!Array.isArray(parsed)) return []
+        const ids = normalizeIds(parsed)
+        if (JSON.stringify(ids) !== raw) {
+            if (ids.length) localStorage.setItem(key, JSON.stringify(ids))
+            else localStorage.removeItem(key)
         }
-    } 
-    else {
-        list.value = []
+        return ids
+    } catch (e) {
+        console.warn(`Failed to parse ${key} from localStorage, resetting to empty array`)
+        return []
     }
+}
+
+export const useTodoStore = defineStore('Todo', () => {
+  // Initialise from localStorage
+  const list = ref<Array<string>>(loadStoredIds('todo'))
 
     // Keep localStorage in sync whenever list changes
     watch(list, (newVal) => {
@@ -65,8 +77,8 @@ export const useTodoStore = defineStore('Todo', () => {
     }
 
     const loadHash: (hash: string) => Array<string> = (hash) => {
-        const newList: Array<string> = hash.split(",");
-        list.value = newList.map(id => String(id));
+        const newList: Array<string> = normalizeIds(hash.split(","));
+        list.value = newList;
         console.log("Loaded following todo list: ", list.value)
         return newList
     }
@@ -104,20 +116,8 @@ export const useMarkedStore = defineStore('marked', {
 })
 
 export const useMasteredStore = defineStore('Mastered', () => {
-  const list = ref<Array<string>>([])
-
-    // Initialise from localStorage
-    const raw = localStorage.getItem('mastered')
-    if (raw) {
-    try {
-        list.value = JSON.parse(raw)
-    } catch (e) {
-        console.warn('Failed to parse mastered from localStorage, resetting to empty array')
-        list.value = []
-    }
-    } else {
-    list.value = []
-    }
+  // Initialise from localStorage
+  const list = ref<Array<string>>(loadStoredIds('mastered'))
 
     // Keep localStorage in sync whenever list changes
     watch(list, (newVal) => {
@@ -199,7 +199,7 @@ export const useMasteredStore = defineStore('Mastered', () => {
     }
 
     const loadHash = (hash: string): Array<string> => {
-        const newList: Array<string> = hash.split(",").map(id => String(id));
+        const newList: Array<string> = normalizeIds(hash.split(","));
         list.value = newList;
         console.log("Loaded following mastered list: ", list.value)
         return newList
