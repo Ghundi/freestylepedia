@@ -3,6 +3,8 @@ import { computed, ref, watch } from 'vue'
 export type ThemeMode = 'system' | 'dark' | 'light'
 
 const KEY = 'themeMode'
+// --bg of each theme in src/styles/tokens.css, for the browser UI colour (theme-color meta)
+export const THEME_COLORS = { dark: '#111214', light: '#f6f6f4' } as const
 const mode = ref<ThemeMode>('system')
 const systemLight = ref(false)
 let listening = false
@@ -58,6 +60,7 @@ export function initTheme(): void {
     resolved,
     (v) => {
       document.documentElement.dataset.theme = v
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLORS[v])
     },
     { immediate: true, flush: 'sync' },
   )
