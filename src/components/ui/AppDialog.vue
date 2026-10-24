@@ -47,7 +47,7 @@ function onClick(e: MouseEvent) {
 
 <style scoped>
 .dlg {
-  /* centred explicitly: a global reset (Vuetify's, until Task 10) zeroes the UA margin: auto */
+  /* centred explicitly: keeps the dialog centred whatever a global reset does to the UA margin: auto */
   margin: auto;
   width: calc(100% - 2 * var(--space-4));
   max-width: 32rem;

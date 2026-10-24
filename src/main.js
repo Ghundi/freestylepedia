@@ -2,10 +2,6 @@ import { createApp } from 'vue'
 import App from "@/App.vue";
 import config from "@/data/config.json";
 
-// vuetify styling
-import { createVuetify } from 'vuetify'
-import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
-
 // VueFlow
 /* import the necessary styles for Vue Flow to work */
 import '@vue-flow/core/dist/style.css';
@@ -38,12 +34,6 @@ function getLang() {
 }
 
 const pinia = createPinia()
-
-const vuetify = createVuetify({
-    theme: {
-        defaultTheme: 'light'
-    }
-})
 
 const availableLocales = config.locales.availableLocales;
 const fallbackLocale = config.locales.fallbackLocale;
@@ -160,7 +150,6 @@ initTheme()
 
 createApp(App)
     .use(pinia) // Use Pinia plugin
-    .use(vuetify)
     .use(i18n)
     .use(router)
     .mount('#app');

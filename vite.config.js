@@ -8,8 +8,6 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 import path from 'path';
 import fs from 'fs';
 
-import vuetify from 'vite-plugin-vuetify'
-
 import { resolve, dirname } from "node:path";
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 
@@ -17,7 +15,6 @@ import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 export default defineConfig({
   plugins: [
     vue(),
-    vuetify(),
     viteStaticCopy({
       targets: [
         {
@@ -50,8 +47,8 @@ export default defineConfig({
         id: "https://freestylepedia.org",
         categories: ["education", "lifestyle", "entertainment", "sports"],
         dir: "ltr",
-        background_color: '#000000',
-        theme_color: '#000000',
+        background_color: '#111214',
+        theme_color: '#111214',
         icons: [
           {
             src: '/icons/Blackbirdlogoneuweiss-144x144.png',
