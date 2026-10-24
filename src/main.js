@@ -143,6 +143,8 @@ router.beforeEach((to, from, next) => {
     }
 
     i18n.global.locale.value = lang;
+    // screen readers pick their voice from <html lang>; Japanese is "ja" in BCP 47, "jp" in our URLs
+    document.documentElement.lang = lang === 'jp' ? 'ja' : lang;
     next();
 });
 
