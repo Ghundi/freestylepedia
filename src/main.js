@@ -24,6 +24,12 @@ import {createRouter, createWebHistory} from 'vue-router'
 
 import { checkIfInstallable } from '@/scripts/pwaInstall.ts'
 
+// design foundations
+import '@fontsource-variable/onest'
+import '@/styles/tokens.css'
+import '@/styles/base.css'
+import { initTheme } from '@/scripts/theme.ts'
+
 
 function getLang() {
     if (navigator.languages !== undefined)
@@ -141,6 +147,8 @@ router.beforeEach((to, from, next) => {
     i18n.global.locale.value = lang;
     next();
 });
+
+initTheme()
 
 createApp(App)
     .use(pinia) // Use Pinia plugin
