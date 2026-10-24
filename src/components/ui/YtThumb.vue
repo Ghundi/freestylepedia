@@ -7,12 +7,17 @@ const props = withDefaults(defineProps<{ videoId: string; alt: string; eager?: b
 // YouTube answers a grey 120px-wide placeholder when hq2.jpg does not exist.
 const PLACEHOLDER_MAX_WIDTH = 120
 const useFallback = ref(false)
-watch(() => props.videoId, () => { useFallback.value = false })
+// Both images failed (deleted or private video): the img goes, the empty box stays.
+const failed = ref(false)
+watch(() => props.videoId, () => { useFallback.value = false; failed.value = false })
 
 const src = computed(() =>
   useFallback.value ? fallbackThumbnailUrl(props.videoId) : frameThumbnailUrl(props.videoId))
 
-function onError() { useFallback.value = true }
+function onError() {
+  if (useFallback.value) failed.value = true
+  else useFallback.value = true
+}
 function onLoad(e: Event) {
   if ((e.target as HTMLImageElement).naturalWidth <= PLACEHOLDER_MAX_WIDTH) useFallback.value = true
 }
@@ -20,7 +25,7 @@ function onLoad(e: Event) {
 
 <template>
   <span class="yt-thumb">
-    <img class="img" :src="src" :alt="alt" :loading="eager ? 'eager' : 'lazy'" decoding="async" @error="onError" @load="onLoad">
+    <img v-if="!failed" class="img" :src="src" :alt="alt" :loading="eager ? 'eager' : 'lazy'" decoding="async" @error="onError" @load="onLoad">
   </span>
 </template>
 

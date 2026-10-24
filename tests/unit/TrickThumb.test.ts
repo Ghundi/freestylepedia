@@ -34,6 +34,23 @@ describe('YtThumb', () => {
     expect(img.attributes('src')).toContain('hqdefault.jpg')
   })
 
+  it('hides the image, leaving the empty box, when the fallback fails too', async () => {
+    const w = mount(YtThumb, { props: { videoId: 'abc', alt: 'x' } })
+    await w.get('img').trigger('error')
+    expect(w.get('img').attributes('src')).toContain('hqdefault.jpg')
+    await w.get('img').trigger('error')
+    expect(w.find('img').exists()).toBe(false)
+    expect(w.find('.yt-thumb').exists()).toBe(true)
+  })
+
+  it('shows the image again for a new video after a double failure', async () => {
+    const w = mount(YtThumb, { props: { videoId: 'abc', alt: 'x' } })
+    await w.get('img').trigger('error')
+    await w.get('img').trigger('error')
+    await w.setProps({ videoId: 'def' })
+    expect(w.get('img').attributes('src')).toContain('/vi/def/hq2.jpg')
+  })
+
   it('keeps hq2 when the image is large enough', async () => {
     const w = mount(YtThumb, { props: { videoId: 'abc', alt: 'x' } })
     Object.defineProperty(w.get('img').element, 'naturalWidth', { value: 480 })
@@ -57,6 +74,10 @@ describe('TrickThumb', () => {
     expect(mountThumb(pinia).text()).not.toContain('Mastered')
     useMasteredStore().list.push('0001')
     expect(mountThumb(pinia).text()).toContain('Mastered')
+  })
+
+  it('gives the image an empty alt: the link already names the trick', () => {
+    expect(mountThumb().get('img').attributes('alt')).toBe('')
   })
 
   it('shows level and links to the trick page', () => {

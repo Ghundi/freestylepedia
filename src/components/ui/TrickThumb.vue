@@ -30,7 +30,7 @@ const to = computed(() => ({
 <template>
   <router-link :to="to" class="thumb" :class="`thumb--${size}`">
     <span class="frame">
-      <YtThumb :video-id="trick.videoID[0]" :alt="trick.title[0]" />
+      <YtThumb :video-id="trick.videoID[0]" alt="" />
       <span v-if="isNew" class="tag">{{ t('new') }}</span>
       <span v-if="isMastered || isTodo" class="mark">
         <AppIcon :path="isMastered ? mdiCheckCircle : mdiBookmark" :size="16" />
