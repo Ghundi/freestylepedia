@@ -59,6 +59,8 @@ describe('TrickList (home)', () => {
     const w = await mountAt('/en')
     expect(w.text()).toContain(en.error.noResults)
     expect(w.findAll('.grid li')).toHaveLength(0)
+    await w.get('.empty button').trigger('click')
+    expect(w.findAll('.grid li')).toHaveLength(tricks.length)
   })
 
   it('lists the filtered tricks in all mode', async () => {

@@ -10,7 +10,7 @@
   import SegmentedControl from '@/components/ui/SegmentedControl.vue';
   import AppButton from '@/components/ui/AppButton.vue';
   import {
-    useCategoryStore, useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore,
+    resetFilters, useCategoryStore, useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore,
     useSelDifficultyStore, useSelSortingOrderStore, useTodoStore,
   } from '@/scripts/store';
   import { useTrickStore } from "@/scripts/trickStore";
@@ -58,13 +58,6 @@
       + Number(markers !== 'mastered,non-mastered')
       + Number(!!curSearch.val);
   });
-
-  function resetFilters() {
-    selCategory.reset();
-    selDifficulty.reset();
-    curSearch.reset();
-    marked.reset();
-  }
 </script>
 
 <template>

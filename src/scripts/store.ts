@@ -371,3 +371,12 @@ export const useCurSearchStore = defineStore('curSearchStore', {
         }
     }
 })
+
+// The one filter reset for the home page and its filter sheet (same as the old toolbar's):
+// sort order is a preference, not a filter, so it is kept.
+export function resetFilters(): void {
+    useSelCategoryStore().reset();
+    useSelDifficultyStore().reset();
+    useCurSearchStore().reset();
+    useMarkedStore().reset();
+}

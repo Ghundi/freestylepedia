@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 import AppDialog from '@/components/ui/AppDialog.vue'
 import AppButton from '@/components/ui/AppButton.vue'
 import {
-  useCategoryStore, useCurSearchStore, useMarkedStore, useSelCategoryStore,
+  resetFilters, useCategoryStore, useMarkedStore, useSelCategoryStore,
   useSelDifficultyStore, useSelSortingOrderStore, useSortingOrderStore,
 } from '@/scripts/store'
 import { useTrickStore } from '@/scripts/trickStore'
@@ -32,14 +32,6 @@ const maxLevel = computed({
   get: () => difficulty.val[1],
   set: (v: number) => difficulty.update([Math.min(v, difficulty.val[0]), v]),
 })
-
-// Same reset as the old toolbar: sort order is a preference, not a filter.
-function reset() {
-  selCategory.reset()
-  difficulty.reset()
-  useCurSearchStore().reset()
-  marked.reset()
-}
 </script>
 
 <template>
@@ -92,7 +84,7 @@ function reset() {
       </label>
 
       <div class="foot">
-        <AppButton @click="reset">{{ t('home.reset') }}</AppButton>
+        <AppButton @click="resetFilters">{{ t('home.reset') }}</AppButton>
         <p class="count" aria-live="polite">{{ t('home.count', { n: trickStore.shownTricks.length }, trickStore.shownTricks.length) }}</p>
       </div>
     </form>
