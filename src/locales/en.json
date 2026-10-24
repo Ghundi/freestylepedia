@@ -5,6 +5,10 @@
   "trickTree": {
     "description": "The whole graph gets increasingly more difficult to the right. Each trick tree splits up into more difficult tricks and is connected by lines. We recommend learning an individual trick tree from left to right."
   },
+  "paths": {
+    "byLevel": "By level",
+    "byCategory": "By category"
+  },
   "faq": {
     "naming_question": "Where do the trick names comes from?",
     "naming_answer": "Naming is done by us with community input.",

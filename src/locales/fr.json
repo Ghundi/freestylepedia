@@ -5,6 +5,10 @@
   "trickTree": {
     "description": "Le graphe devient de plus en plus difficile vers la droite. Chaque arbre de compétences se divise en tricks plus complexes et est relié par des lignes. Nous recommandons d’apprendre un seul skill tree de gauche à droite."
   },
+  "paths": {
+    "byLevel": "Par niveau",
+    "byCategory": "Par catégorie"
+  },
   "faq": {
     "naming_question": "D’où viennent les noms des tricks ?",
     "naming_answer": "Les tricks sont en général nommés par la communauté et diffèrent souvent selon les régions et les pays.",
