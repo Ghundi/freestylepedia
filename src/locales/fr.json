@@ -10,22 +10,22 @@
     "byCategory": "Par catégorie"
   },
   "faq": {
-    "naming_question": "D’où viennent les noms des figures ?",
+    "naming_question": "D’où viennent les noms des figures ?",
     "naming_answer": "Les figures sont en général nommées par la communauté, et leurs noms diffèrent souvent selon les régions et les pays.",
-    "scoring_question": "Comment les niveaux de difficulté sont-ils déterminés ?",
+    "scoring_question": "Comment les niveaux de difficulté sont-ils déterminés ?",
     "scoring_answer": "Nous essayons d’évaluer chaque figure de la façon la plus juste possible. La difficulté est représentée par le nombre de patins.",
-    "categories_question": "Que signifient les catégories ?",
+    "categories_question": "Que signifient les catégories ?",
     "categories_answer": "Les catégories regroupent les figures selon leurs ressemblances.",
-    "usage_question": "Comment utiliser Freestylepedia ?",
-    "usage_answer": "Tu peux consulter des informations détaillées sur chaque figure, les parcourir par catégorie ou voir quelles figures s’appuient sur d’autres dans l’onglet « Parcours ».",
-    "existence_question": "Pourquoi avoir créé Freestylepedia ?",
+    "usage_question": "Comment utiliser Freestylepedia ?",
+    "usage_answer": "Tu peux consulter des informations détaillées sur chaque figure, les parcourir par catégorie ou voir quelles figures s’appuient sur d’autres dans l’onglet « Parcours ».",
+    "existence_question": "Pourquoi avoir créé Freestylepedia ?",
     "existence_answer": "Tu peux retrouver rapidement des figures, pour les montrer à tes amis ou les regarder et les apprendre sur la glace.",
-    "improve_question": "Comment utiliser Freestylepedia pour progresser sur la glace ?",
+    "improve_question": "Comment utiliser Freestylepedia pour progresser sur la glace ?",
     "improve_answer": "Freestylepedia te montre quelles figures sont à ta portée et lesquelles ressemblent à celles que tu maîtrises déjà.",
-    "help_question": "Comment puis-je aider à améliorer Freestylepedia ?",
+    "help_question": "Comment puis-je aider à améliorer Freestylepedia ?",
     "help_answer": "Tu peux nous contacter sur les réseaux sociaux ou, si tu connais GitHub, ouvrir une issue sur notre dépôt. Tous les liens sont en bas du site.",
-    "transfer_question": "Comment transférer ma progression vers un autre appareil ?",
-    "transfer_answer": "Sur l’onglet « Ma progression », appuie sur « Transférer ma progression ». Un lien s’affiche : ouvre-le sur ton nouvel appareil pour y retrouver ta progression."
+    "transfer_question": "Comment transférer ma progression vers un autre appareil ?",
+    "transfer_answer": "Sur l’onglet « Ma progression », appuie sur « Transférer ma progression ». Un lien s’affiche : ouvre-le sur ton nouvel appareil pour y retrouver ta progression."
   },
   "aboutUs": {
     "members": "Membres",
@@ -44,7 +44,7 @@
     "switchToLightMode": "Passer en mode clair",
     "switchToDarkMode": "Passer en mode sombre",
     "installApp": "Installer l’application",
-    "installAppHintIOS": "Sur iOS, tu peux ajouter ce site à ton écran d’accueil comme une application. Appuie sur le bouton Partager, puis sur « Sur l’écran d’accueil »."
+    "installAppHintIOS": "Sur iOS, tu peux ajouter ce site à ton écran d’accueil comme une application. Appuie sur le bouton Partager, puis sur « Sur l’écran d’accueil »."
   },
   "toolbar": {
     "resetFilters": "Réinitialiser les filtres",
