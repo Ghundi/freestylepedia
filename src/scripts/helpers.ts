@@ -16,10 +16,6 @@ export function list2Trick(list: Array<any>): Trick {
     })
 }
 
-export function isMobile(): boolean {
-    return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
 export function getOrientation(): string {
   return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
 }
@@ -207,10 +203,6 @@ export function checkSpace(y: number, x: number, width: number, height: number, 
         }
     }
     return true;
-}
-
-export function getBgColor(dark: boolean): string {
-    return dark ? '#333333' : '#eeeeee'
 }
 
 function changeTimeZone(date: Date, timeZone: string) {
