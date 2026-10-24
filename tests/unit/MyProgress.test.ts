@@ -1,0 +1,70 @@
+import { beforeEach, describe, expect, it } from 'vitest'
+import { flushPromises, mount } from '@vue/test-utils'
+import { createPinia, setActivePinia } from 'pinia'
+import { createI18n } from 'vue-i18n'
+import { createMemoryHistory, createRouter } from 'vue-router'
+import en from '../../src/locales/en.json'
+import MyProgress from '../../src/pages/MyProgress.vue'
+import { useCategoryStore } from '../../src/scripts/store'
+import { useTrickStore, type Trick } from '../../src/scripts/trickStore'
+
+const make = (trickID: string, title: string, category: string, difficulty: number) =>
+  ({ trickID, title: [title], difficulty, category, releaseDate: new Date('2024-01-01'),
+    videoID: ['vid' + trickID], requirements: [], connections: [] }) as Trick
+
+// the five starter tricks getRecommendedTricks looks up by title; only two of the configured
+// categories have tricks, so every other one has a total of 0
+const tricks = [
+  make('0001', 'Triangle', 'footwork', 1),
+  make('0002', 'Backwards Donut', 'footwork', 1),
+  make('0003', 'Hockey Stop', 'stop', 1),
+  make('0004', 'Eagle', 'footwork', 2),
+  make('0005', 'Grapevine', 'footwork', 2),
+  make('0006', 'Hawk Stop', 'stop', 3),
+]
+
+async function mountPage() {
+  const router = createRouter({
+    history: createMemoryHistory(),
+    routes: [
+      { path: '/:lang', name: 'Home', component: { template: '<div/>' } },
+      { path: '/:lang/MyProgress', name: 'MyProgress', component: MyProgress },
+      { path: '/:lang/trick/:trickname', name: 'Trick', component: { template: '<div/>' } },
+    ],
+  })
+  router.push('/en/MyProgress')
+  await router.isReady()
+  const i18n = createI18n({ legacy: false, locale: 'en', messages: { en } })
+  const w = mount(MyProgress, { global: { plugins: [router, i18n] } })
+  await flushPromises()
+  return w
+}
+
+describe('MyProgress page', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    setActivePinia(createPinia())
+    useTrickStore().tricks = tricks.map(t => ({ ...t }))
+  })
+
+  it('shows the empty state and a home button when nothing is mastered', async () => {
+    const w = await mountPage()
+    expect(w.get('.percent').text()).toBe('0%')
+    expect(w.get('.empty').text()).toContain(en.myProgress.empty)
+    const browse = w.get('.empty a')
+    expect(browse.text()).toBe(en.myProgress.browse)
+    expect(browse.attributes('href')).toBe('/en')
+    expect(w.find('[role="progressbar"]').exists()).toBe(false)
+  })
+
+  it('hides categories without tricks and never shows NaN', async () => {
+    expect(useCategoryStore().categories.length).toBeGreaterThan(2)
+    localStorage.setItem('mastered', JSON.stringify(['0001']))
+    const w = await mountPage()
+    const bars = w.findAll('[role="progressbar"]')
+    expect(bars.map(b => b.attributes('aria-label'))).toEqual([en.categories.footwork, en.categories.stop])
+    expect(w.get('.percent').text()).toBe('17%')
+    expect(w.text()).not.toContain('NaN')
+    expect(w.find('.empty').exists()).toBe(false)
+  })
+})
