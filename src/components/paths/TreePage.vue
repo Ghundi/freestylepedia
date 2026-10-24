@@ -31,6 +31,7 @@ function switchView(name: string) {
 <template>
   <section class="tree-page">
     <header class="tree-head">
+      <h1>{{ t('tabs.paths') }}</h1>
       <SegmentedControl :model-value="active" :options="views" :label="t('tabs.paths')" @update:model-value="switchView" />
       <p class="desc">{{ description }}</p>
     </header>
@@ -50,17 +51,13 @@ function switchView(name: string) {
   padding-top: var(--space-3);
 }
 .tree-head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+.tree-head h1 { margin: 0; font-size: var(--t-xl); }
 .desc {
   margin: 0;
   max-width: 70ch;
   color: var(--text-muted);
   font-size: var(--t-sm);
   line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 .zone {
   flex: 1;
