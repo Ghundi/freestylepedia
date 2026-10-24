@@ -1,6 +1,6 @@
 {
   "categoryTree": {
-  "description": "This mind map groups together tricks in the same category and the connection to a base trick."
+    "description": "This mind map groups together tricks in the same category and the connection to a base trick."
   },
   "trickTree": {
     "description": "The whole graph gets increasingly more difficult to the right. Each trick tree splits up into more difficult tricks and is connected by lines. We recommend learning an individual trick tree from left to right."
@@ -53,7 +53,8 @@
     "help": "Help",
     "language": "Language",
     "byBlackbirdAndMISG": "by Blackbird and MISG",
-    "supportedBy": "supported by"
+    "supportedBy": "supported by",
+    "supporterLogo": "Supporter logo"
   },
   "sortOptions": {
     "difficultyDown": "Difficulty (Hard - Easy)",
@@ -66,8 +67,8 @@
   "categories": {
     "footwork": "Footwork",
     "ground": "Ground",
-    "jump":  "Jump",
-    "acrobatic":  "Acrobatic",
+    "jump": "Jump",
+    "acrobatic": "Acrobatic",
     "hydroblading": "Hydroblading",
     "spin": "Spin",
     "stop": "Stop"
@@ -101,5 +102,23 @@
   "category": "Category",
   "similarTricks": "Similar Tricks",
   "requirements": "Requirements",
-  "otherTutorials": "Other Tutorials"
+  "otherTutorials": "Other Tutorials",
+  "tabs": {
+    "tricks": "Tricks",
+    "paths": "Paths",
+    "progress": "My progress"
+  },
+  "settings": {
+    "title": "Settings",
+    "theme": "Theme",
+    "themeSystem": "System",
+    "themeDark": "Dark",
+    "themeLight": "Light",
+    "language": "Language"
+  },
+  "search": {
+    "open": "Search",
+    "placeholder": "Search a trick"
+  },
+  "back": "Back"
 }

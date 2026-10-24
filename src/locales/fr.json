@@ -52,7 +52,8 @@
     "help": "FAQ",
     "language": "Langue",
     "byBlackbirdAndMISG": "par Blackbird et MISG",
-    "supportedBy": "soutenu par"
+    "supportedBy": "soutenu par",
+    "supporterLogo": "Logo du soutien"
   },
   "sortOptions": {
     "difficultyDown": "Difficulté (difficile → facile)",
@@ -100,5 +101,23 @@
   "category": "Catégorie",
   "similarTricks": "Tricks similaires",
   "requirements": "Prérequis",
-  "otherTutorials": "Autres tutoriels"
+  "otherTutorials": "Autres tutoriels",
+  "tabs": {
+    "tricks": "Figures",
+    "paths": "Parcours",
+    "progress": "Ma progression"
+  },
+  "settings": {
+    "title": "Réglages",
+    "theme": "Thème",
+    "themeSystem": "Système",
+    "themeDark": "Sombre",
+    "themeLight": "Clair",
+    "language": "Langue"
+  },
+  "search": {
+    "open": "Rechercher",
+    "placeholder": "Rechercher une figure"
+  },
+  "back": "Retour"
 }

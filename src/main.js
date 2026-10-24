@@ -87,6 +87,13 @@ const routes = [
         }
     },
     {
+        path: '/Settings',
+        redirect: () => {
+            const locale = availableLocales.includes(getLang()) ? getLang() : fallbackLocale;
+            return { name: 'Settings', params: { lang: locale } };
+        }
+    },
+    {
         path: '/AboutUs',
         redirect: () => {
             const locale = availableLocales.includes(getLang()) ? getLang() : fallbackLocale;
@@ -115,9 +122,10 @@ const routes = [
             { path: 'CategoryTree',     name: 'CategoryTree', component: () => import('./pages/CategoryTree.vue') },
             { path: 'TrickTree',        name: 'TrickTree',    component: () => import('./pages/TrickTree.vue') },
             { path: 'MyProgress',       name: 'MyProgress',   component: () => import('./pages/MyProgress.vue') },
+            { path: 'Settings',         name: 'Settings',     component: () => import('./pages/Settings.vue') },
             { path: 'AboutUs',          name: 'AboutUs',      component: () => import('./pages/AboutUs.vue') },
             { path: 'Help',             name: 'Help',         component: () => import('./pages/Help.vue') },
-            { path: 'trick/:trickname', name: 'Trick',        component: () => import('./pages/Trick.vue') },
+            { path: 'trick/:trickname', name: 'Trick',        component: () => import('./pages/Trick.vue'), meta: { ownHeader: true } },
             { path: ':pathMatch(.*)*',  name: 'NotFound',     component: () => import('./pages/notFound.vue') },
         ]
     },
