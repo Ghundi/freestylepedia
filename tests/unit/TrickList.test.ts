@@ -36,7 +36,7 @@ async function mountAt(path: string) {
   const i18n = createI18n({ legacy: false, locale: 'en', messages: { en } })
   const w = mount(TrickList, { global: { plugins: [router, i18n] } })
   await flushPromises()
-  return w
+  return Object.assign(w, { router })
 }
 
 describe('TrickList (home)', () => {
@@ -78,6 +78,13 @@ describe('TrickList (home)', () => {
     expect(card.text()).toContain(en.home.next)
     const mastered = useMasteredStore()
     expect(tricks.filter(t => mastered.isMastered(t)).map(t => t.trickID)).toEqual(['0001', '0003'])
+  })
+
+  it('drops the transfer query once loaded, so going back does not apply it again', async () => {
+    const w = await mountAt('/en?mastered=0001&todo=0042')
+    expect(w.router.currentRoute.value.query).toEqual({})
+    expect(w.router.currentRoute.value.fullPath).toBe('/en')
+    expect(useMasteredStore().list).toEqual(['0001'])
   })
 
   it('shows a todo trick saved with a legacy "trick" id as next', async () => {

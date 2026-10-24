@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { useRoute } from 'vue-router';
+  import { useRoute, useRouter } from 'vue-router';
   import { mdiTuneVariant } from '@mdi/js';
   import NextTrickCard from '@/components/home/NextTrickCard.vue';
   import FilterSheet from '@/components/home/FilterSheet.vue';
@@ -25,6 +25,11 @@
   }
   if(route.query.mastered) {
     useMasteredStore().loadHash(route.query.mastered.toString());
+  }
+  // Once loaded, the transfer link leaves the URL: coming back to this history entry
+  // must not apply it again over marks made since.
+  if(route.query.todo || route.query.mastered) {
+    useRouter().replace({ query: {} });
   }
 
   const { t } = useI18n();
