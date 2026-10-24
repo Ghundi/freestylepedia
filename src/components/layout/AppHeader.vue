@@ -18,7 +18,7 @@ const searchOpen = useSearchOpen()
         <button type="button" class="icon-btn" :aria-label="t('back')" @click="emit('back')">
           <AppIcon :path="mdiArrowLeft" />
         </button>
-        <h1 class="title">{{ title }}</h1>
+        <h1 v-if="title" class="title">{{ title }}</h1>
         <div class="actions"><slot name="actions" /></div>
       </template>
       <template v-else>
@@ -67,7 +67,7 @@ const searchOpen = useSearchOpen()
   font-weight: 700;
   text-decoration: none;
 }
-.actions { display: flex; align-items: center; gap: var(--space-1); }
+.actions { display: flex; align-items: center; gap: var(--space-1); margin-left: auto; }
 .icon-btn {
   display: inline-flex;
   align-items: center;

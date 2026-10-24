@@ -84,7 +84,8 @@
     "pageNotFound": "Page introuvable",
     "pageNotFoundSuggestion": "L’URL est peut-être mal orthographiée",
     "trickNotFound": "introuvable",
-    "trickNotFoundSuggestion": "Le nom du trick dans l’URL est peut-être incorrect. Seul le nom du thumbnail YouTube est accepté."
+    "trickNotFoundSuggestion": "Le nom du trick dans l’URL est peut-être incorrect. Seul le nom du thumbnail YouTube est accepté.",
+    "toHome": "Voir toutes les figures"
   },
   "myProgress": {
     "myProgress": "Ma progression",
@@ -135,5 +136,21 @@
     "levelMax": "Maximum",
     "reset": "Réinitialiser",
     "active": "{n} actif | {n} actifs"
+  },
+  "video": {
+    "play": "Lire {name}",
+    "others": "Autres vidéos"
+  },
+  "trick": {
+    "todo": "À faire",
+    "mastered": "Acquise",
+    "before": "À maîtriser avant",
+    "related": "Figures proches"
+  },
+  "share": {
+    "title": "Partager",
+    "copy": "Copier le lien",
+    "copied": "Lien copié",
+    "native": "Partager…"
   }
 }
