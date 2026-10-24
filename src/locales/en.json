@@ -120,5 +120,21 @@
     "open": "Search",
     "placeholder": "Search a trick"
   },
-  "back": "Back"
+  "back": "Back",
+  "home": {
+    "next": "Up next",
+    "suggested": "Start here",
+    "byCategory": "By category",
+    "all": "All",
+    "filters": "Filters",
+    "count": "{n} trick | {n} tricks",
+    "view": "View",
+    "sort": "Sort by",
+    "status": "Status",
+    "level": "Level",
+    "levelMin": "Minimum",
+    "levelMax": "Maximum",
+    "reset": "Reset",
+    "active": "{n} active"
+  }
 }

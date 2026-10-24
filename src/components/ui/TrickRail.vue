@@ -37,6 +37,8 @@ h2 { margin: 0; font-size: var(--t-lg); font-weight: 600; color: var(--text); }
   margin: calc(-1 * var(--space-2));
   list-style: none;
   overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: var(--space-2);
 }

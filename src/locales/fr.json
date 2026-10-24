@@ -119,5 +119,21 @@
     "open": "Rechercher",
     "placeholder": "Rechercher une figure"
   },
-  "back": "Retour"
+  "back": "Retour",
+  "home": {
+    "next": "À travailler ensuite",
+    "suggested": "Pour commencer",
+    "byCategory": "Par catégorie",
+    "all": "Toutes",
+    "filters": "Filtres",
+    "count": "{n} figure | {n} figures",
+    "view": "Affichage",
+    "sort": "Trier par",
+    "status": "Statut",
+    "level": "Niveau",
+    "levelMin": "Minimum",
+    "levelMax": "Maximum",
+    "reset": "Réinitialiser",
+    "active": "{n} actif | {n} actifs"
+  }
 }

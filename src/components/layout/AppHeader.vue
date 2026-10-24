@@ -25,7 +25,7 @@ const searchOpen = useSearchOpen()
         <router-link class="brand" :to="{ name: 'Home', params: { lang: locale } }">Freestylepedia</router-link>
         <div class="actions">
           <slot name="actions" />
-          <button type="button" class="icon-btn" :aria-label="t('search.open')" @click="searchOpen = true">
+          <button type="button" class="icon-btn" data-search-trigger :aria-label="t('search.open')" @click="searchOpen = true">
             <AppIcon :path="mdiMagnify" />
           </button>
           <router-link class="icon-btn" :aria-label="t('settings.title')" :to="{ name: 'Settings', params: { lang: locale } }">

@@ -9,9 +9,12 @@ import { useThemeMode } from '@/scripts/theme';
 import AppHeader from '@/components/layout/AppHeader.vue';
 import AppFooter from '@/components/layout/AppFooter.vue';
 import TabBar from '@/components/layout/TabBar.vue';
+import SearchOverlay from '@/components/home/SearchOverlay.vue';
+import { useSearchOpen } from '@/scripts/ui';
 import LocaleLayout from './components/localeLayout.vue';
 
 const route = useRoute();
+const searchOpen = useSearchOpen();
 
 // Transition only: keep the not-yet-migrated Vuetify pages in sync with the new theme (removed in Task 10).
 const vuetifyTheme = useTheme();
@@ -40,6 +43,7 @@ trickStore.loadTricks();
         <LocaleLayout/>
       </main>
       <AppFooter/>
+      <SearchOverlay v-model:open="searchOpen"/>
     </div>
   </v-app>
 </template>
@@ -53,17 +57,15 @@ trickStore.loadTricks();
   background: transparent !important;
   color: var(--text);
 }
-.frame--own-header { --header-h: 0px; }
+/* no global header, and no tab bar below 900px (TabBar hides itself there) */
+.frame--own-header { --header-h: 0px; --tabbar-h: 0px; }
 .main {
+  /* the fixed tab bar's offset is the footer's job: it is the last thing above the bar */
   padding: 0 var(--space-4);
-  padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   overflow-x: clip;
-}
-@media (min-width: 900px) {
-  .main { padding-bottom: 0; }
 }
 /* width */
 ::-webkit-scrollbar {

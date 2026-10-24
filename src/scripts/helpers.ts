@@ -61,7 +61,7 @@ function logicalOR(res: boolean, x: boolean): boolean {
     return res || x;
 }
 
-function trickMatchesSearch(trick: Trick, searchVal: string | null) {
+export function trickMatchesSearch(trick: Trick, searchVal: string | null): boolean {
     // empty search field
     if(!searchVal) {
         return true;
