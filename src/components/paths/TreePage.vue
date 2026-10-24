@@ -1,0 +1,77 @@
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+import type { Edge } from '@vue-flow/core';
+import { useThemeMode } from '@/scripts/theme';
+import SegmentedControl from '@/components/ui/SegmentedControl.vue';
+
+const props = defineProps<{ active: 'TrickTree' | 'CategoryTree'; edges: Edge[]; description: string }>();
+
+const { t } = useI18n();
+const router = useRouter();
+const route = useRoute();
+const { resolved } = useThemeMode();
+
+// Edge colours follow the theme (computed, so they update when `resolved` changes)
+const themedEdges = computed(() => {
+  const stroke = resolved.value === 'dark' ? '#5a5e66' : '#9a9ea6';
+  return props.edges.map((edge: Edge) => ({ ...edge, style: { ...edge.style, stroke } }));
+});
+
+const views = computed(() => [
+  { value: 'TrickTree', label: t('paths.byLevel') },
+  { value: 'CategoryTree', label: t('paths.byCategory') },
+]);
+function switchView(name: string) {
+  if (name !== props.active) router.replace({ name, params: route.params });
+}
+</script>
+
+<template>
+  <section class="tree-page">
+    <header class="tree-head">
+      <SegmentedControl :model-value="active" :options="views" :label="t('tabs.paths')" @update:model-value="switchView" />
+      <p class="desc">{{ description }}</p>
+    </header>
+    <div class="zone">
+      <slot :edges="themedEdges" />
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.tree-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  /* mobile: fixed tab bar at the bottom; desktop (below): 48px tab row under the header */
+  height: calc(100dvh - var(--header-h) - var(--tabbar-h) - env(safe-area-inset-bottom, 0px));
+  padding-top: var(--space-3);
+}
+.tree-head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+.desc {
+  margin: 0;
+  max-width: 70ch;
+  color: var(--text-muted);
+  font-size: var(--t-sm);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.zone {
+  flex: 1;
+  min-height: 0;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+}
+.zone :deep(.basic-flow) { background: var(--bg); }
+@media (min-width: 900px) {
+  .tree-page { height: calc(100dvh - var(--header-h) - 48px); }
+}
+</style>

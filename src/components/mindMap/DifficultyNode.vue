@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { getPosition, getOrientation } from "@/scripts/helpers";
-import { Handle } from '@vue-flow/core'
+import { computed } from 'vue'
+import { Handle, useVueFlow } from '@vue-flow/core'
 
 const props = defineProps(['label', 'orientation', 'n_children', 'color'])
+const { viewport } = useVueFlow()
+// keep the separator about 1.5 device px wide whatever the zoom
+const lineWidth = computed(() => Math.max(1, 1.5 / (viewport.value.zoom || 1)) + 'px')
 </script>
 
 <template>
@@ -13,7 +17,7 @@ const props = defineProps(['label', 'orientation', 'n_children', 'color'])
     {{ $t('level', { n: label }) }}
   </div>
 
-  <div class="line" v-if="label !== '1'"></div>
+  <div class="line" v-if="label !== '1'" :style="{ width: lineWidth }"></div>
 </template>
 
 <style scoped>
@@ -28,7 +32,7 @@ const props = defineProps(['label', 'orientation', 'n_children', 'color'])
 .line {
   position: absolute;
   right: 1000px;
-  border-left: 1px solid var(--line);
+  background: var(--line);
   height: 4000px;
   pointer-events: none;
 }
