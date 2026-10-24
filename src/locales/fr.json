@@ -94,6 +94,8 @@
     "transferInfo": "Collez l’URL copiée depuis votre presse-papiers sur le nouvel appareil"
   },
   "close": "Fermer",
+  "level": "Niveau {n}",
+  "new": "Nouveau",
   "difficulty": "Difficulté",
   "category": "Catégorie",
   "similarTricks": "Tricks similaires",

@@ -95,6 +95,8 @@
     "transferInfo": "Enter the copied URL in your clipboard on the new device"
   },
   "close": "Close",
+  "level": "Level {n}",
+  "new": "New",
   "difficulty": "Difficulty",
   "category": "Category",
   "similarTricks": "Similar Tricks",
