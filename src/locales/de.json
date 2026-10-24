@@ -14,7 +14,7 @@
     "categories_answer": "Die Kategorien gruppieren die Tricks nach ihrer Ähnlichkeit.",
     "usage_question": "Wie nutze ich Freestylepedia?",
     "usage_answer": "Du kannst detaillierte Infos auf der freestylepedia Seite nachschauen, über die Kategorien lernen im Kategorienbaum oder nachschauen, welche Tricks aufeinander aufbauen im Skill Tree.",
-    "existence_question":"",
+    "existence_question": "Warum gibt es Freestylepedia?",
     "existence_answer": "Du kannst auf Freestylepedia schnell Tricks nachzusehen und sie auf dem Eis lernen.",
     "improve_question": "Wie kann ich Freestylepedia nutzen um auf dem Eis besser zu werden?",
     "improve_answer": "Mit Freestylepedia kannst du sehen, welche Tricks für dich erreichbar sind und welche ähnlich.",
@@ -26,6 +26,7 @@
   "aboutUs": {
     "members": "Mitglieder",
     "aboutUs": "Über uns",
+    "story_title": "Unsere Geschichte",
     "findUs": "Finde uns auf",
     "story": "Zwei Mitglieder der Gruppen hatten die Idee eine Webseite zu erstellen, um Tricks schnell und einfach zu finden. Wir hatten häufig unterschiedliche Namen für den gleichen Trick. Wir hoffen deshalb, dass diese Seite hilft euch Tricks unter dir bekannten Namen zu finden und neue Namen zu lernen. Wir haben lange an dem Projekt gearbeitet und mehrere Versuche gestartet. Wir sind stolz auf das Ergebnis und hoffen diese neue Resource hilft dir.",
     "MisgDescription": "Die Mainz Ice Skate Group ist eine kleine Ice Breaking Gruppe aus Mainz in in der Nähe von Frankfurt. Wir sind gerne in vielen Eishallen bei uns in der Nähe.",

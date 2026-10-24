@@ -1,55 +1,57 @@
 {
   "categoryTree": {
-    "description": "Cette mind map regroupe des tricks de la même famille et montre les liens avec les tricks de base correspondants."
+    "description": "Ce graphe regroupe les figures d’une même famille et montre leurs liens avec les figures de base correspondantes."
   },
   "trickTree": {
-    "description": "Le graphe devient de plus en plus difficile vers la droite. Chaque arbre de compétences se divise en tricks plus complexes et est relié par des lignes. Nous recommandons d’apprendre un seul skill tree de gauche à droite."
+    "description": "Le graphe devient de plus en plus difficile vers la droite. Chaque arbre de compétences se divise en figures plus complexes, reliées par des lignes. Nous te conseillons d’apprendre un arbre de compétences à la fois, de gauche à droite."
   },
   "paths": {
     "byLevel": "Par niveau",
     "byCategory": "Par catégorie"
   },
   "faq": {
-    "naming_question": "D’où viennent les noms des tricks ?",
-    "naming_answer": "Les tricks sont en général nommés par la communauté et diffèrent souvent selon les régions et les pays.",
-    "scoring_question": "Comment les niveaux de difficulté sont-ils déterminés ?",
-    "scoring_answer": "Nous essayons d’évaluer chaque trick de la manière la plus juste possible. La difficulté est représentée par le nombre de patins.",
-    "categories_question": "Que signifient les catégories ?",
-    "categories_answer": "Les catégories regroupent les tricks selon leur similarité.",
-    "usage_question": "Comment utiliser Freestylepedia ?",
-    "usage_answer": "Tu peux consulter des infos détaillées sur la page Freestylepedia, apprendre avec differentes catégories ou voir quels tricks se construisent les uns sur les autres dans les structure de competences.",
-    "existence_question": "",
-    "existence_answer": "Avec Freestylepedia, tu peux rapidement consulter des tricks et les apprendre sur la glace.",
-    "improve_question": "Comment puis-je utiliser Freestylepedia pour m’améliorer sur la glace ?",
-    "improve_answer": "Freestylepedia te permet de voir quels tricks sont accessibles à ton niveau et ceux qui sont similaires.",
-    "help_question": "Comment puis-je aider à améliorer Freestylepedia ?",
-    "help_answer": "Tu peux nous contacter sur les réseaux sociaux ou ouvrir une issue sur notre page GitHub si tu t’y connais. Tu trouveras tout en bas de notre site.",
-    "transfer_question": "Comment puis-je transférer mon progrès vers un autre appareil ?",
-    "transfer_answer": "Cliquez sur le bouton „Progression du transfert“ sur la page „Mon progrès“. Vous obtiendrez alors un lien spécial dans votre presse-papiers que vous pourrez coller sur votre nouvel appareil dans le champ URL."
+    "naming_question": "D’où viennent les noms des figures ?",
+    "naming_answer": "Les figures sont en général nommées par la communauté, et leurs noms diffèrent souvent selon les régions et les pays.",
+    "scoring_question": "Comment les niveaux de difficulté sont-ils déterminés ?",
+    "scoring_answer": "Nous essayons d’évaluer chaque figure de la façon la plus juste possible. La difficulté est représentée par le nombre de patins.",
+    "categories_question": "Que signifient les catégories ?",
+    "categories_answer": "Les catégories regroupent les figures selon leurs ressemblances.",
+    "usage_question": "Comment utiliser Freestylepedia ?",
+    "usage_answer": "Tu peux consulter des informations détaillées sur chaque figure, les parcourir par catégorie ou voir quelles figures s’appuient sur d’autres dans l’onglet « Parcours ».",
+    "existence_question": "Pourquoi avoir créé Freestylepedia ?",
+    "existence_answer": "Tu peux retrouver rapidement des figures, pour les montrer à tes amis ou les regarder et les apprendre sur la glace.",
+    "improve_question": "Comment utiliser Freestylepedia pour progresser sur la glace ?",
+    "improve_answer": "Freestylepedia te montre quelles figures sont à ta portée et lesquelles ressemblent à celles que tu maîtrises déjà.",
+    "help_question": "Comment puis-je aider à améliorer Freestylepedia ?",
+    "help_answer": "Tu peux nous contacter sur les réseaux sociaux ou, si tu connais GitHub, ouvrir une issue sur notre dépôt. Tous les liens sont en bas du site.",
+    "transfer_question": "Comment transférer ma progression vers un autre appareil ?",
+    "transfer_answer": "Sur l’onglet « Ma progression », appuie sur « Transférer ma progression ». Un lien s’affiche : ouvre-le sur ton nouvel appareil pour y retrouver ta progression."
   },
   "aboutUs": {
     "members": "Membres",
-    "aboutUs": "À propos de nous",
+    "aboutUs": "À propos",
+    "story_title": "Notre histoire",
     "findUs": "Retrouve-nous sur",
-    "story": "Deux membres des groupes ont eu l’idée de créer un site web pour trouver des tricks rapidement et facilement. Nous avions souvent des noms différents pour un même trick. Nous espérons donc que ce site t’aidera à trouver des tricks sous les noms que tu connais et à en apprendre de nouveaux. Nous avons travaillé longtemps sur ce projet et lancé plusieurs tentatives. Nous sommes fiers du résultat et espérons que cette nouvelle ressource t’aidera.",
-    "MisgDescription": "Le Mainz Ice Skate Group est un petit groupe d’ice breaking basé à Mainz, près de Francfort. Nous aimons aller dans de nombreuses patinoires de la région.",
-    "BlackbirdDescription": "Les Blackbirds sont un groupe de ice freestyle de Munich composé de huit membres."
+    "story": "Deux membres de nos groupes ont eu l’idée de créer un site pour retrouver facilement des figures. Nous utilisions souvent des noms différents pour une même figure. Nous espérons donc que ce site te permettra de retrouver les figures sous les noms que tu connais, et d’en découvrir d’autres. Nous y avons travaillé longtemps, en plusieurs tentatives. Nous sommes fiers du résultat et espérons que cette nouvelle ressource te plaira.",
+    "MisgDescription": "Le Mainz Ice Skate Group est un petit groupe d’ice breaking basé à Mayence, près de Francfort. Nous aimons patiner dans toutes les patinoires de la région.",
+    "BlackbirdDescription": "Les Blackbirds sont un groupe d’ice freestyle de Munich, composé de huit membres."
   },
   "navBar": {
-    "freestylepedia": "Encyclopédie Freestyle",
-    "categoryTree": "Structure des Catégories",
-    "trickTree": "Structure des Compétences",
+    "freestylepedia": "Freestylepedia",
+    "categoryTree": "Arbre des catégories",
+    "trickTree": "Arbre des compétences",
     "myProgress": "Ma progression",
     "switchToLightMode": "Passer en mode clair",
     "switchToDarkMode": "Passer en mode sombre",
-    "installApp": "Installer l’application"
+    "installApp": "Installer l’application",
+    "installAppHintIOS": "Sur iOS, tu peux ajouter ce site à ton écran d’accueil comme une application. Appuie sur le bouton Partager, puis sur « Sur l’écran d’accueil »."
   },
   "toolbar": {
     "resetFilters": "Réinitialiser les filtres",
     "search": "Rechercher",
     "sortBy": "Trier par",
     "categories": "Catégories",
-    "marked": "Marqué",
+    "marked": "Statut",
     "filters": "Filtres"
   },
   "footer": {
@@ -57,7 +59,7 @@
     "language": "Langue",
     "byBlackbirdAndMISG": "par Blackbird et MISG",
     "supportedBy": "soutenu par",
-    "supporterLogo": "Logo du soutien"
+    "supporterLogo": "Logo d’un partenaire"
   },
   "sortOptions": {
     "difficultyDown": "Difficulté (difficile → facile)",
@@ -69,7 +71,7 @@
   },
   "categories": {
     "footwork": "Footwork",
-    "ground": "Breakdance",
+    "ground": "Au sol",
     "jump": "Sauts",
     "acrobatic": "Acrobaties",
     "hydroblading": "Hydroblading",
@@ -77,18 +79,18 @@
     "stop": "Freinages"
   },
   "marked": {
-    "mastered": "Maîtrisé",
-    "non-mastered": "Non maîtrisé",
-    "todo": "Todo",
-    "irrelevant": "inutiles"
+    "mastered": "Acquises",
+    "non-mastered": "Non acquises",
+    "todo": "À faire",
+    "irrelevant": "Non pertinentes"
   },
   "error": {
-    "noResults": "Aucun trick trouvé",
-    "noResultsSuggestions": "Essaie de modifier ta recherche ou tes filtres. Des filtres et termes plus généraux peuvent parfois aider.",
+    "noResults": "Aucune figure trouvée",
+    "noResultsSuggestions": "Essaie de modifier ta recherche ou tes filtres. Des termes ou des filtres plus généraux peuvent parfois aider.",
     "pageNotFound": "Page introuvable",
-    "pageNotFoundSuggestion": "L’URL est peut-être mal orthographiée",
+    "pageNotFoundSuggestion": "L’adresse est peut-être mal orthographiée",
     "trickNotFound": "introuvable",
-    "trickNotFoundSuggestion": "Le nom du trick dans l’URL est peut-être incorrect. Seul le nom du thumbnail YouTube est accepté.",
+    "trickNotFoundSuggestion": "Le nom de la figure dans l’adresse est peut-être incorrect. Seul le nom de la miniature YouTube est accepté.",
     "toHome": "Voir toutes les figures"
   },
   "myProgress": {
@@ -105,10 +107,10 @@
   },
   "close": "Fermer",
   "level": "Niveau {n}",
-  "new": "Nouveau",
+  "new": "Nouvelle",
   "difficulty": "Difficulté",
   "category": "Catégorie",
-  "similarTricks": "Tricks similaires",
+  "similarTricks": "Figures similaires",
   "requirements": "Prérequis",
   "otherTutorials": "Autres tutoriels",
   "tabs": {
