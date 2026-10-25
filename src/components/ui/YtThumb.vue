@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { frameThumbnailUrl, fallbackThumbnailUrl } from '../../scripts/trickMedia'
+import { frameThumbnailUrl, fallbackThumbnailUrl, thumbFrameInfo } from '../../scripts/trickMedia'
 
 const props = withDefaults(defineProps<{ videoId: string; alt: string; eager?: boolean }>(), { eager: false })
 
@@ -14,6 +14,8 @@ watch(() => props.videoId, () => { useFallback.value = false; failed.value = fal
 const src = computed(() =>
   useFallback.value ? fallbackThumbnailUrl(props.videoId) : frameThumbnailUrl(props.videoId))
 
+const isCard = computed(() => thumbFrameInfo(props.videoId).card)
+
 function onError() {
   if (useFallback.value) failed.value = true
   else useFallback.value = true
@@ -24,7 +26,7 @@ function onLoad(e: Event) {
 </script>
 
 <template>
-  <span class="yt-thumb">
+  <span class="yt-thumb" :class="{ card: isCard }">
     <img v-if="!failed" class="img" :src="src" :alt="alt" :loading="eager ? 'eager' : 'lazy'" decoding="async" @error="onError" @load="onLoad">
   </span>
 </template>
@@ -46,5 +48,9 @@ function onLoad(e: Event) {
   height: 100%;
   object-fit: cover;
   transform: scale(1.112);
+}
+/* A white title card glares in the dark UI: invert it to light-on-dark. */
+:global(:root[data-theme='dark']) .card .img {
+  filter: invert(1) grayscale(1) contrast(0.9);
 }
 </style>

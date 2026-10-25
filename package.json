@@ -6,7 +6,8 @@
     "build": "vite build",
     "dev": "vite",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "thumbs": "node scripts/pick-thumb-frames.mjs"
   },
   "engines": {
     "node": ">=20.19.0"

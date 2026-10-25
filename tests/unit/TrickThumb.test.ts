@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { mount, RouterLinkStub } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { createI18n } from 'vue-i18n'
+import thumbFrames from '../../src/data/thumbFrames.json'
 import YtThumb from '../../src/components/ui/YtThumb.vue'
 import TrickThumb from '../../src/components/ui/TrickThumb.vue'
 import { useMasteredStore } from '../../src/scripts/store'
@@ -17,6 +18,16 @@ const trick = { trickID: '0001', title: ['Spin'], difficulty: 2, category: 'spin
   releaseDate: new Date('2024-01-01'), videoID: ['abc'], requirements: [], connections: [] } as unknown as Trick
 
 describe('YtThumb', () => {
+  it('flags a title-card frame with the card class', () => {
+    const cardId = 'card-test-id'
+    ;(thumbFrames as Record<string, unknown>)[cardId] = { frame: 'hq1', card: true }
+    const w = mount(YtThumb, { props: { videoId: cardId, alt: 'x' } })
+    expect(w.classes()).toContain('card')
+    expect(w.get('img').attributes('src')).toContain('hq1.jpg')
+    expect(mount(YtThumb, { props: { videoId: 'abc', alt: 'x' } }).classes()).not.toContain('card')
+    delete (thumbFrames as Record<string, unknown>)[cardId]
+  })
+
   it('falls back to hqdefault when hq2 fails', async () => {
     const w = mount(YtThumb, { props: { videoId: 'abc', alt: 'x' } })
     expect(w.get('img').attributes('src')).toContain('hq2.jpg')
