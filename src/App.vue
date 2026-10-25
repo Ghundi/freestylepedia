@@ -56,8 +56,4 @@ trickStore.loadTricks();
   margin: 0 auto;
   overflow-x: clip;
 }
-/* width */
-::-webkit-scrollbar {
-  width: 0;
-}
 </style>

@@ -89,8 +89,9 @@ export default defineConfig({
             "description": "On this page you can track your progress and see what tricks to learn next.",
             "icons": [
               {
-                "src": "icon/Silouette_Schlittschuh.png",
-                "purpose": "monochrome maskable"
+                "src": "/icons/Blackbirdlogoneuweiss-192x192.png",
+                "sizes": "192x192",
+                "type": "image/png"
               }
             ]
           },

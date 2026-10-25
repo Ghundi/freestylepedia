@@ -163,14 +163,6 @@
 }
 .empty h2 { margin: 0; font-size: var(--t-lg); font-weight: 600; }
 .empty p { margin: 0; color: var(--text-muted); }
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
 @media (min-width: 900px) {
   .home { gap: var(--space-6); padding-top: var(--space-5); }
 }

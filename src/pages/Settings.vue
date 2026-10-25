@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import config from '@/data/config.json'
@@ -8,6 +8,9 @@ import AppDialog from '@/components/ui/AppDialog.vue'
 import SegmentedControl from '@/components/ui/SegmentedControl.vue'
 import { pwaInstallPromptEvent } from '@/scripts/pwaInstall'
 import { useThemeMode, type ThemeMode } from '@/scripts/theme'
+import { focusHeadingIfRequested, requestHeadingFocus } from '@/scripts/ui'
+import AppIcon from '@/components/ui/AppIcon.vue'
+import { mdiChevronRight } from '@mdi/js'
 
 const { t, locale } = useI18n()
 const router = useRouter()
@@ -19,9 +22,13 @@ const names: Record<string, string> = {
 }
 const languages = config.locales.availableLocales.map(code => ({ code, name: names[code] ?? code }))
 
+const heading = ref<HTMLElement>()
+onMounted(() => focusHeadingIfRequested(heading.value))
+
 function updateLang(code: string) {
   if (locale.value === code) return
   locale.value = code
+  requestHeadingFocus()
   router.replace({ name: route.name as string, params: { ...route.params, lang: code } })
 }
 
@@ -38,7 +45,7 @@ const iosHint = ref(false)
 
 <template>
   <div class="settings">
-    <h1>{{ t('settings.title') }}</h1>
+    <h1 ref="heading" tabindex="-1">{{ t('settings.title') }}</h1>
 
     <section>
       <h2>{{ t('settings.language') }}</h2>
@@ -71,9 +78,19 @@ const iosHint = ref(false)
       <AppButton v-else @click="iosHint = true">{{ t('navBar.installApp') }}</AppButton>
     </section>
 
-    <section class="links">
-      <AppButton variant="ghost" :to="{ name: 'AboutUs', params: { lang: locale } }">{{ t('aboutUs.aboutUs') }}</AppButton>
-      <AppButton variant="ghost" :to="{ name: 'Help', params: { lang: locale } }">{{ t('footer.help') }}</AppButton>
+    <section>
+      <ul class="rows">
+        <li>
+          <router-link class="row" :to="{ name: 'AboutUs', params: { lang: locale } }">
+            {{ t('aboutUs.aboutUs') }}<AppIcon :path="mdiChevronRight" />
+          </router-link>
+        </li>
+        <li>
+          <router-link class="row" :to="{ name: 'Help', params: { lang: locale } }">
+            {{ t('footer.help') }}<AppIcon :path="mdiChevronRight" />
+          </router-link>
+        </li>
+      </ul>
     </section>
 
     <AppDialog v-model:open="iosHint" :title="t('navBar.installApp')">
@@ -87,12 +104,14 @@ const iosHint = ref(false)
 h1 { margin: 0 0 var(--space-5); font-size: var(--t-xl); }
 h2 { margin: 0 0 var(--space-3); font-size: var(--t-md); color: var(--text-muted); font-weight: 600; }
 section { margin-bottom: var(--space-6); }
-.langs { display: flex; flex-direction: column; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
-.lang {
+.langs, .rows { display: flex; flex-direction: column; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
+.lang, .row {
+  display: flex; align-items: center; justify-content: space-between; text-decoration: none;
   width: 100%; min-height: 44px; padding: 0 var(--space-4); text-align: left;
   border: 1px solid var(--line); border-radius: var(--radius-m);
   background: var(--surface); color: var(--text); font: inherit; cursor: pointer;
 }
 .lang[aria-current='true'] { border-color: var(--accent); color: var(--accent); font-weight: 600; }
-.links { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+h1:focus { outline: none; }
+.row svg { color: var(--text-muted); }
 </style>

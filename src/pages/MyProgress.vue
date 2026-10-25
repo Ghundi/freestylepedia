@@ -93,12 +93,4 @@
 .hardest { max-width: 480px; }
 .hardest h2 { margin: 0 0 var(--space-3); font-size: var(--t-lg); font-weight: 600; }
 .transfer { display: flex; }
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
 </style>

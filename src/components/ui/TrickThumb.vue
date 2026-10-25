@@ -106,12 +106,4 @@ const to = computed(() => ({
 .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
 .thumb--l .name { font-size: var(--t-lg); }
 .thumb--l .meta { font-size: var(--t-sm); }
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
 </style>

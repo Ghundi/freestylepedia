@@ -6,6 +6,45 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* thin, themed scrollbars everywhere (rails, dialogs, the page itself) */
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--text-muted) 55%, transparent) transparent;
+  caret-color: var(--accent);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--text-muted) 55%, transparent) transparent;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  color: var(--text);
+}
+
+a {
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+input,
+textarea {
+  caret-color: var(--accent);
+}
+
+/* counts and levels line up when they change */
+.count,
+.badge {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 body {

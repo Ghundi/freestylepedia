@@ -124,6 +124,10 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
+    // back/forward restores where the page was (the home rails after a trick); a new page starts at the top
+    scrollBehavior(to, from, savedPosition) {
+        return savedPosition ?? { top: 0 }
+    },
 })
 
 router.beforeEach((to, from, next) => {

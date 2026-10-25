@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { nextTick, ref, watch } from 'vue'
+import { nextTick, ref, useId, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const props = defineProps<{ open: boolean; title: string }>()
 const emit = defineEmits<{ 'update:open': [value: boolean] }>()
 
 const { t } = useI18n()
+const titleId = useId()
 const dialog = ref<HTMLDialogElement>()
 let trigger: HTMLElement | null = null
 
@@ -34,10 +35,10 @@ function onClick(e: MouseEvent) {
 </script>
 
 <template>
-  <dialog ref="dialog" class="dlg" :aria-label="title" @close="onClose" @click="onClick">
+  <dialog ref="dialog" class="dlg" :aria-labelledby="titleId" @close="onClose" @click="onClick">
     <div class="panel">
       <header class="bar">
-        <h2>{{ title }}</h2>
+        <h2 :id="titleId">{{ title }}</h2>
         <button type="button" class="close" @click="emit('update:open', false)">{{ t('close') }}</button>
       </header>
       <slot />
@@ -69,6 +70,7 @@ function onClick(e: MouseEvent) {
 h2 { margin: 0; font-size: var(--t-lg); font-weight: 600; }
 .close {
   min-height: 44px;
+  min-width: 44px;
   padding: 0 var(--space-4);
   border: 1px solid var(--line);
   border-radius: var(--radius-s);

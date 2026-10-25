@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { onBeforeUnmount, ref } from 'vue'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { mdiCheck, mdiContentCopy, mdiSwapHorizontal } from '@mdi/js'
 import AppButton from '@/components/ui/AppButton.vue'
 import AppDialog from '@/components/ui/AppDialog.vue'
 import Qrcode from '@/components/qrcode.vue'
 import { useMasteredStore, useTodoStore } from '@/scripts/store'
+import { useCopy } from '@/scripts/useCopy'
 
 const { t, locale } = useI18n()
 const mastered = useMasteredStore()
@@ -13,25 +14,12 @@ const todo = useTodoStore()
 
 const open = ref(false)
 const url = ref('')
-const copied = ref(false)
-let copiedTimer: ReturnType<typeof setTimeout> | undefined
-onBeforeUnmount(() => clearTimeout(copiedTimer))
-
-async function copy() {
-  try {
-    await navigator.clipboard.writeText(url.value)
-  } catch {
-    return // no clipboard access (insecure context, denied permission): the link stays selectable
-  }
-  copied.value = true
-  clearTimeout(copiedTimer)
-  copiedTimer = setTimeout(() => { copied.value = false }, 2500)
-}
+const { copied, failed, copy, reset } = useCopy(() => url.value)
 
 async function show() {
   // Built on click: the lists change while the page is open.
   url.value = `https://freestylepedia.org/${locale.value}?todo=${todo.getHash()}&mastered=${mastered.getHash()}`
-  copied.value = false
+  reset()
   open.value = true
   await copy()
 }
@@ -47,6 +35,7 @@ async function show() {
       <AppButton :icon="copied ? mdiCheck : mdiContentCopy" @click="copy">
         <span aria-live="polite">{{ copied ? t('share.copied') : t('share.copy') }}</span>
       </AppButton>
+      <p v-if="failed" class="fail" role="status">{{ t('share.copyFailed') }}</p>
     </div>
   </AppDialog>
 </template>
@@ -55,6 +44,7 @@ async function show() {
 .body { display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
 .info { margin: 0; align-self: stretch; color: var(--text-muted); }
 /* Black on white stays scannable in the dark theme. */
+.fail { align-self: stretch; margin: 0; color: var(--text-muted); font-size: var(--t-sm); }
 .qr { padding: var(--space-3); background: #fff; border-radius: var(--radius-m); line-height: 0; }
 .link {
   align-self: stretch;

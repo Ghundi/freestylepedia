@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useVueFlow, type Edge } from '@vue-flow/core';
 import { mdiFitToScreenOutline, mdiMagnifyMinusOutline, mdiMagnifyPlusOutline } from '@mdi/js';
 import { useThemeMode } from '@/scripts/theme';
+import { focusHeadingIfRequested, requestHeadingFocus } from '@/scripts/ui';
 import AppIcon from '@/components/ui/AppIcon.vue';
 import IconButton from '@/components/ui/IconButton.vue';
 import SegmentedControl from '@/components/ui/SegmentedControl.vue';
@@ -28,15 +29,20 @@ const views = computed(() => [
   { value: 'TrickTree', label: t('paths.byLevel') },
   { value: 'CategoryTree', label: t('paths.byCategory') },
 ]);
+const heading = ref<HTMLElement>();
+onMounted(() => focusHeadingIfRequested(heading.value));
+
 function switchView(name: string) {
-  if (name !== props.active) router.replace({ name, params: route.params });
+  if (name === props.active) return;
+  requestHeadingFocus();
+  router.replace({ name, params: route.params });
 }
 </script>
 
 <template>
   <section class="tree-page">
     <header class="tree-head">
-      <h1>{{ t('tabs.paths') }}</h1>
+      <h1 ref="heading" tabindex="-1">{{ t('tabs.paths') }}</h1>
       <SegmentedControl :model-value="active" :options="views" :label="t('tabs.paths')" @update:model-value="switchView" />
       <p class="desc">{{ description }}</p>
     </header>
@@ -62,6 +68,7 @@ function switchView(name: string) {
 }
 .tree-head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
 .tree-head h1 { margin: 0; font-size: var(--t-xl); }
+.tree-head h1:focus { outline: none; }
 .desc {
   margin: 0;
   max-width: 70ch;
