@@ -19,6 +19,7 @@
 
   const total = computed(() => trickStore.tricks.length)
   const count = computed(() => masteredStore.calcShareMastered(trickStore.tricks))
+  // width of the overall bar
   const percent = computed(() => total.value ? Math.round((count.value / total.value) * 100) : 0)
   const rows = computed(() =>
     categoryProgress(trickStore.tricks, categoryStore.categories, masteredStore.isMastered)
@@ -30,11 +31,20 @@
 
 <template>
   <div class="page">
-    <h1 class="sr-only">{{ t('myProgress.myProgress') }}</h1>
-
     <section class="summary">
-      <p class="percent">{{ percent }}%</p>
+      <h1>{{ t('myProgress.myProgress') }}</h1>
       <p class="line">{{ t('myProgress.summary', { n: count, total }) }}</p>
+      <div
+        v-if="count > 0"
+        class="overall"
+        role="progressbar"
+        :aria-label="t('myProgress.myProgress')"
+        aria-valuemin="0"
+        :aria-valuemax="total"
+        :aria-valuenow="count"
+      >
+        <div class="fill" :style="{ width: percent + '%' }" />
+      </div>
     </section>
 
     <div v-if="count === 0" class="empty">
@@ -71,14 +81,12 @@
   gap: var(--space-6);
   padding-top: var(--space-5);
 }
-.percent {
-  margin: 0;
-  font-size: 56px;
-  font-weight: 700;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-.line { margin: var(--space-2) 0 0; color: var(--text-muted); }
+.summary { display: flex; flex-direction: column; gap: var(--space-2); }
+.summary h1 { margin: 0; font-size: var(--t-xl); font-weight: 700; line-height: 1.15; }
+.line { margin: 0; color: var(--text-muted); font-size: var(--t-lg); font-variant-numeric: tabular-nums; }
+/* same track as the category bars */
+.overall { height: 8px; margin-top: var(--space-2); border-radius: var(--radius-s); background: var(--surface-2); overflow: hidden; }
+.fill { height: 100%; border-radius: var(--radius-s); background: var(--accent); }
 .empty { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
 .empty p { margin: 0; max-width: 40ch; color: var(--text-muted); }
 .block { max-width: 560px; }

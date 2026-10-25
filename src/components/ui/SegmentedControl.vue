@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps<{
   modelValue: string
@@ -10,16 +10,24 @@ const emit = defineEmits<{ 'update:modelValue': [value: string] }>()
 
 const buttons = ref<HTMLButtonElement[]>([])
 
+// When modelValue matches no option the first one takes the tab stop, so the group stays reachable.
+const tabStop = computed(() =>
+  props.options.some(o => o.value === props.modelValue) ? props.modelValue : props.options[0]?.value)
+
+function select(next: number) {
+  emit('update:modelValue', props.options[next].value)
+  buttons.value[next]?.focus()
+}
 function move(delta: number) {
   const n = props.options.length
   const i = props.options.findIndex(o => o.value === props.modelValue)
-  const next = (i + delta + n) % n
-  emit('update:modelValue', props.options[next].value)
-  buttons.value[next]?.focus()
+  select((i + delta + n) % n)
 }
 function onKey(e: KeyboardEvent) {
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); move(1) }
   else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); move(-1) }
+  else if (e.key === 'Home') { e.preventDefault(); select(0) }
+  else if (e.key === 'End') { e.preventDefault(); select(props.options.length - 1) }
 }
 </script>
 
@@ -33,7 +41,7 @@ function onKey(e: KeyboardEvent) {
       role="radio"
       class="opt"
       :aria-checked="o.value === modelValue"
-      :tabindex="o.value === modelValue ? 0 : -1"
+      :tabindex="o.value === tabStop ? 0 : -1"
       @click="emit('update:modelValue', o.value)"
       @keydown="onKey"
     >{{ o.label }}</button>
@@ -61,7 +69,12 @@ function onKey(e: KeyboardEvent) {
   cursor: pointer;
   transition: background var(--dur), color var(--dur);
 }
-.opt[aria-checked='true'] { background: var(--accent); color: var(--accent-text); font-weight: 600; }
+.opt[aria-checked='true'] {
+  background: var(--surface-2);
+  color: var(--text);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
 .opt:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .opt { transition: none; } }
 </style>

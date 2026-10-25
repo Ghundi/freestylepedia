@@ -25,4 +25,18 @@ describe('SegmentedControl', () => {
     expect(w.get('[role="radiogroup"]').attributes('aria-label')).toBe('View')
     expect(w.findAll('[tabindex="0"]')).toHaveLength(1)
   })
+  it('keeps the group reachable by Tab when the value matches no option', () => {
+    const w = mount(SegmentedControl, { props: { modelValue: 'nope', options, label: 'View' } })
+    const stops = w.findAll('[tabindex="0"]')
+    expect(stops).toHaveLength(1)
+    expect(stops[0].text()).toBe('By category')
+  })
+
+  it('jumps to the first and last option on Home and End', async () => {
+    const w = mount(SegmentedControl, { props: { modelValue: 'all', options, label: 'View' } })
+    await w.get('[aria-checked="true"]').trigger('keydown', { key: 'Home' })
+    expect(w.emitted('update:modelValue')![0]).toEqual(['category'])
+    await w.get('[aria-checked="true"]').trigger('keydown', { key: 'End' })
+    expect(w.emitted('update:modelValue')![1]).toEqual(['all'])
+  })
 })

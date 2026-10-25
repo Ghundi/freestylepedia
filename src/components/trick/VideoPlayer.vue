@@ -79,10 +79,8 @@ async function play() {
   height: 64px;
   margin: -32px 0 0 -32px;
   border-radius: 50%;
-  background: var(--accent);
-  color: var(--accent-text);
-  /* keeps the disc's edge visible on a light frame, where the dark theme's light accent fades */
-  box-shadow: 0 0 0 2px rgb(0 0 0 / 0.55);
+  background: var(--text);
+  color: var(--bg);
   z-index: 1;
 }
 /* the triangle's visual centre sits left of its box centre */
