@@ -27,7 +27,9 @@ const landscape = getOrientation() === 'Landscape';
         :zoom-on-scroll="true"
         :zoom-on-double-click="false"
         :edges-focusable="false"
+        :nodes-focusable="false"
         :prevent-scrolling="true"
+        id="CategoryTree"
         class="basic-flow"
         :default-viewport="{ zoom: landscape ? 0.05 : 0.14 }"
         :translate-extent="[

@@ -7,7 +7,10 @@
   },
   "paths": {
     "byLevel": "By level",
-    "byCategory": "By category"
+    "byCategory": "By category",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "fit": "Show the whole graph"
   },
   "faq": {
     "naming_question": "Where do the trick names comes from?",
@@ -161,6 +164,7 @@
     "title": "Share",
     "copy": "Copy link",
     "copied": "Link copied",
-    "native": "Share…"
+    "native": "Share…",
+    "copyFailed": "Could not copy: select the link below"
   }
 }

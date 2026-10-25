@@ -7,7 +7,10 @@
   },
   "paths": {
     "byLevel": "Par niveau",
-    "byCategory": "Par catégorie"
+    "byCategory": "Par catégorie",
+    "zoomIn": "Zoomer",
+    "zoomOut": "Dézoomer",
+    "fit": "Voir tout le graphe"
   },
   "faq": {
     "naming_question": "D’où viennent les noms des figures ?",
@@ -161,6 +164,7 @@
     "title": "Partager",
     "copy": "Copier le lien",
     "copied": "Lien copié",
-    "native": "Partager…"
+    "native": "Partager…",
+    "copyFailed": "Copie impossible : sélectionne le lien ci-dessous"
   }
 }

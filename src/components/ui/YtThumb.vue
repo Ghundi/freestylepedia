@@ -50,7 +50,7 @@ function onLoad(e: Event) {
   transform: scale(1.112);
 }
 /* A white title card glares in the dark UI: invert it to light-on-dark. */
-:global(:root[data-theme='dark']) .card .img {
+:root[data-theme='dark'] .card .img {
   filter: invert(1) grayscale(1) contrast(0.9);
 }
 </style>

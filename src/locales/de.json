@@ -7,7 +7,10 @@
   },
   "paths": {
     "byLevel": "Nach Level",
-    "byCategory": "Nach Kategorie"
+    "byCategory": "Nach Kategorie",
+    "zoomIn": "Vergrößern",
+    "zoomOut": "Verkleinern",
+    "fit": "Ganzen Graphen anzeigen"
   },
   "faq": {
     "naming_question": "Woher kommen die Namen der Tricks?",
@@ -161,6 +164,7 @@
     "title": "Teilen",
     "copy": "Link kopieren",
     "copied": "Link kopiert",
-    "native": "Teilen…"
+    "native": "Teilen…",
+    "copyFailed": "Kopieren nicht möglich: Markiere den Link unten"
   }
 }

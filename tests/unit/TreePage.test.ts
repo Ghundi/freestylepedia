@@ -29,4 +29,9 @@ describe('TreePage', () => {
     expect(h1).toHaveLength(1)
     expect(h1[0].text()).toBe(en.tabs.paths)
   })
+  it('offers zoom in, zoom out and fit controls with accessible names', async () => {
+    const w = await mountTree('TrickTree')
+    const labels = w.findAll('.controls button').map(b => b.attributes('aria-label'))
+    expect(labels).toEqual([en.paths.zoomIn, en.paths.zoomOut, en.paths.fit])
+  })
 })

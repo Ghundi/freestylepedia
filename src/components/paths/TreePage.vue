@@ -2,8 +2,11 @@
 import { computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import type { Edge } from '@vue-flow/core';
+import { useVueFlow, type Edge } from '@vue-flow/core';
+import { mdiFitToScreenOutline, mdiMagnifyMinusOutline, mdiMagnifyPlusOutline } from '@mdi/js';
 import { useThemeMode } from '@/scripts/theme';
+import AppIcon from '@/components/ui/AppIcon.vue';
+import IconButton from '@/components/ui/IconButton.vue';
 import SegmentedControl from '@/components/ui/SegmentedControl.vue';
 
 const props = defineProps<{ active: 'TrickTree' | 'CategoryTree'; edges: Edge[]; description: string }>();
@@ -12,6 +15,8 @@ const { t } = useI18n();
 const router = useRouter();
 const route = useRoute();
 const { resolved } = useThemeMode();
+// the VueFlow in the slot carries the same id as the active view, so both use one store
+const { zoomIn, zoomOut, fitView } = useVueFlow(props.active);
 
 // Edge colours follow the theme (computed, so they update when `resolved` changes)
 const themedEdges = computed(() => {
@@ -37,6 +42,11 @@ function switchView(name: string) {
     </header>
     <div class="zone">
       <slot :edges="themedEdges" />
+      <div class="controls">
+        <IconButton :label="t('paths.zoomIn')" @click="zoomIn()"><AppIcon :path="mdiMagnifyPlusOutline" /></IconButton>
+        <IconButton :label="t('paths.zoomOut')" @click="zoomOut()"><AppIcon :path="mdiMagnifyMinusOutline" /></IconButton>
+        <IconButton :label="t('paths.fit')" @click="fitView({ padding: 0.1 })"><AppIcon :path="mdiFitToScreenOutline" /></IconButton>
+      </div>
     </div>
   </section>
 </template>
@@ -60,12 +70,24 @@ function switchView(name: string) {
   line-height: 1.5;
 }
 .zone {
+  position: relative;
   flex: 1;
   min-height: 0;
   background: var(--bg);
   border: 1px solid var(--line);
   border-radius: var(--radius-m);
   overflow: hidden;
+}
+.controls {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
 }
 .zone :deep(.basic-flow) { background: var(--bg); }
 @media (min-width: 900px) {
