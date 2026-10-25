@@ -106,7 +106,7 @@
           <p v-if="aliases.length" class="aliases">{{ aliases.join(' · ') }}</p>
           <p class="meta">
             <span class="pill">
-              <span class="dot" :style="{ background: categories.getColor(trick.category) }" />
+              <span class="dot" :style="{ background: categories.getDotColor(trick.category) }" />
               {{ t('categories.' + trick.category) }}
             </span>
             <span>{{ t('level', { n: trick.difficulty }) }}</span>

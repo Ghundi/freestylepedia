@@ -75,7 +75,7 @@ describe('TrickList (home)', () => {
     const w = await mountAt('/en?mastered=0001,0003&todo=0042')
     const card = w.get('.next')
     expect(card.text()).toContain('Scratch Spin')
-    expect(card.text()).toContain(en.home.next)
+    expect(card.text()).toContain(en.home.nextContext)
     const mastered = useMasteredStore()
     expect(tricks.filter(t => mastered.isMastered(t)).map(t => t.trickID)).toEqual(['0001', '0003'])
   })
@@ -92,11 +92,15 @@ describe('TrickList (home)', () => {
     const w = await mountAt('/en')
     const card = w.get('.next')
     expect(card.text()).toContain('Scratch Spin')
-    expect(card.text()).toContain(en.home.next)
+    expect(card.text()).toContain(en.home.nextContext)
   })
 
   it('suggests a starter trick when nothing is on the todo list', async () => {
     const w = await mountAt('/en')
-    expect(w.get('.next').text()).toContain(en.home.suggested)
+    const card = w.get('.next')
+    expect(card.text()).toContain(en.home.suggestedContext)
+    // the context is one line under the heading, not an eyebrow above it
+    expect(card.find('.over').exists()).toBe(false)
+    expect(card.get('.name').element.nextElementSibling?.textContent).toContain(en.home.suggestedContext)
   })
 })

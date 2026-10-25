@@ -5,6 +5,8 @@ export type ThemeMode = 'system' | 'dark' | 'light'
 const KEY = 'themeMode'
 // --bg of each theme in src/styles/tokens.css, for the browser UI colour (theme-color meta)
 export const THEME_COLORS = { dark: '#111214', light: '#f6f6f4' } as const
+// --surface-2 of each theme: the track the progress bars' fills sit on
+export const THEME_SURFACE_2 = { dark: '#24262b', light: '#ececea' } as const
 const mode = ref<ThemeMode>('system')
 const systemLight = ref(false)
 let listening = false

@@ -15,6 +15,8 @@ import IFP from "../assets/supporters/IFP Print Brust Link.webp"
 import ICD from "../assets/supporters/ICD.webp"
 import IceIceDilly from "../assets/supporters/IceIceDilly.webp"
 import { Trick } from '@/scripts/trickStore';
+import { visibleOnBackground } from '@/scripts/contrast';
+import { THEME_COLORS, THEME_SURFACE_2, useThemeMode } from '@/scripts/theme';
 import configJSON from "@/data/config.json";
 
 // Ids saved before the "trick" prefix was dropped from tricks.json ("trick0042") are
@@ -307,6 +309,15 @@ export const useCategoryStore = defineStore('categoryStore', {
         getColor(category: string): string {
             const index = this.categories.indexOf(category.toLowerCase());
             return this.colors[index];
+        },
+        /** The category colour adjusted to reach 3:1 on the page background (or on --surface-2) in the current theme. */
+        getDotColor(category: string, on: 'bg' | 'surface-2' = 'bg'): string {
+            const { resolved } = useThemeMode();
+            return visibleOnBackground(
+                this.getColor(category),
+                (on === 'bg' ? THEME_COLORS : THEME_SURFACE_2)[resolved.value],
+                resolved.value,
+            );
         }
     }
 })

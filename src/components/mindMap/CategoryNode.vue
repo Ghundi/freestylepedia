@@ -3,12 +3,12 @@ import { Handle } from '@vue-flow/core'
 import { computed } from 'vue';
 import { getOrientation, getPosition } from '@/scripts/helpers';
 import { readableTextColor } from '@/scripts/contrast';
-import { useThemeMode } from '@/scripts/theme';
+import { THEME_COLORS, useThemeMode } from '@/scripts/theme';
 
 const props = defineProps(['label', 'orientation', 'n_children', 'color'])
 const { resolved } = useThemeMode()
 // label sits on the page background: composite translucent category colours over it
-const textColor = computed(() => readableTextColor(props.color, resolved.value === 'dark' ? '#111214' : '#f6f6f4'))
+const textColor = computed(() => readableTextColor(props.color, THEME_COLORS[resolved.value]))
 </script>
 
 <template>

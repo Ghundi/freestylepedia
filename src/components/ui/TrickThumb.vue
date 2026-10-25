@@ -20,7 +20,7 @@ const categories = useCategoryStore()
 const isMastered = computed(() => mastered.isMastered(props.trick))
 const isTodo = computed(() => todo.isOnTodo(props.trick))
 const isNew = computed(() => trickStore.newestTrick?.trickID === props.trick.trickID)
-const dotColor = computed(() => categories.getColor(props.trick.category))
+const dotColor = computed(() => categories.getDotColor(props.trick.category))
 const to = computed(() => ({
   name: 'Trick',
   params: { lang: locale.value, trickname: strToUrl(props.trick.title[0]) },

@@ -132,8 +132,8 @@
   },
   "back": "Zurück",
   "home": {
-    "next": "Als Nächstes",
-    "suggested": "Fang hier an",
+    "nextContext": "Nächste Figur auf deiner Liste",
+    "suggestedContext": "Eine gute Figur zum Anfangen",
     "byCategory": "Nach Kategorie",
     "all": "Alle",
     "filters": "Filter",

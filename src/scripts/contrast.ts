@@ -39,3 +39,24 @@ export function readableTextColor(color: string, pageBg: string): string {
     ? DARK_TEXT
     : LIGHT_TEXT
 }
+
+function toHex([r, g, b]: RGB): string {
+  return '#' + [r, g, b].map(v => Math.round(Math.min(255, Math.max(0, v))).toString(16).padStart(2, '0')).join('')
+}
+
+/**
+ * A category colour usable for a dot, pill or fill that sits on `pageBg`: composited over it, then lightened
+ * (dark theme) or darkened (light theme) until it reaches `min`:1 against it (3:1 is the floor for graphics).
+ * Returns an opaque hex colour; an already sufficient colour keeps its hue and only loses its alpha.
+ */
+export function visibleOnBackground(color: string, pageBg: string, theme: 'dark' | 'light', min = 3): string {
+  const fg = parse(color)
+  const bg = parse(pageBg).rgb
+  let rgb = fg.rgb.map((v, i) => v * fg.a + bg[i] * (1 - fg.a)) as RGB
+  const target = theme === 'dark' ? 255 : 0
+  const bgL = luminance(bg)
+  for (let step = 0; step < 40 && ratio(luminance(rgb), bgL) < min; step++) {
+    rgb = rgb.map(v => v + (target - v) * 0.06) as RGB
+  }
+  return toHex(rgb)
+}

@@ -13,7 +13,7 @@ const categories = useCategoryStore()
     <li v-for="row in rows" :key="row.category" class="row">
       <div class="label">
         <span class="name">
-          <span class="dot" :style="{ background: categories.getColor(row.category) }" />
+          <span class="dot" :style="{ background: categories.getDotColor(row.category) }" />
           {{ t('categories.' + row.category) }}
         </span>
         <span class="count">{{ row.mastered }} / {{ row.total }}</span>
@@ -30,7 +30,7 @@ const categories = useCategoryStore()
           class="fill"
           :style="{
             width: (row.total ? (row.mastered / row.total) * 100 : 0) + '%',
-            background: categories.getColor(row.category),
+            background: categories.getDotColor(row.category, 'surface-2'),
           }"
         />
       </div>

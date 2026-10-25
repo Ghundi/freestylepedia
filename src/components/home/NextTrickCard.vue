@@ -4,12 +4,15 @@ import { useI18n } from 'vue-i18n'
 import YtThumb from '@/components/ui/YtThumb.vue'
 import { strToUrl } from '@/scripts/helpers'
 import { useCategoryStore } from '@/scripts/store'
+import { visibleOnBackground } from '@/scripts/contrast'
 import type { Trick } from '@/scripts/trickStore'
 
 const props = defineProps<{ trick: Trick | null; fromTodo: boolean }>()
 
 const { t, locale } = useI18n()
+// the dot sits on the card's fixed dark scrim, whatever the theme
 const categories = useCategoryStore()
+const dotColor = computed(() => props.trick ? visibleOnBackground(categories.getColor(props.trick.category), '#000000', 'dark') : '')
 
 const to = computed(() => props.trick && {
   name: 'Trick',
@@ -22,11 +25,10 @@ const to = computed(() => props.trick && {
     <!-- the title is the link text; the image adds nothing for screen readers -->
     <YtThumb :video-id="trick.videoID[0]" alt="" eager />
     <span class="cap">
-      <span class="over">{{ fromTodo ? t('home.next') : t('home.suggested') }}</span>
       <span class="name">{{ trick.title[0] }}</span>
       <span class="meta">
-        <span class="dot" :style="{ background: categories.getColor(trick.category) }" />
-        {{ t('categories.' + trick.category) }} · {{ t('level', { n: trick.difficulty }) }}
+        <span class="dot" :style="{ background: dotColor }" />
+        {{ fromTodo ? t('home.nextContext') : t('home.suggestedContext') }} · {{ t('categories.' + trick.category) }} · {{ t('level', { n: trick.difficulty }) }}
       </span>
     </span>
   </router-link>
@@ -37,7 +39,6 @@ const to = computed(() => props.trick && {
   position: relative;
   display: block;
   width: 100%;
-  max-width: 720px;
   border-radius: var(--radius-l);
   overflow: hidden;
   color: #f2f2f0;
@@ -57,7 +58,6 @@ const to = computed(() => props.trick && {
   /* fades in over the top padding only, so the text always sits on ≥ 80% black, even on white title cards */
   background: linear-gradient(to bottom, rgb(0 0 0 / 0), rgb(0 0 0 / 0.8) var(--space-6), rgb(0 0 0 / 0.85));
 }
-.over { color: #c9ccd2; font-size: var(--t-sm); font-weight: 500; }
 .name {
   font-size: var(--t-lg);
   font-weight: 700;
@@ -74,6 +74,9 @@ const to = computed(() => props.trick && {
 }
 .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
 @media (min-width: 900px) {
+  /* full content width, cinematic crop */
+  .next :deep(.yt-thumb) { aspect-ratio: 21 / 9; max-height: 440px; }
+  .next :deep(.img) { object-position: 50% 50%; }
   .cap { padding: var(--space-6) var(--space-5) var(--space-5); }
   .name { font-size: var(--t-xl); }
 }

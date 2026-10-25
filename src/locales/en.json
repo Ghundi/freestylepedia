@@ -132,8 +132,8 @@
   },
   "back": "Back",
   "home": {
-    "next": "Up next",
-    "suggested": "Start here",
+    "nextContext": "Next trick on your list",
+    "suggestedContext": "A good trick to start with",
     "byCategory": "By category",
     "all": "All",
     "filters": "Filters",
