@@ -27,7 +27,7 @@ trickStore.loadTricks();
         It is the page for the freestylepedia youtube series from Blackbirds Ice Freestyle.">
   </head>
   <div class="frame" :class="{ 'frame--own-header': route.meta.ownHeader }">
-    <AppHeader v-if="!route.meta.ownHeader"/>
+    <AppHeader class="global-header"/>
     <TabBar/>
     <main class="main">
       <LocaleLayout/>
@@ -42,8 +42,12 @@ trickStore.loadTricks();
   --header-h: 56px;
   --tabbar-h: 64px;
 }
-/* no global header, and no tab bar below 900px (TabBar hides itself there) */
-.frame--own-header { --header-h: 0px; --tabbar-h: 0px; }
+/* own-header pages (a trick) bring their own bar below 900px: no global header or tab bar there.
+   From 900px up they get the normal header and tab row. */
+@media (max-width: 899.98px) {
+  .frame--own-header { --header-h: 0px; --tabbar-h: 0px; }
+  .frame--own-header .global-header { display: none; }
+}
 .main {
   /* the fixed tab bar's offset is the footer's job: it is the last thing above the bar */
   padding: 0 var(--space-4);

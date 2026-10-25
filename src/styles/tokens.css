@@ -15,6 +15,7 @@
   --t-lg: 20px;
   --t-xl: 28px;
   --dur: 180ms;
+  --tabrow-h: 48px; /* the tab row under the header, from 900px up */
 }
 
 :root[data-theme='dark'] {

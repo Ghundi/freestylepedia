@@ -2,10 +2,11 @@
   import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue";
   import { useI18n } from "vue-i18n";
   import { useRoute, useRouter } from "vue-router";
-  import { mdiBookmark, mdiBookmarkOutline, mdiCheckCircle, mdiCheckCircleOutline, mdiShareVariant } from "@mdi/js";
+  import { mdiBookmark, mdiBookmarkOutline, mdiCheckCircle, mdiCheckCircleOutline, mdiShareVariant, mdiArrowLeft } from "@mdi/js";
   import AppHeader from "@/components/layout/AppHeader.vue";
   import AppButton from "@/components/ui/AppButton.vue";
   import AppIcon from "@/components/ui/AppIcon.vue";
+  import IconButton from "@/components/ui/IconButton.vue";
   import TrickRail from "@/components/ui/TrickRail.vue";
   import YtThumb from "@/components/ui/YtThumb.vue";
   import VideoPlayer from "@/components/trick/VideoPlayer.vue";
@@ -60,7 +61,8 @@
 
   // Escape goes back, unless it is closing a dialog (the share sheet) first.
   function onKeydown(e: KeyboardEvent) {
-    if (e.key !== 'Escape' || e.defaultPrevented || document.querySelector('dialog[open]')) return
+    // a held key repeats: going back once is enough
+    if (e.key !== 'Escape' || e.repeat || e.defaultPrevented || document.querySelector('dialog[open]')) return
     goBack()
   }
 
@@ -69,7 +71,7 @@
     window.addEventListener('keydown', onKeydown)
     // arriving from a rail lower on the previous trick's page must not land mid-page
     window.scrollTo(0, 0)
-    if (trick) document.title = trick.title[0]
+    document.title = trick ? trick.title[0] : requestedName + ' ' + t('error.trickNotFound')
     await nextTick()
     heading.value?.focus({ preventScroll: true })
   })
@@ -78,13 +80,20 @@
 
 <template>
   <div class="trick">
+    <!-- below 900px: own header (the tab bar is hidden); from 900px: the global header and tab row, and this toolbar -->
     <AppHeader class="head" back @back="goBack">
       <template v-if="trick" #actions>
-        <button type="button" class="icon-btn" :aria-label="t('share.title')" @click="shareOpen = true">
+        <IconButton :label="t('share.title')" @click="shareOpen = true">
           <AppIcon :path="mdiShareVariant" />
-        </button>
+        </IconButton>
       </template>
     </AppHeader>
+    <div class="toolbar">
+      <IconButton :label="t('back')" @click="goBack"><AppIcon :path="mdiArrowLeft" /></IconButton>
+      <IconButton v-if="trick" :label="t('share.title')" @click="shareOpen = true">
+        <AppIcon :path="mdiShareVariant" />
+      </IconButton>
+    </div>
 
     <template v-if="trick">
       <component :is="'script'" type="application/ld+json" v-text="jsonLd" />
@@ -154,20 +163,7 @@
 /* The header spans the window, past the page gutter, like the global one. App.vue zeroes --header-h
    on own-header routes (no global header there), so this one sets its own height. */
 .trick .head { height: 56px; margin-inline: calc(50% - 50vw); }
-.icon-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border: 0;
-  border-radius: var(--radius-m);
-  background: transparent;
-  color: var(--text);
-  cursor: pointer;
-}
-.icon-btn:hover { background: var(--surface-2); }
+.toolbar { display: none; }
 
 /* mobile: edge to edge, straight under the header */
 .trick .video { width: auto; margin-inline: calc(-1 * var(--space-4)); }
@@ -248,12 +244,17 @@
 .missing p { margin: 0; max-width: 36rem; color: var(--text-muted); }
 
 @media (min-width: 900px) {
-  /* the tab bar stays on top of the page on desktop: stick below it */
-  /* main clips it to the 1200px column here, so its rule would stop short of the tab bar's full-width one */
-  .trick .head { top: 48px; border-bottom-color: transparent; }
+  .trick .head { display: none; }
+  /* back and share sit on one row directly above the video, aligned with its edges */
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    max-width: 960px;
+    margin: var(--space-3) auto 0;
+  }
   .trick .video {
     max-width: 960px;
-    margin: var(--space-5) auto 0;
+    margin: var(--space-2) auto 0;
     border-radius: var(--radius-l);
     /* keeps the frame's edge when a white title card sits on the light page */
     outline: 1px solid var(--line);

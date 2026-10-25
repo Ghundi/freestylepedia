@@ -67,7 +67,7 @@ const active = computed(() => tabs.find(
     position: sticky;
     top: var(--header-h);
     bottom: auto;
-    height: 48px;
+    height: var(--tabrow-h);
     padding: 0;
     justify-content: center;
     gap: var(--space-2);

@@ -2,6 +2,7 @@
 import { mdiArrowLeft, mdiCogOutline, mdiMagnify } from '@mdi/js'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
+import IconButton from '@/components/ui/IconButton.vue'
 import { useSearchOpen } from '@/scripts/ui'
 
 defineProps<{ title?: string; back?: boolean }>()
@@ -15,9 +16,9 @@ const searchOpen = useSearchOpen()
   <header class="header">
     <div class="inner">
       <template v-if="back">
-        <button type="button" class="icon-btn" :aria-label="t('back')" @click="emit('back')">
+        <IconButton :label="t('back')" @click="emit('back')">
           <AppIcon :path="mdiArrowLeft" />
-        </button>
+        </IconButton>
         <h1 v-if="title" class="title">{{ title }}</h1>
         <div class="actions"><slot name="actions" /></div>
       </template>
@@ -25,12 +26,12 @@ const searchOpen = useSearchOpen()
         <router-link class="brand" :to="{ name: 'Home', params: { lang: locale } }">Freestylepedia</router-link>
         <div class="actions">
           <slot name="actions" />
-          <button type="button" class="icon-btn" data-search-trigger :aria-label="t('search.open')" @click="searchOpen = true">
+          <IconButton :label="t('search.open')" data-search-trigger @click="searchOpen = true">
             <AppIcon :path="mdiMagnify" />
-          </button>
-          <router-link class="icon-btn" :aria-label="t('settings.title')" :to="{ name: 'Settings', params: { lang: locale } }">
+          </IconButton>
+          <IconButton :label="t('settings.title')" :to="{ name: 'Settings', params: { lang: locale } }">
             <AppIcon :path="mdiCogOutline" />
-          </router-link>
+          </IconButton>
         </div>
       </template>
     </div>
@@ -68,20 +69,6 @@ const searchOpen = useSearchOpen()
   text-decoration: none;
 }
 .actions { display: flex; align-items: center; gap: var(--space-1); margin-left: auto; }
-.icon-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border: 0;
-  border-radius: var(--radius-m);
-  background: transparent;
-  color: var(--text);
-  cursor: pointer;
-}
-.icon-btn:hover { background: var(--surface-2); }
 @media (min-width: 900px) {
   .brand { flex: 0 0 auto; margin-right: auto; }
 }

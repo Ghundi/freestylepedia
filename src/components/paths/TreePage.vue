@@ -46,7 +46,7 @@ function switchView(name: string) {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  /* mobile: fixed tab bar at the bottom; desktop (below): 48px tab row under the header */
+  /* mobile: fixed tab bar at the bottom; desktop (below): tab row under the header */
   height: calc(100dvh - var(--header-h) - var(--tabbar-h) - env(safe-area-inset-bottom, 0px));
   padding-top: var(--space-3);
 }
@@ -69,6 +69,6 @@ function switchView(name: string) {
 }
 .zone :deep(.basic-flow) { background: var(--bg); }
 @media (min-width: 900px) {
-  .tree-page { height: calc(100dvh - var(--header-h) - 48px); }
+  .tree-page { height: calc(100dvh - var(--header-h) - var(--tabrow-h)); }
 }
 </style>
