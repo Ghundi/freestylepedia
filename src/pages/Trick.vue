@@ -252,6 +252,9 @@
     max-width: 960px;
     margin: var(--space-3) auto 0;
   }
+  /* the 44px hit areas overhang so the icons line up with the video's edges */
+  .toolbar > :first-child { margin-left: calc(-1 * var(--space-2)); }
+  .toolbar > :last-child { margin-right: calc(-1 * var(--space-2)); }
   .trick .video {
     max-width: 960px;
     margin: var(--space-2) auto 0;
