@@ -4,7 +4,6 @@ import { useRoute } from 'vue-router';
 import { useTrickStore } from "@/scripts/trickStore";
 import AppHeader from '@/components/layout/AppHeader.vue';
 import AppFooter from '@/components/layout/AppFooter.vue';
-import TabBar from '@/components/layout/TabBar.vue';
 import SearchOverlay from '@/components/home/SearchOverlay.vue';
 import { useSearchOpen } from '@/scripts/ui';
 import LocaleLayout from './components/localeLayout.vue';
@@ -28,7 +27,6 @@ trickStore.loadTricks();
   </head>
   <div class="frame" :class="{ 'frame--own-header': route.meta.ownHeader }">
     <AppHeader class="global-header"/>
-    <TabBar/>
     <main class="main">
       <LocaleLayout/>
     </main>
@@ -43,7 +41,7 @@ trickStore.loadTricks();
   --tabbar-h: 64px;
 }
 /* own-header pages (a trick) bring their own bar below 900px: no global header or tab bar there.
-   From 900px up they get the normal header and tab row. */
+   From 900px up they get the normal header, tabs included. */
 @media (max-width: 899.98px) {
   .frame--own-header { --header-h: 0px; --tabbar-h: 0px; }
   .frame--own-header .global-header { display: none; }

@@ -3,6 +3,7 @@ import { mdiArrowLeft, mdiCogOutline, mdiMagnify } from '@mdi/js'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import IconButton from '@/components/ui/IconButton.vue'
+import TabBar from '@/components/layout/TabBar.vue'
 import { useSearchOpen } from '@/scripts/ui'
 
 defineProps<{ title?: string; back?: boolean }>()
@@ -24,6 +25,8 @@ const searchOpen = useSearchOpen()
       </template>
       <template v-else>
         <router-link class="brand" :to="{ name: 'Home', params: { lang: locale } }">Freestylepedia</router-link>
+        <!-- fixed to the bottom of the screen below 900px, centred in this bar from 900px up -->
+        <TabBar />
         <div class="actions">
           <slot name="actions" />
           <IconButton :label="t('search.open')" data-search-trigger @click="searchOpen = true">
@@ -48,6 +51,7 @@ const searchOpen = useSearchOpen()
   border-bottom: 1px solid var(--line);
 }
 .inner {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--space-2);

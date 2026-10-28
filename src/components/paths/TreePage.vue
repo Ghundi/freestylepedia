@@ -98,6 +98,6 @@ function switchView(name: string) {
 }
 .zone :deep(.basic-flow) { background: var(--bg); }
 @media (min-width: 900px) {
-  .tree-page { height: calc(100dvh - var(--header-h) - var(--tabrow-h)); }
+  .tree-page { height: calc(100dvh - var(--header-h)); }
 }
 </style>

@@ -62,23 +62,26 @@ const active = computed(() => tabs.find(
 .tabs--own-header { display: none; }
 
 @media (min-width: 900px) {
+  /* inside the header row, centred between the brand and the actions */
   .tabs, .tabs--own-header {
     display: flex;
-    position: sticky;
-    top: var(--header-h);
-    bottom: auto;
-    height: var(--tabrow-h);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    height: auto;
     padding: 0;
-    justify-content: center;
-    gap: var(--space-2);
+    gap: var(--space-1);
+    background: none;
     border-top: 0;
-    border-bottom: 1px solid var(--line);
   }
   .tab {
     flex: 0 0 auto;
     flex-direction: row;
     gap: var(--space-2);
-    padding: 0 var(--space-4);
+    padding: 0 var(--space-3);
     font-size: var(--t-md);
   }
 }
