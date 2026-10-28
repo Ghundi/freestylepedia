@@ -6,6 +6,7 @@ import { createMemoryHistory, createRouter } from 'vue-router'
 import en from '../../src/locales/en.json'
 import Trick from '../../src/pages/Trick.vue'
 import VideoPlayer from '../../src/components/trick/VideoPlayer.vue'
+import ShareSheet from '../../src/components/trick/ShareSheet.vue'
 import { useTrickStore, type Trick as TrickT } from '../../src/scripts/trickStore'
 
 const make = (trickID: string, title: string | string[], videoID: string[], requirements: string[] = [], connections: string[] = []) =>
@@ -18,9 +19,9 @@ const tricks = [
   make('0003', 'T-Stop', ['eee']),
 ]
 
-async function mountAt(path: string) {
+async function mountAt(path: string, base?: string) {
   const router = createRouter({
-    history: createMemoryHistory(),
+    history: createMemoryHistory(base),
     routes: [
       { path: '/:lang', name: 'Home', component: { template: '<div/>' } },
       { path: '/:lang/trick/:trickname', name: 'Trick', component: Trick },
@@ -50,6 +51,11 @@ describe('Trick page', () => {
     expect(home.attributes('href')).toBe('/en')
     expect(w.findComponent(VideoPlayer).exists()).toBe(false)
     expect(w.find('.others').exists()).toBe(false)
+  })
+
+  it('shares a link that keeps the folder the site is served from', async () => {
+    const w = await mountAt('/en/trick/Hockey+Stop', '/freestylepedia/')
+    expect(w.findComponent(ShareSheet).props('url')).toBe(`${window.location.origin}/freestylepedia/en/trick/Hockey+Stop`)
   })
 
   it('has no "other videos" block for a trick with a single video', async () => {

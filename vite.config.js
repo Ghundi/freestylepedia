@@ -38,7 +38,8 @@ export default defineConfig({
         // the 960px ones are cached as they are seen
         globIgnores: ['thumbs/*-960.webp'],
         // files that are not app pages keep their own response instead of the app shell
-        navigateFallbackDenylist: [/^\/(thumbs|icons|assets)\//, /^\/[^/]+\.[a-z0-9]+$/i],
+        // (at the root, or under the one folder the site may be served from)
+        navigateFallbackDenylist: [/^\/(?:[^/]+\/)?(thumbs|icons|assets)\//, /^\/(?:[^/]+\/)?[^/]+\.[a-z0-9]+$/i],
         runtimeCaching: [{
           urlPattern: /\/thumbs\/.+\.webp$/,
           handler: 'CacheFirst',
@@ -55,7 +56,8 @@ export default defineConfig({
         name: 'Freestylepedia',
         short_name: 'Freestylepedia',
         description: "A place to lookup tricks and watch your progress",
-        start_url: '/',
+        // relative to the manifest, so the app also installs from a sub-folder
+        start_url: './',
         display: 'standalone',
         orientation: "any",
         id: "https://freestylepedia.org",
@@ -65,42 +67,42 @@ export default defineConfig({
         theme_color: '#111214',
         icons: [
           {
-            src: '/icons/Blackbirdlogoneuweiss-144x144.png',
+            src: 'icons/Blackbirdlogoneuweiss-144x144.png',
             sizes: '144x144',
             type: 'image/png'
           },
           {
-            src: '/icons/Blackbirdlogoneuweiss-192x192.png',
+            src: 'icons/Blackbirdlogoneuweiss-192x192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: '/icons/Blackbirdlogo-maskable-192x192.png',
+            src: 'icons/Blackbirdlogo-maskable-192x192.png',
             sizes: '192x192',
             type: 'image/png',
             purpose: "maskable"
           },
           {
-            src: '/icons/Blackbirdlogo-maskable-512x512.png',
+            src: 'icons/Blackbirdlogo-maskable-512x512.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: "maskable"
           },
           {
-            src: '/icons/Blackbirdlogoneuweiss-512x512.png',
+            src: 'icons/Blackbirdlogoneuweiss-512x512.png',
             sizes: '512x512',
             type: 'image/png'
           }
         ],
         screenshots: [
           {
-              "src": "/icons/ScreenshotWide.png",
+              "src": "icons/ScreenshotWide.png",
               "type": "image/png",
               "sizes": "1916x929",
               "form_factor": "wide",
           },
           {
-              "src": "/icons/ScreenshotNarrow.png",
+              "src": "icons/ScreenshotNarrow.png",
               "type": "image/png",
               "sizes": "389x840",
               "form_factor": "narrow",
@@ -109,12 +111,12 @@ export default defineConfig({
         "shortcuts": [
           {
             "name": "My Progress",
-            "url": "/MyProgress",
+            "url": "MyProgress",
             "short_name": "Progress",
             "description": "On this page you can track your progress and see what tricks to learn next.",
             "icons": [
               {
-                "src": "/icons/Blackbirdlogoneuweiss-192x192.png",
+                "src": "icons/Blackbirdlogoneuweiss-192x192.png",
                 "sizes": "192x192",
                 "type": "image/png"
               }

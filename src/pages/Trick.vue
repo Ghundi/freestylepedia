@@ -45,7 +45,8 @@
   const related = computed(() => trick ? byIds(trick.connections.filter(id => !trick.requirements.includes(id))) : [])
 
   const shareOpen = ref(false)
-  const shareUrl = computed(() => window.location.origin + route.path)
+  // href carries the folder the site is served from, if any
+  const shareUrl = computed(() => window.location.origin + router.resolve(route.path).href)
 
   const jsonLd = computed(() => trick && JSON.stringify({
     "@context": "https://schema.org",

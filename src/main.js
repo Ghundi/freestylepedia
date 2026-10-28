@@ -126,7 +126,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory(import.meta.env.BASE_URL),
     routes,
     // back/forward restores where the page was (the home rails after a trick); a new page starts at the top
     scrollBehavior(to, from, savedPosition) {
@@ -178,8 +178,10 @@ function reloadOnce(path) {
 router.onError((err, to) => {
     if (!CHUNK_ERROR.test(err?.message ?? '')) return;
     // offline, the page loads once the connection is back
-    if (navigator.onLine) reloadOnce(to.fullPath);
-    else window.addEventListener('online', () => reloadOnce(to.fullPath), { once: true });
+    // href keeps the folder the site is served from
+    const path = router.resolve(to).href;
+    if (navigator.onLine) reloadOnce(path);
+    else window.addEventListener('online', () => reloadOnce(path), { once: true });
 });
 window.addEventListener('vite:preloadError', (event) => {
     event.preventDefault();
