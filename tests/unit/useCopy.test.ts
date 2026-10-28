@@ -83,4 +83,42 @@ describe('useCopy', () => {
     expect(c.failed.value).toBe(true)
     expect(c.copied.value).toBe(false)
   })
+
+  it('selects inside the open dialog, where the page outside is inert', async () => {
+    Object.defineProperty(navigator, 'clipboard', { value: undefined, configurable: true })
+    const dialog = document.createElement('dialog')
+    dialog.setAttribute('open', '')
+    const button = document.createElement('button')
+    dialog.append(button)
+    document.body.append(dialog)
+    button.focus()
+    let host: Element | null | undefined
+    let selected = ''
+    Object.defineProperty(document, 'execCommand', {
+      configurable: true,
+      value: vi.fn(() => {
+        const area = document.querySelector('textarea')!
+        host = area.parentElement
+        selected = area.value.slice(area.selectionStart, area.selectionEnd)
+        return true
+      }),
+    })
+    const c = setup('https://x.test/b')
+    await c.copy()
+    expect(host).toBe(dialog)
+    expect(selected).toBe('https://x.test/b')
+    expect(document.activeElement).toBe(button)
+    dialog.remove()
+  })
+
+  it('sizes the hidden field so iOS does not zoom when it takes focus', async () => {
+    Object.defineProperty(navigator, 'clipboard', { value: undefined, configurable: true })
+    let fontSize = ''
+    Object.defineProperty(document, 'execCommand', {
+      configurable: true,
+      value: vi.fn(() => { fontSize = document.querySelector('textarea')!.style.fontSize; return true }),
+    })
+    await setup().copy()
+    expect(fontSize).toBe('12pt')
+  })
 })

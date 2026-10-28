@@ -3,17 +3,24 @@ import { onBeforeUnmount, ref } from 'vue'
 /**
  * Copy text through a hidden selection. Works where the Clipboard API is missing,
  * such as a page served over plain http on the local network.
+ * The field goes inside the open dialog, if any: a modal dialog makes the rest of the page inert,
+ * and a selection there copies nothing.
  */
 function copyWithSelection(text: string): boolean {
   const previousFocus = document.activeElement as HTMLElement | null
+  const host = previousFocus?.closest('dialog[open]') ?? document.body
   const area = document.createElement('textarea')
   area.value = text
   area.readOnly = true
+  // 12pt keeps iOS from zooming the page when the field takes focus
+  area.style.fontSize = '12pt'
   area.style.position = 'fixed'
   area.style.top = '0'
   area.style.left = '-9999px'
-  document.body.append(area)
+  host.append(area)
   area.select()
+  // iOS leaves a readonly field's selection empty without an explicit range
+  area.setSelectionRange(0, text.length)
   let ok = false
   try {
     ok = document.execCommand('copy')
