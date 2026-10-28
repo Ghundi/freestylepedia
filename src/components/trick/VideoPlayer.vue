@@ -5,7 +5,7 @@ import { mdiPlay } from '@mdi/js'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import YtThumb from '@/components/ui/YtThumb.vue'
 import { embedUrl } from '@/scripts/trickMedia'
-import { loadYouTubeApi, type YouTubePlayer } from '@/scripts/youtubeApi'
+import { loadYouTubeApi, type YouTubeApi, type YouTubePlayer } from '@/scripts/youtubeApi'
 
 const props = defineProps<{ videoId: string; title: string }>()
 
@@ -33,9 +33,9 @@ onBeforeUnmount(() => window.removeEventListener('online', backOnline))
 
 // Safari refuses autoplay with sound inside the frame: start muted there instead of waiting for a second tap.
 // Without the API (blocked script), the frame keeps YouTube's own play button.
-async function attachPlayer(el: HTMLIFrameElement) {
+async function attachPlayer(api: Promise<YouTubeApi>, el: HTMLIFrameElement) {
   try {
-    const YT = await loadYouTubeApi()
+    const YT = await api
     if (frame.value !== el) return
     player = new YT.Player(el, {
       events: {
@@ -56,11 +56,14 @@ async function play() {
     offline.value = true
     return
   }
+  // the API starts loading with the frame, so it is ready when the browser decides on autoplay
+  const api = loadYouTubeApi()
+  api.catch(() => {})
   playing.value = true
   await nextTick()
   if (!frame.value) return
   frame.value.focus()
-  attachPlayer(frame.value)
+  attachPlayer(api, frame.value)
 }
 </script>
 

@@ -61,6 +61,13 @@ describe('VideoPlayer', () => {
     expect(w.find('img').exists()).toBe(false)
   })
 
+  it('starts loading the YouTube API on the click itself, before the frame renders', () => {
+    fakeApi()
+    const w = mountPlayer()
+    w.get('button').trigger('click')
+    expect(loadYouTubeApi).toHaveBeenCalledTimes(1)
+  })
+
   it('attaches the player to the iframe it rendered', async () => {
     const { created } = fakeApi()
     const w = mountPlayer()

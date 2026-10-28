@@ -80,7 +80,6 @@ const iosHint = ref(false)
       <AppButton v-else @click="iosHint = true">{{ t('navBar.installApp') }}</AppButton>
     </section>
 
-
     <AppDialog v-model:open="iosHint" :title="t('navBar.installApp')">
       <p>{{ t('navBar.installAppHintIOS') }}</p>
     </AppDialog>
