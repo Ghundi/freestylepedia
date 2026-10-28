@@ -134,6 +134,10 @@ input::-moz-range-thumb {
   pointer-events: auto;
   cursor: grab;
 }
+@media (hover: hover) {
+  input::-webkit-slider-thumb:hover { background: var(--surface-2); }
+  input::-moz-range-thumb:hover { background: var(--surface-2); }
+}
 input:active::-webkit-slider-thumb { cursor: grabbing; }
 input:active::-moz-range-thumb { cursor: grabbing; }
 input:focus { outline: none; }
