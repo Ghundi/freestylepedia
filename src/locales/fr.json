@@ -93,7 +93,7 @@
     "pageNotFound": "Page introuvable",
     "pageNotFoundSuggestion": "L’adresse est peut-être mal orthographiée",
     "trickNotFound": "introuvable",
-    "trickNotFoundSuggestion": "Le nom de la figure dans l’adresse est peut-être incorrect. Seul le nom de la miniature YouTube est accepté.",
+    "trickNotFoundSuggestion": "Le nom de la figure dans l’adresse est peut-être mal orthographié. Essaie de la rechercher.",
     "toHome": "Voir toutes les figures"
   },
   "myProgress": {
@@ -103,10 +103,11 @@
     "nextTrick": "Ta prochaine figure",
     "transferProgress": "Transférer ma progression",
     "transferInfo": "Ouvre ce lien sur ton nouvel appareil pour retrouver ta progression.",
-    "summary": "{n} figures acquises sur {total}",
+    "summary": "{n} figure acquise sur {total} | {n} figures acquises sur {total}",
     "empty": "Marque tes premières figures comme acquises pour suivre ta progression.",
     "byCategory": "Par catégorie",
-    "browse": "Voir les figures"
+    "browse": "Voir les figures",
+    "allDone": "Toutes les figures sont acquises. De nouvelles vidéos sortent régulièrement : reviens bientôt."
   },
   "close": "Fermer",
   "level": "Niveau {n}",
@@ -148,7 +149,8 @@
     "levelMin": "Minimum",
     "levelMax": "Maximum",
     "reset": "Réinitialiser",
-    "active": "{n} actif | {n} actifs"
+    "active": "{n} actif | {n} actifs",
+    "recommendedContext": "Recommandée pour ton niveau"
   },
   "video": {
     "play": "Lire {name}",
@@ -166,5 +168,6 @@
     "copied": "Lien copié",
     "native": "Partager…",
     "copyFailed": "Copie impossible : sélectionne le lien ci-dessous"
-  }
+  },
+  "skipToContent": "Aller au contenu"
 }

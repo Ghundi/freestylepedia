@@ -18,16 +18,10 @@ trickStore.loadTricks();
 
 
 <template>
-  <head>
-    <title>Freestylepedia</title>
-    <meta name="description" content=
-        "This is a website where you can learn ice freestyle tricks and moves.
-        You can learn about all of them here and see the connections between them.
-        It is the page for the freestylepedia youtube series from Blackbirds Ice Freestyle.">
-  </head>
   <div class="frame" :class="{ 'frame--own-header': route.meta.ownHeader }">
+    <a class="skip" href="#main">{{ $t('skipToContent') }}</a>
     <AppHeader class="global-header"/>
-    <main class="main">
+    <main id="main" class="main" tabindex="-1">
       <LocaleLayout/>
     </main>
     <AppFooter/>
@@ -46,6 +40,21 @@ trickStore.loadTricks();
   .frame--own-header { --header-h: 0px; --tabbar-h: 0px; }
   .frame--own-header .global-header { display: none; }
 }
+/* first Tab stop: hidden until focused */
+.skip {
+  position: fixed;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-s);
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+.skip:focus-visible { transform: none; }
+.main:focus { outline: none; }
 .main {
   /* the fixed tab bar's offset is the footer's job: it is the last thing above the bar */
   padding: 0 var(--space-4);

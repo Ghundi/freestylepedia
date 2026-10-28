@@ -132,13 +132,18 @@ select {
   font: inherit;
 }
 select:focus-visible, .check input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+/* reset and the live count stay in view while the filters scroll */
 .foot {
+  position: sticky;
+  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  padding-top: var(--space-4);
+  padding: var(--space-4) 0 var(--space-5);
+  margin-bottom: calc(-1 * var(--space-5));
   border-top: 1px solid var(--line);
+  background: var(--surface);
 }
 .count { margin: 0; color: var(--text-muted); font-size: var(--t-sm); }
 </style>

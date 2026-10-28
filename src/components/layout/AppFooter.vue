@@ -36,12 +36,12 @@ const social = [
       <ul class="row">
         <li>
           <a href="https://www.youtube.com/@BlackbirdIceFreestyle" target="_blank" rel="noopener">
-            <img class="logo" :src="dark ? blackbirdLight : blackbirdDark" alt="Blackbird Logo" width="40" height="40">
+            <img class="logo" :src="dark ? blackbirdLight : blackbirdDark" alt="Blackbird Logo" width="44" height="44">
           </a>
         </li>
         <li>
           <a href="https://www.instagram.com/mainziceskategroup/" target="_blank" rel="noopener">
-            <img class="logo" :src="dark ? misgLight : misgDark" alt="MISG Logo" width="40" height="40">
+            <img class="logo" :src="dark ? misgLight : misgDark" alt="MISG Logo" width="44" height="44">
           </a>
         </li>
       </ul>
@@ -49,7 +49,7 @@ const social = [
       <ul class="row">
         <li v-for="(team, i) in supporters" :key="i">
           <a :href="team.link" target="_blank" rel="noopener">
-            <img class="logo logo--supporter" :src="team.imgSrc" :alt="t('footer.supporterLogo')" width="40" height="40">
+            <img class="logo logo--supporter" :src="team.imgSrc" :alt="team.name" width="44" height="44">
           </a>
         </li>
       </ul>
@@ -73,8 +73,9 @@ const social = [
 }
 .social:hover { background: var(--surface-2); }
 .row a { display: inline-flex; }
-.logo { display: block; width: 40px; height: 40px; object-fit: contain; }
-.logo--supporter { border-radius: 50%; background: #000; }
+.logo { display: block; width: 44px; height: 44px; object-fit: contain; }
+/* the ring keeps black logos apart from the dark page */
+.logo--supporter { border-radius: 50%; background: #000; box-shadow: 0 0 0 1px var(--line); }
 .muted { margin: 0; color: var(--text-muted); font-size: var(--t-sm); text-align: center; }
 @media (min-width: 900px) {
   .footer { padding-bottom: var(--space-6); }

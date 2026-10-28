@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { useRoute, useRouter } from 'vue-router';
   import { mdiTuneVariant } from '@mdi/js';
   import FilterSheet from '@/components/home/FilterSheet.vue';
   import TrickRail from '@/components/ui/TrickRail.vue';
@@ -9,27 +8,14 @@
   import SegmentedControl from '@/components/ui/SegmentedControl.vue';
   import AppButton from '@/components/ui/AppButton.vue';
   import {
-    resetFilters, useCategoryStore, useCurSearchStore, useMarkedStore, useMasteredStore, useSelCategoryStore,
-    useSelDifficultyStore, useSelSortingOrderStore, useTodoStore,
+    resetFilters, useCategoryStore, useCurSearchStore, useMarkedStore, useSelCategoryStore,
+    useSelDifficultyStore, useSelSortingOrderStore,
   } from '@/scripts/store';
   import { useTrickStore } from "@/scripts/trickStore";
   import { groupByCategory } from '@/scripts/collections';
   import { useHomeView } from '@/scripts/homeView';
 
   const trickStore = useTrickStore();
-
-  const route = useRoute()
-  if(route.query.todo) {
-    useTodoStore().loadHash(route.query.todo.toString());
-  }
-  if(route.query.mastered) {
-    useMasteredStore().loadHash(route.query.mastered.toString());
-  }
-  // Once loaded, the transfer link leaves the URL: coming back to this history entry
-  // must not apply it again over marks made since.
-  if(route.query.todo || route.query.mastered) {
-    useRouter().replace({ query: {} });
-  }
 
   const { t } = useI18n();
   const categoryStore = useCategoryStore();

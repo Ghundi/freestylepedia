@@ -102,6 +102,15 @@ export const useTrickStore = defineStore('trickStore', {
                 return null;
             }
         },
+        // Case-insensitive match on the canonical title or any alias, locale-tagged ones ("de{...}") included.
+        findTrickByAnyTitle(name: string): Trick | null {
+            const wanted = name.trim().toLowerCase()
+            if (!wanted) return null
+            const plain = (title: string) => title.replace(/^[a-z]{2}\{(.*)\}$/, '$1').trim().toLowerCase()
+            return this.tricks.find(t => plain(t.title[0]) === wanted)
+                ?? this.tricks.find(t => t.title.some(title => plain(title) === wanted))
+                ?? null
+        },
         getLocalTrickTitles(trick: Trick, lang: string): Array<string> {
             let res: Array<string> = [];
             for (let i = 0; i < trick.title.length; i++) {
@@ -217,6 +226,11 @@ export const useTrickStore = defineStore('trickStore', {
                 }
                 // trick node
                 else if(parent && g_parent) {
+                    // a trick reached from a second parent is drawn once: only the extra edge is added
+                    if (getNodeIdxById(g_node.name, nodes) !== -1) {
+                        edges.push({ id: g_parent.name + '->' + g_node.name, source: g_parent.name, target: g_node.name, style: { stroke: 'black', strokeWidth: 3 } });
+                        return [nodes, edges];
+                    }
                     const prev_idx = g_parent.children.indexOf(g_node) - 1;
                     nodes.push({
                         id: g_node.name,
@@ -389,6 +403,11 @@ export const useTrickStore = defineStore('trickStore', {
                         throw Error("node missing difficulty for tree height/width calculation" + g_node.name);
                     if(!g_parent.difficulty)
                         throw Error("node missing difficulty for tree height/width calculation" + g_parent.name);
+                    // a trick reached from a second parent is drawn once: only the extra edge is added
+                    if (getNodeIdxById(g_node.name, nodes) !== -1) {
+                        edges.push({ id: g_parent.name + '->' + g_node.name, source: g_parent.name, target: g_node.name, style: { stroke: 'black', strokeWidth: 3 } });
+                        return [nodes, edges];
+                    }
 
                     const prev_idx = g_parent.children.indexOf(g_node) - 1;
                     nodes.push({
@@ -435,12 +454,6 @@ export const useTrickStore = defineStore('trickStore', {
                             color: categoryStore.getColor(trick.category)
                         }});
                 }
-                // difficulty markers
-                for (let j = 1; j <= 5; j++) {
-                    nodes.push({id: 'Difficulty ' + j.toString(), type: 'difficulty', position: {x: j * difficultySpacing * xScaleFactor, y: -200}, data: {
-                            label: j.toString(),
-                        }})
-                }
                 // calculate conversion recursively
                 for (let i = 0; i < g_node.children.length; i++) {
                     const [t_nodes, t_edges] = convGraph(nodes, edges, nodes[getNodeIdxById(g_node.name, nodes)], g_node.children[i], g_node)
@@ -458,6 +471,12 @@ export const useTrickStore = defineStore('trickStore', {
             const categoryStore = useCategoryStore();
 
             [nodes, edges] = convGraph(nodes, edges, null, graph[0], null)
+            // one level heading per difficulty column
+            for (let j = 1; j <= 5; j++) {
+                nodes.push({id: 'Difficulty ' + j.toString(), type: 'difficulty', position: {x: j * difficultySpacing * xScaleFactor, y: -200}, data: {
+                        label: j.toString(),
+                    }})
+            }
 
 
             return [nodes, edges];

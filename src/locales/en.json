@@ -93,7 +93,7 @@
     "pageNotFound": "Page not found",
     "pageNotFoundSuggestion": "Maybe you spelled something wrong",
     "trickNotFound": "not found",
-    "trickNotFoundSuggestion": "Maybe the trick in the URL is spelled wrong. Only the name of the YouTube Thumbnail is valid.",
+    "trickNotFoundSuggestion": "Maybe the trick name in the URL is misspelled. Try searching for it.",
     "toHome": "See all tricks"
   },
   "myProgress": {
@@ -106,7 +106,8 @@
     "summary": "{n} of {total} tricks mastered",
     "empty": "Mark your first tricks as mastered to follow your progress.",
     "byCategory": "By category",
-    "browse": "Browse tricks"
+    "browse": "Browse tricks",
+    "allDone": "Every trick is mastered. New videos come out regularly: check back soon."
   },
   "close": "Close",
   "level": "Level {n}",
@@ -148,7 +149,8 @@
     "levelMin": "Minimum",
     "levelMax": "Maximum",
     "reset": "Reset",
-    "active": "{n} active"
+    "active": "{n} active",
+    "recommendedContext": "Recommended for your level"
   },
   "video": {
     "play": "Play {name}",
@@ -166,5 +168,6 @@
     "copied": "Link copied",
     "native": "Share…",
     "copyFailed": "Could not copy: select the link below"
-  }
+  },
+  "skipToContent": "Skip to content"
 }

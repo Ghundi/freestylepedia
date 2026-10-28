@@ -8,13 +8,14 @@ import Trick from '../../src/pages/Trick.vue'
 import VideoPlayer from '../../src/components/trick/VideoPlayer.vue'
 import { useTrickStore, type Trick as TrickT } from '../../src/scripts/trickStore'
 
-const make = (trickID: string, title: string, videoID: string[], requirements: string[] = []) =>
-  ({ trickID, title: [title], difficulty: 2, category: 'stop', releaseDate: new Date('2024-01-01'),
-    videoID, requirements, connections: [] }) as TrickT
+const make = (trickID: string, title: string | string[], videoID: string[], requirements: string[] = [], connections: string[] = []) =>
+  ({ trickID, title: Array.isArray(title) ? title : [title], difficulty: 2, category: 'stop', releaseDate: new Date('2024-01-01'),
+    videoID, requirements, connections }) as TrickT
 
 const tricks = [
   make('0001', 'Hockey Stop', ['aaa']),
-  make('0002', 'Hawk Stop', ['bbb', 'ccc', 'ddd'], ['0001', '9999']),
+  make('0002', ['Hawk Stop', 'de{Falken Bremse}'], ['bbb', 'ccc', 'ddd'], ['0001', '9999'], ['0001', '0003']),
+  make('0003', 'T-Stop', ['eee']),
 ]
 
 async function mountAt(path: string) {
@@ -30,7 +31,7 @@ async function mountAt(path: string) {
   const i18n = createI18n({ legacy: false, locale: 'en', messages: { en } })
   const w = mount(Trick, { global: { plugins: [router, i18n] } })
   await flushPromises()
-  return w
+  return Object.assign(w, { router })
 }
 
 describe('Trick page', () => {
@@ -71,5 +72,17 @@ describe('Trick page', () => {
     const rail = w.findAll('.rail').find(r => r.text().includes(en.trick.before))!
     expect(rail.findAll('li')).toHaveLength(1)
     expect(rail.text()).toContain('Hockey Stop')
+  })
+
+  it('sends an alias or a different case to the trick\'s own URL', async () => {
+    expect((await mountAt('/en/trick/hawk+stop')).router.currentRoute.value.path).toBe('/en/trick/Hawk+Stop')
+    expect((await mountAt('/de/trick/Falken+Bremse')).router.currentRoute.value.path).toBe('/de/trick/Hawk+Stop')
+  })
+
+  it('does not repeat a "learn first" trick under related tricks', async () => {
+    const w = await mountAt('/en/trick/Hawk+Stop')
+    const related = w.findAll('.rail').find(r => r.text().includes(en.trick.related))!
+    expect(related.text()).toContain('T-Stop')
+    expect(related.text()).not.toContain('Hockey Stop')
   })
 })

@@ -7,7 +7,8 @@ import { useCategoryStore } from '@/scripts/store'
 import { visibleOnBackground } from '@/scripts/contrast'
 import type { Trick } from '@/scripts/trickStore'
 
-const props = defineProps<{ trick: Trick | null; fromTodo: boolean }>()
+// started: the user has mastered tricks already, so a suggestion is no longer a first trick
+const props = defineProps<{ trick: Trick | null; fromTodo: boolean; started?: boolean }>()
 
 const { t, locale } = useI18n()
 // the dot sits on the card's fixed dark scrim, whatever the theme
@@ -28,7 +29,7 @@ const to = computed(() => props.trick && {
       <span class="name">{{ trick.title[0] }}</span>
       <span class="meta">
         <span class="dot" :style="{ background: dotColor }" />
-        {{ fromTodo ? t('home.nextContext') : t('home.suggestedContext') }} · {{ t('categories.' + trick.category) }} · {{ t('level', { n: trick.difficulty }) }}
+        {{ fromTodo ? t('home.nextContext') : started ? t('home.recommendedContext') : t('home.suggestedContext') }} · {{ t('categories.' + trick.category) }} · {{ t('level', { n: trick.difficulty }) }}
       </span>
     </span>
   </router-link>

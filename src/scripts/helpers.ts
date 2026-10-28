@@ -53,21 +53,17 @@ export function getCategorySizes(tricks: Array<Trick>): Array<number> {
     return catSizes
 }
 
-function logicalOR(res: boolean, x: boolean): boolean {
-    return res || x;
+// Folds a title or a query for matching: locale tag ("de{...}"), accents, case, hyphens and extra spaces go.
+function foldForSearch(str: string): string {
+    return str.replace(/^[a-z]{2}\{(.*)\}$/, '$1')
+        .normalize('NFD').replace(/\p{Diacritic}/gu, '')
+        .toLowerCase().replaceAll('-', ' ').replace(/\s+/g, ' ').trim()
 }
 
 export function trickMatchesSearch(trick: Trick, searchVal: string | null): boolean {
-    // empty search field
-    if(!searchVal) {
-        return true;
-    }
-    const search = searchVal.toLowerCase();
-    // include results with hyphens
-    if(!search.includes("-") && trick.title.toString().includes("-")) {
-        return trick.title.map( x => x.toLowerCase().replaceAll("-", " ").includes(search) ).reduce(logicalOR, false)        
-    }
-    return trick.title.map( x => x.toLowerCase().includes(search) ).reduce(logicalOR, false)
+    const search = searchVal ? foldForSearch(searchVal) : ''
+    if (!search) return true
+    return trick.title.some(title => foldForSearch(title).includes(search))
 }
 
 export function getSortedTricks(tricks: Array<Trick>, sortOption: string): Array<Trick>  {

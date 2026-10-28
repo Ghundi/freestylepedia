@@ -44,7 +44,11 @@ async function shareNative() {
         <AppButton class="row" :icon="copied ? mdiCheck : mdiContentCopy" @click="copy">
           <span aria-live="polite">{{ copied ? t('share.copied') : t('share.copy') }}</span>
         </AppButton>
-        <p v-if="failed" class="fail" role="status">{{ t('share.copyFailed') }}</p>
+        <template v-if="failed">
+          <p class="fail" role="status">{{ t('share.copyFailed') }}</p>
+          <!-- the link to select by hand, as the message says -->
+          <p class="link">{{ url }}</p>
+        </template>
       </li>
       <li v-for="l in links" :key="l.label">
         <AppButton class="row" :icon="l.icon" :href="l.href" target="_blank" rel="noopener">{{ l.label }}</AppButton>
@@ -63,5 +67,6 @@ async function shareNative() {
   list-style: none;
 }
 .fail { margin: var(--space-2) 0 0; color: var(--text-muted); font-size: var(--t-sm); }
+.link { margin: var(--space-2) 0 0; font-size: var(--t-sm); overflow-wrap: anywhere; user-select: all; }
 .list .row { width: 100%; min-height: 48px; justify-content: flex-start; }
 </style>

@@ -29,13 +29,19 @@ function onClose() {
   trigger = null
 }
 // The dialog box itself is only the click target outside its inner panel (the backdrop).
+// A press that starts inside (a drag, a text selection) and ends outside does not close it.
+let pressedOutside = false
+function onPointerDown(e: PointerEvent) {
+  pressedOutside = e.target === dialog.value
+}
 function onClick(e: MouseEvent) {
-  if (e.target === dialog.value) emit('update:open', false)
+  if (e.target === dialog.value && pressedOutside) emit('update:open', false)
+  pressedOutside = false
 }
 </script>
 
 <template>
-  <dialog ref="dialog" class="dlg" :aria-labelledby="titleId" @close="onClose" @click="onClick">
+  <dialog ref="dialog" class="dlg" :aria-labelledby="titleId" @close="onClose" @pointerdown="onPointerDown" @click="onClick">
     <div class="panel">
       <header class="bar">
         <h2 :id="titleId">{{ title }}</h2>
@@ -59,13 +65,22 @@ function onClick(e: MouseEvent) {
   color: var(--text);
 }
 .dlg::backdrop { background: rgb(0 0 0 / 0.6); }
-.panel { padding: var(--space-5); }
+/* the page behind an open dialog stays put */
+:global(html:has(dialog[open])) { overflow: hidden; }
+.dlg { overscroll-behavior: contain; }
+.panel { padding: 0 var(--space-5) var(--space-5); }
+/* the title and Close stay in view while a long dialog scrolls */
 .bar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-  margin-bottom: var(--space-4);
+  padding: var(--space-5) 0 var(--space-3);
+  margin-bottom: var(--space-1);
+  background: var(--surface);
 }
 h2 { margin: 0; font-size: var(--t-lg); font-weight: 600; }
 .close {

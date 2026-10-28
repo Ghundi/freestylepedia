@@ -13,7 +13,7 @@ const lineWidth = computed(() => Math.max(1, 1.5 / (viewport.value.zoom || 1)) +
   <Handle type="source" :position="getPosition(props.orientation)" style="opacity: 0" />
   <Handle type="target" :position="getPosition(props.orientation)" style="opacity: 0" />
 
-  <div class="level" :style="{ fontSize: getOrientation() === 'Portrait' ? '20px' : '40px' }">
+  <div class="level" :style="{ fontSize: getOrientation() === 'Portrait' ? '20px' : '28px' }">
     {{ $t('level', { n: label }) }}
   </div>
 

@@ -2,7 +2,8 @@
 import { computed, onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { useVueFlow, type Edge } from '@vue-flow/core';
+import { getRectOfNodes, useVueFlow, type Edge } from '@vue-flow/core';
+import { getOrientation } from '@/scripts/helpers';
 import { mdiFitToScreenOutline, mdiMagnifyMinusOutline, mdiMagnifyPlusOutline } from '@mdi/js';
 import { useThemeMode } from '@/scripts/theme';
 import { focusHeadingIfRequested, requestHeadingFocus } from '@/scripts/ui';
@@ -17,7 +18,18 @@ const router = useRouter();
 const route = useRoute();
 const { resolved } = useThemeMode();
 // the VueFlow in the slot carries the same id as the active view, so both use one store
-const { zoomIn, zoomOut, fitView } = useVueFlow(props.active);
+const { zoomIn, zoomOut, fitView, onNodesInitialized, setViewport, getNodes } = useVueFlow(props.active);
+
+// The whole graph only fits at a zoom where labels are a few pixels high, so it opens on its
+// top-left corner at a readable size (12-14px labels); the fit button still shows all of it.
+const START_ZOOM = getOrientation() === 'Portrait' ? 0.6 : 0.5;
+let placed = false;
+onNodesInitialized(() => {
+  if (placed) return;
+  placed = true;
+  const rect = getRectOfNodes(getNodes.value);
+  setViewport({ x: 16 - rect.x * START_ZOOM, y: 16 - rect.y * START_ZOOM, zoom: START_ZOOM });
+});
 
 // Edge colours follow the theme (computed, so they update when `resolved` changes)
 const themedEdges = computed(() => {
@@ -98,6 +110,14 @@ function switchView(name: string) {
 }
 .zone :deep(.basic-flow) { background: var(--bg); }
 @media (min-width: 900px) {
-  .tree-page { height: calc(100dvh - var(--header-h)); }
+  /* the graph ends a step above the window edge rather than flush with it */
+  .tree-page { height: calc(100dvh - var(--header-h)); padding-bottom: var(--space-4); }
+}
+/* phone in landscape: title and switch share one row and the description goes, so the graph keeps its room */
+@media (max-height: 560px) {
+  .tree-head { flex-direction: row; flex-wrap: wrap; align-items: center; column-gap: var(--space-4); }
+  .tree-head h1 { font-size: var(--t-lg); }
+  .desc { display: none; }
+  .controls { flex-direction: row; }
 }
 </style>

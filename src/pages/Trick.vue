@@ -11,7 +11,7 @@
   import YtThumb from "@/components/ui/YtThumb.vue";
   import VideoPlayer from "@/components/trick/VideoPlayer.vue";
   import ShareSheet from "@/components/trick/ShareSheet.vue";
-  import { UrlToStr } from "@/scripts/helpers";
+  import { strToUrl, UrlToStr } from "@/scripts/helpers";
   import { embedUrl, fallbackThumbnailUrl } from "@/scripts/trickMedia";
   import { useCategoryStore, useMasteredStore, useTodoStore } from "@/scripts/store";
   import { useTrickStore, type Trick } from "@/scripts/trickStore";
@@ -27,6 +27,11 @@
   // The router-view is keyed by fullPath, so each trick gets its own instance of this page.
   const requestedName = UrlToStr(String(route.params.trickname ?? ''))
   const trick = trickStore.getTrickByTitle(requestedName)
+  // An alias or a different case ("forward donut", "Vorwärts Kreisel") leads to the trick's own URL.
+  const match = trick ? null : trickStore.findTrickByAnyTitle(requestedName)
+  if (match) {
+    router.replace({ name: 'Trick', params: { lang: route.params.lang, trickname: strToUrl(match.title[0]) }, hash: route.hash })
+  }
   const selected = ref(trick?.videoID[0] ?? '')
 
   const localTitles = computed(() => trick ? trickStore.getLocalTrickTitles(trick, locale.value) : [])
@@ -36,7 +41,8 @@
 
   const byIds = (ids: string[]) => ids.map(id => trickStore.getTrickByID(id)).filter((x): x is Trick => !!x)
   const before = computed(() => trick ? byIds(trick.requirements) : [])
-  const related = computed(() => trick ? byIds(trick.connections) : [])
+  // a trick already under "learn first" is not repeated under related tricks
+  const related = computed(() => trick ? byIds(trick.connections.filter(id => !trick.requirements.includes(id))) : [])
 
   const shareOpen = ref(false)
   const shareUrl = computed(() => window.location.origin + route.path)
@@ -52,7 +58,8 @@
   }))
 
   function goBack() {
-    if (window.history.length > 1) {
+    // vue-router records the previous in-app entry; without one, back would leave the site
+    if (window.history.state?.back) {
       router.back();
     } else {
       router.replace({ name: "Home", params: { lang: route.params.lang } });
@@ -71,7 +78,7 @@
     window.addEventListener('keydown', onKeydown)
     // arriving from a rail lower on the previous trick's page must not land mid-page
     window.scrollTo(0, 0)
-    document.title = trick ? trick.title[0] : requestedName + ' ' + t('error.trickNotFound')
+    document.title = (trick ? trick.title[0] : requestedName + ' ' + t('error.trickNotFound')) + ' · Freestylepedia'
     await nextTick()
     heading.value?.focus({ preventScroll: true })
   })
@@ -167,6 +174,10 @@
 
 /* mobile: edge to edge, straight under the header */
 .trick .video { width: auto; margin-inline: calc(-1 * var(--space-4)); }
+/* phone in landscape: the video fits the height left under the header, centred */
+@media (max-width: 899.98px) and (max-height: 560px) {
+  .trick .video { width: calc((100dvh - 56px) * 16 / 9); max-width: 100%; margin-inline: auto; }
+}
 
 .col {
   display: flex;

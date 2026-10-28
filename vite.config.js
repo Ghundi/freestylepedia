@@ -33,8 +33,9 @@ export default defineConfig({
       },
       registerType: 'autoUpdate',
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webp}'],
         // trick thumbnails are cached as they are seen, not all at install
+        globIgnores: ['thumbs/**'],
         runtimeCaching: [{
           urlPattern: /\/thumbs\/.+\.webp$/,
           handler: 'CacheFirst',

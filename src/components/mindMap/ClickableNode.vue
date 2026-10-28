@@ -20,9 +20,9 @@ function open() {
     type="button"
     class="node"
     :style="{
-      borderWidth: getOrientation() === 'Portrait' ? '3px' : '6px',
+      borderWidth: getOrientation() === 'Portrait' ? '3px' : '4px',
       borderColor: color,
-      fontSize: getOrientation() === 'Portrait' ? '20px' : '40px',
+      fontSize: getOrientation() === 'Portrait' ? '20px' : '28px',
     }"
     @click="open"
   >{{ label }}</button>

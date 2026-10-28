@@ -9,6 +9,7 @@ import SegmentedControl from '@/components/ui/SegmentedControl.vue'
 import { pwaInstallPromptEvent } from '@/scripts/pwaInstall'
 import { useThemeMode, type ThemeMode } from '@/scripts/theme'
 import { focusHeadingIfRequested, requestHeadingFocus } from '@/scripts/ui'
+import { storeLang } from '@/scripts/lang'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import { mdiChevronRight } from '@mdi/js'
 
@@ -28,6 +29,7 @@ onMounted(() => focusHeadingIfRequested(heading.value))
 function updateLang(code: string) {
   if (locale.value === code) return
   locale.value = code
+  storeLang(code)
   requestHeadingFocus()
   router.replace({ name: route.name as string, params: { ...route.params, lang: code } })
 }

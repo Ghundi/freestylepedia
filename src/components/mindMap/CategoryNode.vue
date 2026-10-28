@@ -14,7 +14,7 @@ const textColor = computed(() => readableTextColor(props.color, THEME_COLORS[res
 <template>
   <Handle type="source" :position="getPosition(props.orientation)" style="opacity: 0" />
   <Handle type="target" :position="getPosition(props.orientation)" style="opacity: 0" />
-  <div class="tag" :style="{ backgroundColor: color, fontSize: getOrientation() === 'Portrait' ? '20px' : '40px', color: textColor }">
+  <div class="tag" :style="{ backgroundColor: color, fontSize: getOrientation() === 'Portrait' ? '20px' : '28px', color: textColor }">
     {{ $t('categories.' + label) }}
   </div>
 </template>

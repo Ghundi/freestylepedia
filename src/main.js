@@ -25,12 +25,16 @@ import '@fontsource-variable/onest'
 import '@/styles/tokens.css'
 import '@/styles/base.css'
 import { initTheme } from '@/scripts/theme.ts'
+import { applyTransferQuery } from '@/scripts/transfer.ts'
+import { storedLang } from '@/scripts/lang.ts'
 
 
+// The language picked in Settings, else the browser's; Japanese is "ja" in browsers and "jp" here.
 function getLang() {
-    if (navigator.languages !== undefined)
-        return navigator.languages[0].slice(0, 2);
-    return navigator.language;
+    const stored = storedLang()
+    if (stored) return stored
+    const code = (navigator.languages?.[0] ?? navigator.language ?? '').slice(0, 2).toLowerCase()
+    return code === 'ja' ? 'jp' : code
 }
 
 const pinia = createPinia()
@@ -109,14 +113,14 @@ const routes = [
         component: () => import('./components/localeLayout.vue'),
         children: [
             { path: '',                 name: 'Home',         component: () => import('./pages/TrickList.vue') },
-            { path: 'CategoryTree',     name: 'CategoryTree', component: () => import('./pages/CategoryTree.vue') },
-            { path: 'TrickTree',        name: 'TrickTree',    component: () => import('./pages/TrickTree.vue') },
-            { path: 'MyProgress',       name: 'MyProgress',   component: () => import('./pages/MyProgress.vue') },
-            { path: 'Settings',         name: 'Settings',     component: () => import('./pages/Settings.vue') },
-            { path: 'AboutUs',          name: 'AboutUs',      component: () => import('./pages/AboutUs.vue') },
-            { path: 'Help',             name: 'Help',         component: () => import('./pages/Help.vue') },
+            { path: 'CategoryTree',     name: 'CategoryTree', component: () => import('./pages/CategoryTree.vue'), meta: { titleKey: 'tabs.paths' } },
+            { path: 'TrickTree',        name: 'TrickTree',    component: () => import('./pages/TrickTree.vue'), meta: { titleKey: 'tabs.paths' } },
+            { path: 'MyProgress',       name: 'MyProgress',   component: () => import('./pages/MyProgress.vue'), meta: { titleKey: 'myProgress.myProgress' } },
+            { path: 'Settings',         name: 'Settings',     component: () => import('./pages/Settings.vue'), meta: { titleKey: 'settings.title' } },
+            { path: 'AboutUs',          name: 'AboutUs',      component: () => import('./pages/AboutUs.vue'), meta: { titleKey: 'aboutUs.aboutUs' } },
+            { path: 'Help',             name: 'Help',         component: () => import('./pages/Help.vue'), meta: { title: 'FAQ' } },
             { path: 'trick/:trickname', name: 'Trick',        component: () => import('./pages/Trick.vue'), meta: { ownHeader: true } },
-            { path: ':pathMatch(.*)*',  name: 'NotFound',     component: () => import('./pages/notFound.vue') },
+            { path: ':pathMatch(.*)*',  name: 'NotFound',     component: () => import('./pages/notFound.vue'), meta: { titleKey: 'error.pageNotFound' } },
         ]
     },
 ]
@@ -131,6 +135,11 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    // A transfer link works on any page; once applied it leaves the URL, so going back
+    // to this history entry does not apply it again over marks made since.
+    const rest = applyTransferQuery(to.query, pinia);
+    if (rest) return next({ path: to.path, query: rest, hash: to.hash, replace: true });
+
     const { lang } = to.params;
 
     if (!lang) return next();                     // '/' redirect handles this
@@ -141,7 +150,7 @@ router.beforeEach((to, from, next) => {
             name: 'NotFound',
             params: {
                 lang: fallbackLocale,
-                pathMatch: to.path.split('/').filter(Boolean).join('/')
+                pathMatch: to.path.split('/').filter(Boolean)
             }
         });
     }
@@ -150,6 +159,14 @@ router.beforeEach((to, from, next) => {
     // screen readers pick their voice from <html lang>; Japanese is "ja" in BCP 47, "jp" in our URLs
     document.documentElement.lang = lang === 'jp' ? 'ja' : lang;
     next();
+});
+
+// Each page names itself in the tab; a trick page sets its own title once its trick is known.
+router.afterEach((to) => {
+    if (to.name === 'Trick') return;
+    const { titleKey, title } = to.meta;
+    const name = titleKey ? i18n.global.t(titleKey) : title;
+    document.title = name ? `${name} · Freestylepedia` : 'Freestylepedia';
 });
 
 initTheme()

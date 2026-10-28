@@ -6,7 +6,7 @@ import { createMemoryHistory, createRouter } from 'vue-router'
 import en from '../../src/locales/en.json'
 import TrickList from '../../src/pages/TrickList.vue'
 import { useHomeView } from '../../src/scripts/homeView'
-import { useMasteredStore, useSelDifficultyStore, useTodoStore } from '../../src/scripts/store'
+import { useSelDifficultyStore } from '../../src/scripts/store'
 import { useTrickStore, type Trick } from '../../src/scripts/trickStore'
 
 const make = (trickID: string, title: string, category: string, difficulty: number) =>
@@ -71,22 +71,8 @@ describe('TrickList (home)', () => {
     expect(w.text()).not.toContain(en.error.noResults)
   })
 
-  it('loads a transfer link: mastered and todo tricks are restored', async () => {
-    await mountAt('/en?mastered=0001,0003&todo=0042')
-    const mastered = useMasteredStore()
-    expect(tricks.filter(t => mastered.isMastered(t)).map(t => t.trickID)).toEqual(['0001', '0003'])
-    expect(useTodoStore().list).toEqual(['0042'])
-  })
-
   it('no longer shows the next-trick card, which lives on My Progress', async () => {
     const w = await mountAt('/en')
     expect(w.find('.next').exists()).toBe(false)
-  })
-
-  it('drops the transfer query once loaded, so going back does not apply it again', async () => {
-    const w = await mountAt('/en?mastered=0001&todo=0042')
-    expect(w.router.currentRoute.value.query).toEqual({})
-    expect(w.router.currentRoute.value.fullPath).toBe('/en')
-    expect(useMasteredStore().list).toEqual(['0001'])
   })
 })

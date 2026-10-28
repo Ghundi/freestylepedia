@@ -37,7 +37,7 @@
   <div class="page">
     <section class="summary">
       <h1>{{ t('myProgress.myProgress') }}</h1>
-      <p class="line">{{ t('myProgress.summary', { n: count, total }) }}</p>
+      <p class="line">{{ t('myProgress.summary', { n: count, total }, count) }}</p>
       <div
         v-if="count > 0"
         class="overall"
@@ -56,13 +56,15 @@
       <AppButton variant="primary" :to="{ name: 'Home', params: { lang: route.params.lang } }">{{ t('myProgress.browse') }}</AppButton>
     </div>
 
-    <section v-else class="block" :aria-label="t('myProgress.byCategory')">
+    <p v-else-if="count === total" class="done">{{ t('myProgress.allDone') }}</p>
+
+    <section v-if="count > 0" class="block" :aria-label="t('myProgress.byCategory')">
       <CategoryBars :rows="rows" />
     </section>
 
     <section v-if="nextTrick" class="block up-next">
       <h2>{{ t('myProgress.nextTrick') }}</h2>
-      <NextTrickCard :trick="nextTrick" :from-todo="fromTodo" />
+      <NextTrickCard :trick="nextTrick" :from-todo="fromTodo" :started="count > 0" />
     </section>
 
     <TrickRail
@@ -87,10 +89,11 @@
 .summary h1 { margin: 0; font-size: var(--t-xl); font-weight: 700; line-height: 1.15; }
 .line { margin: 0; color: var(--text-muted); font-size: var(--t-lg); font-variant-numeric: tabular-nums; }
 /* same track as the category bars */
-.overall { height: 8px; margin-top: var(--space-2); border-radius: var(--radius-s); background: var(--surface-2); overflow: hidden; }
+.overall { max-width: 560px; height: 8px; margin-top: var(--space-2); border-radius: var(--radius-s); background: var(--surface-2); overflow: hidden; }
 .fill { height: 100%; border-radius: var(--radius-s); background: var(--accent); }
 .empty { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
 .empty p { margin: 0; max-width: 40ch; color: var(--text-muted); }
+.done { margin: 0; max-width: 40ch; font-size: var(--t-lg); }
 .block { max-width: 560px; }
 .up-next h2 { margin: 0 0 var(--space-3); font-size: var(--t-lg); font-weight: 600; }
 .transfer { display: flex; }

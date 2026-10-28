@@ -93,7 +93,7 @@
     "pageNotFound": "Seite nicht gefunden",
     "pageNotFoundSuggestion": "Vielleicht ist die URL falsch geschrieben",
     "trickNotFound": "nicht gefunden",
-    "trickNotFoundSuggestion": "Vielleicht ist der Trick in der URL falsch geschrieben. Nur der Name vom YouTube Thumbnail wird akzeptiert.",
+    "trickNotFoundSuggestion": "Vielleicht ist der Trickname in der URL falsch geschrieben. Versuch es mit der Suche.",
     "toHome": "Alle Tricks ansehen"
   },
   "myProgress": {
@@ -106,7 +106,8 @@
     "summary": "{n} von {total} Tricks gemeistert",
     "empty": "Markiere deine ersten Tricks als „Mastered“, um deinen Fortschritt zu verfolgen.",
     "byCategory": "Nach Kategorie",
-    "browse": "Tricks ansehen"
+    "browse": "Tricks ansehen",
+    "allDone": "Du hast jeden Trick gemeistert. Neue Videos erscheinen regelmäßig: schau bald wieder vorbei."
   },
   "close": "Schließen",
   "level": "Level {n}",
@@ -148,7 +149,8 @@
     "levelMin": "Minimum",
     "levelMax": "Maximum",
     "reset": "Zurücksetzen",
-    "active": "{n} aktiv"
+    "active": "{n} aktiv",
+    "recommendedContext": "Passend zu deinem Stand"
   },
   "video": {
     "play": "{name} abspielen",
@@ -166,5 +168,6 @@
     "copied": "Link kopiert",
     "native": "Teilen…",
     "copyFailed": "Kopieren nicht möglich: Markiere den Link unten"
-  }
+  },
+  "skipToContent": "Zum Inhalt springen"
 }

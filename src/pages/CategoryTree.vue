@@ -11,7 +11,6 @@ const trickStore = useTrickStore();
 trickStore.categoryTree = trickStore.getConnectionsGraph(getOrientation());
 
 const graph = trickStore.categoryTree;
-const landscape = getOrientation() === 'Landscape';
 </script>
 
 <template>
@@ -31,13 +30,12 @@ const landscape = getOrientation() === 'Landscape';
         :prevent-scrolling="true"
         id="CategoryTree"
         class="basic-flow"
-        :default-viewport="{ zoom: landscape ? 0.05 : 0.14 }"
         :translate-extent="[
           [-3000, -2000],
           [3000, 13000]
         ]"
-        :min-zoom="landscape ? 0.2 : 0.12"
-        :max-zoom="landscape ? 0.5 : 1"
+        :min-zoom="0.05"
+        :max-zoom="1"
       >
         <template #node-clickable="props">
           <ClickableNode v-bind="props.data"/>

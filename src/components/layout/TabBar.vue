@@ -59,6 +59,8 @@ const active = computed(() => tabs.find(
   text-decoration: none;
 }
 .tab[aria-current='page'] { color: var(--accent); font-weight: 600; }
+/* the ring sits inside the tab: the tab is flush with the bar's edges */
+.tab:focus-visible { outline-offset: -4px; border-radius: var(--radius-m); }
 .tabs--own-header { display: none; }
 
 @media (min-width: 900px) {
