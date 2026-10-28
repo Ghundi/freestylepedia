@@ -1,8 +1,24 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import TrickThumb from './TrickThumb.vue'
+import { railScroll } from '../../scripts/railScroll'
 import type { Trick } from '../../scripts/trickStore'
 
-defineProps<{ title: string; count: number; tricks: Trick[] }>()
+const props = defineProps<{ title: string; count: number; tricks: Trick[] }>()
+
+// Back to this page finds each rail where it was left: the key holds the history entry,
+// so a new visit of the same page starts at the beginning.
+const route = useRoute()
+const list = ref<HTMLElement>()
+const key = `${window.history.state?.position ?? ''}|${route.fullPath}|${props.title}`
+onMounted(() => {
+  const left = railScroll.get(key)
+  if (left && list.value) list.value.scrollLeft = left
+})
+onBeforeUnmount(() => {
+  if (list.value) railScroll.set(key, list.value.scrollLeft)
+})
 </script>
 
 <template>
@@ -11,7 +27,7 @@ defineProps<{ title: string; count: number; tricks: Trick[] }>()
       <h2>{{ title }}</h2>
       <span class="count">{{ count }}</span>
     </header>
-    <ul class="list">
+    <ul ref="list" class="list">
       <li v-for="t in tricks" :key="t.trickID" class="item">
         <TrickThumb :trick="t" />
       </li>

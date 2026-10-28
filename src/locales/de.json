@@ -154,7 +154,8 @@
   },
   "video": {
     "play": "{name} abspielen",
-    "others": "Weitere Videos"
+    "others": "Weitere Videos",
+    "offline": "Du bist offline: Das Video läuft, sobald du wieder online bist."
   },
   "trick": {
     "todo": "ToDo",

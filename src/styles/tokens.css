@@ -9,11 +9,11 @@
   --space-5: 24px;
   --space-6: 32px;
   --font: 'Onest Variable', system-ui, sans-serif;
-  --t-xs: 12px;
-  --t-sm: 14px;
-  --t-md: 16px;
-  --t-lg: 20px;
-  --t-xl: 28px;
+  --t-xs: 0.75rem;
+  --t-sm: 0.875rem;
+  --t-md: 1rem;
+  --t-lg: 1.25rem;
+  --t-xl: 1.75rem;
   --dur: 180ms;
 }
 

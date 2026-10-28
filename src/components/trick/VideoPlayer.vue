@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, ref, watch } from 'vue'
+import { nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { mdiPlay } from '@mdi/js'
 import AppIcon from '@/components/ui/AppIcon.vue'
@@ -14,8 +14,18 @@ const frame = ref<HTMLIFrameElement>()
 
 watch(() => props.videoId, () => { playing.value = false })
 
+// YouTube needs the network: offline, the poster stays and says so instead of opening an empty frame.
+const offline = ref(false)
+const backOnline = () => { offline.value = false }
+window.addEventListener('online', backOnline)
+onBeforeUnmount(() => window.removeEventListener('online', backOnline))
+
 // The play button disappears on click: hand focus to the player so keyboard users keep their place.
 async function play() {
+  if (!navigator.onLine) {
+    offline.value = true
+    return
+  }
   playing.value = true
   await nextTick()
   frame.value?.focus()
@@ -37,6 +47,7 @@ async function play() {
       <YtThumb class="media" :video-id="videoId" alt="" eager sizes="(min-width: 900px) 960px, 100vw" />
       <span class="disc"><AppIcon :path="mdiPlay" :size="36" /></span>
     </button>
+    <p v-if="offline && !playing" class="offline" role="status">{{ t('video.offline') }}</p>
   </div>
 </template>
 
@@ -67,6 +78,18 @@ async function play() {
   cursor: pointer;
 }
 .poster:focus { outline: none; }
+.offline {
+  position: absolute;
+  inset: auto var(--space-3) var(--space-3);
+  z-index: 2;
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-s);
+  background: rgb(0 0 0 / 0.75);
+  color: #fff;
+  font-size: var(--t-sm);
+  text-align: center;
+}
 /* dark theme only: dims the poster a little so a white title card does not glare in the dark page */
 :root[data-theme='dark'] .poster::after { content: ''; position: absolute; inset: 0; background: rgb(0 0 0 / 0.2); }
 .disc {

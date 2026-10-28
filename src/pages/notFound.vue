@@ -18,7 +18,7 @@ const route = useRoute()
 
 <style scoped>
 .not-found { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); max-width: 40rem; margin: 0 auto; padding-top: var(--space-6); }
-.code { margin: 0; font-size: 56px; font-weight: 700; line-height: 1; color: var(--text-muted); }
+.code { margin: 0; font-size: 3.5rem; font-weight: 700; line-height: 1; color: var(--text-muted); }
 h1 { margin: 0; font-size: var(--t-xl); }
 .hint { margin: 0 0 var(--space-3); color: var(--text-muted); }
 </style>
