@@ -2,19 +2,20 @@
   import { computed } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { useRoute } from 'vue-router'
+  import NextTrickCard from '@/components/home/NextTrickCard.vue'
   import CategoryBars from '@/components/progress/CategoryBars.vue'
   import TransferDialog from '@/components/progress/TransferDialog.vue'
   import AppButton from '@/components/ui/AppButton.vue'
   import TrickRail from '@/components/ui/TrickRail.vue'
-  import TrickThumb from '@/components/ui/TrickThumb.vue'
-  import { categoryProgress } from '@/scripts/collections'
-  import { useCategoryStore, useMasteredStore } from '@/scripts/store'
+  import { categoryProgress, getNextTrick } from '@/scripts/collections'
+  import { useCategoryStore, useMasteredStore, useTodoStore } from '@/scripts/store'
   import { useTrickStore } from '@/scripts/trickStore'
 
   const { t } = useI18n()
   const route = useRoute()
   const trickStore = useTrickStore()
   const masteredStore = useMasteredStore()
+  const todoStore = useTodoStore()
   const categoryStore = useCategoryStore()
 
   const total = computed(() => trickStore.tricks.length)
@@ -24,9 +25,12 @@
   const rows = computed(() =>
     categoryProgress(trickStore.tricks, categoryStore.categories, masteredStore.isMastered)
       .filter(r => r.total > 0))
-  const hardest = computed(() =>
-    trickStore.getHardestMasteredTrick(masteredStore.getMasteredTricks(trickStore.tricks)))
   const recommended = computed(() => trickStore.getRecommendedTricks(masteredStore))
+  const nextTrick = computed(() =>
+    getNextTrick(trickStore.tricks, todoStore.list, recommended.value, masteredStore.isMastered))
+  const fromTodo = computed(() => !!nextTrick.value && todoStore.isOnTodo(nextTrick.value))
+  // the next-trick card already shows that one
+  const moreRecommended = computed(() => recommended.value.filter(trick => trick !== nextTrick.value))
 </script>
 
 <template>
@@ -52,22 +56,20 @@
       <AppButton variant="primary" :to="{ name: 'Home', params: { lang: route.params.lang } }">{{ t('myProgress.browse') }}</AppButton>
     </div>
 
-    <template v-else>
-      <section class="block" :aria-label="t('myProgress.byCategory')">
-        <CategoryBars :rows="rows" />
-      </section>
+    <section v-else class="block" :aria-label="t('myProgress.byCategory')">
+      <CategoryBars :rows="rows" />
+    </section>
 
-      <section v-if="hardest" class="block hardest">
-        <h2>{{ t('myProgress.hardestTrick') }}</h2>
-        <TrickThumb :trick="hardest" size="l" />
-      </section>
-    </template>
+    <section v-if="nextTrick" class="block up-next">
+      <h2>{{ t('myProgress.nextTrick') }}</h2>
+      <NextTrickCard :trick="nextTrick" :from-todo="fromTodo" />
+    </section>
 
     <TrickRail
-      v-if="recommended.length"
+      v-if="moreRecommended.length"
       :title="t('myProgress.recommendedTricks')"
-      :count="recommended.length"
-      :tricks="recommended"
+      :count="moreRecommended.length"
+      :tricks="moreRecommended"
     />
 
     <div class="transfer"><TransferDialog /></div>
@@ -90,7 +92,6 @@
 .empty { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
 .empty p { margin: 0; max-width: 40ch; color: var(--text-muted); }
 .block { max-width: 560px; }
-.hardest { max-width: 480px; }
-.hardest h2 { margin: 0 0 var(--space-3); font-size: var(--t-lg); font-weight: 600; }
+.up-next h2 { margin: 0 0 var(--space-3); font-size: var(--t-lg); font-weight: 600; }
 .transfer { display: flex; }
 </style>

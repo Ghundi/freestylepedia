@@ -40,17 +40,6 @@ export const useTrickStore = defineStore('trickStore', {
             const sorted = getSortedTricks(state.tricks, selSortingOrderStore.by)
             const filtered = getFilteredTricks(sorted)
             return filtered
-        },
-        getHardestMasteredTrick: (state) => (masteredTricks: Array<Trick>) => {
-            if (!masteredTricks?.length) return null;
-            
-            // Filter mastered tricks from ALL tricks
-            const mastered = state.tricks.filter(trick => 
-            masteredTricks.some(m => m.trickID === trick.trickID)
-            );
-            
-            // Sort by difficulty descending
-            return [...mastered].sort((a, b) => b.difficulty - a.difficulty)[0] || null;
         }
     },
     actions: {

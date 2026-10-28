@@ -14,6 +14,7 @@ import Guardians from "../assets/supporters/Guardians.webp"
 import IFP from "../assets/supporters/IFP Print Brust Link.webp"
 import ICD from "../assets/supporters/ICD.webp"
 import IceIceDilly from "../assets/supporters/IceIceDilly.webp"
+import IcePulse from "../assets/supporters/IcePulse.webp"
 import { Trick } from '@/scripts/trickStore';
 import { visibleOnBackground } from '@/scripts/contrast';
 import { THEME_COLORS, THEME_SURFACE_2, useThemeMode } from '@/scripts/theme';
@@ -264,6 +265,10 @@ export const useSupporters = defineStore('supporters', {
                 {
                     imgSrc: IceIceDilly,
                     link: 'https://www.youtube.com/@IceIceDilly'
+                },
+                {
+                    imgSrc: IcePulse,
+                    link: 'https://www.instagram.com/icepulse18'
                 },
             ]
         }

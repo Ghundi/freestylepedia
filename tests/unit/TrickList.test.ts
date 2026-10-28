@@ -6,7 +6,7 @@ import { createMemoryHistory, createRouter } from 'vue-router'
 import en from '../../src/locales/en.json'
 import TrickList from '../../src/pages/TrickList.vue'
 import { useHomeView } from '../../src/scripts/homeView'
-import { useMasteredStore, useSelDifficultyStore } from '../../src/scripts/store'
+import { useMasteredStore, useSelDifficultyStore, useTodoStore } from '../../src/scripts/store'
 import { useTrickStore, type Trick } from '../../src/scripts/trickStore'
 
 const make = (trickID: string, title: string, category: string, difficulty: number) =>
@@ -71,13 +71,16 @@ describe('TrickList (home)', () => {
     expect(w.text()).not.toContain(en.error.noResults)
   })
 
-  it('loads a transfer link: the todo trick is next, mastered tricks are marked', async () => {
-    const w = await mountAt('/en?mastered=0001,0003&todo=0042')
-    const card = w.get('.next')
-    expect(card.text()).toContain('Scratch Spin')
-    expect(card.text()).toContain(en.home.nextContext)
+  it('loads a transfer link: mastered and todo tricks are restored', async () => {
+    await mountAt('/en?mastered=0001,0003&todo=0042')
     const mastered = useMasteredStore()
     expect(tricks.filter(t => mastered.isMastered(t)).map(t => t.trickID)).toEqual(['0001', '0003'])
+    expect(useTodoStore().list).toEqual(['0042'])
+  })
+
+  it('no longer shows the next-trick card, which lives on My Progress', async () => {
+    const w = await mountAt('/en')
+    expect(w.find('.next').exists()).toBe(false)
   })
 
   it('drops the transfer query once loaded, so going back does not apply it again', async () => {
@@ -85,22 +88,5 @@ describe('TrickList (home)', () => {
     expect(w.router.currentRoute.value.query).toEqual({})
     expect(w.router.currentRoute.value.fullPath).toBe('/en')
     expect(useMasteredStore().list).toEqual(['0001'])
-  })
-
-  it('shows a todo trick saved with a legacy "trick" id as next', async () => {
-    localStorage.setItem('todo', JSON.stringify(['trick0042']))
-    const w = await mountAt('/en')
-    const card = w.get('.next')
-    expect(card.text()).toContain('Scratch Spin')
-    expect(card.text()).toContain(en.home.nextContext)
-  })
-
-  it('suggests a starter trick when nothing is on the todo list', async () => {
-    const w = await mountAt('/en')
-    const card = w.get('.next')
-    expect(card.text()).toContain(en.home.suggestedContext)
-    // the context is one line under the heading, not an eyebrow above it
-    expect(card.find('.over').exists()).toBe(false)
-    expect(card.get('.name').element.nextElementSibling?.textContent).toContain(en.home.suggestedContext)
   })
 })

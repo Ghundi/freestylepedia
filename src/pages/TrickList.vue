@@ -3,7 +3,6 @@
   import { useI18n } from 'vue-i18n';
   import { useRoute, useRouter } from 'vue-router';
   import { mdiTuneVariant } from '@mdi/js';
-  import NextTrickCard from '@/components/home/NextTrickCard.vue';
   import FilterSheet from '@/components/home/FilterSheet.vue';
   import TrickRail from '@/components/ui/TrickRail.vue';
   import TrickThumb from '@/components/ui/TrickThumb.vue';
@@ -14,7 +13,7 @@
     useSelDifficultyStore, useSelSortingOrderStore, useTodoStore,
   } from '@/scripts/store';
   import { useTrickStore } from "@/scripts/trickStore";
-  import { getNextTrick, groupByCategory } from '@/scripts/collections';
+  import { groupByCategory } from '@/scripts/collections';
   import { useHomeView } from '@/scripts/homeView';
 
   const trickStore = useTrickStore();
@@ -33,8 +32,6 @@
   }
 
   const { t } = useI18n();
-  const todoStore = useTodoStore();
-  const masteredStore = useMasteredStore();
   const categoryStore = useCategoryStore();
   const selCategory = useSelCategoryStore();
   const selDifficulty = useSelDifficultyStore();
@@ -42,10 +39,6 @@
   const curSearch = useCurSearchStore();
   const sorting = useSelSortingOrderStore();
   const { view } = useHomeView();
-
-  const nextTrick = computed(() => getNextTrick(
-    trickStore.tricks, todoStore.list, trickStore.getRecommendedTricks(masteredStore), masteredStore.isMastered));
-  const fromTodo = computed(() => !!nextTrick.value && todoStore.isOnTodo(nextTrick.value));
 
   const rows = computed(() => groupByCategory(trickStore.tricks, categoryStore.categories));
 
@@ -68,8 +61,6 @@
 <template>
   <div class="home">
     <h1 class="sr-only">{{ t('tabs.tricks') }}</h1>
-
-    <NextTrickCard :trick="nextTrick" :from-todo="fromTodo" />
 
     <SegmentedControl v-model="view" class="switch" :options="viewOptions" :label="t('home.view')" />
 

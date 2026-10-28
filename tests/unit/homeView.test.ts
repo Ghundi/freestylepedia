@@ -17,6 +17,21 @@ describe('useHomeView', () => {
     expect(view.value).toBe('category')
   })
 
+  it('defaults to all on a wide screen', async () => {
+    vi.stubGlobal('matchMedia', (q: string) => ({ matches: q === '(min-width: 900px)' }))
+    const { view } = await load()
+    expect(view.value).toBe('all')
+    vi.unstubAllGlobals()
+  })
+
+  it('keeps a stored choice on a wide screen', async () => {
+    vi.stubGlobal('matchMedia', () => ({ matches: true }))
+    localStorage.setItem('homeView', 'category')
+    const { view } = await load()
+    expect(view.value).toBe('category')
+    vi.unstubAllGlobals()
+  })
+
   it('restores all from localStorage', async () => {
     localStorage.setItem('homeView', 'all')
     const { view } = await load()

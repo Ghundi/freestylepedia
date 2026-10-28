@@ -100,7 +100,7 @@
     "myProgress": "My Progress",
     "progress": "Progress",
     "recommendedTricks": "Recommended tricks",
-    "hardestTrick": "Your hardest trick",
+    "nextTrick": "Your next trick",
     "transferProgress": "Transfer my progress",
     "transferInfo": "Open this link on your new device to bring your progress with you.",
     "summary": "{n} of {total} tricks mastered",

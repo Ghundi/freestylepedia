@@ -73,4 +73,23 @@ describe('MyProgress page', () => {
     expect(w.text()).not.toContain('NaN')
     expect(w.find('.empty').exists()).toBe(false)
   })
+
+  it('shows the next todo trick, also with a legacy "trick" id', async () => {
+    localStorage.setItem('todo', JSON.stringify(['trick0006']))
+    const w = await mountPage()
+    expect(w.get('.up-next h2').text()).toBe(en.myProgress.nextTrick)
+    const card = w.get('.up-next .next')
+    expect(card.text()).toContain('Hawk Stop')
+    expect(card.text()).toContain(en.home.nextContext)
+  })
+
+  it('suggests a starter trick when nothing is on the todo list, even with nothing mastered', async () => {
+    const w = await mountPage()
+    const card = w.get('.up-next .next')
+    // the context is one line under the name, not an eyebrow above it
+    expect(card.get('.name').element.nextElementSibling?.textContent).toContain(en.home.suggestedContext)
+    // the suggested trick is not repeated in the recommended rail
+    const name = card.get('.name').text()
+    expect(w.findAll('.rail li').map(li => li.text()).some(text => text.includes(name))).toBe(false)
+  })
 })

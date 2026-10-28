@@ -5,12 +5,18 @@ export type HomeView = 'category' | 'all'
 const KEY = 'homeView'
 const VIEWS: HomeView[] = ['category', 'all']
 
+// Category rails scroll sideways, which suits touch screens; wide screens start on the grid.
+function defaultView(): HomeView {
+  return typeof window.matchMedia === 'function' && window.matchMedia('(min-width: 900px)').matches
+    ? 'all' : 'category'
+}
+
 function read(): HomeView {
   try {
     const stored = localStorage.getItem(KEY)
-    return VIEWS.includes(stored as HomeView) ? stored as HomeView : 'category'
+    return VIEWS.includes(stored as HomeView) ? stored as HomeView : defaultView()
   } catch {
-    return 'category'
+    return defaultView()
   }
 }
 
