@@ -23,12 +23,13 @@ function reveal(e: FocusEvent) {
   const node = findNode(props.label)
   if (!node) return
   setCenter(node.position.x + node.dimensions.width / 2, node.position.y + node.dimensions.height / 2,
-    { zoom: viewport.value.zoom, duration: 200 })
+    { zoom: viewport.value.zoom, duration: reduceMotion() ? 0 : 200 })
 }
 
 function open() {
   router.push({ name: 'Trick', params: { lang: locale.value, trickname: strToUrl(props.label) } })
 }
+function reduceMotion() { return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false }
 </script>
 
 <template>

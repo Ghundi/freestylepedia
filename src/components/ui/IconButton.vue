@@ -25,6 +25,6 @@ defineProps<{ label: string; to?: RouteLocationRaw }>()
   cursor: pointer;
   transition: background var(--dur);
 }
-.icon-btn:hover { background: var(--surface-2); }
+@media (hover: hover) { .icon-btn:hover { background: var(--surface-2); } }
 @media (prefers-reduced-motion: reduce) { .icon-btn { transition: none; } }
 </style>

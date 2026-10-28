@@ -52,8 +52,8 @@ const attrs = computed(() => {
 .btn--primary { background: var(--accent); color: var(--accent-text); }
 .btn--secondary { background: var(--surface-2); color: var(--text); border-color: var(--line); }
 .btn--ghost { background: transparent; color: var(--text); }
-.btn--ghost:hover:not(:disabled), .btn--secondary:hover:not(:disabled) { background: var(--line); }
-.btn--primary:hover:not(:disabled) { filter: brightness(1.08); }
+@media (hover: hover) { .btn--ghost:hover:not(:disabled), .btn--secondary:hover:not(:disabled) { background: var(--line); } }
+@media (hover: hover) { .btn--primary:hover:not(:disabled) { filter: brightness(1.08); } }
 .btn[aria-pressed='true'] { border-color: var(--accent); color: var(--accent); }
 .btn--primary[aria-pressed='true'] { color: var(--accent-text); outline: 2px solid var(--text); outline-offset: 2px; }
 .btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { frameThumbnailUrl, fallbackThumbnailUrl, hasLocalThumb, localThumbSrcset, localThumbUrl, thumbFrameInfo } from '../../scripts/trickMedia'
 
 const props = withDefaults(defineProps<{ videoId: string; alt: string; eager?: boolean; sizes?: string }>(), {
@@ -13,7 +13,12 @@ const PLACEHOLDER_MAX_WIDTH = 120
 const useFallback = ref(false)
 // Both images failed (deleted or private video): the img goes, the empty box stays.
 const failed = ref(false)
-watch(() => props.videoId, () => { useFallback.value = false; failed.value = false })
+function reset() { useFallback.value = false; failed.value = false }
+watch(() => props.videoId, reset)
+// a picture that failed while offline gets another try once the connection is back
+function onOnline() { if (useFallback.value || failed.value) reset() }
+onMounted(() => window.addEventListener('online', onOnline))
+onBeforeUnmount(() => window.removeEventListener('online', onOnline))
 
 // A frame extracted from the video when there is one; otherwise YouTube's picked frame, then its default.
 const local = computed(() => hasLocalThumb(props.videoId) && !useFallback.value)

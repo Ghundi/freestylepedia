@@ -21,9 +21,9 @@ import { THEME_COLORS, THEME_SURFACE_2, useThemeMode } from '@/scripts/theme';
 import configJSON from "@/data/config.json";
 
 // Ids saved before the "trick" prefix was dropped from tricks.json ("trick0042") are
-// normalized to the current form ("0042"); duplicates go, order is kept.
+// normalized to the current form ("0042"); anything that is not an id, and duplicates, go; order is kept.
 export function normalizeIds(ids: Array<unknown>): Array<string> {
-    return [...new Set(ids.map(id => String(id).replace('trick', '')))]
+    return [...new Set(ids.map(id => String(id).replace('trick', '')).filter(id => /^\d+$/.test(id)))]
 }
 
 // localStorage can be missing or throw (privacy modes, blocked site data): progress then lives in memory.
@@ -88,7 +88,13 @@ export const useTodoStore = defineStore('Todo', () => {
     function toggle(trick: Trick): void {
         const idx: number = list.value.indexOf(trick.trickID)
         if (idx > -1) list.value.splice(idx, 1)
-        else list.value.push(trick.trickID)
+        else {
+            // back on the list to learn again: no longer mastered
+            list.value.push(trick.trickID)
+            const mastered = useMasteredStore().list
+            const at = mastered.indexOf(trick.trickID)
+            if (at > -1) mastered.splice(at, 1)
+        }
     }
 
     function remove(trick: Trick): void {

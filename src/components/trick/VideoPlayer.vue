@@ -108,7 +108,7 @@ async function play() {
 }
 /* the triangle's visual centre sits left of its box centre */
 .disc :deep(svg) { margin-left: 2px; }
-.poster:hover .disc { filter: brightness(1.08); }
+@media (hover: hover) { .poster:hover .disc { filter: brightness(1.08); } }
 /* drawn on the video frame in both themes: a black then a white ring reads on any picture */
 .poster:focus-visible .disc { box-shadow: 0 0 0 3px #000; outline: 2px solid #fff; outline-offset: 3px; }
 </style>

@@ -65,4 +65,9 @@ const categories = useCategoryStore()
   overflow: hidden;
 }
 .fill { height: 100%; border-radius: var(--radius-s); }
+/* high-contrast modes drop background colours: draw the track and the fill with system colours */
+@media (forced-colors: active) {
+  .track { border: 1px solid CanvasText; }
+  .fill { background: Highlight !important; forced-color-adjust: none; }
+}
 </style>

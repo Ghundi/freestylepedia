@@ -10,6 +10,9 @@ html {
   scrollbar-width: thin;
   scrollbar-color: color-mix(in srgb, var(--text-muted) 55%, transparent) transparent;
   caret-color: var(--accent);
+  /* Tab and in-page jumps keep the focused element clear of the sticky header and the fixed tab bar */
+  scroll-padding-top: calc(var(--header-h, 56px) + var(--space-4));
+  scroll-padding-bottom: calc(var(--tabbar-h, 64px) + env(safe-area-inset-bottom) + var(--space-4));
 }
 
 * {
@@ -60,6 +63,8 @@ img,
 svg {
   max-width: 100%;
 }
+/* an icon next to a label that wraps keeps its size */
+svg { flex: none; }
 
 :focus-visible {
   outline: 2px solid var(--focus);

@@ -85,6 +85,6 @@ h2 { margin: 0; font-size: var(--t-lg); font-weight: 600; }
   display: inline-flex; align-items: center; justify-content: center;
   width: 44px; height: 44px; border-radius: var(--radius-m); color: var(--text);
 }
-.icon-link:hover { background: var(--surface-2); }
+@media (hover: hover) { .icon-link:hover { background: var(--surface-2); } }
 .icon-link:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 </style>

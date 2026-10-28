@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { nextTick } from 'vue'
-import { useMasteredStore, useTodoStore } from '../../src/scripts/store'
+import { normalizeIds, useMasteredStore, useTodoStore } from '../../src/scripts/store'
 import type { Trick } from '../../src/scripts/trickStore'
 
 // Ids saved before 2026-08-22 (commit 8e29521) carry the old "trick" prefix.
@@ -108,5 +108,20 @@ describe('mastering a trick', () => {
     mastered.toggle(trick('0001'))
     expect(mastered.list).toEqual([])
     expect(todo.list).toEqual(['0002'])
+  })
+
+  it('putting a mastered trick back on the todo list unmasters it', () => {
+    const todo = useTodoStore()
+    const mastered = useMasteredStore()
+    mastered.toggle(trick('0001'))
+    todo.toggle(trick('0001'))
+    expect(todo.list).toEqual(['0001'])
+    expect(mastered.list).toEqual([])
+  })
+})
+
+describe('normalizeIds', () => {
+  it('drops values that are not trick ids', () => {
+    expect(normalizeIds(['trick0001', null, 42, {}, '', '0002', '0001'])).toEqual(['0001', '42', '0002'])
   })
 })

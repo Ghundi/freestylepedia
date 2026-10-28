@@ -168,7 +168,7 @@
     "copy": "Copier le lien",
     "copied": "Lien copié",
     "native": "Partager…",
-    "copyFailed": "Copie impossible : sélectionne le lien ci-dessous"
+    "copyFailed": "Copie impossible : sélectionne le lien et copie-le à la main"
   },
   "skipToContent": "Aller au contenu"
 }

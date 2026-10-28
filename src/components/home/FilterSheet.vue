@@ -108,6 +108,10 @@ legend, .legend {
   align-items: center;
   gap: var(--space-2);
   min-height: 44px;
+  min-width: 0;
+  /* long category names (Hydroblading, Akrobatyka) break inside their column on narrow phones */
+  overflow-wrap: anywhere;
+  hyphens: auto;
   cursor: pointer;
 }
 .check input {

@@ -57,7 +57,11 @@
     "uploadDate": trick.releaseDate.toISOString().slice(0, 10),
   }))
 
+  let leaving = false
   function goBack() {
+    // a second tap while the first is still navigating would go back twice
+    if (leaving) return
+    leaving = true
     // vue-router records the previous in-app entry; without one, back would leave the site
     if (window.history.state?.back) {
       router.back();

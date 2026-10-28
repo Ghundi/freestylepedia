@@ -71,7 +71,7 @@ const social = [
   display: inline-flex; align-items: center; justify-content: center;
   width: 44px; height: 44px; border-radius: var(--radius-m); color: var(--text);
 }
-.social:hover { background: var(--surface-2); }
+@media (hover: hover) { .social:hover { background: var(--surface-2); } }
 .row a { display: inline-flex; }
 .logo { display: block; width: 44px; height: 44px; object-fit: contain; }
 /* the ring keeps black logos apart from the dark page */

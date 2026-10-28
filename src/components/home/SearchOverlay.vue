@@ -62,8 +62,15 @@ watch(() => route.fullPath, () => { if (props.open) emit('update:open', false) }
 function onClose() {
   lockScroll(false)
   emit('update:open', false)
-  // after navigation the new page owns focus; otherwise go back to the search button
   if (route.fullPath === openedAt) trigger?.focus()
+  else {
+    // a result was picked: the browser has put focus back on the search button, move it to the new page
+    nextTick(() => {
+      const heading = document.querySelector<HTMLElement>('main h1')
+      if (heading && !heading.hasAttribute('tabindex')) heading.tabIndex = -1
+      ;(heading ?? document.getElementById('main'))?.focus()
+    })
+  }
   trigger = null
 }
 
@@ -177,7 +184,7 @@ input::placeholder { color: var(--text-muted); }
   color: var(--text);
   cursor: pointer;
 }
-.close:hover { background: var(--surface-2); }
+@media (hover: hover) { .close:hover { background: var(--surface-2); } }
 .close:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .body { padding-top: var(--space-4); padding-bottom: calc(var(--space-6) + env(safe-area-inset-bottom)); }
 .count { margin: 0 0 var(--space-4); color: var(--text-muted); font-size: var(--t-sm); }
@@ -189,4 +196,6 @@ input::placeholder { color: var(--text-muted); }
   padding: 0;
   list-style: none;
 }
+/* Safari draws its own clear button next to ours */
+input::-webkit-search-cancel-button { display: none; }
 </style>

@@ -91,6 +91,10 @@
 /* same track as the category bars */
 .overall { max-width: 560px; height: 8px; margin-top: var(--space-2); border-radius: var(--radius-s); background: var(--surface-2); overflow: hidden; }
 .fill { height: 100%; border-radius: var(--radius-s); background: var(--accent); }
+@media (forced-colors: active) {
+  .overall { border: 1px solid CanvasText; }
+  .fill { background: Highlight; forced-color-adjust: none; }
+}
 .empty { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
 .empty p { margin: 0; max-width: 40ch; color: var(--text-muted); }
 .done { margin: 0; max-width: 40ch; font-size: var(--t-lg); }

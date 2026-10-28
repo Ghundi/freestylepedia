@@ -1,6 +1,7 @@
 <script setup>
 
-import { useRoute } from 'vue-router';
+import { ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import { useTrickStore } from "@/scripts/trickStore";
 import AppHeader from '@/components/layout/AppHeader.vue';
 import AppFooter from '@/components/layout/AppFooter.vue';
@@ -10,6 +11,10 @@ import LocaleLayout from './components/localeLayout.vue';
 
 const route = useRoute();
 const searchOpen = useSearchOpen();
+
+// on a slow first load the footer waits for the first page, instead of showing alone and then jumping down
+const pageReady = ref(false);
+useRouter().isReady().then(() => { pageReady.value = true; });
 
 const trickStore = useTrickStore();
 trickStore.loadTricks();
@@ -24,7 +29,7 @@ trickStore.loadTricks();
     <main id="main" class="main" tabindex="-1">
       <LocaleLayout/>
     </main>
-    <AppFooter/>
+    <AppFooter v-if="pageReady"/>
     <SearchOverlay v-model:open="searchOpen"/>
   </div>
 </template>

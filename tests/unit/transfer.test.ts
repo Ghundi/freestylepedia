@@ -31,4 +31,10 @@ describe('transfer link', () => {
     expect(isKnownTrickId('9999')).toBe(false)
     expect(isKnownTrickId('')).toBe(false)
   })
+
+  it('leaves no trick both mastered and on the todo list', () => {
+    applyTransferQuery({ todo: '0001,0002', mastered: '0001' })
+    expect(useMasteredStore().list).toEqual(['0001'])
+    expect(useTodoStore().list).toEqual(['0002'])
+  })
 })

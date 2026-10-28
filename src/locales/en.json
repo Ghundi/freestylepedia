@@ -47,7 +47,7 @@
     "switchToLightMode": "Switch to Light Mode",
     "switchToDarkMode": "Switch to Dark Mode",
     "installApp": "Install App",
-    "installAppHintIOS": "On IOS devices you can add this to your home screen like an App. Tap the Share button and then 'Add to homescreen'"
+    "installAppHintIOS": "On iPhone and iPad you can add this site to your Home Screen like an app. Tap the Share button, then “Add to Home Screen”."
   },
   "toolbar": {
     "resetFilters": "Reset Filters",
@@ -168,7 +168,7 @@
     "copy": "Copy link",
     "copied": "Link copied",
     "native": "Share…",
-    "copyFailed": "Could not copy: select the link below"
+    "copyFailed": "Could not copy: select the link and copy it by hand"
   },
   "skipToContent": "Skip to content"
 }

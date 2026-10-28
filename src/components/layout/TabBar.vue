@@ -41,7 +41,7 @@ const active = computed(() => tabs.find(
   bottom: 0;
   z-index: 10;
   display: flex;
-  height: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
+  min-height: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
   padding-bottom: env(safe-area-inset-bottom);
   background: var(--bg);
   border-top: 1px solid var(--line);
@@ -59,6 +59,7 @@ const active = computed(() => tabs.find(
   text-decoration: none;
 }
 .tab[aria-current='page'] { color: var(--accent); font-weight: 600; }
+@media (forced-colors: active) { .tab[aria-current='page'] { text-decoration: underline; text-underline-offset: 4px; } }
 /* the ring sits inside the tab: the tab is flush with the bar's edges */
 .tab:focus-visible { outline-offset: -4px; border-radius: var(--radius-m); }
 .tabs--own-header { display: none; }

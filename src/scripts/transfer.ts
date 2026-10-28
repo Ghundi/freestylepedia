@@ -21,5 +21,9 @@ export function applyTransferQuery(query: LocationQuery, pinia?: Pinia): Locatio
         store.loadHash(hash, isKnownTrickId)
         delete rest[key]
     }
+    // a trick mastered on either device is not left on the todo list
+    const mastered = useMasteredStore(pinia).list
+    const todo = useTodoStore(pinia)
+    todo.list = todo.list.filter(id => !mastered.includes(id))
     return rest
 }

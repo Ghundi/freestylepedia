@@ -34,12 +34,20 @@ export default defineConfig({
       registerType: 'autoUpdate',
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webp}'],
-        // trick thumbnails are cached as they are seen, not all at install
-        globIgnores: ['thumbs/**'],
+        // the 480px thumbnails (about 1.7 MB) come with the install so the list has pictures offline;
+        // the 960px ones are cached as they are seen
+        globIgnores: ['thumbs/*-960.webp'],
+        // files that are not app pages keep their own response instead of the app shell
+        navigateFallbackDenylist: [/^\/(thumbs|icons|assets)\//, /^\/[^/]+\.[a-z0-9]+$/i],
         runtimeCaching: [{
           urlPattern: /\/thumbs\/.+\.webp$/,
           handler: 'CacheFirst',
           options: { cacheName: 'thumbs', expiration: { maxEntries: 300 } },
+        }, {
+          // YouTube frames for videos without an extracted thumbnail
+          urlPattern: /^https:\/\/i\.ytimg\.com\/vi\//,
+          handler: 'CacheFirst',
+          options: { cacheName: 'yt-thumbs', expiration: { maxEntries: 100 }, cacheableResponse: { statuses: [0, 200] } },
         }],
       },
       injectRegister: 'auto',
@@ -65,6 +73,17 @@ export default defineConfig({
           {
             src: '/icons/Blackbirdlogoneuweiss-192x192.png',
             sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: '/icons/Blackbirdlogo-maskable-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: "maskable"
+          },
+          {
+            src: '/icons/Blackbirdlogo-maskable-512x512.png',
+            sizes: '512x512',
             type: 'image/png',
             purpose: "maskable"
           },

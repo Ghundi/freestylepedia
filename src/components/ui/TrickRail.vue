@@ -27,7 +27,7 @@ onBeforeUnmount(() => {
       <h2>{{ title }}</h2>
       <span class="count">{{ count }}</span>
     </header>
-    <ul ref="list" class="list">
+    <ul ref="list" class="list" tabindex="-1">
       <li v-for="t in tricks" :key="t.trickID" class="item">
         <TrickThumb :trick="t" />
       </li>

@@ -144,6 +144,10 @@ router.beforeEach((to, from, next) => {
 
     if (!lang) return next();                     // '/' redirect handles this
 
+    if (!availableLocales.includes(lang) && availableLocales.includes(lang.toLowerCase())) {
+        return next({ path: to.fullPath.replace(`/${lang}`, `/${lang.toLowerCase()}`), replace: true });
+    }
+
     if (!availableLocales.includes(lang)) {
         // First segment isn't a valid locale → send to 404
         return next({
@@ -161,13 +165,38 @@ router.beforeEach((to, from, next) => {
     next();
 });
 
+// After a new version is deployed, a tab opened before it can ask for a page file that no longer
+// exists. Load that page fresh, once per path, so the tap is not lost.
+const CHUNK_ERROR = /dynamically imported module|Importing a module script failed|Failed to fetch/i;
+function reloadOnce(path) {
+    try {
+        if (sessionStorage.getItem('chunkReload') === path) return;
+        sessionStorage.setItem('chunkReload', path);
+    } catch { /* storage blocked: reload anyway */ }
+    window.location.assign(path);
+}
+router.onError((err, to) => {
+    if (!CHUNK_ERROR.test(err?.message ?? '')) return;
+    // offline, the page loads once the connection is back
+    if (navigator.onLine) reloadOnce(to.fullPath);
+    else window.addEventListener('online', () => reloadOnce(to.fullPath), { once: true });
+});
+window.addEventListener('vite:preloadError', (event) => {
+    event.preventDefault();
+    reloadOnce(window.location.pathname + window.location.search);
+});
+
 // Each page names itself in the tab; a trick page sets its own title once its trick is known.
 router.afterEach((to) => {
+    try { sessionStorage.removeItem('chunkReload'); } catch { /* storage blocked */ }
     if (to.name === 'Trick') return;
     const { titleKey, title } = to.meta;
     const name = titleKey ? i18n.global.t(titleKey) : title;
     document.title = name ? `${name} · Freestylepedia` : 'Freestylepedia';
 });
+
+// an installed app asks to keep its storage, so the browser does not clear the progress to free space
+if (window.matchMedia?.('(display-mode: standalone)').matches) navigator.storage?.persist?.().catch(() => {});
 
 initTheme()
 

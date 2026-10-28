@@ -6,7 +6,7 @@ import config from '@/data/config.json'
 import AppButton from '@/components/ui/AppButton.vue'
 import AppDialog from '@/components/ui/AppDialog.vue'
 import SegmentedControl from '@/components/ui/SegmentedControl.vue'
-import { pwaInstallPromptEvent } from '@/scripts/pwaInstall'
+import { promptInstall, pwaInstallPromptEvent } from '@/scripts/pwaInstall'
 import { useThemeMode, type ThemeMode } from '@/scripts/theme'
 import { focusHeadingIfRequested, requestHeadingFocus } from '@/scripts/ui'
 import { storeLang } from '@/scripts/lang'
@@ -40,7 +40,9 @@ const themeOptions = computed(() => [
   { value: 'light', label: t('settings.themeLight') },
 ])
 
-const isIOS = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase())
+const ua = window.navigator.userAgent.toLowerCase()
+// iPadOS asks for desktop sites by default and then calls itself a Mac: a touch screen gives it away
+const isIOS = /iphone|ipad|ipod/.test(ua) || (/macintosh/.test(ua) && window.navigator.maxTouchPoints > 1)
 const standalone = 'standalone' in window.navigator && !!(window.navigator as { standalone?: boolean }).standalone
 const iosHint = ref(false)
 </script>
@@ -74,7 +76,7 @@ const iosHint = ref(false)
     </section>
 
     <section v-if="pwaInstallPromptEvent || (isIOS && !standalone)">
-      <AppButton v-if="pwaInstallPromptEvent" @click="pwaInstallPromptEvent.prompt()">
+      <AppButton v-if="pwaInstallPromptEvent" @click="promptInstall">
         {{ t('navBar.installApp') }}
       </AppButton>
       <AppButton v-else @click="iosHint = true">{{ t('navBar.installApp') }}</AppButton>
