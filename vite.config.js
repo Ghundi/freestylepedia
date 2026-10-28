@@ -56,7 +56,6 @@ export default defineConfig({
         short_name: 'Freestylepedia',
         description: "A place to lookup tricks and watch your progress",
         start_url: '/',
-        display_override: ["window-controls-overlay", "minimal-ui", "browser"],
         display: 'standalone',
         orientation: "any",
         id: "https://freestylepedia.org",
