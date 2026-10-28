@@ -10,8 +10,6 @@ import { promptInstall, pwaInstallPromptEvent } from '@/scripts/pwaInstall'
 import { useThemeMode, type ThemeMode } from '@/scripts/theme'
 import { focusHeadingIfRequested, requestHeadingFocus } from '@/scripts/ui'
 import { storeLang } from '@/scripts/lang'
-import AppIcon from '@/components/ui/AppIcon.vue'
-import { mdiChevronRight } from '@mdi/js'
 
 const { t, locale } = useI18n()
 const router = useRouter()
@@ -82,20 +80,6 @@ const iosHint = ref(false)
       <AppButton v-else @click="iosHint = true">{{ t('navBar.installApp') }}</AppButton>
     </section>
 
-    <section>
-      <ul class="rows">
-        <li>
-          <router-link class="row" :to="{ name: 'AboutUs', params: { lang: locale } }">
-            {{ t('aboutUs.aboutUs') }}<AppIcon :path="mdiChevronRight" />
-          </router-link>
-        </li>
-        <li>
-          <router-link class="row" :to="{ name: 'Help', params: { lang: locale } }">
-            {{ t('footer.help') }}<AppIcon :path="mdiChevronRight" />
-          </router-link>
-        </li>
-      </ul>
-    </section>
 
     <AppDialog v-model:open="iosHint" :title="t('navBar.installApp')">
       <p>{{ t('navBar.installAppHintIOS') }}</p>
@@ -108,14 +92,13 @@ const iosHint = ref(false)
 h1 { margin: 0 0 var(--space-5); font-size: var(--t-xl); }
 h2 { margin: 0 0 var(--space-3); font-size: var(--t-md); color: var(--text-muted); font-weight: 600; }
 section { margin-bottom: var(--space-6); }
-.langs, .rows { display: flex; flex-direction: column; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
-.lang, .row {
-  display: flex; align-items: center; justify-content: space-between; text-decoration: none;
+.langs { display: flex; flex-direction: column; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
+.lang {
+  display: flex; align-items: center; justify-content: space-between;
   width: 100%; min-height: 44px; padding: 0 var(--space-4); text-align: left;
   border: 1px solid var(--line); border-radius: var(--radius-m);
   background: var(--surface); color: var(--text); font: inherit; cursor: pointer;
 }
 .lang[aria-current='true'] { border-color: var(--accent); color: var(--accent); font-weight: 600; }
 h1:focus { outline: none; }
-.row svg { color: var(--text-muted); }
 </style>

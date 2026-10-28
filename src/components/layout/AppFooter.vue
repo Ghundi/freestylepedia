@@ -10,7 +10,7 @@ import blackbirdDark from '@/assets/blackbirdIconInverted.png'
 import misgLight from '@/assets/MISG-white-Icon.png'
 import misgDark from '@/assets/MISG-Icon.png'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const supporters = useSupporters().images
 const { resolved } = useThemeMode()
 const dark = computed(() => resolved.value === 'dark')
@@ -31,6 +31,10 @@ const social = [
             <AppIcon :path="s.icon" />
           </a>
         </li>
+      </ul>
+      <ul class="row">
+        <li><router-link class="link" :to="{ name: 'AboutUs', params: { lang: locale } }">{{ t('aboutUs.aboutUs') }}</router-link></li>
+        <li><router-link class="link" :to="{ name: 'Help', params: { lang: locale } }">{{ t('footer.help') }}</router-link></li>
       </ul>
       <p class="muted">{{ t('footer.byBlackbirdAndMISG') }}</p>
       <ul class="row">
@@ -71,7 +75,13 @@ const social = [
   display: inline-flex; align-items: center; justify-content: center;
   width: 44px; height: 44px; border-radius: var(--radius-m); color: var(--text);
 }
-@media (hover: hover) { .social:hover { background: var(--surface-2); } }
+@media (hover: hover) { .social:hover, .link:hover { background: var(--surface-2); } }
+.link {
+  display: inline-flex; align-items: center;
+  min-height: 44px; padding: 0 var(--space-3); border-radius: var(--radius-m);
+  color: var(--text); font-weight: 600; text-decoration: none;
+}
+.link.router-link-active { color: var(--accent); }
 .row a { display: inline-flex; }
 .logo { display: block; width: 44px; height: 44px; object-fit: contain; }
 /* the ring keeps black logos apart from the dark page */
