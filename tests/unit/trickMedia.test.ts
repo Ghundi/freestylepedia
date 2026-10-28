@@ -38,4 +38,10 @@ describe('trickMedia', () => {
     expect(embedUrl('abc', { autoplay: false })).toBe('https://www.youtube-nocookie.com/embed/abc?start=4&playsinline=1&rel=0')
     expect(embedUrl('abc', { start: 10 })).toContain('start=10')
   })
+  it('enables the player API for this origin only when asked', () => {
+    expect(embedUrl('abc')).not.toContain('enablejsapi')
+    const url = embedUrl('abc', { api: true })
+    expect(url).toContain('&enablejsapi=1')
+    expect(url).toContain(`&origin=${encodeURIComponent(window.location.origin)}`)
+  })
 })

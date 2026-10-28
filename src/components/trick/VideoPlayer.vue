@@ -5,20 +5,50 @@ import { mdiPlay } from '@mdi/js'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import YtThumb from '@/components/ui/YtThumb.vue'
 import { embedUrl } from '@/scripts/trickMedia'
+import { loadYouTubeApi, type YouTubePlayer } from '@/scripts/youtubeApi'
 
 const props = defineProps<{ videoId: string; title: string }>()
 
 const { t } = useI18n()
 const playing = ref(false)
 const frame = ref<HTMLIFrameElement>()
+let player: YouTubePlayer | undefined
 
-watch(() => props.videoId, () => { playing.value = false })
+function stopPlayer() {
+  player?.destroy()
+  player = undefined
+}
+
+watch(() => props.videoId, () => {
+  stopPlayer()
+  playing.value = false
+})
+onBeforeUnmount(stopPlayer)
 
 // YouTube needs the network: offline, the poster stays and says so instead of opening an empty frame.
 const offline = ref(false)
 const backOnline = () => { offline.value = false }
 window.addEventListener('online', backOnline)
 onBeforeUnmount(() => window.removeEventListener('online', backOnline))
+
+// Safari refuses autoplay with sound inside the frame: start muted there instead of waiting for a second tap.
+// Without the API (blocked script), the frame keeps YouTube's own play button.
+async function attachPlayer(el: HTMLIFrameElement) {
+  try {
+    const YT = await loadYouTubeApi()
+    if (frame.value !== el) return
+    player = new YT.Player(el, {
+      events: {
+        onAutoplayBlocked: ({ target }) => {
+          target.mute()
+          target.playVideo()
+        },
+      },
+    })
+  } catch {
+    // the plain frame still plays on a tap
+  }
+}
 
 // The play button disappears on click: hand focus to the player so keyboard users keep their place.
 async function play() {
@@ -28,7 +58,9 @@ async function play() {
   }
   playing.value = true
   await nextTick()
-  frame.value?.focus()
+  if (!frame.value) return
+  frame.value.focus()
+  attachPlayer(frame.value)
 }
 </script>
 
@@ -38,7 +70,7 @@ async function play() {
       v-if="playing"
       ref="frame"
       class="media"
-      :src="embedUrl(videoId)"
+      :src="embedUrl(videoId, { api: true })"
       :title="title"
       allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
       allowfullscreen
