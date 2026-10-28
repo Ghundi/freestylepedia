@@ -23,7 +23,7 @@ const to = computed(() => props.trick && {
 <template>
   <router-link v-if="trick && to" :to="to" class="next">
     <!-- the title is the link text; the image adds nothing for screen readers -->
-    <YtThumb :video-id="trick.videoID[0]" alt="" eager />
+    <YtThumb :video-id="trick.videoID[0]" alt="" eager sizes="(min-width: 900px) 560px, 100vw" />
     <span class="cap">
       <span class="name">{{ trick.title[0] }}</span>
       <span class="meta">

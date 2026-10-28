@@ -3,6 +3,7 @@ import { mount, RouterLinkStub } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { createI18n } from 'vue-i18n'
 import thumbFrames from '../../src/data/thumbFrames.json'
+import localThumbs from '../../src/data/localThumbs.json'
 import YtThumb from '../../src/components/ui/YtThumb.vue'
 import TrickThumb from '../../src/components/ui/TrickThumb.vue'
 import { useMasteredStore } from '../../src/scripts/store'
@@ -18,6 +19,20 @@ const trick = { trickID: '0001', title: ['Spin'], difficulty: 2, category: 'spin
   releaseDate: new Date('2024-01-01'), videoID: ['abc'], requirements: [], connections: [] } as unknown as Trick
 
 describe('YtThumb', () => {
+  it('serves the extracted frame with a srcset when there is one, and falls back to YouTube if it fails', async () => {
+    const id = localThumbs[0]
+    const w = mount(YtThumb, { props: { videoId: id, alt: 'x' } })
+    const img = w.get('img')
+    expect(img.attributes('src')).toBe(`/thumbs/${id}-480.webp`)
+    expect(img.attributes('srcset')).toBe(`/thumbs/${id}-480.webp 480w, /thumbs/${id}-960.webp 960w`)
+    expect(img.attributes('sizes')).toBeTruthy()
+    expect(w.classes()).toContain('local')
+    expect(w.classes()).not.toContain('card')
+    await img.trigger('error')
+    expect(w.get('img').attributes('src')).toContain('i.ytimg.com')
+    expect(w.get('img').attributes('srcset')).toBeUndefined()
+  })
+
   it('flags a title-card frame with the card class', () => {
     const cardId = 'card-test-id'
     ;(thumbFrames as Record<string, unknown>)[cardId] = { frame: 'hq1', card: true }

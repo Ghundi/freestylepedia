@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { frameThumbnailUrl, fallbackThumbnailUrl, thumbFrameInfo } from '../../scripts/trickMedia'
+import { frameThumbnailUrl, fallbackThumbnailUrl, hasLocalThumb, localThumbSrcset, localThumbUrl, thumbFrameInfo } from '../../scripts/trickMedia'
 
-const props = withDefaults(defineProps<{ videoId: string; alt: string; eager?: boolean }>(), { eager: false })
+const props = withDefaults(defineProps<{ videoId: string; alt: string; eager?: boolean; sizes?: string }>(), {
+  eager: false,
+  // grid and rail cards; wide images (next-trick card, player poster) pass their own
+  sizes: '(min-width: 900px) 260px, 45vw',
+})
 
 // YouTube answers a grey 120px-wide placeholder when hq2.jpg does not exist.
 const PLACEHOLDER_MAX_WIDTH = 120
@@ -11,23 +15,27 @@ const useFallback = ref(false)
 const failed = ref(false)
 watch(() => props.videoId, () => { useFallback.value = false; failed.value = false })
 
+// A frame extracted from the video when there is one; otherwise YouTube's picked frame, then its default.
+const local = computed(() => hasLocalThumb(props.videoId) && !useFallback.value)
 const src = computed(() =>
-  useFallback.value ? fallbackThumbnailUrl(props.videoId) : frameThumbnailUrl(props.videoId))
+  local.value ? localThumbUrl(props.videoId)
+    : useFallback.value ? fallbackThumbnailUrl(props.videoId) : frameThumbnailUrl(props.videoId))
+const srcset = computed(() => local.value ? localThumbSrcset(props.videoId) : undefined)
 
-const isCard = computed(() => thumbFrameInfo(props.videoId).card)
+const isCard = computed(() => !local.value && thumbFrameInfo(props.videoId).card)
 
 function onError() {
   if (useFallback.value) failed.value = true
   else useFallback.value = true
 }
 function onLoad(e: Event) {
-  if ((e.target as HTMLImageElement).naturalWidth <= PLACEHOLDER_MAX_WIDTH) useFallback.value = true
+  if (!local.value && (e.target as HTMLImageElement).naturalWidth <= PLACEHOLDER_MAX_WIDTH) useFallback.value = true
 }
 </script>
 
 <template>
-  <span class="yt-thumb" :class="{ card: isCard }">
-    <img v-if="!failed" class="img" :src="src" :alt="alt" :loading="eager ? 'eager' : 'lazy'" decoding="async" @error="onError" @load="onLoad">
+  <span class="yt-thumb" :class="{ card: isCard, local }">
+    <img v-if="!failed" class="img" :src="src" :srcset="srcset" :sizes="srcset ? sizes : undefined" :alt="alt" :loading="eager ? 'eager' : 'lazy'" decoding="async" @error="onError" @load="onLoad">
   </span>
 </template>
 
@@ -49,6 +57,8 @@ function onLoad(e: Event) {
   object-fit: cover;
   transform: scale(1.112);
 }
+/* extracted frames are plain 16:9, no letterbox to crop */
+.local .img { transform: none; }
 /* A white title card glares in the dark UI: invert it to light-on-dark. */
 :root[data-theme='dark'] .card .img {
   filter: invert(1) grayscale(1) contrast(0.9);

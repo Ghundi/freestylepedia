@@ -34,7 +34,7 @@ async function play() {
       allowfullscreen
     />
     <button v-else type="button" class="poster" :aria-label="t('video.play', { name: title })" @click="play">
-      <YtThumb class="media" :video-id="videoId" alt="" eager />
+      <YtThumb class="media" :video-id="videoId" alt="" eager sizes="(min-width: 900px) 960px, 100vw" />
       <span class="disc"><AppIcon :path="mdiPlay" :size="36" /></span>
     </button>
   </div>
