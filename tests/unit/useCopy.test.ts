@@ -13,6 +13,11 @@ function clipboard(impl: () => Promise<void>) {
   Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true })
   return writeText
 }
+function selectionCopy(result: boolean) {
+  const execCommand = vi.fn(() => result)
+  Object.defineProperty(document, 'execCommand', { value: execCommand, configurable: true })
+  return execCommand
+}
 
 describe('useCopy', () => {
   afterEach(() => { vi.useRealTimers() })
@@ -31,6 +36,7 @@ describe('useCopy', () => {
 
   it('reports a failure instead of staying silent, and clears it on the next success', async () => {
     clipboard(() => Promise.reject(new Error('denied')))
+    selectionCopy(false)
     const c = setup()
     await c.copy()
     expect(c.failed.value).toBe(true)
@@ -43,9 +49,38 @@ describe('useCopy', () => {
 
   it('reset clears both flags', async () => {
     clipboard(() => Promise.reject(new Error('denied')))
+    selectionCopy(false)
     const c = setup()
     await c.copy()
     c.reset()
     expect(c.failed.value).toBe(false)
+  })
+
+  it('falls back to a selection copy when the Clipboard API is missing', async () => {
+    Object.defineProperty(navigator, 'clipboard', { value: undefined, configurable: true })
+    const execCommand = selectionCopy(true)
+    const c = setup()
+    await c.copy()
+    expect(execCommand).toHaveBeenCalledWith('copy')
+    expect(c.copied.value).toBe(true)
+    expect(c.failed.value).toBe(false)
+    expect(document.body.querySelector('textarea')).toBeNull()
+  })
+
+  it('falls back when the Clipboard API rejects', async () => {
+    clipboard(() => Promise.reject(new Error('insecure')))
+    selectionCopy(true)
+    const c = setup()
+    await c.copy()
+    expect(c.copied.value).toBe(true)
+  })
+
+  it('fails when both ways fail', async () => {
+    clipboard(() => Promise.reject(new Error('denied')))
+    selectionCopy(false)
+    const c = setup()
+    await c.copy()
+    expect(c.failed.value).toBe(true)
+    expect(c.copied.value).toBe(false)
   })
 })
