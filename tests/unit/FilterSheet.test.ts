@@ -15,14 +15,13 @@ const mountSheet = () => mount(FilterSheet, { props: { open: false }, global: { 
 describe('FilterSheet', () => {
   beforeEach(() => setActivePinia(createPinia()))
 
-  it('keeps min ≤ max when either bound crosses the other', async () => {
+  it('drives the difficulty store from the level slider', async () => {
     const w = mountSheet()
-    const [min, max] = w.findAll('select')
-    await max.setValue('2')
-    await min.setValue('4')
-    expect(useSelDifficultyStore().val).toEqual([4, 4])
-    await max.setValue('3')
-    expect(useSelDifficultyStore().val).toEqual([3, 3])
+    const [min, max] = w.findAll('input[type="range"]')
+    await min.setValue('2')
+    expect(useSelDifficultyStore().val).toEqual([2, 5])
+    await max.setValue('4')
+    expect(useSelDifficultyStore().val).toEqual([2, 4])
   })
 
   it('binds category checkboxes to the selected categories', async () => {

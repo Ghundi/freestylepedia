@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AppDialog from '@/components/ui/AppDialog.vue'
 import AppButton from '@/components/ui/AppButton.vue'
+import RangeSlider from '@/components/ui/RangeSlider.vue'
 import {
   resetFilters, useCategoryStore, useMarkedStore, useSelCategoryStore,
   useSelDifficultyStore, useSelSortingOrderStore, useSortingOrderStore,
@@ -21,16 +22,9 @@ const sorting = useSelSortingOrderStore()
 const sortingOrders = useSortingOrderStore().sortingOrders
 const trickStore = useTrickStore()
 
-const LEVELS = [1, 2, 3, 4, 5]
-
-// min ≤ max: moving one bound past the other drags the other along.
-const minLevel = computed({
-  get: () => difficulty.val[0],
-  set: (v: number) => difficulty.update([v, Math.max(v, difficulty.val[1])]),
-})
-const maxLevel = computed({
-  get: () => difficulty.val[1],
-  set: (v: number) => difficulty.update([Math.min(v, difficulty.val[0]), v]),
+const level = computed({
+  get: () => difficulty.val as [number, number],
+  set: (v: [number, number]) => difficulty.update(v),
 })
 </script>
 
@@ -60,20 +54,13 @@ const maxLevel = computed({
 
       <fieldset>
         <legend>{{ t('home.level') }}</legend>
-        <div class="pair">
-          <label class="field">
-            <span>{{ t('home.levelMin') }}</span>
-            <select v-model.number="minLevel">
-              <option v-for="n in LEVELS" :key="n" :value="n">{{ n }}</option>
-            </select>
-          </label>
-          <label class="field">
-            <span>{{ t('home.levelMax') }}</span>
-            <select v-model.number="maxLevel">
-              <option v-for="n in LEVELS" :key="n" :value="n">{{ n }}</option>
-            </select>
-          </label>
-        </div>
+        <RangeSlider
+          v-model="level"
+          :min="1"
+          :max="5"
+          :min-label="t('home.levelMin')"
+          :max-label="t('home.levelMax')"
+        />
       </fieldset>
 
       <label class="field">
@@ -122,9 +109,7 @@ legend, .legend {
   accent-color: var(--accent);
 }
 .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
-.pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
 .field { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
-.pair .field span { font-size: var(--t-sm); }
 select {
   min-height: 44px;
   width: 100%;
