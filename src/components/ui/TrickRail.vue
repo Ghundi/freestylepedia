@@ -54,16 +54,18 @@ onBeforeUnmount(() => {
     <header class="head">
       <h2>{{ title }}</h2>
       <span class="count">{{ count }}</span>
-      <div v-if="!(atStart && atEnd)" class="arrows">
-        <IconButton :label="t('home.scrollPrev')" :disabled="atStart" @click="page(-1)"><AppIcon :path="mdiChevronLeft" /></IconButton>
-        <IconButton :label="t('home.scrollNext')" :disabled="atEnd" @click="page(1)"><AppIcon :path="mdiChevronRight" /></IconButton>
-      </div>
     </header>
-    <ul ref="list" class="list" tabindex="-1" @scroll.passive="update">
-      <li v-for="t in tricks" :key="t.trickID" class="item">
-        <TrickThumb :trick="t" />
-      </li>
-    </ul>
+    <div class="track">
+      <ul ref="list" class="list" tabindex="-1" @scroll.passive="update">
+        <li v-for="t in tricks" :key="t.trickID" class="item">
+          <TrickThumb :trick="t" />
+        </li>
+      </ul>
+      <div v-if="!(atStart && atEnd)" class="arrows">
+        <IconButton class="arrow arrow--prev" :label="t('home.scrollPrev')" :disabled="atStart" @click="page(-1)"><AppIcon :path="mdiChevronLeft" /></IconButton>
+        <IconButton class="arrow arrow--next" :label="t('home.scrollNext')" :disabled="atEnd" @click="page(1)"><AppIcon :path="mdiChevronRight" /></IconButton>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -91,12 +93,26 @@ h2 { margin: 0; font-size: var(--t-lg); font-weight: 600; color: var(--text); }
   scroll-padding-inline: var(--space-2);
 }
 .item { flex: 0 0 148px; scroll-snap-align: start; }
-/* phones swipe; wide screens get the arrows */
-.arrows { display: none; margin-left: auto; gap: var(--space-1); }
-.arrows :deep(.icon-btn:disabled) { opacity: 0.35; cursor: default; }
+/* phones swipe; wide screens get round arrows over the edges of the row, centred on the pictures */
+.track { position: relative; }
+.arrows { display: none; }
+.arrow {
+  position: absolute;
+  /* 200px-wide thumbnails are 16:9, so their middle sits about 56px below the list's top padding */
+  top: calc(var(--space-2) + 56px - 22px);
+  z-index: 2;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.25);
+}
+.arrow--prev { left: calc(-1 * var(--space-3)); }
+.arrow--next { right: calc(-1 * var(--space-3)); }
+.arrow:disabled { opacity: 0; pointer-events: none; }
+@media (hover: hover) { .arrow:not(:disabled):hover { background: var(--surface-2); } }
 @media (min-width: 900px) {
   .item { flex-basis: 200px; }
-  .head { align-items: center; }
-  .arrows { display: flex; }
+  .arrows { display: block; }
 }
 </style>
