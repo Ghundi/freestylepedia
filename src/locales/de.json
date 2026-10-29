@@ -144,6 +144,8 @@
   },
   "back": "Zurück",
   "home": {
+    "scrollPrev": "Vorherige Tricks",
+    "scrollNext": "Weitere Tricks",
     "nextContext": "Nächste Figur auf deiner Liste",
     "suggestedContext": "Eine gute Figur zum Anfangen",
     "byCategory": "Nach Kategorie",

@@ -144,6 +144,8 @@
   },
   "back": "Retour",
   "home": {
+    "scrollPrev": "Figures précédentes",
+    "scrollNext": "Figures suivantes",
     "nextContext": "Prochaine figure de ta liste",
     "suggestedContext": "Une bonne figure pour commencer",
     "byCategory": "Par catégorie",

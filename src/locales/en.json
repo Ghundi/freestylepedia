@@ -144,6 +144,8 @@
   },
   "back": "Back",
   "home": {
+    "scrollPrev": "Previous tricks",
+    "scrollNext": "More tricks",
     "nextContext": "Next trick on your list",
     "suggestedContext": "A good trick to start with",
     "byCategory": "By category",
