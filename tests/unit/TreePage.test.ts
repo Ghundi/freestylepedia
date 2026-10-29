@@ -71,7 +71,7 @@ describe('TreePage', () => {
     expect(w.findComponent(PathList).props('mode')).toBe(mode)
     expect(w.text()).toContain(en.paths.hint)
   })
-  it('closes the sheet when the screen becomes wide', async () => {
+  it('keeps the sheet closed after going wide and back to a phone', async () => {
     stubWide(false)
     const w = await mountTree('CategoryTree')
     const trick = useTrickStore().tricks[0]
@@ -80,6 +80,8 @@ describe('TreePage', () => {
     expect(w.findComponent(PathSheet).props('trick')).toEqual(trick)
     listener({ matches: true })
     await w.vm.$nextTick()
-    expect(w.findComponent(PathSheet).exists() ? w.findComponent(PathSheet).props('trick') : null).toBeNull()
+    listener({ matches: false })
+    await w.vm.$nextTick()
+    expect(w.findComponent(PathSheet).props('trick')).toBeNull()
   })
 })
