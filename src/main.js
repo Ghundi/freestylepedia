@@ -18,6 +18,7 @@ import {createPinia} from "pinia";
 // routing
 import {createRouter, createWebHistory} from 'vue-router'
 
+import { pluralPl } from '@/scripts/pluralRules.ts'
 import { checkIfInstallable } from '@/scripts/pwaInstall.ts'
 
 // design foundations
@@ -49,6 +50,7 @@ const i18n = createI18n({
     fallbackLocale: fallbackLocale,
     availableLocales: availableLocales,
     messages: messages,
+    pluralRules: { pl: pluralPl },
 });
 
 const routes = [

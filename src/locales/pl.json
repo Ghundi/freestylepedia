@@ -5,6 +5,21 @@
   "trickTree": {
     "description": "Graf staje się coraz trudniejszy w kierunku prawej strony. Każde drzewo umiejętności rozgałęzia się na trudniejsze triki i jest połączone liniami. Zalecamy naukę jednego drzewa umiejętności od lewej do prawej."
   },
+  "paths": {
+    "byLevel": "Poziomy",
+    "byCategory": "Kategorie",
+    "zoomIn": "Przybliż",
+    "zoomOut": "Oddal",
+    "fit": "Pokaż cały graf",
+    "hint": "Dotknij tricku, aby zobaczyć, czego nauczyć się wcześniej i co dzięki niemu odblokujesz.",
+    "countLabel": "Opanowane: {done} z {total}",
+    "sheetTitle": "Ścieżka",
+    "before": "Najpierw naucz się",
+    "after": "Potem odblokujesz",
+    "noneBefore": "Nic: to punkt startowy",
+    "noneAfter": "Na razie brak trików",
+    "openTrick": "Zobacz trik"
+  },
   "faq": {
     "naming_question": "Skąd pochodzą nazwy trików?",
     "naming_answer": "Wszystkie triki nazywamy wspólnie ze społecznością.",
@@ -39,7 +54,8 @@
     "myProgress": "Mój postęp",
     "switchToLightMode": "Przełącz na tryb jasny",
     "switchToDarkMode": "Przełącz na tryb ciemny",
-    "installApp": "Zainstaluj aplikację"
+    "installApp": "Zainstaluj aplikację",
+    "installAppHintIOS": "Na iPhonie i iPadzie możesz dodać tę stronę do ekranu głównego jak aplikację. Stuknij przycisk Udostępnij, a potem „Do ekranu początkowego”."
   },
   "toolbar": {
     "resetFilters": "Resetuj filtry",
@@ -53,7 +69,8 @@
     "help": "Pomoc",
     "language": "Język",
     "byBlackbirdAndMISG": "od Blackbird i MISG",
-    "supportedBy": "wspierane przez"
+    "supportedBy": "wspierane przez",
+    "supporterLogo": "Logo partnera"
   },
   "sortOptions": {
     "difficultyDown": "Trudność (Trudne – Łatwe)",
@@ -84,19 +101,84 @@
     "pageNotFound": "Strona nie znaleziona",
     "pageNotFoundSuggestion": "Możliwe, że adres URL jest błędnie wpisany",
     "trickNotFound": "nie znaleziono",
-    "trickNotFoundSuggestion": "Możliwe, że nazwa triku w URL jest błędna. Akceptowana jest tylko nazwa z miniatury YouTube."
+    "trickNotFoundSuggestion": "Możliwe, że nazwa triku w URL jest błędna. Akceptowana jest tylko nazwa z miniatury YouTube.",
+    "toHome": "Zobacz wszystkie triki"
   },
   "myProgress": {
     "myProgress": "Mój postęp",
     "progress": "Postęp",
     "recommendedTricks": "Triki polecane dla ciebie",
+    "nextTrick": "Twój następny trik",
     "transferProgress": "Postęp transferu",
-    "transferInfo": "Wklej skopiowany adres URL z schowka na nowym urządzeniu"
+    "transferInfo": "Wklej skopiowany adres URL z schowka na nowym urządzeniu",
+    "summary": "Opanowane: {n} z {total}",
+    "empty": "Oznacz pierwsze triki jako opanowane, aby śledzić swój postęp.",
+    "byCategory": "Według kategorii",
+    "browse": "Przeglądaj triki",
+    "allDone": "Wszystkie triki są opanowane. Nowe filmy pojawiają się regularnie: zajrzyj wkrótce."
   },
   "close": "Zamknij",
+  "level": "Poz. {n}",
+  "new": "Nowy",
   "difficulty": "Trudność",
   "category": "Kategoria",
   "similarTricks": "Podobne triki",
   "requirements": "Wymaga",
-  "otherTutorials": "Inne poradniki"
+  "otherTutorials": "Inne poradniki",
+  "tabs": {
+    "tricks": "Triki",
+    "paths": "Ścieżki",
+    "progress": "Mój postęp"
+  },
+  "settings": {
+    "title": "Ustawienia",
+    "theme": "Motyw",
+    "themeSystem": "Systemowy",
+    "themeDark": "Ciemny",
+    "themeLight": "Jasny",
+    "language": "Język"
+  },
+  "search": {
+    "open": "Szukaj",
+    "placeholder": "Szukaj triku"
+  },
+  "back": "Wstecz",
+  "home": {
+    "scrollPrev": "Poprzednie triki",
+    "scrollNext": "Więcej trików",
+    "nextContext": "Następny trik z twojej listy",
+    "suggestedContext": "Dobry trik na początek",
+    "byCategory": "Kategorie",
+    "all": "Wszystkie",
+    "filters": "Filtry",
+    "count": "{n} trik | {n} triki | {n} trików",
+    "view": "Widok",
+    "sort": "Sortuj",
+    "status": "Status",
+    "level": "Poziom",
+    "levelMin": "Minimum",
+    "levelMax": "Maksimum",
+    "reset": "Resetuj",
+    "active": "{n} aktywny | {n} aktywne | {n} aktywnych",
+    "recommendedContext": "Polecany na twoim poziomie"
+  },
+  "video": {
+    "play": "Odtwórz: {name}",
+    "others": "Inne filmy",
+    "offline": "Jesteś offline: film odtworzy się po powrocie połączenia."
+  },
+  "trick": {
+    "todo": "Todo",
+    "mastered": "Opanowane",
+    "before": "Naucz się najpierw",
+    "related": "Powiązane triki"
+  },
+  "share": {
+    "title": "Udostępnij",
+    "copy": "Kopiuj link",
+    "copied": "Link skopiowany",
+    "native": "Udostępnij…",
+    "copyFailed": "Nie udało się skopiować: zaznacz link i skopiuj go ręcznie"
+  },
+  "skipToContent": "Przejdź do treści"
 }
