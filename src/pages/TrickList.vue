@@ -1,15 +1,16 @@
 <script setup lang="ts">
-  import { computed, ref } from 'vue';
+  import { computed, ref, useId } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { mdiTuneVariant } from '@mdi/js';
+  import { mdiChevronDown, mdiTuneVariant } from '@mdi/js';
   import FilterSheet from '@/components/home/FilterSheet.vue';
   import TrickRail from '@/components/ui/TrickRail.vue';
   import TrickThumb from '@/components/ui/TrickThumb.vue';
   import SegmentedControl from '@/components/ui/SegmentedControl.vue';
   import AppButton from '@/components/ui/AppButton.vue';
+  import AppIcon from '@/components/ui/AppIcon.vue';
   import {
     resetFilters, useCategoryStore, useCurSearchStore, useMarkedStore, useSelCategoryStore,
-    useSelDifficultyStore, useSelSortingOrderStore,
+    useSelDifficultyStore, useSelSortingOrderStore, useSortingOrderStore,
   } from '@/scripts/store';
   import { useTrickStore } from "@/scripts/trickStore";
   import { groupByCategory } from '@/scripts/collections';
@@ -24,6 +25,8 @@
   const marked = useMarkedStore();
   const curSearch = useCurSearchStore();
   const sorting = useSelSortingOrderStore();
+  const sortingOrders = useSortingOrderStore().sortingOrders;
+  const sortId = useId();
   const { view } = useHomeView();
 
   const rows = computed(() => groupByCategory(trickStore.tricks, categoryStore.categories));
@@ -69,10 +72,15 @@
             <span class="sr-only">{{ t('home.active', { n: activeFilters }, activeFilters) }}</span>
           </template>
         </AppButton>
-        <p class="sort">
-          <span class="muted">{{ t('home.sort') }}</span>
-          {{ t('sortOptions.' + sorting.by) }}
-        </p>
+        <div class="sort">
+          <label class="muted" :for="sortId">{{ t('home.sort') }}</label>
+          <span class="pick">
+            <select :id="sortId" v-model="sorting.by">
+              <option v-for="o in sortingOrders" :key="o" :value="o">{{ t('sortOptions.' + o) }}</option>
+            </select>
+            <AppIcon class="chevron" :path="mdiChevronDown" :size="18" />
+          </span>
+        </div>
         <p class="count">{{ t('home.count', { n: trickStore.shownTricks.length }, trickStore.shownTricks.length) }}</p>
       </div>
 
@@ -118,8 +126,23 @@
   font-size: var(--t-xs);
   font-weight: 700;
 }
-.sort, .count { margin: 0; font-size: var(--t-sm); }
-.sort { display: flex; flex-wrap: wrap; gap: 0 var(--space-2); }
+.count { margin: 0; font-size: var(--t-sm); }
+.sort { display: flex; align-items: center; gap: var(--space-2); font-size: var(--t-sm); }
+.pick { position: relative; display: inline-flex; align-items: center; }
+/* reads as plain text with a chevron; the native list opens on tap */
+.pick select {
+  appearance: none;
+  min-height: 44px;
+  padding: 0 calc(var(--space-2) + 18px) 0 var(--space-1);
+  border: 0;
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+.pick select:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.chevron { position: absolute; right: var(--space-1); color: var(--text-muted); pointer-events: none; }
 .muted, .count { color: var(--text-muted); }
 .count { margin-left: auto; }
 .grid {

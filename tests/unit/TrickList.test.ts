@@ -6,7 +6,7 @@ import { createMemoryHistory, createRouter } from 'vue-router'
 import en from '../../src/locales/en.json'
 import TrickList from '../../src/pages/TrickList.vue'
 import { useHomeView } from '../../src/scripts/homeView'
-import { useSelDifficultyStore } from '../../src/scripts/store'
+import { useSelDifficultyStore, useSelSortingOrderStore, useSortingOrderStore } from '../../src/scripts/store'
 import { useTrickStore, type Trick } from '../../src/scripts/trickStore'
 
 const make = (trickID: string, title: string, category: string, difficulty: number) =>
@@ -74,5 +74,17 @@ describe('TrickList (home)', () => {
   it('no longer shows the next-trick card, which lives on My Progress', async () => {
     const w = await mountAt('/en')
     expect(w.find('.next').exists()).toBe(false)
+  })
+
+  it('lets the sort order be chosen in place in the toolbar', async () => {
+    useHomeView().view.value = 'all'
+    const w = await mountAt('/en')
+    const select = w.get('.tools select')
+    const label = w.get(`.tools label[for="${select.attributes('id')}"]`)
+    expect(label.text()).toBe(en.home.sort)
+    const orders = useSortingOrderStore().sortingOrders
+    expect(select.findAll('option').map(o => o.attributes('value'))).toEqual(orders)
+    await select.setValue(orders[1])
+    expect(useSelSortingOrderStore().by).toBe(orders[1])
   })
 })

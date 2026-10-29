@@ -6,7 +6,7 @@ import AppButton from '@/components/ui/AppButton.vue'
 import RangeSlider from '@/components/ui/RangeSlider.vue'
 import {
   resetFilters, useCategoryStore, useMarkedStore, useSelCategoryStore,
-  useSelDifficultyStore, useSelSortingOrderStore, useSortingOrderStore,
+  useSelDifficultyStore,
 } from '@/scripts/store'
 import { useTrickStore } from '@/scripts/trickStore'
 
@@ -18,8 +18,6 @@ const categoryStore = useCategoryStore()
 const selCategory = useSelCategoryStore()
 const marked = useMarkedStore()
 const difficulty = useSelDifficultyStore()
-const sorting = useSelSortingOrderStore()
-const sortingOrders = useSortingOrderStore().sortingOrders
 const trickStore = useTrickStore()
 
 const level = computed({
@@ -63,13 +61,6 @@ const level = computed({
         />
       </fieldset>
 
-      <label class="field">
-        <span class="legend">{{ t('home.sort') }}</span>
-        <select v-model="sorting.by">
-          <option v-for="o in sortingOrders" :key="o" :value="o">{{ t('sortOptions.' + o) }}</option>
-        </select>
-      </label>
-
       <div class="foot">
         <AppButton @click="resetFilters">{{ t('home.reset') }}</AppButton>
         <p class="count" aria-live="polite">{{ t('home.count', { n: trickStore.shownTricks.length }, trickStore.shownTricks.length) }}</p>
@@ -81,7 +72,7 @@ const level = computed({
 <style scoped>
 .sheet { display: flex; flex-direction: column; gap: var(--space-5); }
 fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
-legend, .legend {
+legend {
   display: block;
   margin-bottom: var(--space-2);
   padding: 0;
@@ -109,18 +100,8 @@ legend, .legend {
   accent-color: var(--accent);
 }
 .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
-.field { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
-select {
-  min-height: 44px;
-  width: 100%;
-  padding: 0 var(--space-3);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-s);
-  background: var(--surface-2);
-  color: var(--text);
-  font: inherit;
-}
-select:focus-visible, .check input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.check input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 /* reset and the live count stay in view while the filters scroll */
 .foot {
   position: sticky;

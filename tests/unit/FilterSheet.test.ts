@@ -30,6 +30,10 @@ describe('FilterSheet', () => {
     expect(useSelCategoryStore().categories).toEqual(['spin'])
   })
 
+  it('has no sort control, the sort order is chosen on the page', () => {
+    expect(mountSheet().find('select').exists()).toBe(false)
+  })
+
   it('reset clears filters but keeps the sort order', async () => {
     const w = mountSheet()
     useSelCategoryStore().update(['spin'])
