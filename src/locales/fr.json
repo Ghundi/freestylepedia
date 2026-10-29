@@ -82,9 +82,9 @@
     "stop": "Freinages"
   },
   "marked": {
-    "mastered": "Acquises",
-    "non-mastered": "Non acquises",
-    "todo": "À faire",
+    "mastered": "Maîtrisé",
+    "non-mastered": "Non maîtrisé",
+    "todo": "À travailler",
     "irrelevant": "Non pertinentes"
   },
   "error": {
@@ -103,11 +103,11 @@
     "nextTrick": "Ta prochaine figure",
     "transferProgress": "Transférer ma progression",
     "transferInfo": "Ouvre ce lien sur ton nouvel appareil pour retrouver ta progression.",
-    "summary": "{n} figure acquise sur {total} | {n} figures acquises sur {total}",
-    "empty": "Marque tes premières figures comme acquises pour suivre ta progression.",
+    "summary": "{n} figure maîtrisée sur {total} | {n} figures maîtrisées sur {total}",
+    "empty": "Marque tes premières figures comme maîtrisées pour suivre ta progression.",
     "byCategory": "Par catégorie",
     "browse": "Voir les figures",
-    "allDone": "Toutes les figures sont acquises. De nouvelles vidéos sortent régulièrement : reviens bientôt."
+    "allDone": "Toutes les figures sont maîtrisées. De nouvelles vidéos sortent régulièrement : reviens bientôt."
   },
   "close": "Fermer",
   "level": "Niveau {n}",
@@ -158,8 +158,8 @@
     "offline": "Tu es hors ligne : la vidéo se lancera une fois la connexion revenue."
   },
   "trick": {
-    "todo": "À faire",
-    "mastered": "Acquise",
+    "todo": "À travailler",
+    "mastered": "Maîtrisé",
     "before": "À maîtriser avant",
     "related": "Figures proches"
   },

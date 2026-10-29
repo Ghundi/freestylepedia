@@ -223,7 +223,7 @@
 .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
 
 .marks { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
-.marks .mark { min-height: 48px; }
+.marks .mark { min-height: 48px; padding-inline: var(--space-3); white-space: nowrap; }
 .marks .mark[aria-pressed='true'] {
   background: var(--accent);
   border-color: var(--accent);
