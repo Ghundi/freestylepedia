@@ -53,7 +53,11 @@ export function levelRows(tricks: Trick[], level: number, categories: string[]):
 
 // What to know first (requirements) and what it leads to (tricks requiring it).
 export function trickPath(tricks: Trick[], trick: Trick): { before: Trick[]; after: Trick[] } {
-  const before = tricks.filter(t => t.trickID !== trick.trickID && trick.requirements.includes(t.trickID))
+  const before: Trick[] = []
+  for (const id of trick.requirements) {
+    const t = tricks.find(x => x.trickID === id)
+    if (t && t.trickID !== trick.trickID && !before.includes(t)) before.push(t)
+  }
   const after = tricks
     .filter(t => t.trickID !== trick.trickID && t.requirements.includes(trick.trickID))
     .sort(byLevelThenName)

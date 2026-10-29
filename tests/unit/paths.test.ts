@@ -65,14 +65,14 @@ describe('levelRows', () => {
 })
 
 describe('trickPath', () => {
-  it('lists requirements in list order, ignoring unknown ids, and sorted followers without self-reference', () => {
+  it('lists requirements in requirements order, ignoring unknown ids, and sorted followers without self-reference', () => {
     const t = mk('1', 'Me', 2, 'footwork', ['3', '99', '2', '1'])
     const tricks = [
       t, mk('2', 'Two', 1, 'footwork'), mk('3', 'Three', 1, 'footwork'),
       mk('4', 'Zed', 3, 'footwork', ['1']), mk('5', 'Alpha', 3, 'footwork', ['1']), mk('6', 'Low', 2, 'stop', ['1']),
     ]
     const { before, after } = trickPath(tricks, t)
-    expect(before.map(x => x.trickID)).toEqual(['2', '3'])
+    expect(before.map(x => x.trickID)).toEqual(['3', '2'])
     expect(after.map(x => x.title[0])).toEqual(['Low', 'Alpha', 'Zed'])
   })
 })
