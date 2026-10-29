@@ -1,49 +1,170 @@
 <script setup lang="ts">
-  import TrickCard from '../components/TrickCard.vue';
-  import Toolbar from "@/components/Toolbar/Toolbar.vue";
-  import { useMasteredStore, useTodoStore } from '@/scripts/store';
+  import { computed, ref, useId } from 'vue';
+  import { useI18n } from 'vue-i18n';
+  import { mdiChevronDown, mdiTuneVariant } from '@mdi/js';
+  import FilterSheet from '@/components/home/FilterSheet.vue';
+  import TrickRail from '@/components/ui/TrickRail.vue';
+  import TrickThumb from '@/components/ui/TrickThumb.vue';
+  import SegmentedControl from '@/components/ui/SegmentedControl.vue';
+  import AppButton from '@/components/ui/AppButton.vue';
+  import AppIcon from '@/components/ui/AppIcon.vue';
+  import {
+    resetFilters, useCategoryStore, useCurSearchStore, useMarkedStore, useSelCategoryStore,
+    useSelDifficultyStore, useSelSortingOrderStore, useSortingOrderStore,
+  } from '@/scripts/store';
   import { useTrickStore } from "@/scripts/trickStore";
-  import { useRoute } from 'vue-router';
-  import { isMobile } from '@/scripts/helpers';
+  import { groupByCategory } from '@/scripts/collections';
+  import { useHomeView } from '@/scripts/homeView';
 
   const trickStore = useTrickStore();
 
-  const route = useRoute()
-  if(route.query.todo) {
-    useTodoStore().loadHash(route.query.todo.toString());
-  }
-  if(route.query.mastered) {
-    useMasteredStore().loadHash(route.query.mastered.toString());
-  }
+  const { t } = useI18n();
+  const categoryStore = useCategoryStore();
+  const selCategory = useSelCategoryStore();
+  const selDifficulty = useSelDifficultyStore();
+  const marked = useMarkedStore();
+  const curSearch = useCurSearchStore();
+  const sorting = useSelSortingOrderStore();
+  const sortingOrders = useSortingOrderStore().sortingOrders;
+  const sortId = useId();
+  const { view } = useHomeView();
 
+  const rows = computed(() => groupByCategory(trickStore.tricks, categoryStore.categories));
+
+  const viewOptions = computed(() => [
+    { value: 'category', label: t('home.byCategory') },
+    { value: 'all', label: t('home.all') },
+  ]);
+
+  const filtersOpen = ref(false);
+  // One per filter group that differs from its reset value.
+  const activeFilters = computed(() => {
+    const markers = [...marked.selMarkers].sort().join();
+    return Number(selCategory.categories.length > 0)
+      + Number(selDifficulty.val[0] !== 1 || selDifficulty.val[1] !== 5)
+      + Number(markers !== 'mastered,non-mastered')
+      + Number(!!curSearch.val);
+  });
 </script>
 
 <template>
-  <v-container>
-    <v-row class="mt-3" justify="center">
-      <Toolbar/>
-    </v-row>
-    <v-row :justify="isMobile() ? 'center' : 'start'" align-content="center">
-      <template
-          v-for="trick in trickStore.shownTricks">
-        <v-col cols="auto">
-            <TrickCard
-                :trick="trick"
-            />
-        </v-col>
-      </template>
-      <template v-if="trickStore.tricks.length === 0">
-        <v-col>
-          <v-empty-state
-              icon="mdi-magnify"
-              :text="$t('error.noResultsSuggestions')"
-              :title="$t('error.noResults')"
-          ></v-empty-state>
-        </v-col>
-      </template>
-    </v-row>
-  </v-container>
+  <div class="home">
+    <h1 class="sr-only">{{ t('tabs.tricks') }}</h1>
+
+    <SegmentedControl v-model="view" class="switch" :options="viewOptions" :label="t('home.view')" />
+
+    <div v-if="view === 'category'" class="rails">
+      <TrickRail
+        v-for="row in rows"
+        :key="row.category"
+        :title="t('categories.' + row.category)"
+        :count="row.tricks.length"
+        :tricks="row.tricks"
+      />
+    </div>
+
+    <section v-else class="all" :aria-label="t('home.all')">
+      <div class="tools">
+        <AppButton :icon="mdiTuneVariant" @click="filtersOpen = true">
+          {{ t('home.filters') }}
+          <template v-if="activeFilters">
+            <span class="badge" aria-hidden="true">{{ activeFilters }}</span>
+            <span class="sr-only">{{ t('home.active', { n: activeFilters }, activeFilters) }}</span>
+          </template>
+        </AppButton>
+        <div class="sort">
+          <label class="muted" :for="sortId">{{ t('home.sort') }}</label>
+          <span class="pick">
+            <select :id="sortId" v-model="sorting.by">
+              <option v-for="o in sortingOrders" :key="o" :value="o">{{ t('sortOptions.' + o) }}</option>
+            </select>
+            <AppIcon class="chevron" :path="mdiChevronDown" :size="18" />
+          </span>
+        </div>
+        <p class="count">{{ t('home.count', { n: trickStore.shownTricks.length }, trickStore.shownTricks.length) }}</p>
+      </div>
+
+      <ul v-if="trickStore.shownTricks.length" class="grid">
+        <li v-for="trick in trickStore.shownTricks" :key="trick.trickID"><TrickThumb :trick="trick" /></li>
+      </ul>
+      <div v-else class="empty">
+        <h2>{{ t('error.noResults') }}</h2>
+        <p>{{ t('error.noResultsSuggestions') }}</p>
+        <AppButton @click="resetFilters">{{ t('home.reset') }}</AppButton>
+      </div>
+    </section>
+
+    <FilterSheet v-model:open="filtersOpen" />
+  </div>
 </template>
 
 <style scoped>
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-top: var(--space-4);
+}
+.switch { align-self: flex-start; }
+.rails { display: flex; flex-direction: column; gap: var(--space-6); }
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin-bottom: var(--space-4);
+}
+.badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-size: var(--t-xs);
+  font-weight: 700;
+}
+.count { margin: 0; font-size: var(--t-sm); }
+.sort { display: flex; align-items: center; gap: var(--space-2); font-size: var(--t-sm); }
+.pick { position: relative; display: inline-flex; align-items: center; }
+/* reads as plain text with a chevron; the native list opens on tap */
+.pick select {
+  appearance: none;
+  min-height: 44px;
+  padding: 0 calc(var(--space-2) + 18px) 0 var(--space-1);
+  border: 0;
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--t-md);
+  cursor: pointer;
+}
+.pick select:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.chevron { position: absolute; right: var(--space-1); color: var(--text-muted); pointer-events: none; }
+.muted, .count { color: var(--text-muted); }
+.count { margin-left: auto; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-5) var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  max-width: 36rem;
+  padding: var(--space-5) 0;
+}
+.empty h2 { margin: 0; font-size: var(--t-lg); font-weight: 600; }
+.empty p { margin: 0; color: var(--text-muted); }
+@media (min-width: 900px) {
+  .home { gap: var(--space-6); padding-top: var(--space-5); }
+}
 </style>

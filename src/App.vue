@@ -1,17 +1,20 @@
 <script setup>
 
-import 'vuetify/styles';
-import NavBar from "@/components/Frame/navBar.vue";
+import { ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import { useTrickStore } from "@/scripts/trickStore";
-import Footer from "@/components/Frame/footer.vue"
-import { useTheme } from 'vuetify'
-import { getBgColor } from "@/scripts/helpers";
+import AppHeader from '@/components/layout/AppHeader.vue';
+import AppFooter from '@/components/layout/AppFooter.vue';
+import SearchOverlay from '@/components/home/SearchOverlay.vue';
+import { useSearchOpen } from '@/scripts/ui';
 import LocaleLayout from './components/localeLayout.vue';
 
-const theme = useTheme();
+const route = useRoute();
+const searchOpen = useSearchOpen();
 
-const prefersDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
-theme.change( prefersDarkTheme && prefersDarkTheme.matches ? 'dark' : 'light' )
+// on a slow first load the footer waits for the first page, instead of showing alone and then jumping down
+const pageReady = ref(false);
+useRouter().isReady().then(() => { pageReady.value = true; });
 
 const trickStore = useTrickStore();
 trickStore.loadTricks();
@@ -20,27 +23,49 @@ trickStore.loadTricks();
 
 
 <template>
-  <head>
-    <title>Freestylepedia</title>
-    <meta name="description" content=
-        "This is a website where you can learn ice freestyle tricks and moves.
-        You can learn about all of them here and see the connections between them.
-        It is the page for the freestylepedia youtube series from Blackbirds Ice Freestyle.">
-  </head>
-  <v-app>
-    <nav-bar/>
-    <br>
-    <v-main class="pb-5" :style="{backgroundColor: getBgColor(theme.global.current.value.dark)}">
-      <!-- <router-view :key="$route.fullPath"/> -->
-       <LocaleLayout/>
-    </v-main>
-    <Footer/>
-    </v-app>
+  <div class="frame" :class="{ 'frame--own-header': route.meta.ownHeader }">
+    <a class="skip" href="#main">{{ $t('skipToContent') }}</a>
+    <AppHeader class="global-header"/>
+    <main id="main" class="main" tabindex="-1">
+      <LocaleLayout/>
+    </main>
+    <AppFooter v-if="pageReady"/>
+    <SearchOverlay v-model:open="searchOpen"/>
+  </div>
 </template>
 
 <style>
-/* width */
-::-webkit-scrollbar {
-  width: 0;
+:root {
+  --header-h: 56px;
+  --tabbar-h: 64px;
+}
+/* own-header pages (a trick) bring their own bar below 900px: no global header or tab bar there.
+   From 900px up they get the normal header, tabs included. */
+@media (max-width: 899.98px) {
+  .frame--own-header { --header-h: 0px; --tabbar-h: 0px; }
+  .frame--own-header .global-header { display: none; }
+}
+/* first Tab stop: hidden until focused */
+.skip {
+  position: fixed;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-s);
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+.skip:focus-visible { transform: none; }
+.main:focus { outline: none; }
+.main {
+  /* the fixed tab bar's offset is the footer's job: it is the last thing above the bar */
+  padding: 0 var(--space-4);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-x: clip;
 }
 </style>

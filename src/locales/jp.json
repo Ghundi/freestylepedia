@@ -5,6 +5,21 @@
   "trickTree": {
     "description": "グラフ全体は右に行くほど難易度が高くなります。各トリックグループは次々と難しいトリックに分岐しており、線でつながっています。個々のトリックグループは左から右へ順に学ぶことをお薦めします。"
   },
+  "paths": {
+    "byLevel": "レベル別",
+    "byCategory": "カテゴリー別",
+    "zoomIn": "拡大",
+    "zoomOut": "縮小",
+    "fit": "全体を表示",
+    "hint": "トリックをタップすると、先に覚えるべきことと、次に解放されるトリックが分かります。",
+    "countLabel": "{total}個中{done}個を習得済み",
+    "sheetTitle": "ルート",
+    "before": "先に覚えること",
+    "after": "次に解放されるトリック",
+    "noneBefore": "なし：最初に挑戦できるトリックです",
+    "noneAfter": "解放されるトリックはまだありません",
+    "openTrick": "トリックを見る"
+  },
   "faq": {
     "naming_question": "トリック名の由来は何ですか？",
     "naming_answer": "名前は私たちが仲間たちとの意見を元に考案しています。",
@@ -26,6 +41,7 @@
   "aboutUs": {
     "members": "メンバー",
     "aboutUs": "私たちについて",
+    "story_title": "私たちの物語",
     "findUs": "私たちをフォロー",
     "story": "私たちのグループの2名が、トリックを調べられる場所を作りたいという案を思いつきました。同じトリックでも、私たちが異なる名前で呼ぶこともよくあるため、このサイトを通じて、誰もが自分の知っている名前でトリックを見つけられ、そこからその別名も学べることを願っています。このプロジェクトには長い時間をかけ、何度も試行錯誤を重ねました。そして今、この新しいリソースを皆様にお届けできることを嬉しく思います。",
     "MisgDescription": "Mainz Ice Skate Group（MISG）「マインツ・アイススケートグループ」はドイツのマインツにある小さなアイスフリースタイラーグループです。近隣地域のあらゆるスケートリンクでスケートを楽しんでいます。",
@@ -38,7 +54,8 @@
     "myProgress": "私の達成度",
     "switchToLightMode": "明るいモードに切り替え",
     "switchToDarkMode": "暗いモードに切り替え",
-    "installApp": "アプリをインストール"
+    "installApp": "アプリをインストール",
+    "installAppHintIOS": "iPhoneとiPadでは、このサイトをアプリのようにホーム画面に追加できます。共有ボタンをタップして「ホーム画面に追加」を選んでください。"
   },
   "toolbar": {
     "resetFilters": "フィルターをリセット",
@@ -52,7 +69,8 @@
     "help": "ヘルプ",
     "language": "言語",
     "byBlackbirdAndMISG": "BlackbirdとMISGと澄江さん制作",
-    "supportedBy": "支援"
+    "supportedBy": "支援",
+    "supporterLogo": "サポーターのロゴ"
   },
   "sortOptions": {
     "difficultyDown": "難易度（難 → 易）",
@@ -83,20 +101,84 @@
     "pageNotFound": "ページが見つかりません。",
     "pageNotFoundSuggestion": "スペルミスの可能性があります。",
     "trickNotFound": "見つかりません。",
-    "trickNotFoundSuggestion": "URLのトリック名が誤って入力されている可能性があります。YouTubeサムネイルの名前のみが有効です。"
+    "trickNotFoundSuggestion": "URLのトリック名が誤って入力されている可能性があります。YouTubeサムネイルの名前のみが有効です。",
+    "toHome": "すべてのトリックを見る"
   },
   "myProgress": {
     "myProgress": "私の達成度",
     "progress": "達成度",
     "recommendedTricks": "お薦めのトリック",
-    "hardestTrick": "最も難しいトリック",
+    "nextTrick": "次に挑戦するトリック",
     "transferProgress": "達成度を移行",
-    "transferInfo": "新しいデバイスのクリップボードにコピーされたURLを入力してください"
+    "transferInfo": "新しいデバイスのクリップボードにコピーされたURLを入力してください",
+    "summary": "{total}個中{n}個のトリックを習得済み",
+    "empty": "トリックを習得済みにマークすると、達成度を確認できます。",
+    "byCategory": "カテゴリー別",
+    "browse": "トリックを探す",
+    "allDone": "すべてのトリックを習得しました。新しい動画は定期的に公開されるので、また見に来てください。"
   },
   "close": "閉じる",
+  "level": "レベル{n}",
+  "new": "新着",
   "difficulty": "難易度",
   "category": "カテゴリー",
   "similarTricks": "類似のトリック",
   "requirements": "必要なスキル",
-  "otherTutorials": "他のチュートリアル"
+  "otherTutorials": "他のチュートリアル",
+  "tabs": {
+    "tricks": "トリック",
+    "paths": "ルート",
+    "progress": "私の達成度"
+  },
+  "settings": {
+    "title": "設定",
+    "theme": "テーマ",
+    "themeSystem": "システム",
+    "themeDark": "暗い",
+    "themeLight": "明るい",
+    "language": "言語"
+  },
+  "search": {
+    "open": "検索",
+    "placeholder": "トリックを検索"
+  },
+  "back": "戻る",
+  "home": {
+    "scrollPrev": "前のトリック",
+    "scrollNext": "次のトリック",
+    "nextContext": "リストの次のトリック",
+    "suggestedContext": "最初におすすめのトリック",
+    "byCategory": "カテゴリー別",
+    "all": "すべて",
+    "filters": "フィルター",
+    "count": "{n}個のトリック",
+    "view": "表示",
+    "sort": "並び替え",
+    "status": "状態",
+    "level": "レベル",
+    "levelMin": "最小",
+    "levelMax": "最大",
+    "reset": "リセット",
+    "active": "{n}件適用中",
+    "recommendedContext": "レベルに合わせたおすすめ"
+  },
+  "video": {
+    "play": "{name}を再生",
+    "others": "他の動画",
+    "offline": "オフラインです。オンラインに戻ると動画を再生できます。"
+  },
+  "trick": {
+    "todo": "やる予定",
+    "mastered": "習得済み",
+    "before": "先に覚えること",
+    "related": "関連トリック"
+  },
+  "share": {
+    "title": "共有",
+    "copy": "リンクをコピー",
+    "copied": "リンクをコピーしました",
+    "native": "共有…",
+    "copyFailed": "コピーできませんでした。リンクを選択して手動でコピーしてください"
+  },
+  "skipToContent": "本文へ移動"
 }

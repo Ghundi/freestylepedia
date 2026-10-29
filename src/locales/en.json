@@ -1,9 +1,24 @@
 {
   "categoryTree": {
-  "description": "This mind map groups together tricks in the same category and the connection to a base trick."
+    "description": "This graph groups tricks of the same category and shows how they connect to a base trick."
   },
   "trickTree": {
     "description": "The whole graph gets increasingly more difficult to the right. Each trick tree splits up into more difficult tricks and is connected by lines. We recommend learning an individual trick tree from left to right."
+  },
+  "paths": {
+    "byLevel": "By level",
+    "byCategory": "By category",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "fit": "Show the whole graph",
+    "hint": "Tap a trick to see what to learn first and what it unlocks.",
+    "countLabel": "{done} of {total} mastered",
+    "sheetTitle": "Path",
+    "before": "Learn first",
+    "after": "Then you unlock",
+    "noneBefore": "Nothing: it’s a starting point",
+    "noneAfter": "No tricks yet",
+    "openTrick": "See the trick"
   },
   "faq": {
     "naming_question": "Where do the trick names comes from?",
@@ -13,7 +28,7 @@
     "categories_question": "What do the categories mean?",
     "categories_answer": "The categories group tricks together by their similarities.",
     "usage_question": "How do I use Freestylepedia?",
-    "usage_answer": "You can get detailed information about all tricks on the freestylepedia page, learn about the the different categories in the Mind Map or see which tricks build upon others in the Trick Tree.",
+    "usage_answer": "You can get detailed information about every trick, browse them by category, or see which tricks build on others in the Paths tab.",
     "existence_question": "Why did you make Freestylepedia?",
     "existence_answer": "You can quickly look up tricks to show your friends or watch them on the ice to learn them.",
     "improve_question": "How can I use Freestylepedia to improve on the ice?",
@@ -21,11 +36,12 @@
     "help_question": "How can I help to improve Freestylepedia?",
     "help_answer": "You can contact us on Social Media or open an issue on our github page if you are familiar with github. Everything is linked at the bottom of this website.",
     "transfer_question": "How can I transfer my progress to another device?",
-    "transfer_answer": "Click on the 'Transfer Progress' button on the 'My Progress' page. Then you will have a special link in your clipboard that you can paste on your new device into the URL field."
+    "transfer_answer": "On the 'My progress' tab, tap 'Transfer my progress'. A link appears: open it on your new device to bring your progress with you."
   },
   "aboutUs": {
     "members": "Members",
     "aboutUs": "About Us",
+    "story_title": "Our Story",
     "findUs": "Find us on",
     "story": "Two members of our groups had the idea of creating a place to look up tricks. We both quite often have different names for the same trick. So we hope this collection allows everybody to find the tricks under the name they know while also learning other aliases. We worked hard on this project for a long time and it took multiple attempts. Now we are proud to present it and hope you will enjoy this new resource in our sport.",
     "MisgDescription": "The Mainz Ice Skate Group is a small Ice Breaking group from Mainz in Germany. We love to skate at all ice rinks in the area.",
@@ -39,7 +55,7 @@
     "switchToLightMode": "Switch to Light Mode",
     "switchToDarkMode": "Switch to Dark Mode",
     "installApp": "Install App",
-    "installAppHintIOS": "On IOS devices you can add this to your home screen like an App. Tap the Share button and then 'Add to homescreen'"
+    "installAppHintIOS": "On iPhone and iPad you can add this site to your Home Screen like an app. Tap the Share button, then “Add to Home Screen”."
   },
   "toolbar": {
     "resetFilters": "Reset Filters",
@@ -53,7 +69,8 @@
     "help": "Help",
     "language": "Language",
     "byBlackbirdAndMISG": "by Blackbird and MISG",
-    "supportedBy": "supported by"
+    "supportedBy": "supported by",
+    "supporterLogo": "Supporter logo"
   },
   "sortOptions": {
     "difficultyDown": "Difficulty (Hard - Easy)",
@@ -66,8 +83,8 @@
   "categories": {
     "footwork": "Footwork",
     "ground": "Ground",
-    "jump":  "Jump",
-    "acrobatic":  "Acrobatic",
+    "jump": "Jump",
+    "acrobatic": "Acrobatic",
     "hydroblading": "Hydroblading",
     "spin": "Spin",
     "stop": "Stop"
@@ -84,20 +101,84 @@
     "pageNotFound": "Page not found",
     "pageNotFoundSuggestion": "Maybe you spelled something wrong",
     "trickNotFound": "not found",
-    "trickNotFoundSuggestion": "Maybe the trick in the URL is spelled wrong. Only the name of the YouTube Thumbnail is valid."
+    "trickNotFoundSuggestion": "Maybe the trick name in the URL is misspelled. Try searching for it.",
+    "toHome": "See all tricks"
   },
   "myProgress": {
     "myProgress": "My Progress",
     "progress": "Progress",
-    "recommendedTricks": "Recommended Tricks",
-    "hardestTrick": "hardest Trick",
-    "transferProgress": "transfer progress",
-    "transferInfo": "Enter the copied URL in your clipboard on the new device"
+    "recommendedTricks": "Recommended tricks",
+    "nextTrick": "Your next trick",
+    "transferProgress": "Transfer my progress",
+    "transferInfo": "Open this link on your new device to bring your progress with you.",
+    "summary": "{n} of {total} tricks mastered",
+    "empty": "Mark your first tricks as mastered to follow your progress.",
+    "byCategory": "By category",
+    "browse": "Browse tricks",
+    "allDone": "Every trick is mastered. New videos come out regularly: check back soon."
   },
   "close": "Close",
+  "level": "Level {n}",
+  "new": "New",
   "difficulty": "Difficulty",
   "category": "Category",
   "similarTricks": "Similar Tricks",
   "requirements": "Requirements",
-  "otherTutorials": "Other Tutorials"
+  "otherTutorials": "Other Tutorials",
+  "tabs": {
+    "tricks": "Tricks",
+    "paths": "Paths",
+    "progress": "My progress"
+  },
+  "settings": {
+    "title": "Settings",
+    "theme": "Theme",
+    "themeSystem": "System",
+    "themeDark": "Dark",
+    "themeLight": "Light",
+    "language": "Language"
+  },
+  "search": {
+    "open": "Search",
+    "placeholder": "Search a trick"
+  },
+  "back": "Back",
+  "home": {
+    "scrollPrev": "Previous tricks",
+    "scrollNext": "More tricks",
+    "nextContext": "Next trick on your list",
+    "suggestedContext": "A good trick to start with",
+    "byCategory": "By category",
+    "all": "All",
+    "filters": "Filters",
+    "count": "{n} trick | {n} tricks",
+    "view": "View",
+    "sort": "Sort by",
+    "status": "Status",
+    "level": "Level",
+    "levelMin": "Minimum",
+    "levelMax": "Maximum",
+    "reset": "Reset",
+    "active": "{n} active",
+    "recommendedContext": "Recommended for your level"
+  },
+  "video": {
+    "play": "Play {name}",
+    "others": "Other videos",
+    "offline": "You're offline: the video will play once you're back online."
+  },
+  "trick": {
+    "todo": "To do",
+    "mastered": "Mastered",
+    "before": "Learn first",
+    "related": "Related tricks"
+  },
+  "share": {
+    "title": "Share",
+    "copy": "Copy link",
+    "copied": "Link copied",
+    "native": "Share…",
+    "copyFailed": "Could not copy: select the link and copy it by hand"
+  },
+  "skipToContent": "Skip to content"
 }

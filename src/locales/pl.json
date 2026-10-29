@@ -5,6 +5,21 @@
   "trickTree": {
     "description": "Graf staje się coraz trudniejszy w kierunku prawej strony. Każde drzewo umiejętności rozgałęzia się na trudniejsze triki i jest połączone liniami. Zalecamy naukę jednego drzewa umiejętności od lewej do prawej."
   },
+  "paths": {
+    "byLevel": "Poziomy",
+    "byCategory": "Kategorie",
+    "zoomIn": "Przybliż",
+    "zoomOut": "Oddal",
+    "fit": "Pokaż cały graf",
+    "hint": "Dotknij triku, aby zobaczyć, czego nauczyć się wcześniej i co dzięki niemu odblokujesz.",
+    "countLabel": "Opanowane: {done} z {total}",
+    "sheetTitle": "Ścieżka",
+    "before": "Najpierw naucz się",
+    "after": "Potem odblokujesz",
+    "noneBefore": "Nic: to punkt startowy",
+    "noneAfter": "Na razie brak trików",
+    "openTrick": "Zobacz trik"
+  },
   "faq": {
     "naming_question": "Skąd pochodzą nazwy trików?",
     "naming_answer": "Wszystkie triki nazywamy wspólnie ze społecznością.",
@@ -14,7 +29,7 @@
     "categories_answer": "Kategorie grupują triki według ich podobieństwa.",
     "usage_question": "Jak korzystać z Freestylepedia?",
     "usage_answer": "Możesz sprawdzić szczegółowe informacje na stronie freestylepedia, uczyć się przez drzewo kategorii lub zobaczyć, które triki na sobie bazują w drzewie umiejętności.",
-    "existence_question": "",
+    "existence_question": "Dlaczego powstała Freestylepedia?",
     "existence_answer": "Na Freestylepedia możesz szybko wyszukiwać triki i uczyć się ich na lodzie.",
     "improve_question": "Jak mogę używać Freestylepedia, aby stać się lepszym na lodzie?",
     "improve_answer": "Dzięki Freestylepedia możesz zobaczyć, które triki są dla ciebie osiągalne i które są do nich podobne.",
@@ -26,6 +41,7 @@
   "aboutUs": {
     "members": "Członkowie",
     "aboutUs": "O nas",
+    "story_title": "Nasza historia",
     "findUs": "Znajdź nas na",
     "story": "Dwóch członków grup wpadło na pomysł stworzenia strony internetowej, aby szybko i łatwo znajdować triki. Często używaliśmy różnych nazw dla tego samego triku. Mamy nadzieję, że ta strona pomoże wam znaleźć triki pod znanymi wam nazwami oraz nauczyć się nowych. Długo pracowaliśmy nad tym projektem i podejmowaliśmy kilka prób. Jesteśmy dumni z efektu i mamy nadzieję, że to nowe źródło okaże się pomocne.",
     "MisgDescription": "Mainz Ice Skate Group to mała grupa Ice Breaking z Moguncji, w pobliżu Frankfurtu. Często jeździmy na lodowiska w naszej okolicy.",
@@ -38,7 +54,8 @@
     "myProgress": "Mój postęp",
     "switchToLightMode": "Przełącz na tryb jasny",
     "switchToDarkMode": "Przełącz na tryb ciemny",
-    "installApp": "Zainstaluj aplikację"
+    "installApp": "Zainstaluj aplikację",
+    "installAppHintIOS": "Na iPhonie i iPadzie możesz dodać tę stronę do ekranu głównego jak aplikację. Stuknij przycisk Udostępnij, a potem „Do ekranu początkowego”."
   },
   "toolbar": {
     "resetFilters": "Resetuj filtry",
@@ -52,7 +69,8 @@
     "help": "Pomoc",
     "language": "Język",
     "byBlackbirdAndMISG": "od Blackbird i MISG",
-    "supportedBy": "wspierane przez"
+    "supportedBy": "wspierane przez",
+    "supporterLogo": "Logo wspierającego"
   },
   "sortOptions": {
     "difficultyDown": "Trudność (Trudne – Łatwe)",
@@ -83,20 +101,84 @@
     "pageNotFound": "Strona nie znaleziona",
     "pageNotFoundSuggestion": "Możliwe, że adres URL jest błędnie wpisany",
     "trickNotFound": "nie znaleziono",
-    "trickNotFoundSuggestion": "Możliwe, że nazwa triku w URL jest błędna. Akceptowana jest tylko nazwa z miniatury YouTube."
+    "trickNotFoundSuggestion": "Możliwe, że nazwa triku w URL jest błędna. Akceptowana jest tylko nazwa z miniatury YouTube.",
+    "toHome": "Zobacz wszystkie triki"
   },
   "myProgress": {
     "myProgress": "Mój postęp",
     "progress": "Postęp",
     "recommendedTricks": "Triki polecane dla ciebie",
-    "hardestTrick": "najtrudniejszy trik",
+    "nextTrick": "Twój następny trik",
     "transferProgress": "Postęp transferu",
-    "transferInfo": "Wklej skopiowany adres URL z schowka na nowym urządzeniu"
+    "transferInfo": "Wklej skopiowany adres URL z schowka na nowym urządzeniu",
+    "summary": "Opanowane: {n} z {total}",
+    "empty": "Oznacz pierwsze triki jako opanowane, aby śledzić swój postęp.",
+    "byCategory": "Według kategorii",
+    "browse": "Przeglądaj triki",
+    "allDone": "Wszystkie triki są opanowane. Nowe filmy pojawiają się regularnie: zajrzyj wkrótce."
   },
   "close": "Zamknij",
+  "level": "Poziom {n}",
+  "new": "Nowy",
   "difficulty": "Trudność",
   "category": "Kategoria",
   "similarTricks": "Podobne triki",
   "requirements": "Wymaga",
-  "otherTutorials": "Inne poradniki"
+  "otherTutorials": "Inne poradniki",
+  "tabs": {
+    "tricks": "Triki",
+    "paths": "Ścieżki",
+    "progress": "Mój postęp"
+  },
+  "settings": {
+    "title": "Ustawienia",
+    "theme": "Motyw",
+    "themeSystem": "Systemowy",
+    "themeDark": "Ciemny",
+    "themeLight": "Jasny",
+    "language": "Język"
+  },
+  "search": {
+    "open": "Szukaj",
+    "placeholder": "Szukaj triku"
+  },
+  "back": "Wstecz",
+  "home": {
+    "scrollPrev": "Poprzednie triki",
+    "scrollNext": "Następne triki",
+    "nextContext": "Następny trik z twojej listy",
+    "suggestedContext": "Dobry trik na początek",
+    "byCategory": "Kategorie",
+    "all": "Wszystkie",
+    "filters": "Filtry",
+    "count": "{n} trik | {n} triki | {n} trików",
+    "view": "Widok",
+    "sort": "Sortuj",
+    "status": "Status",
+    "level": "Poziom",
+    "levelMin": "Minimum",
+    "levelMax": "Maksimum",
+    "reset": "Resetuj",
+    "active": "{n} aktywny | {n} aktywne | {n} aktywnych",
+    "recommendedContext": "Polecany dla twojego poziomu"
+  },
+  "video": {
+    "play": "Odtwórz: {name}",
+    "others": "Inne filmy",
+    "offline": "Jesteś offline: film odtworzy się po powrocie połączenia."
+  },
+  "trick": {
+    "todo": "Todo",
+    "mastered": "Opanowane",
+    "before": "Najpierw naucz się",
+    "related": "Powiązane triki"
+  },
+  "share": {
+    "title": "Udostępnij",
+    "copy": "Kopiuj link",
+    "copied": "Link skopiowany",
+    "native": "Udostępnij…",
+    "copyFailed": "Nie udało się skopiować: zaznacz link i skopiuj go ręcznie"
+  },
+  "skipToContent": "Przejdź do treści"
 }

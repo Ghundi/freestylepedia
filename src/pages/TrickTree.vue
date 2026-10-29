@@ -1,59 +1,32 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { VueFlow, Edge } from '@vue-flow/core';
+import { computed } from 'vue';
+import { VueFlow } from '@vue-flow/core';
 import { useTrickStore } from '@/scripts/trickStore';
-import { useTheme } from 'vuetify';
-import { getBgColor, getOrientation } from "@/scripts/helpers";
+import { getOrientation } from '@/scripts/helpers';
+import { useWideScreen } from '@/scripts/useWideScreen';
+import TreePage from '@/components/paths/TreePage.vue';
 
 import ClickableNode from '../components/mindMap/ClickableNode.vue';
 import CategoryNode from '../components/mindMap/CategoryNode.vue';
 import DifficultyNode from '../components/mindMap/DifficultyNode.vue';
 
 const trickStore = useTrickStore();
-trickStore.trickTree = trickStore.getTrickTreeGraph(getOrientation());
+const wide = useWideScreen();
+// the graph is only built where it is shown; phones get the list instead
+const graph = computed(() => {
+  if (!wide.value) return [[], []] as ReturnType<typeof trickStore.getTrickTreeGraph>;
+  return trickStore.getTrickTreeGraph(getOrientation());
+});
+const landscape = getOrientation() === 'Landscape';
 
-const graph = ref(trickStore.trickTree);
-const theme = useTheme();
-
-// Function to update edge colors dynamically based on theme
-function updateEdgeColorsBasedOnTheme() {
-  const edgeColor = theme.global.current.value.dark ? 'white' : 'black';
-  graph.value[1] = graph.value[1].map((edge: Edge) => ({
-    ...edge,
-    style: {
-      ...edge.style,
-      stroke: edgeColor,
-    }
-  }));
-}
-
-watch(() => theme.global.current.value.dark, () => {
-  updateEdgeColorsBasedOnTheme();
-}, {immediate: true});
 </script>
 
 <template>
-  <v-card
-      class="ma-3 text-center"
-      width="90%"
-      height="90vh"
-      :style="{backgroundColor: getBgColor(theme.global.current.value.dark)}"
-      v-once
-  >
-    <v-card-title
-        class="font-weight-bold"
-        :style="{ backgroundColor: getBgColor(theme.global.current.value.dark) }">
-      {{ $t("navBar.trickTree") }}
-    </v-card-title>
-    <v-card-text
-        class="text-center pa-2"
-        :style="{ backgroundColor: getBgColor(theme.global.current.value.dark) }">
-      {{ $t('trickTree.description') }}
-    </v-card-text>
-
-    <VueFlow
+  <TreePage active="TrickTree" :edges="graph[1]" :description="$t('trickTree.description')">
+    <template #default="slotProps">
+      <VueFlow
         :nodes="graph[0]"
-        :edges="graph[1]"
+        :edges="slotProps.edges"
         :nodes-draggable="false"
         :nodes-connectable="false"
         :pan-on-drag="true"
@@ -62,33 +35,26 @@ watch(() => theme.global.current.value.dark, () => {
         :zoom-on-double-click="false"
         :edges-focusable="false"
         :prevent-scrolling="true"
+        id="TrickTree"
         class="basic-flow"
-        :default-viewport="{ zoom: 1 }"
         :translate-extent="[
-        [0, -200],
-        [(getOrientation() === 'Landscape') ? 9000 : 7000, 5000]
-      ]"
-        :min-zoom="(getOrientation() === 'Landscape') ? 0.2 : 0.05"
+          [0, -200],
+          [landscape ? 9000 : 7000, 5000]
+        ]"
+        :min-zoom="0.05"
         :max-zoom="1"
-        fit-view-on-init
-        :style="{backgroundColor: getBgColor(theme.global.current.value.dark)}"
-    >
-      <template #node-clickable="props">
-        <ClickableNode v-bind="props.data"/>
-      </template>
-      <template #node-category="props">
-        <CategoryNode v-bind="props.data"/>
-      </template>
-      <template #node-difficulty="props">
-        <DifficultyNode v-bind="props.data"/>
-      </template>
-    </VueFlow>
-  </v-card>
+        :nodes-focusable="false"
+      >
+        <template #node-clickable="props">
+          <ClickableNode v-bind="props.data"/>
+        </template>
+        <template #node-category="props">
+          <CategoryNode v-bind="props.data"/>
+        </template>
+        <template #node-difficulty="props">
+          <DifficultyNode v-bind="props.data"/>
+        </template>
+      </VueFlow>
+    </template>
+  </TreePage>
 </template>
-
-<style>
-html::-webkit-scrollbar {
-  width: 50px;
-  background: red;
-}
-</style>

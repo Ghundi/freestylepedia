@@ -2,11 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="./src/assets/Blackbirdlogoneuweiss-144x144.png">
-    <link rel="apple-touch-icon" href="./src/assets/Blackbirdlogoneuweiss-144x144.png">
+    <link rel="icon" href="/icons/Blackbirdlogoneuweiss-144x144.png">
+    <link rel="apple-touch-icon" href="/icons/Blackbirdlogoneuweiss-144x144.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#111214">
     <title>Freestylepedia</title>
+    <meta name="description" content="Learn ice freestyle skating tricks and moves, and see how they connect. The site of the Freestylepedia YouTube series by Blackbird Ice Freestyle.">
+    <!-- Before the app loads: no white flash in dark mode, and a stored theme choice applies at once. -->
+    <style>
+      html { background: #111214; color-scheme: dark; }
+      @media (prefers-color-scheme: light) { html { background: #f6f6f4; color-scheme: light; } }
+      html[data-theme='dark'] { background: #111214; color-scheme: dark; }
+      html[data-theme='light'] { background: #f6f6f4; color-scheme: light; }
+    </style>
+    <script>
+      try {
+        var m = localStorage.getItem('themeMode');
+        if (m === 'dark' || m === 'light') document.documentElement.setAttribute('data-theme', m);
+      } catch (e) { /* storage unavailable: the system theme applies */ }
+    </script>
   </head>
   <body>
     <div id="app"></div>

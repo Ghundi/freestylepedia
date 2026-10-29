@@ -1,0 +1,82 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  /* thin, themed scrollbars everywhere (rails, dialogs, the page itself) */
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--text-muted) 55%, transparent) transparent;
+  caret-color: var(--accent);
+  /* Tab and in-page jumps keep the focused element clear of the sticky header and the fixed tab bar */
+  scroll-padding-top: calc(var(--header-h, 56px) + var(--space-4));
+  scroll-padding-bottom: calc(var(--tabbar-h, 64px) + env(safe-area-inset-bottom) + var(--space-4));
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--text-muted) 55%, transparent) transparent;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  color: var(--text);
+}
+
+a {
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+input,
+textarea {
+  caret-color: var(--accent);
+}
+
+/* counts and levels line up when they change */
+.count,
+.badge {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--t-md);
+  line-height: 1.5;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+/* an icon next to a label that wraps keeps its size */
+svg { flex: none; }
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

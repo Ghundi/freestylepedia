@@ -16,10 +16,6 @@ export function list2Trick(list: Array<any>): Trick {
     })
 }
 
-export function isMobile(): boolean {
-    return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
 export function getOrientation(): string {
   return window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
 }
@@ -57,21 +53,17 @@ export function getCategorySizes(tricks: Array<Trick>): Array<number> {
     return catSizes
 }
 
-function logicalOR(res: boolean, x: boolean): boolean {
-    return res || x;
+// Folds a title or a query for matching: locale tag ("de{...}"), accents, case, hyphens and extra spaces go.
+function foldForSearch(str: string): string {
+    return str.replace(/^[a-z]{2}\{(.*)\}$/, '$1')
+        .normalize('NFD').replace(/\p{Diacritic}/gu, '')
+        .toLowerCase().replaceAll('-', ' ').replace(/\s+/g, ' ').trim()
 }
 
-function trickMatchesSearch(trick: Trick, searchVal: string | null) {
-    // empty search field
-    if(!searchVal) {
-        return true;
-    }
-    const search = searchVal.toLowerCase();
-    // include results with hyphens
-    if(!search.includes("-") && trick.title.toString().includes("-")) {
-        return trick.title.map( x => x.toLowerCase().replaceAll("-", " ").includes(search) ).reduce(logicalOR, false)        
-    }
-    return trick.title.map( x => x.toLowerCase().includes(search) ).reduce(logicalOR, false)
+export function trickMatchesSearch(trick: Trick, searchVal: string | null): boolean {
+    const search = searchVal ? foldForSearch(searchVal) : ''
+    if (!search) return true
+    return trick.title.some(title => foldForSearch(title).includes(search))
 }
 
 export function getSortedTricks(tricks: Array<Trick>, sortOption: string): Array<Trick>  {
@@ -207,10 +199,6 @@ export function checkSpace(y: number, x: number, width: number, height: number, 
         }
     }
     return true;
-}
-
-export function getBgColor(dark: boolean): string {
-    return dark ? '#333333' : '#eeeeee'
 }
 
 function changeTimeZone(date: Date, timeZone: string) {

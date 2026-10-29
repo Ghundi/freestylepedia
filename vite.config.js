@@ -8,8 +8,6 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 import path from 'path';
 import fs from 'fs';
 
-import vuetify from 'vite-plugin-vuetify'
-
 import { resolve, dirname } from "node:path";
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 
@@ -17,7 +15,6 @@ import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 export default defineConfig({
   plugins: [
     vue(),
-    vuetify(),
     viteStaticCopy({
       targets: [
         {
@@ -36,49 +33,76 @@ export default defineConfig({
       },
       registerType: 'autoUpdate',
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}']
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webp}'],
+        // the 480px thumbnails (about 1.7 MB) come with the install so the list has pictures offline;
+        // the 960px ones are cached as they are seen
+        globIgnores: ['thumbs/*-960.webp'],
+        // files that are not app pages keep their own response instead of the app shell
+        // (at the root, or under the one folder the site may be served from)
+        navigateFallbackDenylist: [/^\/(?:[^/]+\/)?(thumbs|icons|assets)\//, /^\/(?:[^/]+\/)?[^/]+\.[a-z0-9]+$/i],
+        runtimeCaching: [{
+          urlPattern: /\/thumbs\/.+\.webp$/,
+          handler: 'CacheFirst',
+          options: { cacheName: 'thumbs', expiration: { maxEntries: 300 } },
+        }, {
+          // YouTube frames for videos without an extracted thumbnail
+          urlPattern: /^https:\/\/i\.ytimg\.com\/vi\//,
+          handler: 'CacheFirst',
+          options: { cacheName: 'yt-thumbs', expiration: { maxEntries: 100 }, cacheableResponse: { statuses: [0, 200] } },
+        }],
       },
       injectRegister: 'auto',
       manifest: {
         name: 'Freestylepedia',
         short_name: 'Freestylepedia',
         description: "A place to lookup tricks and watch your progress",
-        start_url: '/',
-        display_override: ["window-controls-overlay", "minimal-ui", "browser"],
+        // relative to the manifest, so the app also installs from a sub-folder
+        start_url: './',
         display: 'standalone',
         orientation: "any",
         id: "https://freestylepedia.org",
         categories: ["education", "lifestyle", "entertainment", "sports"],
         dir: "ltr",
-        background_color: '#000000',
-        theme_color: '#000000',
+        background_color: '#111214',
+        theme_color: '#111214',
         icons: [
           {
-            src: '/icons/Blackbirdlogoneuweiss-144x144.png',
+            src: 'icons/Blackbirdlogoneuweiss-144x144.png',
             sizes: '144x144',
             type: 'image/png'
           },
           {
-            src: '/icons/Blackbirdlogoneuweiss-192x192.png',
+            src: 'icons/Blackbirdlogoneuweiss-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'icons/Blackbirdlogo-maskable-192x192.png',
             sizes: '192x192',
             type: 'image/png',
             purpose: "maskable"
           },
           {
-            src: '/icons/Blackbirdlogoneuweiss-512x512.png',
+            src: 'icons/Blackbirdlogo-maskable-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: "maskable"
+          },
+          {
+            src: 'icons/Blackbirdlogoneuweiss-512x512.png',
             sizes: '512x512',
             type: 'image/png'
           }
         ],
         screenshots: [
           {
-              "src": "/icons/ScreenshotWide.png",
+              "src": "icons/ScreenshotWide.png",
               "type": "image/png",
               "sizes": "1916x929",
               "form_factor": "wide",
           },
           {
-              "src": "/icons/ScreenshotNarrow.png",
+              "src": "icons/ScreenshotNarrow.png",
               "type": "image/png",
               "sizes": "389x840",
               "form_factor": "narrow",
@@ -87,13 +111,14 @@ export default defineConfig({
         "shortcuts": [
           {
             "name": "My Progress",
-            "url": "/MyProgress",
+            "url": "MyProgress",
             "short_name": "Progress",
             "description": "On this page you can track your progress and see what tricks to learn next.",
             "icons": [
               {
-                "src": "icon/Silouette_Schlittschuh.png",
-                "purpose": "monochrome maskable"
+                "src": "icons/Blackbirdlogoneuweiss-192x192.png",
+                "sizes": "192x192",
+                "type": "image/png"
               }
             ]
           },

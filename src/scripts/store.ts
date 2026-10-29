@@ -14,64 +14,101 @@ import Guardians from "../assets/supporters/Guardians.webp"
 import IFP from "../assets/supporters/IFP Print Brust Link.webp"
 import ICD from "../assets/supporters/ICD.webp"
 import IceIceDilly from "../assets/supporters/IceIceDilly.webp"
+import IcePulse from "../assets/supporters/IcePulse.webp"
 import { Trick } from '@/scripts/trickStore';
+import { visibleOnBackground } from '@/scripts/contrast';
+import { THEME_COLORS, THEME_SURFACE_2, useThemeMode } from '@/scripts/theme';
 import configJSON from "@/data/config.json";
 
-export const useTodoStore = defineStore('Todo', () => {
-  const list = ref<Array<string>>([])
+// Ids saved before the "trick" prefix was dropped from tricks.json ("trick0042") are
+// normalized to the current form ("0042"); anything that is not an id, and duplicates, go; order is kept.
+export function normalizeIds(ids: Array<unknown>): Array<string> {
+    return [...new Set(ids.map(id => String(id).replace('trick', '')).filter(id => /^\d+$/.test(id)))]
+}
 
-    // Initialise from localStorage
-    const raw = localStorage.getItem('todo')
-    if (raw) {
-        try {
-            list.value = JSON.parse(raw)
-        } catch (e) {
-            console.warn('Failed to parse todo from localStorage, resetting to empty array')
-            list.value = []
-        }
-    } 
-    else {
-        list.value = []
-    }
+// localStorage can be missing or throw (privacy modes, blocked site data): progress then lives in memory.
+function readStorage(key: string): string | null {
+    try { return localStorage.getItem(key) } catch { return null }
+}
+function writeStorage(key: string, value: string | null): void {
+    try {
+        if (value === null) localStorage.removeItem(key)
+        else localStorage.setItem(key, value)
+    } catch { /* storage full or unavailable: keep the list in memory */ }
+}
 
-    // Keep localStorage in sync whenever list changes
-    watch(list, (newVal) => {
-    if (newVal.length === 0) {
-        localStorage.removeItem('todo')
-    } else {
-        localStorage.setItem('todo', JSON.stringify(newVal))
+// Reads a stored id list, normalizes it and writes the normalized list back.
+function loadStoredIds(key: string): Array<string> {
+    const raw = readStorage(key)
+    if (!raw) return []
+    try {
+        const parsed = JSON.parse(raw)
+        if (!Array.isArray(parsed)) return []
+        const ids = normalizeIds(parsed)
+        if (JSON.stringify(ids) !== raw) writeStorage(key, ids.length ? JSON.stringify(ids) : null)
+        return ids
+    } catch (e) {
+        console.warn(`Failed to parse ${key} from localStorage, resetting to empty array`)
+        return []
     }
+}
+
+// Splits a transfer-link list ("0001,trick0006, ,abc") into clean ids; `isKnown` drops ids no trick has.
+export function parseIdList(hash: string, isKnown?: (id: string) => boolean): Array<string> {
+    const ids = normalizeIds(hash.split(',').map(id => id.trim()).filter(Boolean))
+    return isKnown ? ids.filter(isKnown) : ids
+}
+
+// An id list kept in localStorage under `key`, and reloaded when another tab changes it,
+// so a tab left open never writes back a stale list over newer marks.
+function usePersistedIds(key: string) {
+    const list = ref<Array<string>>(loadStoredIds(key))
+    watch(list, (ids) => {
+        const value = ids.length ? JSON.stringify(ids) : null
+        if (readStorage(key) !== value) writeStorage(key, value)
     }, { deep: true })
+    if (typeof window !== 'undefined') {
+        window.addEventListener('storage', (e) => {
+            if (e.key === key || e.key === null) list.value = loadStoredIds(key)
+        })
+    }
+    // A transfer link adds its ids to the ones already here: opening it never erases progress.
+    const loadHash = (hash: string, isKnown?: (id: string) => boolean): Array<string> => {
+        const added = parseIdList(hash, isKnown)
+        list.value = normalizeIds([...list.value, ...added])
+        return added
+    }
+    // only well-formed ids go into a transfer link
+    const getHash = (): string => list.value.filter(id => /^\d{4}$/.test(id)).toString()
+    return { list, loadHash, getHash }
+}
+
+export const useTodoStore = defineStore('Todo', () => {
+    const { list, loadHash, getHash } = usePersistedIds('todo')
+    // a trick saved as both mastered and to-do counts as mastered
+    const masteredIds = useMasteredStore().list
+    if (list.value.some(id => masteredIds.includes(id))) list.value = list.value.filter(id => !masteredIds.includes(id))
 
     function toggle(trick: Trick): void {
-        // work with trickID
         const idx: number = list.value.indexOf(trick.trickID)
         if (idx > -1) list.value.splice(idx, 1)
-        else list.value.push(trick.trickID)
-
-        // removed to migrate to typescript
-        // fallback remove title
-        // only adding trickID
-        // const idxT = list.value.indexOf(trick.title[0])
-        // if (idxT > -1) list.value.splice(idxT, 1)
+        else {
+            // back on the list to learn again: no longer mastered
+            list.value.push(trick.trickID)
+            const mastered = useMasteredStore().list
+            const at = mastered.indexOf(trick.trickID)
+            if (at > -1) mastered.splice(at, 1)
+        }
     }
 
-    const isOnTodo: (trick: Trick) => boolean = (trick) => {
-        return list.value.map((val, i) => val.replace('trick', '')).includes(trick.trickID)
+    function remove(trick: Trick): void {
+        const idx = list.value.indexOf(trick.trickID)
+        if (idx > -1) list.value.splice(idx, 1)
     }
 
-    const getHash: () => string = () => {
-        return list.value.toString();
-    }
+    const isOnTodo: (trick: Trick) => boolean = (trick) => list.value.includes(trick.trickID)
 
-    const loadHash: (hash: string) => Array<string> = (hash) => {
-        const newList: Array<string> = hash.split(",");
-        list.value = newList.map(id => String(id));
-        console.log("Loaded following todo list: ", list.value)
-        return newList
-    }
-
-    return { list, toggle, isOnTodo, getHash, loadHash }
+    return { list, toggle, remove, isOnTodo, getHash, loadHash }
 })
 
 export const useMarkedStore = defineStore('marked', {
@@ -104,40 +141,16 @@ export const useMarkedStore = defineStore('marked', {
 })
 
 export const useMasteredStore = defineStore('Mastered', () => {
-  const list = ref<Array<string>>([])
+  const { list, loadHash, getHash } = usePersistedIds('mastered')
 
-    // Initialise from localStorage
-    const raw = localStorage.getItem('mastered')
-    if (raw) {
-    try {
-        list.value = JSON.parse(raw)
-    } catch (e) {
-        console.warn('Failed to parse mastered from localStorage, resetting to empty array')
-        list.value = []
-    }
-    } else {
-    list.value = []
-    }
-
-    // Keep localStorage in sync whenever list changes
-    watch(list, (newVal) => {
-    if (newVal.length === 0) {
-        localStorage.removeItem('mastered')
-    } else {
-        localStorage.setItem('mastered', JSON.stringify(newVal))
-    }
-    }, { deep: true })
-
+  // A trick marked mastered leaves the todo list.
   function toggle(trick: Trick): void {
-    // work with trickID
     const idx = list.value.indexOf(trick.trickID)
     if (idx > -1) list.value.splice(idx, 1)
-    else list.value.push(trick.trickID)
-
-    // removed to migrate to typescript
-    // fallback to title
-    // const idxT = list.value.indexOf(trick.title[0])
-    // if (idxT > -1) list.value.splice(idxT, 1)
+    else {
+      list.value.push(trick.trickID)
+      useTodoStore().remove(trick)
+    }
   }
 
   const getMasteredTricks = (tricks: Array<Trick>): Array<Trick> => {
@@ -190,20 +203,7 @@ export const useMasteredStore = defineStore('Mastered', () => {
     }
   }
 
-  const isMastered = (trick: Trick): boolean => {
-    return list.value.map((val, i) => val.replace('trick', '')).includes(trick.trickID)
-  }
-
-    const getHash = (): string => {
-        return list.value.toString();
-    }
-
-    const loadHash = (hash: string): Array<string> => {
-        const newList: Array<string> = hash.split(",").map(id => String(id));
-        list.value = newList;
-        console.log("Loaded following mastered list: ", list.value)
-        return newList
-    }
+  const isMastered = (trick: Trick): boolean => list.value.includes(trick.trickID)
 
   return { list, toggle, isMastered, calcShareMastered, calcCategoryShareMastered, getMasteredTricks, getHash, loadHash }
 })
@@ -221,47 +221,63 @@ export const useSupporters = defineStore('supporters', {
             images: [
                 {
                     imgSrc: AIF,
+                    name: 'Alpine Ice Freestyle',
                     link: 'https://www.youtube.com/@AlpineIceFreestyle'
                 },
                 {
                     imgSrc: GlobalIce,
+                    name: 'Global Ice Skate',
                     link: 'https://www.instagram.com/globaliceskate'
                 },
                 {
                     imgSrc: Guardians,
+                    name: 'Ice Freestyle Guardians',
                     link: 'https://www.youtube.com/@icefreestyleguardians'
                 },
                 {
                     imgSrc: ICD,
+                    name: 'Ice Cracks Dresden',
                     link: 'https://www.instagram.com/ice.cracks_dresden'
                 },
                 {
                     imgSrc: MunichEast,
+                    name: 'Ice Freestyler München Ost',
                     link: 'https://www.youtube.com/@ice.freestyler.muenchen-ost'
                 },
                 {
                     imgSrc: IFO,
+                    name: 'Ice Freestyler Offenburg',
                     link: 'https://www.instagram.com/icefreestyleroffenburg'
                 },
                 {
                     imgSrc: IFP,
+                    name: 'Ice Freestyler Polarion',
                     link: 'https://www.instagram.com/ice_freestyler_polarion'
                 },
                 {
                     imgSrc: IceRad,
+                    name: 'IceRad',
                     link: 'https://www.instagram.com/icerad'
                 },
                 {
                     imgSrc: NK,
+                    name: 'Nagyerdei Korisok',
                     link: 'https://www.youtube.com/@NagyerdeiKorisok'
                 },
                 {
                     imgSrc: Turtle,
+                    name: 'Turtle Style',
                     link: 'https://www.instagram.com/turtlestyleofficial'
                 },
                 {
                     imgSrc: IceIceDilly,
+                    name: 'IceIceDilly',
                     link: 'https://www.youtube.com/@IceIceDilly'
+                },
+                {
+                    imgSrc: IcePulse,
+                    name: 'IcePulse',
+                    link: 'https://www.instagram.com/icepulse18'
                 },
             ]
         }
@@ -307,6 +323,15 @@ export const useCategoryStore = defineStore('categoryStore', {
         getColor(category: string): string {
             const index = this.categories.indexOf(category.toLowerCase());
             return this.colors[index];
+        },
+        /** The category colour adjusted to reach 3:1 on the page background (or on --surface-2) in the current theme. */
+        getDotColor(category: string, on: 'bg' | 'surface-2' = 'bg'): string {
+            const { resolved } = useThemeMode();
+            return visibleOnBackground(
+                this.getColor(category),
+                (on === 'bg' ? THEME_COLORS : THEME_SURFACE_2)[resolved.value],
+                resolved.value,
+            );
         }
     }
 })
@@ -371,3 +396,12 @@ export const useCurSearchStore = defineStore('curSearchStore', {
         }
     }
 })
+
+// The one filter reset for the home page and its filter sheet (same as the old toolbar's):
+// sort order is a preference, not a filter, so it is kept.
+export function resetFilters(): void {
+    useSelCategoryStore().reset();
+    useSelDifficultyStore().reset();
+    useCurSearchStore().reset();
+    useMarkedStore().reset();
+}

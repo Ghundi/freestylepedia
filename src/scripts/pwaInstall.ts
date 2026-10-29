@@ -21,6 +21,19 @@ function checkIfInstallable() {
     // and store the caught event
     pwaInstallPromptEvent.value = event as BeforeInstallPromptEvent
   })
+  // installed from the browser menu or from our button: nothing left to offer
+  window.addEventListener('appinstalled', () => { pwaInstallPromptEvent.value = undefined })
 }
 
-export { checkIfInstallable, pwaInstallPromptEvent }
+// The browser's install prompt can be shown once per event: drop it after use.
+async function promptInstall() {
+  const event = pwaInstallPromptEvent.value
+  if (!event) return
+  pwaInstallPromptEvent.value = undefined
+  try {
+    await event.prompt()
+    await event.userChoice
+  } catch { /* prompt refused by the browser */ }
+}
+
+export { checkIfInstallable, promptInstall, pwaInstallPromptEvent }
