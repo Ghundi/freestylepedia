@@ -63,7 +63,7 @@ const name = (trick: Trick) => trickStore.getLocalTrickTitles(trick, locale.valu
           <span v-if="g.color" class="dot dot--lg" :style="{ background: g.color }" aria-hidden="true"></span>
           {{ g.label }}
         </span>
-        <span class="gc" :aria-label="t('paths.countLabel', { done: doneCount(g), total: g.rows.length })">{{ doneCount(g) }}/{{ g.rows.length }}</span>
+        <span class="gc" aria-hidden="true">{{ doneCount(g) }}/{{ g.rows.length }}</span><span class="sr-only">{{ t('paths.countLabel', { done: doneCount(g), total: g.rows.length }) }}</span>
         <AppIcon :path="mdiChevronRight" :size="20" class="car" :class="{ open: isOpen(g.key) }" />
       </button>
       <ul v-if="isOpen(g.key)" class="rows">

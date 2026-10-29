@@ -87,9 +87,9 @@ function switchView(name: string) {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  /* phone: the page scrolls and keeps room for the fixed tab bar */
+  /* phone: the page scrolls; AppFooter already clears the fixed tab bar */
   padding-top: var(--space-3);
-  padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px) + var(--space-3));
+  padding-bottom: var(--space-3);
 }
 .tree-head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
 .tree-head h1 { margin: 0; font-size: var(--t-xl); }
