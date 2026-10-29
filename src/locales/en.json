@@ -10,7 +10,9 @@
     "byCategory": "By category",
     "zoomIn": "Zoom in",
     "zoomOut": "Zoom out",
-    "fit": "Show the whole graph"
+    "fit": "Show the whole graph",
+    "hint": "Tap a trick to see what to learn first and what it unlocks.",
+    "countLabel": "{done} of {total} mastered"
   },
   "faq": {
     "naming_question": "Where do the trick names comes from?",

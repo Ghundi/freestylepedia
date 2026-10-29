@@ -10,7 +10,9 @@
     "byCategory": "Nach Kategorie",
     "zoomIn": "Vergrößern",
     "zoomOut": "Verkleinern",
-    "fit": "Ganzen Graphen anzeigen"
+    "fit": "Ganzen Graphen anzeigen",
+    "hint": "Tippe auf einen Trick, um zu sehen, was du vorher können musst und was er freischaltet.",
+    "countLabel": "{done} von {total} gemeistert"
   },
   "faq": {
     "naming_question": "Woher kommen die Namen der Tricks?",

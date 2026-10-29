@@ -10,7 +10,9 @@
     "byCategory": "Par catégorie",
     "zoomIn": "Zoomer",
     "zoomOut": "Dézoomer",
-    "fit": "Voir tout le graphe"
+    "fit": "Voir tout le graphe",
+    "hint": "Touche une figure pour voir ce qu’il faut savoir avant, et ce qu’elle débloque.",
+    "countLabel": "{done} sur {total} maîtrisées"
   },
   "faq": {
     "naming_question": "D’où viennent les noms des figures ?",
