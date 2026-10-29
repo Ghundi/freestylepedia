@@ -76,4 +76,6 @@ const searchOpen = useSearchOpen()
 @media (min-width: 900px) {
   .brand { flex: 0 0 auto; margin-right: auto; }
 }
+/* the logo link gets a full 44px touch target */
+.brand { display: inline-flex; align-items: center; min-height: 44px; }
 </style>

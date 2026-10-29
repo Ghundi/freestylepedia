@@ -58,14 +58,14 @@ const name = (trick: Trick) => trickStore.getLocalTrickTitles(trick, locale.valu
 <template>
   <div class="path-list">
     <section v-for="g in groups" :key="g.key" class="group">
-      <button type="button" class="gh" :aria-expanded="isOpen(g.key)" @click="toggleGroup(g.key)">
+      <h2 class="gh-h"><button type="button" class="gh" :aria-expanded="isOpen(g.key)" @click="toggleGroup(g.key)">
         <span class="gt">
           <span v-if="g.color" class="dot dot--lg" :style="{ background: g.color }" aria-hidden="true"></span>
           {{ g.label }}
         </span>
         <span class="gc" aria-hidden="true">{{ doneCount(g) }}/{{ g.rows.length }}</span><span class="sr-only">{{ t('paths.countLabel', { done: doneCount(g), total: g.rows.length }) }}</span>
         <AppIcon :path="mdiChevronRight" :size="20" class="car" :class="{ open: isOpen(g.key) }" />
-      </button>
+      </button></h2>
       <ul v-if="isOpen(g.key)" class="rows">
         <li v-for="r in g.rows" :key="r.trick.trickID">
           <button type="button" class="row" :class="{ root: props.mode === 'level' || r.depth === 0 }" :style="{ '--i': props.mode === 'category' ? r.depth : 0 }" @click="emit('open', r.trick)">
@@ -97,6 +97,9 @@ const name = (trick: Trick) => trickStore.getLocalTrickTitles(trick, locale.valu
 .gc { color: var(--text-muted); font-weight: 500; font-size: var(--t-sm); font-variant-numeric: tabular-nums; }
 .car { color: var(--text-muted); transition: transform .15s; }
 .car.open { transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) { .car { transition: none; } }
+/* each group title is a heading, so screen readers can jump between groups */
+.gh-h { margin: 0; font: inherit; }
 .rows { list-style: none; margin: 0 0 12px; padding: 0; }
 .row {
   position: relative; display: flex; align-items: center; gap: 12px; width: 100%; min-height: 60px;
