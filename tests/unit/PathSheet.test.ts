@@ -114,3 +114,21 @@ describe('AppDialog placement', () => {
     expect(mk({ placement: 'bottom' }).get('dialog').classes()).toContain('dlg--bottom')
   })
 })
+
+describe('AppDialog bottom sheet drag', () => {
+  const ev = (type: string, clientY: number) => {
+    const e = new Event(type, { bubbles: true }) as PointerEvent
+    Object.defineProperty(e, 'clientY', { value: clientY })
+    return e
+  }
+  it('closes when the title bar is dragged down far enough, not on a short drag', async () => {
+    const i18n = createI18n({ legacy: false, locale: 'en', messages: { en } })
+    const w = mount(AppDialog, { props: { open: true, title: 'T', placement: 'bottom' }, global: { plugins: [i18n] }, attachTo: document.body })
+    const bar = w.get('header.bar').element
+    bar.dispatchEvent(ev('pointerdown', 100)); window.dispatchEvent(ev('pointermove', 140)); window.dispatchEvent(ev('pointerup', 140))
+    expect(w.emitted('update:open')).toBeUndefined()
+    bar.dispatchEvent(ev('pointerdown', 100)); window.dispatchEvent(ev('pointermove', 220)); window.dispatchEvent(ev('pointerup', 220))
+    expect(w.emitted('update:open')?.[0]).toEqual([false])
+    w.unmount()
+  })
+})

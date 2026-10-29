@@ -34,6 +34,30 @@ let pressedOutside = false
 function onPointerDown(e: PointerEvent) {
   pressedOutside = e.target === dialog.value
 }
+// Bottom sheet: dragging the handle or the title bar down by more than 80px closes it.
+let dragFrom: number | null = null
+let dragBy = 0
+function startDrag(e: PointerEvent) {
+  if (props.placement !== 'bottom' || (e.target as HTMLElement).closest('button')) return
+  dragFrom = e.clientY
+  dragBy = 0
+  window.addEventListener('pointermove', onDrag)
+  window.addEventListener('pointerup', endDrag, { once: true })
+  window.addEventListener('pointercancel', endDrag, { once: true })
+}
+function onDrag(e: PointerEvent) {
+  if (dragFrom === null || !dialog.value) return
+  dragBy = Math.max(0, e.clientY - dragFrom)
+  dialog.value.style.transform = `translateY(${dragBy}px)`
+}
+function endDrag() {
+  window.removeEventListener('pointermove', onDrag)
+  window.removeEventListener('pointercancel', endDrag)
+  window.removeEventListener('pointerup', endDrag)
+  if (dialog.value) dialog.value.style.transform = ''
+  if (dragFrom !== null && dragBy > 80) emit('update:open', false)
+  dragFrom = null
+}
 function onClick(e: MouseEvent) {
   if (e.target === dialog.value && pressedOutside) emit('update:open', false)
   pressedOutside = false
@@ -43,8 +67,8 @@ function onClick(e: MouseEvent) {
 <template>
   <dialog ref="dialog" class="dlg" :class="{ 'dlg--bottom': placement === 'bottom' }" :aria-labelledby="titleId" @close="onClose" @pointerdown="onPointerDown" @click="onClick">
     <div class="panel">
-      <span v-if="placement === 'bottom'" class="grab" aria-hidden="true"></span>
-      <header class="bar">
+      <span v-if="placement === 'bottom'" class="grab" aria-hidden="true" @pointerdown="startDrag"></span>
+      <header class="bar" @pointerdown="startDrag">
         <h2 :id="titleId">{{ title }}</h2>
         <button type="button" class="close" @click="emit('update:open', false)">{{ t('close') }}</button>
       </header>
@@ -75,6 +99,7 @@ function onClick(e: MouseEvent) {
   border-radius: var(--radius-l) var(--radius-l) 0 0;
 }
 .dlg--bottom .panel { padding-bottom: calc(var(--space-5) + env(safe-area-inset-bottom, 0px)); }
+.dlg--bottom .grab, .dlg--bottom .bar { touch-action: none; }
 .grab { display: block; width: 40px; height: 4px; margin: var(--space-2) auto 0; border-radius: 2px; background: var(--line); }
 .dlg--bottom .bar { padding-top: var(--space-3); }
 .dlg::backdrop { background: rgb(0 0 0 / 0.6); }

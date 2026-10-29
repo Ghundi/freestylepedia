@@ -70,6 +70,21 @@ watch(() => props.trick, async (now, before) => {
         </div>
       </div>
 
+      <div class="marks">
+        <AppButton
+          class="mark"
+          :pressed="todoStore.isOnTodo(trick)"
+          :icon="todoStore.isOnTodo(trick) ? mdiBookmark : mdiBookmarkOutline"
+          @click="todoStore.toggle(trick)"
+        >{{ t('trick.todo') }}</AppButton>
+        <AppButton
+          class="mark"
+          :pressed="masteredStore.isMastered(trick)"
+          :icon="masteredStore.isMastered(trick) ? mdiCheckCircle : mdiCheckCircleOutline"
+          @click="masteredStore.toggle(trick)"
+        >{{ t('trick.mastered') }}</AppButton>
+      </div>
+
       <AppIcon :path="mdiArrowDown" :size="24" class="arrow" />
 
       <p class="lab">{{ t('paths.after') }}</p>
@@ -86,21 +101,6 @@ watch(() => props.trick, async (now, before) => {
         </li>
         <li v-if="!path.after.length" class="none">{{ t('paths.noneAfter') }}</li>
       </ul>
-
-      <div class="marks">
-        <AppButton
-          class="mark"
-          :pressed="todoStore.isOnTodo(trick)"
-          :icon="todoStore.isOnTodo(trick) ? mdiBookmark : mdiBookmarkOutline"
-          @click="todoStore.toggle(trick)"
-        >{{ t('trick.todo') }}</AppButton>
-        <AppButton
-          class="mark"
-          :pressed="masteredStore.isMastered(trick)"
-          :icon="masteredStore.isMastered(trick) ? mdiCheckCircle : mdiCheckCircleOutline"
-          @click="masteredStore.toggle(trick)"
-        >{{ t('trick.mastered') }}</AppButton>
-      </div>
 
       <AppButton
         class="open"
@@ -133,7 +133,7 @@ watch(() => props.trick, async (now, before) => {
 .focus:focus { outline: none; }
 .focus:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .th { width: 96px; height: 60px; border-radius: var(--radius-s); overflow: hidden; background: var(--surface-2); flex: none; }
-.marks { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margin-top: var(--space-4); }
+.marks { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margin-top: var(--space-3); }
 .mark { min-height: 48px; padding-inline: var(--space-3); white-space: nowrap; }
 .open { display: flex; width: 100%; min-height: 48px; margin-top: var(--space-3); }
 </style>

@@ -98,8 +98,8 @@ h2 { margin: 0; font-size: var(--t-lg); font-weight: 600; color: var(--text); }
 .arrows { display: none; }
 .arrow {
   position: absolute;
-  /* 200px-wide thumbnails are 16:9, so their middle sits about 56px below the list's top padding */
-  top: calc(var(--space-2) + 56px - 22px);
+  /* thumbnails are 200px wide at 16:10, so their middle sits 62.5px below the list's top padding */
+  top: calc(var(--space-2) + 200px * 10 / 16 / 2 - 22px);
   z-index: 2;
   border: 1px solid var(--line);
   border-radius: 50%;
