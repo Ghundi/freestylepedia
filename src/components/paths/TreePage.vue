@@ -1,15 +1,19 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { getRectOfNodes, useVueFlow, type Edge } from '@vue-flow/core';
 import { getOrientation } from '@/scripts/helpers';
 import { mdiFitToScreenOutline, mdiMagnifyMinusOutline, mdiMagnifyPlusOutline } from '@mdi/js';
 import { useThemeMode } from '@/scripts/theme';
+import { useWideScreen } from '@/scripts/useWideScreen';
+import type { Trick } from '@/scripts/trickStore';
 import { focusHeadingIfRequested, requestHeadingFocus } from '@/scripts/ui';
 import AppIcon from '@/components/ui/AppIcon.vue';
 import IconButton from '@/components/ui/IconButton.vue';
 import SegmentedControl from '@/components/ui/SegmentedControl.vue';
+import PathList from '@/components/paths/PathList.vue';
+import PathSheet from '@/components/paths/PathSheet.vue';
 
 const props = defineProps<{ active: 'TrickTree' | 'CategoryTree'; edges: Edge[]; description: string }>();
 
@@ -17,6 +21,10 @@ const { t } = useI18n();
 const router = useRouter();
 const route = useRoute();
 const { resolved } = useThemeMode();
+const wide = useWideScreen();
+const sheetTrick = ref<Trick | null>(null);
+// a sheet left open when the screen turns wide would be an orphan modal over the graph
+watch(wide, w => { if (w) sheetTrick.value = null; });
 // the VueFlow in the slot carries the same id as the active view, so both use one store
 const { zoomIn, zoomOut, fitView, onNodesInitialized, setViewport, getNodes } = useVueFlow(props.active);
 
@@ -38,8 +46,8 @@ const themedEdges = computed(() => {
 });
 
 const views = computed(() => [
-  { value: 'TrickTree', label: t('paths.byLevel') },
   { value: 'CategoryTree', label: t('paths.byCategory') },
+  { value: 'TrickTree', label: t('paths.byLevel') },
 ]);
 const heading = ref<HTMLElement>();
 onMounted(() => focusHeadingIfRequested(heading.value));
@@ -56,9 +64,14 @@ function switchView(name: string) {
     <header class="tree-head">
       <h1 ref="heading" tabindex="-1">{{ t('tabs.paths') }}</h1>
       <SegmentedControl :model-value="active" :options="views" :label="t('tabs.paths')" @update:model-value="switchView" />
-      <p class="desc">{{ description }}</p>
+      <p v-if="wide" class="desc">{{ description }}</p>
+      <p v-else class="desc">{{ t('paths.hint') }}</p>
     </header>
-    <div class="zone">
+    <template v-if="!wide">
+      <PathList :mode="active === 'CategoryTree' ? 'category' : 'level'" @open="sheetTrick = $event" />
+      <PathSheet v-model:trick="sheetTrick" />
+    </template>
+    <div v-else class="zone">
       <slot :edges="themedEdges" />
       <div class="controls">
         <IconButton :label="t('paths.zoomIn')" @click="zoomIn()"><AppIcon :path="mdiMagnifyPlusOutline" /></IconButton>
@@ -74,9 +87,9 @@ function switchView(name: string) {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  /* mobile: fixed tab bar at the bottom; desktop (below): tab row under the header */
-  height: calc(100dvh - var(--header-h) - var(--tabbar-h) - env(safe-area-inset-bottom, 0px));
+  /* phone: the page scrolls and keeps room for the fixed tab bar */
   padding-top: var(--space-3);
+  padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px) + var(--space-3));
 }
 .tree-head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
 .tree-head h1 { margin: 0; font-size: var(--t-xl); }
@@ -113,8 +126,8 @@ function switchView(name: string) {
   /* the graph ends a step above the window edge rather than flush with it */
   .tree-page { height: calc(100dvh - var(--header-h)); padding-bottom: var(--space-4); }
 }
-/* phone in landscape: title and switch share one row and the description goes, so the graph keeps its room */
-@media (max-height: 560px) {
+/* short wide window: title and switch share one row and the description goes, so the graph keeps its room */
+@media (min-width: 900px) and (max-height: 560px) {
   .tree-head { flex-direction: row; flex-wrap: wrap; align-items: center; column-gap: var(--space-4); }
   .tree-head h1 { font-size: var(--t-lg); }
   .desc { display: none; }

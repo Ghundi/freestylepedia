@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { VueFlow } from '@vue-flow/core';
 import { useTrickStore } from '@/scripts/trickStore';
 import { getOrientation } from '@/scripts/helpers';
+import { useWideScreen } from '@/scripts/useWideScreen';
 import TreePage from '@/components/paths/TreePage.vue';
 
 import ClickableNode from '../components/mindMap/ClickableNode.vue';
@@ -9,9 +11,12 @@ import CategoryNode from '../components/mindMap/CategoryNode.vue';
 import DifficultyNode from '../components/mindMap/DifficultyNode.vue';
 
 const trickStore = useTrickStore();
-trickStore.trickTree = trickStore.getTrickTreeGraph(getOrientation());
-
-const graph = trickStore.trickTree;
+const wide = useWideScreen();
+// the graph is only built where it is shown; phones get the list instead
+const graph = computed(() => {
+  if (!wide.value) return [[], []] as ReturnType<typeof trickStore.getTrickTreeGraph>;
+  return trickStore.getTrickTreeGraph(getOrientation());
+});
 const landscape = getOrientation() === 'Landscape';
 
 </script>

@@ -1,16 +1,21 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { VueFlow } from '@vue-flow/core';
 import { useTrickStore } from '@/scripts/trickStore';
 import { getOrientation } from '@/scripts/helpers';
+import { useWideScreen } from '@/scripts/useWideScreen';
 import TreePage from '@/components/paths/TreePage.vue';
 
 import ClickableNode from '../components/mindMap/ClickableNode.vue';
 import CategoryNode from '../components/mindMap/CategoryNode.vue';
 
 const trickStore = useTrickStore();
-trickStore.categoryTree = trickStore.getConnectionsGraph(getOrientation());
-
-const graph = trickStore.categoryTree;
+const wide = useWideScreen();
+// the graph is only built where it is shown; phones get the list instead
+const graph = computed(() => {
+  if (!wide.value) return [[], []] as ReturnType<typeof trickStore.getConnectionsGraph>;
+  return trickStore.getConnectionsGraph(getOrientation());
+});
 </script>
 
 <template>

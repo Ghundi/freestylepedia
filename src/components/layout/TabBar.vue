@@ -10,7 +10,7 @@ const route = useRoute()
 
 const tabs = [
   { name: 'Home', label: 'tabs.tricks', icon: mdiViewGridOutline, also: [] as string[] },
-  { name: 'TrickTree', label: 'tabs.paths', icon: mdiSitemapOutline, also: ['CategoryTree'] },
+  { name: 'CategoryTree', label: 'tabs.paths', icon: mdiSitemapOutline, also: ['TrickTree'] },
   { name: 'MyProgress', label: 'tabs.progress', icon: mdiChartBoxOutline, also: [] as string[] },
 ]
 const active = computed(() => tabs.find(
