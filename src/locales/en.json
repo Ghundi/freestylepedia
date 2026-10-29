@@ -12,7 +12,13 @@
     "zoomOut": "Zoom out",
     "fit": "Show the whole graph",
     "hint": "Tap a trick to see what to learn first and what it unlocks.",
-    "countLabel": "{done} of {total} mastered"
+    "countLabel": "{done} of {total} mastered",
+    "sheetTitle": "Path",
+    "before": "Learn first",
+    "after": "Then you unlock",
+    "noneBefore": "Nothing: it’s a starting point",
+    "noneAfter": "No tricks yet",
+    "openTrick": "See the trick"
   },
   "faq": {
     "naming_question": "Where do the trick names comes from?",

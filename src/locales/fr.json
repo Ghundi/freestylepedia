@@ -12,7 +12,13 @@
     "zoomOut": "Dézoomer",
     "fit": "Voir tout le graphe",
     "hint": "Touche une figure pour voir ce qu’il faut savoir avant, et ce qu’elle débloque.",
-    "countLabel": "{done} sur {total} maîtrisées"
+    "countLabel": "{done} sur {total} maîtrisées",
+    "sheetTitle": "Chemin",
+    "before": "Il faut d’abord savoir",
+    "after": "Ensuite, tu débloques",
+    "noneBefore": "Rien : c’est un point de départ",
+    "noneAfter": "Aucune figure pour l’instant",
+    "openTrick": "Voir la figure"
   },
   "faq": {
     "naming_question": "D’où viennent les noms des figures ?",

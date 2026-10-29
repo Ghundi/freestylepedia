@@ -2,7 +2,7 @@
 import { nextTick, ref, useId, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-const props = defineProps<{ open: boolean; title: string }>()
+const props = withDefaults(defineProps<{ open: boolean; title: string; placement?: 'center' | 'bottom' }>(), { placement: 'center' })
 const emit = defineEmits<{ 'update:open': [value: boolean] }>()
 
 const { t } = useI18n()
@@ -41,8 +41,9 @@ function onClick(e: MouseEvent) {
 </script>
 
 <template>
-  <dialog ref="dialog" class="dlg" :aria-labelledby="titleId" @close="onClose" @pointerdown="onPointerDown" @click="onClick">
+  <dialog ref="dialog" class="dlg" :class="{ 'dlg--bottom': placement === 'bottom' }" :aria-labelledby="titleId" @close="onClose" @pointerdown="onPointerDown" @click="onClick">
     <div class="panel">
+      <span v-if="placement === 'bottom'" class="grab" aria-hidden="true"></span>
       <header class="bar">
         <h2 :id="titleId">{{ title }}</h2>
         <button type="button" class="close" @click="emit('update:open', false)">{{ t('close') }}</button>
@@ -64,6 +65,18 @@ function onClick(e: MouseEvent) {
   background: var(--surface);
   color: var(--text);
 }
+/* bottom sheet: stuck to the bottom edge, full width, rounded top corners only */
+.dlg--bottom {
+  margin: auto 0 0;
+  width: 100%;
+  max-width: none;
+  max-height: 86dvh;
+  border-width: 1px 1px 0;
+  border-radius: var(--radius-l) var(--radius-l) 0 0;
+}
+.dlg--bottom .panel { padding-bottom: calc(var(--space-5) + env(safe-area-inset-bottom, 0px)); }
+.grab { display: block; width: 40px; height: 4px; margin: var(--space-2) auto 0; border-radius: 2px; background: var(--line); }
+.dlg--bottom .bar { padding-top: var(--space-3); }
 .dlg::backdrop { background: rgb(0 0 0 / 0.6); }
 /* the page behind an open dialog stays put */
 :global(html:has(dialog[open])) { overflow: hidden; }
