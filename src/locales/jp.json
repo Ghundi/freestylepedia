@@ -13,11 +13,11 @@
     "fit": "全体を表示",
     "hint": "トリックをタップすると、先に覚えるべきことと、次に解放されるトリックが分かります。",
     "countLabel": "{total}個中{done}個を習得済み",
-    "sheetTitle": "パス",
+    "sheetTitle": "ルート",
     "before": "先に覚えること",
     "after": "次に解放されるトリック",
     "noneBefore": "なし：最初に挑戦できるトリックです",
-    "noneAfter": "まだトリックはありません",
+    "noneAfter": "解放されるトリックはまだありません",
     "openTrick": "トリックを見る"
   },
   "faq": {
@@ -108,7 +108,7 @@
     "myProgress": "私の達成度",
     "progress": "達成度",
     "recommendedTricks": "お薦めのトリック",
-    "nextTrick": "次のトリック",
+    "nextTrick": "次に挑戦するトリック",
     "transferProgress": "達成度を移行",
     "transferInfo": "新しいデバイスのクリップボードにコピーされたURLを入力してください",
     "summary": "{total}個中{n}個のトリックを習得済み",
@@ -127,7 +127,7 @@
   "otherTutorials": "他のチュートリアル",
   "tabs": {
     "tricks": "トリック",
-    "paths": "パス",
+    "paths": "ルート",
     "progress": "私の達成度"
   },
   "settings": {
@@ -151,7 +151,7 @@
     "byCategory": "カテゴリー別",
     "all": "すべて",
     "filters": "フィルター",
-    "count": "{n}件のトリック",
+    "count": "{n}個のトリック",
     "view": "表示",
     "sort": "並び替え",
     "status": "状態",
@@ -160,7 +160,7 @@
     "levelMax": "最大",
     "reset": "リセット",
     "active": "{n}件適用中",
-    "recommendedContext": "あなたのレベルにおすすめ"
+    "recommendedContext": "レベルに合わせたおすすめ"
   },
   "video": {
     "play": "{name}を再生",

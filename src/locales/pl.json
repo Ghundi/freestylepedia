@@ -11,7 +11,7 @@
     "zoomIn": "Przybliż",
     "zoomOut": "Oddal",
     "fit": "Pokaż cały graf",
-    "hint": "Dotknij tricku, aby zobaczyć, czego nauczyć się wcześniej i co dzięki niemu odblokujesz.",
+    "hint": "Dotknij triku, aby zobaczyć, czego nauczyć się wcześniej i co dzięki niemu odblokujesz.",
     "countLabel": "Opanowane: {done} z {total}",
     "sheetTitle": "Ścieżka",
     "before": "Najpierw naucz się",
@@ -70,7 +70,7 @@
     "language": "Język",
     "byBlackbirdAndMISG": "od Blackbird i MISG",
     "supportedBy": "wspierane przez",
-    "supporterLogo": "Logo partnera"
+    "supporterLogo": "Logo wspierającego"
   },
   "sortOptions": {
     "difficultyDown": "Trudność (Trudne – Łatwe)",
@@ -118,7 +118,7 @@
     "allDone": "Wszystkie triki są opanowane. Nowe filmy pojawiają się regularnie: zajrzyj wkrótce."
   },
   "close": "Zamknij",
-  "level": "Poz. {n}",
+  "level": "Poziom {n}",
   "new": "Nowy",
   "difficulty": "Trudność",
   "category": "Kategoria",
@@ -145,7 +145,7 @@
   "back": "Wstecz",
   "home": {
     "scrollPrev": "Poprzednie triki",
-    "scrollNext": "Więcej trików",
+    "scrollNext": "Następne triki",
     "nextContext": "Następny trik z twojej listy",
     "suggestedContext": "Dobry trik na początek",
     "byCategory": "Kategorie",
@@ -160,7 +160,7 @@
     "levelMax": "Maksimum",
     "reset": "Resetuj",
     "active": "{n} aktywny | {n} aktywne | {n} aktywnych",
-    "recommendedContext": "Polecany na twoim poziomie"
+    "recommendedContext": "Polecany dla twojego poziomu"
   },
   "video": {
     "play": "Odtwórz: {name}",
@@ -170,7 +170,7 @@
   "trick": {
     "todo": "Todo",
     "mastered": "Opanowane",
-    "before": "Naucz się najpierw",
+    "before": "Najpierw naucz się",
     "related": "Powiązane triki"
   },
   "share": {
