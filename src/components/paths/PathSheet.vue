@@ -26,12 +26,16 @@ const todoStore = useTodoStore()
 const path = computed(() => props.trick ? trickPath(trickStore.tricks, props.trick) : { before: [], after: [] })
 const name = (trick: Trick) => trickStore.getLocalTrickTitles(trick, locale.value)[0] ?? trick.title[0]
 
-// Back to the top of the dialog when the sheet switches to another trick.
+// Switching to another trick scrolls the dialog back to the top and moves focus to the trick card,
+// since the tapped row is gone. The first open is left to AppDialog.
 const content = ref<HTMLElement>()
-watch(() => props.trick, async () => {
+const card = ref<HTMLElement>()
+watch(() => props.trick, async (now, before) => {
+  if (!now || !before) return
   await nextTick()
   const dlg = content.value?.closest('dialog')
   if (dlg) dlg.scrollTop = 0
+  card.value?.focus({ preventScroll: true })
 })
 </script>
 
@@ -55,7 +59,7 @@ watch(() => props.trick, async () => {
 
       <AppIcon :path="mdiArrowDown" :size="24" class="arrow" />
 
-      <div class="focus">
+      <div ref="card" class="focus" tabindex="-1">
         <YtThumb :video-id="trick.videoID[0]" :alt="''" class="th" sizes="96px" />
         <div class="tx">
           <span class="nm nm--l">{{ name(trick) }}</span>
@@ -126,6 +130,8 @@ watch(() => props.trick, async () => {
 .chev { color: var(--text-muted); flex: none; }
 .arrow { display: block; margin: var(--space-1) auto; color: var(--text-muted); }
 .focus { display: flex; align-items: center; gap: 12px; padding: 12px; border: 2px solid var(--accent); border-radius: var(--radius-m); }
+.focus:focus { outline: none; }
+.focus:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .th { width: 96px; height: 60px; border-radius: var(--radius-s); overflow: hidden; background: var(--surface-2); flex: none; }
 .marks { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margin-top: var(--space-4); }
 .mark { min-height: 48px; padding-inline: var(--space-3); white-space: nowrap; }

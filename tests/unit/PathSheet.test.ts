@@ -10,7 +10,7 @@ import { trickPath } from '../../src/scripts/paths'
 import { useTrickStore, type Trick } from '../../src/scripts/trickStore'
 import { useMasteredStore } from '../../src/scripts/store'
 
-async function mountSheet(trick: Trick | null) {
+async function mountSheet(trick: Trick | null, attach = false) {
   const router = createRouter({
     history: createMemoryHistory(),
     routes: [{ path: '/:lang/trick/:trickname', name: 'Trick', component: { template: '<div/>' } }],
@@ -18,7 +18,7 @@ async function mountSheet(trick: Trick | null) {
   router.push('/en/trick/x')
   await router.isReady()
   const i18n = createI18n({ legacy: false, locale: 'en', messages: { en } })
-  return mount(PathSheet, { props: { trick }, global: { plugins: [router, i18n] } })
+  return mount(PathSheet, { props: { trick }, global: { plugins: [router, i18n] }, attachTo: attach ? document.body : undefined })
 }
 
 const names = (w: ReturnType<typeof mount>, sel: string) => w.findAll(`${sel} .nm`).map(n => n.text())
@@ -83,6 +83,26 @@ describe('PathSheet', () => {
     const w = await mountSheet(trick)
     const a = w.findAll('a').find(l => l.text() === en.paths.openTrick)!
     expect(a.attributes('href')).toBe('/en/trick/Eagle+Stop')
+  })
+})
+
+describe('PathSheet switching tricks', () => {
+  it('scrolls back to the top and focuses the trick card', async () => {
+    const store = useTrickStore()
+    const trick = store.getTrickByTitle('Eagle Stop')!
+    const { before } = trickPath(store.tricks, trick)
+    const w = await mountSheet(trick, true)
+    await flushPromises()
+    const dlg = w.get('dialog').element as HTMLDialogElement
+    dlg.scrollTop = 120
+    expect(dlg.scrollTop).toBe(120)
+    await w.get('.before button').trigger('click')
+    await w.setProps({ trick: w.emitted('update:trick')![0][0] as Trick })
+    await flushPromises()
+    expect(dlg.scrollTop).toBe(0)
+    expect(document.activeElement).toBe(w.get('.focus').element)
+    expect(w.get('.focus .nm').text()).toBe(store.getLocalTrickTitles(before[0], 'en')[0] ?? before[0].title[0])
+    w.unmount()
   })
 })
 
