@@ -10,13 +10,14 @@ export function resetOpenGroups() { openGroups.value = new Set() }
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { mdiBookmark, mdiCheck, mdiChevronRight } from '@mdi/js'
+import { mdiChevronRight } from '@mdi/js'
 import AppIcon from '../ui/AppIcon.vue'
 import YtThumb from '../ui/YtThumb.vue'
+import TrickStatus from './TrickStatus.vue'
 import { categoryRows, levelRows, type PathRow } from '../../scripts/paths'
 import { useTrickStore, type Trick } from '../../scripts/trickStore'
 import { useCategoryStore } from '../../scripts/store'
-import { useMasteredStore, useTodoStore } from '../../scripts/store'
+import { useMasteredStore } from '../../scripts/store'
 
 const props = defineProps<{ mode: 'category' | 'level' }>()
 const emit = defineEmits<{ open: [trick: Trick] }>()
@@ -25,7 +26,6 @@ const { t, locale } = useI18n()
 const trickStore = useTrickStore()
 const categoryStore = useCategoryStore()
 const mastered = useMasteredStore()
-const todo = useTodoStore()
 
 interface Group { key: string; label: string; color: string | null; rows: PathRow[] }
 
@@ -77,15 +77,7 @@ const name = (trick: Trick) => trickStore.getLocalTrickTitles(trick, locale.valu
                 {{ t('level', { n: r.trick.difficulty }) }}
               </span>
             </span>
-            <span v-if="mastered.isMastered(r.trick)" class="st st--done">
-              <AppIcon :path="mdiCheck" :size="16" />
-              <span class="sr-only">{{ t('marked.mastered') }}</span>
-            </span>
-            <span v-else-if="todo.isOnTodo(r.trick)" class="st st--todo">
-              <AppIcon :path="mdiBookmark" :size="14" />
-              <span class="sr-only">{{ t('marked.todo') }}</span>
-            </span>
-            <span v-else class="st" aria-hidden="true"></span>
+            <TrickStatus :trick="r.trick" />
             <AppIcon :path="mdiChevronRight" :size="20" class="chev" />
           </button>
         </li>
@@ -122,9 +114,6 @@ const name = (trick: Trick) => trickStore.getLocalTrickTitles(trick, locale.valu
 .mt { display: flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: var(--t-sm); }
 .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; }
 .dot--lg { width: 10px; height: 10px; }
-.st { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; flex: none; }
-.st--done { background: var(--accent); color: var(--accent-text); }
-.st--todo { border: 2px solid var(--accent); color: var(--accent); }
 .chev { color: var(--text-muted); flex: none; }
 .gh:focus-visible, .row:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
 </style>
