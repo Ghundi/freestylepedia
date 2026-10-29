@@ -78,12 +78,16 @@ function usePersistedIds(key: string) {
         list.value = normalizeIds([...list.value, ...added])
         return added
     }
-    const getHash = (): string => list.value.toString()
+    // only well-formed ids go into a transfer link
+    const getHash = (): string => list.value.filter(id => /^\d{4}$/.test(id)).toString()
     return { list, loadHash, getHash }
 }
 
 export const useTodoStore = defineStore('Todo', () => {
     const { list, loadHash, getHash } = usePersistedIds('todo')
+    // a trick saved as both mastered and to-do counts as mastered
+    const masteredIds = useMasteredStore().list
+    if (list.value.some(id => masteredIds.includes(id))) list.value = list.value.filter(id => !masteredIds.includes(id))
 
     function toggle(trick: Trick): void {
         const idx: number = list.value.indexOf(trick.trickID)

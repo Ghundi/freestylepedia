@@ -125,3 +125,21 @@ describe('normalizeIds', () => {
     expect(normalizeIds(['trick0001', null, 42, {}, '', '0002', '0001'])).toEqual(['0001', '42', '0002'])
   })
 })
+
+describe('saved progress that disagrees with itself', () => {
+  beforeEach(() => {
+    localStorage.clear()
+  })
+  it('counts a trick saved as both mastered and to-do as mastered', () => {
+    localStorage.setItem('mastered', JSON.stringify(['0001']))
+    localStorage.setItem('todo', JSON.stringify(['0001', '0002']))
+    setActivePinia(createPinia())
+    expect(useTodoStore().list).toEqual(['0002'])
+    expect(useMasteredStore().list).toEqual(['0001'])
+  })
+  it('leaves malformed ids out of the transfer link', () => {
+    localStorage.setItem('mastered', JSON.stringify(['0001', 'abc', '12']))
+    setActivePinia(createPinia())
+    expect(useMasteredStore().getHash()).toBe('0001')
+  })
+})

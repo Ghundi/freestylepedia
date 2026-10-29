@@ -18,7 +18,7 @@ const { copied, failed, copy, reset } = useCopy(() => url.value)
 
 async function show() {
   // Built on click: the lists change while the page is open.
-  url.value = `${location.origin}${import.meta.env.BASE_URL}${locale.value}?todo=${todo.getHash()}&mastered=${mastered.getHash()}`
+  url.value = `${location.origin}${import.meta.env.BASE_URL}${locale.value}/?todo=${todo.getHash()}&mastered=${mastered.getHash()}`
   reset()
   open.value = true
   await copy()
