@@ -15,10 +15,7 @@ const pwaInstallPromptEvent = ref<BeforeInstallPromptEvent>()
 
 function checkIfInstallable() {
   window.addEventListener('beforeinstallprompt', (event) => {
-    // block the event
-    event.preventDefault()
-
-    // and store the caught event
+    // The browser keeps its own install banner; the event is stored for the Settings button.
     pwaInstallPromptEvent.value = event as BeforeInstallPromptEvent
   })
   // installed from the browser menu or from our button: nothing left to offer
