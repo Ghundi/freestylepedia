@@ -33,10 +33,8 @@ export function fallbackThumbnailUrl(videoId: string): string {
   return `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
 }
 
-/** `api` turns on the IFrame Player API for this page's origin, so the page can drive the player. */
-export function embedUrl(videoId: string, opts: { autoplay?: boolean, start?: number, api?: boolean } = {}): string {
-  const { autoplay = true, start = 4, api = false } = opts
+export function embedUrl(videoId: string, opts: { autoplay?: boolean, start?: number } = {}): string {
+  const { autoplay = true, start = 4 } = opts
   const autoplayParam = autoplay ? '&autoplay=1' : ''
-  const apiParams = api ? `&enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}` : ''
-  return `https://www.youtube-nocookie.com/embed/${videoId}?start=${start}${autoplayParam}&playsinline=1&rel=0${apiParams}`
+  return `https://www.youtube-nocookie.com/embed/${videoId}?start=${start}${autoplayParam}&playsinline=1&rel=0`
 }

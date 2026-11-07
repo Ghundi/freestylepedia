@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mdiArrowLeft, mdiCogOutline, mdiMagnify } from '@mdi/js'
+import { mdiArrowLeft, mdiCogOutline, mdiHomeOutline, mdiMagnify } from '@mdi/js'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import IconButton from '@/components/ui/IconButton.vue'
@@ -19,6 +19,10 @@ const searchOpen = useSearchOpen()
       <template v-if="back">
         <IconButton :label="t('back')" @click="emit('back')">
           <AppIcon :path="mdiArrowLeft" />
+        </IconButton>
+        <!-- straight to the trick list, however long the history behind this page -->
+        <IconButton :label="t('goHome')" :to="{ name: 'Home', params: { lang: locale } }">
+          <AppIcon :path="mdiHomeOutline" />
         </IconButton>
         <h1 v-if="title" class="title">{{ title }}</h1>
         <div class="actions"><slot name="actions" /></div>

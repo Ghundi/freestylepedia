@@ -143,6 +143,7 @@
     "placeholder": "Search a trick"
   },
   "back": "Back",
+  "goHome": "Home",
   "home": {
     "scrollPrev": "Previous tricks",
     "scrollNext": "More tricks",
@@ -163,7 +164,6 @@
     "recommendedContext": "Recommended for your level"
   },
   "video": {
-    "play": "Play {name}",
     "others": "Other videos",
     "offline": "You're offline: the video will play once you're back online."
   },

@@ -53,6 +53,12 @@ describe('Trick page', () => {
     expect(w.find('.others').exists()).toBe(false)
   })
 
+  it('has a home link next to the back button in the phone header', async () => {
+    const w = await mountAt('/en/trick/Hockey+Stop')
+    const home = w.get(`.head a[aria-label="${en.goHome}"]`)
+    expect(home.attributes('href')).toBe('/en')
+  })
+
   it('shares a link that keeps the folder the site is served from', async () => {
     const w = await mountAt('/en/trick/Hockey+Stop', '/freestylepedia/')
     expect(w.findComponent(ShareSheet).props('url')).toBe(`${window.location.origin}/freestylepedia/en/trick/Hockey+Stop`)

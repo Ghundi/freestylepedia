@@ -143,6 +143,7 @@
     "placeholder": "Szukaj triku"
   },
   "back": "Wstecz",
+  "goHome": "Strona główna",
   "home": {
     "scrollPrev": "Poprzednie triki",
     "scrollNext": "Następne triki",
@@ -163,7 +164,6 @@
     "recommendedContext": "Polecany dla twojego poziomu"
   },
   "video": {
-    "play": "Odtwórz: {name}",
     "others": "Inne filmy",
     "offline": "Jesteś offline: film odtworzy się po powrocie połączenia."
   },

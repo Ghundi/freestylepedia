@@ -1,116 +1,55 @@
-import { beforeEach, describe, it, expect, vi } from 'vitest'
-import { flushPromises, mount } from '@vue/test-utils'
+import { afterEach, describe, it, expect, vi } from 'vitest'
+import { mount } from '@vue/test-utils'
 import { createI18n } from 'vue-i18n'
 import VideoPlayer from '../../src/components/trick/VideoPlayer.vue'
-import { loadYouTubeApi } from '../../src/scripts/youtubeApi'
 
-vi.mock('../../src/scripts/youtubeApi', () => ({ loadYouTubeApi: vi.fn() }))
-
-const i18n = createI18n({
-  legacy: false,
-  locale: 'en',
-  messages: { en: { video: { play: 'Play {name}' } } },
-})
-
+const i18n = createI18n({ legacy: false, locale: 'en', messages: { en: { video: { offline: 'You are offline' } } } })
 const mountPlayer = (videoId = 'abc') =>
   mount(VideoPlayer, { props: { videoId, title: 'Hawk Stop' }, global: { plugins: [i18n] } })
 
-// Stand-in for YT.Player: records the element and events it was given.
-function fakeApi() {
-  const calls: string[] = []
-  const player = {
-    mute: vi.fn(() => { calls.push('mute') }),
-    playVideo: vi.fn(() => { calls.push('playVideo') }),
-    destroy: vi.fn(),
-  }
-  const created: { el: HTMLIFrameElement, events: Record<string, (e: { target: typeof player }) => void> }[] = []
-  class Player {
-    constructor(el: HTMLIFrameElement, opts: { events: Record<string, (e: { target: typeof player }) => void> }) {
-      created.push({ el, events: opts.events })
-      return player
-    }
-  }
-  vi.mocked(loadYouTubeApi).mockResolvedValue({ Player } as never)
-  return { player, created, calls }
-}
-
 describe('VideoPlayer', () => {
-  beforeEach(() => { vi.mocked(loadYouTubeApi).mockReset() })
+  afterEach(() => { vi.restoreAllMocks() })
 
-  it('shows the poster and no iframe before play', () => {
-    fakeApi()
+  it('offline, says so instead of loading a frame that would show the browser error page', () => {
+    vi.spyOn(navigator, 'onLine', 'get').mockReturnValue(false)
     const w = mountPlayer()
     expect(w.find('iframe').exists()).toBe(false)
-    expect(w.get('img').attributes('src')).toContain('/vi/abc/')
-    expect(w.get('button').attributes('aria-label')).toBe('Play Hawk Stop')
-    expect(loadYouTubeApi).not.toHaveBeenCalled()
+    expect(w.get('[role="status"]').text()).toBe('You are offline')
   })
 
-  it('loads the nocookie iframe with start=4, autoplay and the player API after click', async () => {
-    fakeApi()
+  it('shows the frame once the connection is back', async () => {
+    const online = vi.spyOn(navigator, 'onLine', 'get').mockReturnValue(false)
     const w = mountPlayer()
-    await w.get('button').trigger('click')
-    const iframe = w.get('iframe')
-    const src = iframe.attributes('src')!
+    online.mockReturnValue(true)
+    window.dispatchEvent(new Event('online'))
+    await w.vm.$nextTick()
+    expect(w.find('iframe').exists()).toBe(true)
+    expect(w.find('[role="status"]').exists()).toBe(false)
+  })
+
+  it('shows the YouTube frame right away, with no poster or play button of its own', () => {
+    const w = mountPlayer()
+    expect(w.find('button').exists()).toBe(false)
+    expect(w.find('img').exists()).toBe(false)
+    const src = w.get('iframe').attributes('src')!
     expect(src.startsWith('https://www.youtube-nocookie.com/embed/abc?')).toBe(true)
     expect(src).toContain('start=4')
-    expect(src).toContain('autoplay=1')
-    expect(src).toContain('enablejsapi=1')
-    expect(iframe.attributes('allow')).toBe('autoplay; encrypted-media; picture-in-picture; fullscreen')
-    expect(iframe.attributes('title')).toBe('Hawk Stop')
-    expect(w.find('img').exists()).toBe(false)
+    expect(w.get('iframe').attributes('title')).toBe('Hawk Stop')
   })
 
-  it('starts loading the YouTube API on the click itself, before the frame renders', () => {
-    fakeApi()
+  it('leaves playback to YouTube: no autoplay and no player API', () => {
     const w = mountPlayer()
-    w.get('button').trigger('click')
-    expect(loadYouTubeApi).toHaveBeenCalledTimes(1)
+    const src = w.get('iframe').attributes('src')!
+    expect(src).not.toContain('autoplay')
+    expect(src).not.toContain('enablejsapi')
+    expect(document.querySelector('script[src*="iframe_api"]')).toBeNull()
   })
 
-  it('attaches the player to the iframe it rendered', async () => {
-    const { created } = fakeApi()
+  it('replaces the frame instead of changing its src when the video changes', async () => {
     const w = mountPlayer()
-    await w.get('button').trigger('click')
-    await flushPromises()
-    expect(created).toHaveLength(1)
-    expect(created[0].el).toBe(w.get('iframe').element)
-  })
-
-  it('mutes and retries when the browser blocks autoplay with sound', async () => {
-    const { player, created, calls } = fakeApi()
-    const w = mountPlayer()
-    await w.get('button').trigger('click')
-    await flushPromises()
-    created[0].events.onAutoplayBlocked({ target: player })
-    expect(calls).toEqual(['mute', 'playVideo'])
-  })
-
-  it('keeps the plain iframe when the YouTube API cannot load', async () => {
-    vi.mocked(loadYouTubeApi).mockRejectedValue(new Error('blocked'))
-    const w = mountPlayer()
-    await w.get('button').trigger('click')
-    await flushPromises()
-    expect(w.find('iframe').exists()).toBe(true)
-  })
-
-  it('destroys the player and resets to the poster when the trick changes', async () => {
-    const { player } = fakeApi()
-    const w = mountPlayer()
-    await w.get('button').trigger('click')
-    await flushPromises()
+    const first = w.get('iframe').element
     await w.setProps({ videoId: 'def' })
-    expect(player.destroy).toHaveBeenCalledTimes(1)
-    expect(w.find('iframe').exists()).toBe(false)
-    expect(w.get('img').attributes('src')).toContain('/vi/def/')
-  })
-
-  it('destroys the player on unmount', async () => {
-    const { player } = fakeApi()
-    const w = mountPlayer()
-    await w.get('button').trigger('click')
-    await flushPromises()
-    w.unmount()
-    expect(player.destroy).toHaveBeenCalledTimes(1)
+    expect(w.get('iframe').element).not.toBe(first)
+    expect(w.get('iframe').attributes('src')).toContain('/embed/def?')
   })
 })

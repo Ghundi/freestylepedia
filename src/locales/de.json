@@ -143,6 +143,7 @@
     "placeholder": "Trick suchen"
   },
   "back": "Zurück",
+  "goHome": "Startseite",
   "home": {
     "scrollPrev": "Vorherige Tricks",
     "scrollNext": "Weitere Tricks",
@@ -163,7 +164,6 @@
     "recommendedContext": "Passend zu deinem Stand"
   },
   "video": {
-    "play": "{name} abspielen",
     "others": "Weitere Videos",
     "offline": "Du bist offline: Das Video läuft, sobald du wieder online bist."
   },
