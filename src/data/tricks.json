@@ -505,7 +505,7 @@
     "difficulty": 4,
     "category": "Hydroblading",
     "releaseDate": "2019-04-12",
-    "videoID": ["vfc2GukBBsk"],
+    "videoID": ["vfc2GukBBsk", "5Veqi6n1Rec"],
     "requirements": ["trick0076"],
     "connections": ["trick0045", "trick0076"]
   },
@@ -814,8 +814,8 @@
     "title": ["Windmill"],
     "difficulty": 4,
     "category": "Ground",
-    "releaseDate": "2056-02-24",
-    "videoID": ["TMP"],
+    "releaseDate": "2026-11-11",
+    "videoID": ["8qFxIa06wEA"],
     "requirements": ["trick0013"],
     "connections": ["trick0013"]
   },
@@ -858,5 +858,5 @@
     "videoID": ["TMP"],
     "requirements": ["trick0070"],
     "connections": []
-  }
+  },
 ]
