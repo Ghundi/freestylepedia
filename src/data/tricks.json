@@ -859,4 +859,14 @@
     "requirements": ["trick0070"],
     "connections": []
   },
+  {
+    "trickID": "trick0087",
+    "title": ["Venom"],
+    "difficulty": 4,
+    "category": "Hydroblading",
+    "releaseDate": "2056-02-08",
+    "videoID": ["TMP"],
+    "requirements": [],
+    "connections": []
+  }
 ]
