@@ -868,5 +868,55 @@
     "videoID": ["TMP"],
     "requirements": [],
     "connections": []
-  }
+  },
+  {
+    "trickID": "trick0088",
+    "title": ["Pendulum"],
+    "difficulty": 4,
+    "category": "Spin",
+    "releaseDate": "2056-02-08",
+    "videoID": ["TMP"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0089",
+    "title": ["Inverse Pendulum"],
+    "difficulty": 4,
+    "category": "Spin",
+    "releaseDate": "2056-02-08",
+    "videoID": ["TMP"],
+    "requirements": [],
+    "connections": []
+  },
+  {
+    "trickID": "trick0090",
+    "title": ["Snow Scoop"],
+    "difficulty": 1,
+    "category": "Footwork",
+    "releaseDate": "2056-02-08",
+    "videoID": ["TMP", "pWZ4nnDPCXs"],
+    "requirements": [],
+    "connections": []
+  }, 
+  {
+    "trickID": "trick0091",
+    "title": ["360"],
+    "difficulty": 3,
+    "category": "Jump",
+    "releaseDate": "2056-02-08",
+    "videoID": ["TMP"],
+    "requirements": [],
+    "connections": []
+  }, 
+  {
+    "trickID": "trick0092",
+    "title": ["540"],
+    "difficulty": 4,
+    "category": "Jump",
+    "releaseDate": "2056-02-08",
+    "videoID": ["TMP"],
+    "requirements": [],
+    "connections": []
+  }    
 ]
