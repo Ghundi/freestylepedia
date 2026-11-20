@@ -918,5 +918,15 @@
     "videoID": ["TMP"],
     "requirements": [],
     "connections": []
-  }    
+  },  
+  {
+    "trickID": "trick0093",
+    "title": ["Eagle Stop (Toe-Toe)"],
+    "difficulty": 3,
+    "category": "Stop",
+    "releaseDate": "2026-11-28",
+    "videoID": ["8K50a9HSvik"],
+    "requirements": ["trick0033"],
+    "connections": []
+  }
 ]
