@@ -61,7 +61,7 @@
   },
   {
     "trickID": "trick0007",
-    "title": ["Hawk Stop", "Reverse T-Stop", "Angel Stop"],
+    "title": ["Hawk Stop", "Reverse T-Stop", "Angel Stop", "Suicide Stop"],
     "difficulty": 3,
     "category": "Stop",
     "releaseDate": "2019-11-22",
@@ -928,5 +928,15 @@
     "videoID": ["8K50a9HSvik"],
     "requirements": ["trick0033"],
     "connections": []
-  }
+  },
+  {
+    "trickID": "trick0094",
+    "title": ["Inverted Hawk Stop", "Inverted Reverse T-Stop", "Inverted Angel Stop", "Inverted Suicide"],
+    "difficulty": 3,
+    "category": "Stop",
+    "releaseDate": "2056-11-22",
+    "videoID": ["TMP"],
+    "requirements": [],
+    "connections": ["trick0007"]
+  },
 ]
